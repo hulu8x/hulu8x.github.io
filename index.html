@@ -1,805 +1,326 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="[Meta Description cho từng trang - chứa từ khóa liên quan]">
-    <meta name="keywords" content="cầu lông, sân cầu lông, dạy cầu lông, Nhơn Phú, Quy Nhơn, Bình Định, đánh cầu, chơi cầu lông, sân cầu, học cầu, học cầu lông, đào tạo cầu lông, thi đấu cầu lông, tuyển sinh cầu lông, dịch vụ cầu lông, thuê sân cầu lông, thuê sân, cầu lông viện sốt rét, sân cầu lông Việt sốt rét, Viện sốt rét Ký sinh trùng Côn trùng Quy Nhơn, Sốt rét Quy Nhơn, Cầu lông Quy Nhơn, Cầu lông Nhơn Phú, Câu lạc bộ Nhơn Phú, Câu lạc bộ cầu lông">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLB Cầu Lông Nhơn Phú | Sân Cầu Lông Viện Sốt Rét Quy Nhơn - Đặt sân & Học cầu lông</title>
+<meta name="description" content="CLB Cầu Lông Nhơn Phú tại Viện Sốt Rét Quy Nhơn. Cung cấp sân cầu lông hiện đại, lớp học cầu lông chất lượng cho mọi lứa tuổi ở Nhơn Phú, Bình Định. Đặt sân online, tham gia cộng đồng đam mê cầu lông.">
+<meta name="keywords" content="cầu lông, sân cầu lông, dạy cầu lông, Nhơn Phú, Quy Nhơn, Bình Định, đánh cầu, chơi cầu lông, sân cầu, học cầu, học cầu lông, đào tạo cầu lông, thi đấu cầu lông, tuyển sinh cầu lông, dịch vụ cầu lông, thuê sân cầu lông, thuê sân, cầu lông viện sốt rét, sân cầu lông Việt sốt rét, Viện sốt rét Ký sinh trùng Côn trùng Quy Nhơn, Sốt rét Quy Nhơn, Cầu lông Quy Nhơn, Cầu lông Nhơn Phú, Câu lạc bộ Nhơn Phú, Câu lạc bộ cầu lông">
+<link rel="icon" href="https://placehold.co/32x32/007bff/ffffff?text=NP" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+fontFamily: {
+sans: ['Inter', 'sans-serif'], // Use Inter font
+},
+colors: {
+primary: {
+DEFAULT: '#007bff', // Blue
+dark: '#0056b3',
+},
+secondary: {
+DEFAULT: '#6c757d', // Gray
+dark: '#5a6268',
+},
+light: '#f8f9fa',
+dark: '#1a2a4a', // Dark Blue/Gray for footer/text
+},
+borderRadius: {
+DEFAULT: '0.5rem', // Default rounded corners
+'lg': '0.75rem',
+'full': '9999px',
+},
+}
+}
+}
+</script>
+<style type="text/tailwindcss">
+/* Custom CSS can be added here if needed, but prefer Tailwind classes */
+body {
+@apply font-sans text-gray-800;
+}
+.section-padding {
+@apply py-12 md:py-16;
+}
+.section-title {
+@apply text-3xl md:text-4xl font-bold text-center mb-10 text-dark relative pb-4;
+}
+.section-title::after {
+content: '';
+@apply block w-16 h-1 bg-primary absolute bottom-0 left-1/2 -translate-x-1/2;
+}
+.btn {
+@apply inline-block px-6 py-3 rounded font-semibold text-center transition duration-300 ease-in-out no-underline;
+}
+.btn-primary {
+@apply bg-primary text-white hover:bg-primary-dark transform hover:-translate-y-0.5 shadow-md hover:shadow-lg;
+}
+.btn-secondary {
+@apply bg-secondary text-white hover:bg-secondary-dark transform hover:-translate-y-0.5 shadow-md hover:shadow-lg;
+}
+.btn-light {
+@apply bg-light text-dark border border-gray-300 hover:bg-gray-200 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg;
+}
+/* Style for active navigation link (example) */
+.navbar-nav li a.active-link {
+@apply text-primary font-semibold;
+}
+.navbar-nav li a.active-link::after {
+@apply w-full; /* Underline active link */
+}
+.navbar-nav a {
+@apply text-dark hover:text-primary relative py-2;
+}
+.navbar-nav a::after {
+content: '';
+@apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-out;
+}
+.navbar-nav a:hover::after {
+@apply w-full;
+}
+.hero-overlay {
+background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
+}
+.service-item {
+@apply bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 text-center;
+}
+.service-icon {
+@apply h-12 mx-auto mb-4;
+}
+.news-item {
+@apply bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300;
+}
+.news-item img {
+@apply w-full h-48 object-cover;
+}
+.gallery-grid-mini img {
+@apply w-full h-32 object-cover rounded-lg cursor-pointer transition-transform duration-300 hover:scale-105 shadow-sm hover:shadow-md;
+}
+.testimonial-item {
+@apply bg-light p-6 rounded-lg shadow;
+}
+.slot { @apply p-2 mb-1 rounded text-sm; }
+.slot-available { @apply bg-green-100 border-l-4 border-green-500 text-green-800; }
+.slot-booked { @apply bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 line-through; }
+.slot-unavailable { @apply bg-gray-200 border-l-4 border-gray-400 text-gray-500; }
+
+/* Responsive Navbar Toggle */
+@media (max-width: 768px) {
+.navbar-nav {
+display: none; /* Hidden by default */
+}
+.navbar-nav.active {
+display: flex; /* Shown when active class is added */
+}
+}
+</style>
 </head>
-<body>
-    <header>
-        <nav class="navbar">
-            <div class="container">
-                <a href="index.html" class="navbar-brand">
-                    <img src="images/logo.png" alt="Logo CLB Nhơn Phú" class="logo">
-                    <span class="club-name">CLB Cầu Lông Nhơn Phú</span>
-                </a>
-                <button class="navbar-toggler" aria-label="Toggle navigation">&#9776;</button>
-                <ul class="navbar-nav">
-                    <li><a href="index.html">Trang Chủ</a></li>
-                    <li><a href="gioi-thieu.html">Giới Thiệu</a></li>
-                    <li><a href="lop-hoc.html">Lớp Học</a></li>
-                    <li><a href="dat-san.html">Đặt Sân</a></li>
-                    <li><a href="thu-vien.html">Thư Viện</a></li>
-                    <li><a href="tin-tuc.html">Tin Tức</a></li>
-                    <li><a href="lien-he.html">Liên Hệ</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <main>
+<body class="bg-gray-50">
 
-</main>
-    <footer>
-        <div class="container footer-content">
-            <div class="footer-info">
-                <p>&copy; <span id="current-year"></span> CLB Cầu Lông Nhơn Phú. Bảo lưu mọi quyền.</p>
-                <p>Địa chỉ: Sân Cầu lông Viện Sốt rét, Khu vực 8, P. Nhơn Phú, TP. Quy Nhơn, Bình Định.</p>
-                <p>Hotline: HLV Biền: <a href="tel:0988809890">0988.809.890</a> | HLV Hoàng: <a href="tel:0935185558">0935.185.558</a></p>
-                <p>Email: <a href="mailto:clbnhonphu@gmail.com">clbnhonphu@gmail.com</a></p>
-            </div>
-            <div class="footer-social">
-                <p>Theo dõi chúng tôi:</p>
-                <a href="https://www.facebook.com/NHONPHUBADMINTONCLUB/" target="_blank" rel="noopener noreferrer" aria-label="Facebook CLB Nhơn Phú"><i class="fab fa-facebook-square"></i></a>
-                </div>
-             <div class="footer-links">
-                </div>
-        </div>
-    </footer>
+<header class="bg-white shadow-md sticky top-0 z-50">
+<nav class="container mx-auto px-4 py-3">
+<div class="flex justify-between items-center">
+<a href="index.html" class="flex items-center space-x-2 no-underline">
+<img src="https://placehold.co/100x40/007bff/ffffff?text=CLB+NP" alt="Logo CLB Nhơn Phú" class="h-10">
+<span class="text-xl font-bold text-dark hidden md:inline">CLB Cầu Lông Nhơn Phú</span>
+</a>
+<button class="md:hidden navbar-toggler focus:outline-none">
+<i class="fas fa-bars text-2xl text-dark"></i>
+</button>
+<ul class="navbar-nav hidden md:flex space-x-6 items-center">
+<li><a href="index.html" class="active-link">Trang Chủ</a></li>
+<li><a href="gioi-thieu.html">Giới Thiệu</a></li>
+<li><a href="tuyen-sinh.html">Lớp Học</a></li>
+<li><a href="dat-san.html">Đặt Sân</a></li>
+<li><a href="thu-vien.html">Thư Viện</a></li>
+<li><a href="tin-tuc.html">Tin Tức</a></li>
+<li><a href="lien-he.html">Liên Hệ</a></li>
+</ul>
+</div>
+<ul class="navbar-nav md:hidden flex-col mt-3 space-y-2 text-center bg-white pb-3">
+<li><a href="index.html">Trang Chủ</a></li>
+<li><a href="gioi-thieu.html">Giới Thiệu</a></li>
+<li><a href="tuyen-sinh.html">Lớp Học</a></li>
+<li><a href="dat-san.html">Đặt Sân</a></li>
+<li><a href="thu-vien.html">Thư Viện</a></li>
+<li><a href="tin-tuc.html">Tin Tức</a></li>
+<li><a href="lien-he.html">Liên Hệ</a></li>
+</ul>
+</nav>
+</header>
 
-    <script src="js/script.js"></script>
-    </body>
-</html>
-
-<section class="hero" style="background-image: url('images/hero-background.jpg');">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-        <h1>CLB Cầu Lông Nhơn Phú: Sân Chơi Đẳng Cấp - Đam Mê Kết Nối</h1>
-        <p>Chào mừng bạn đến với Câu lạc bộ Cầu lông Nhơn Phú - điểm đến lý tưởng cho người yêu cầu lông tại Quy Nhơn. Với hệ thống sân hiện đại tại Viện Sốt Rét và các lớp học chất lượng, chúng tôi mang đến trải nghiệm tốt nhất cho mọi trình độ.</p>
-        <div class="cta-buttons">
-            <a href="dat-san.html" class="btn btn-primary">Đặt Sân Ngay</a>
-            <a href="lop-hoc.html" class="btn btn-secondary">Tìm Hiểu Lớp Học</a>
-        </div>
-    </div>
+<main>
+<section class="hero relative h-[75vh] bg-cover bg-center flex items-center justify-center text-white text-center" style="background-image: url('https://placehold.co/1600x900/cccccc/ffffff?text=Sân+Cầu+Lông+Hiện+Đại');">
+<div class="hero-overlay absolute inset-0"></div>
+<div class="container mx-auto px-4 relative z-10">
+<h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight shadow-text">CLB Cầu Lông Nhơn Phú: Sân Chơi Đẳng Cấp - Đam Mê Kết Nối</h1>
+<p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">Chào mừng bạn đến với Câu lạc bộ Cầu lông Nhơn Phú - điểm đến lý tưởng cho người yêu cầu lông tại Quy Nhơn. Với hệ thống sân hiện đại tại Viện Sốt Rét và các lớp học chất lượng, chúng tôi mang đến trải nghiệm tốt nhất cho mọi trình độ.</p>
+<div class="cta-buttons space-x-4">
+<a href="dat-san.html" class="btn btn-primary text-lg">Đặt Sân Ngay</a>
+<a href="tuyen-sinh.html" class="btn btn-light text-lg">Tìm Hiểu Lớp Học</a>
+</div>
+</div>
 </section>
 
 <section class="services section-padding">
-    <div class="container">
-        <div class="service-grid">
-            <div class="service-item">
-                <img src="images/icon-san-bai.svg" alt="Icon Sân Bãi" class="service-icon">
-                <h3>Sân Bãi Hiện Đại</h3>
-                <p>Hệ thống 3 sân đạt chuẩn, thảm mới 4,5mm giảm chấn, ánh sáng tốt, không gian thoáng đãng.</p>
-                <a href="gioi-thieu.html#co-so-vat-chat">Xem chi tiết sân &gt;</a>
-            </div>
-            <div class="service-item">
-                <img src="images/icon-lop-hoc.svg" alt="Icon Lớp Học" class="service-icon">
-                <h3>Lớp Học Chất Lượng</h3>
-                <p>Đào tạo bài bản từ cơ bản đến nâng cao cho mọi lứa tuổi cùng HLV Biền, HLV Hoàng và đội ngũ giàu kinh nghiệm.</p>
-                <a href="lop-hoc.html">Khám phá lớp học &gt;</a>
-            </div>
-            <div class="service-item">
-                <img src="images/icon-dat-san.svg" alt="Icon Đặt Sân" class="service-icon">
-                <h3>Đặt Sân Dễ Dàng</h3>
-                <p>Hệ thống đặt lịch trực tuyến 24/7 nhanh chóng, xem trạng thái sân theo thời gian thực.</p>
-                <a href="dat-san.html">Đặt sân online &gt;</a>
-            </div>
-            <div class="service-item">
-                <img src="images/icon-cong-dong.svg" alt="Icon Cộng Đồng" class="service-icon">
-                <h3>Cộng Đồng Sôi Nổi</h3>
-                <p>Tham gia các buổi giao lưu định kỳ, giải đấu hấp dẫn và kết nối với những người cùng đam mê.</p>
-                <a href="tin-tuc.html">Xem hoạt động &gt;</a>
-            </div>
-        </div>
-    </div>
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="service-item">
+<img src="https://placehold.co/64x64/007bff/ffffff?text=Sân" alt="Icon Sân Bãi" class="service-icon">
+<h3 class="text-xl font-semibold mb-2">Sân Bãi Hiện Đại</h3>
+<p class="text-gray-600">Hệ thống 3 sân đạt chuẩn, thảm mới 4,5mm giảm chấn, ánh sáng tốt, không gian thoáng đãng.</p>
+<a href="gioi-thieu.html#co-so-vat-chat" class="text-primary hover:underline mt-4 inline-block">Xem chi tiết sân →</a>
+</div>
+<div class="service-item">
+<img src="https://placehold.co/64x64/28a745/ffffff?text=Lớp" alt="Icon Lớp Học" class="service-icon">
+<h3 class="text-xl font-semibold mb-2">Lớp Học Chất Lượng</h3>
+<p class="text-gray-600">Đào tạo bài bản từ cơ bản đến nâng cao cho mọi lứa tuổi cùng HLV Biền, HLV Hoàng và đội ngũ giàu kinh nghiệm.</p>
+<a href="tuyen-sinh.html" class="text-primary hover:underline mt-4 inline-block">Khám phá lớp học →</a>
+</div>
+<div class="service-item">
+<img src="https://placehold.co/64x64/ffc107/ffffff?text=Đặt" alt="Icon Đặt Sân" class="service-icon">
+<h3 class="text-xl font-semibold mb-2">Đặt Sân Dễ Dàng</h3>
+<p class="text-gray-600">Hệ thống đặt lịch trực tuyến 24/7 nhanh chóng, xem trạng thái sân theo thời gian thực.</p>
+<a href="dat-san.html" class="text-primary hover:underline mt-4 inline-block">Đặt sân online →</a>
+</div>
+<div class="service-item">
+<img src="https://placehold.co/64x64/dc3545/ffffff?text=Team" alt="Icon Cộng Đồng" class="service-icon">
+<h3 class="text-xl font-semibold mb-2">Cộng Đồng Sôi Nổi</h3>
+<p class="text-gray-600">Tham gia các buổi giao lưu định kỳ, giải đấu hấp dẫn và kết nối với những người cùng đam mê.</p>
+<a href="tin-tuc.html" class="text-primary hover:underline mt-4 inline-block">Xem hoạt động →</a>
+</div>
+</div>
+</div>
 </section>
 
 <section class="mini-booking section-padding bg-light">
-    <div class="container">
-        <h2 class="section-title">Kiểm tra sân trống hôm nay</h2>
-        <div id="mini-booking-widget">
-            <p>Đang tải lịch sân...</p>
-            </div>
-        <a href="dat-san.html" class="btn btn-secondary">Xem lịch đầy đủ & Đặt sân</a>
-    </div>
+<div class="container mx-auto px-4 text-center">
+<h2 class="section-title">Kiểm tra sân trống hôm nay</h2>
+<div id="mini-booking-widget" class="max-w-md mx-auto bg-white p-4 rounded shadow border border-gray-200 mb-6 text-left">
+<p class="text-center font-semibold mb-3">Lịch sân (Ví dụ)</p>
+<div class="space-y-2">
+<div class="slot slot-available">17:00 - 18:00 - Sân 1 (Còn trống)</div>
+<div class="slot slot-booked">18:00 - 19:00 - Sân 1 (Đã đặt)</div>
+<div class="slot slot-available">17:00 - 18:00 - Sân 2 (Còn trống)</div>
+<div class="slot slot-booked">19:00 - 20:00 - Sân 3 (Đã đặt)</div>
+</div>
+<p class="text-center text-sm text-gray-500 mt-4">(Đây là giao diện mẫu. Cần lập trình để hiển thị lịch thực tế)</p>
+</div>
+<a href="dat-san.html" class="btn btn-secondary">Xem lịch đầy đủ & Đặt sân</a>
+</div>
 </section>
 
 <section class="news-events section-padding">
-    <div class="container">
-        <h2 class="section-title">Cập Nhật Từ CLB Nhơn Phú</h2>
-        <div class="news-grid">
-            <article class="news-item">
-                <img src="images/news-placeholder-1.jpg" alt="Tiêu đề bài viết 1">
-                <h3><a href="tin-tuc/bai-viet-1.html">[Giải đấu] Kết quả Giải Giao hữu Tháng 3/2025</a></h3>
-                <p>Xem ngay kết quả chi tiết và những hình ảnh đáng nhớ từ giải đấu...</p>
-                <a href="tin-tuc/bai-viet-1.html" class="read-more">Đọc tiếp &gt;</a>
-            </article>
-            <article class="news-item">
-                <img src="images/news-placeholder-2.jpg" alt="Tiêu đề bài viết 2">
-                <h3><a href="tin-tuc/bai-viet-2.html">[Thông báo] Lịch hoạt động CLB dịp Lễ sắp tới</a></h3>
-                <p>CLB Nhơn Phú xin thông báo lịch hoạt động trong dịp lễ...</p>
-                <a href="tin-tuc/bai-viet-2.html" class="read-more">Đọc tiếp &gt;</a>
-            </article>
-            <article class="news-item">
-                <img src="images/news-placeholder-3.jpg" alt="Tiêu đề bài viết 3">
-                <h3><a href="tin-tuc/bai-viet-3.html">[Chia sẻ] Mẹo chọn vợt cầu lông cho người mới bắt đầu</a></h3>
-                <p>HLV Biền chia sẻ kinh nghiệm giúp bạn chọn được cây vợt phù hợp...</p>
-                <a href="tin-tuc/bai-viet-3.html" class="read-more">Đọc tiếp &gt;</a>
-            </article>
-        </div>
-        <div class="text-center">
-            <a href="tin-tuc.html" class="btn btn-secondary">Xem tất cả tin tức</a>
-        </div>
-    </div>
+<div class="container mx-auto px-4">
+<h2 class="section-title">Cập Nhật Từ CLB Nhơn Phú</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<article class="news-item">
+<img src="https://placehold.co/400x250/cccccc/ffffff?text=Giải+Đấu" alt="Hình ảnh giải đấu cầu lông">
+<div class="p-5">
+<h3 class="text-lg font-semibold mb-2"><a href="tin-tuc/bai-viet-1.html" class="text-dark hover:text-primary">[Giải đấu] Kết quả Giải Giao hữu Tháng 3/2025</a></h3>
+<p class="text-gray-600 text-sm mb-3">Xem ngay kết quả chi tiết và những hình ảnh đáng nhớ từ giải đấu...</p>
+<a href="tin-tuc/bai-viet-1.html" class="text-primary hover:underline font-medium">Đọc tiếp →</a>
+</div>
+</article>
+<article class="news-item">
+<img src="https://placehold.co/400x250/cccccc/ffffff?text=Thông+Báo" alt="Hình ảnh thông báo">
+<div class="p-5">
+<h3 class="text-lg font-semibold mb-2"><a href="tin-tuc/bai-viet-2.html" class="text-dark hover:text-primary">[Thông báo] Lịch hoạt động CLB dịp Lễ sắp tới</a></h3>
+<p class="text-gray-600 text-sm mb-3">CLB Nhơn Phú xin thông báo lịch hoạt động trong dịp lễ...</p>
+<a href="tin-tuc/bai-viet-2.html" class="text-primary hover:underline font-medium">Đọc tiếp →</a>
+</div>
+</article>
+<article class="news-item">
+<img src="https://placehold.co/400x250/cccccc/ffffff?text=Mẹo+Hay" alt="Hình ảnh vợt cầu lông">
+<div class="p-5">
+<h3 class="text-lg font-semibold mb-2"><a href="tin-tuc/bai-viet-3.html" class="text-dark hover:text-primary">[Chia sẻ] Mẹo chọn vợt cầu lông cho người mới bắt đầu</a></h3>
+<p class="text-gray-600 text-sm mb-3">HLV Biền chia sẻ kinh nghiệm giúp bạn chọn được cây vợt phù hợp...</p>
+<a href="tin-tuc/bai-viet-3.html" class="text-primary hover:underline font-medium">Đọc tiếp →</a>
+</div>
+</article>
+</div>
+<div class="text-center mt-10">
+<a href="tin-tuc.html" class="btn btn-secondary">Xem tất cả tin tức</a>
+</div>
+</div>
 </section>
 
 <section class="mini-gallery section-padding bg-light">
-    <div class="container">
-        <h2 class="section-title">Khoảnh Khắc Nhơn Phú</h2>
-        <div class="gallery-grid-mini">
-            <img src="images/gallery-thumb-1.jpg" alt="Sân cầu lông Nhơn Phú buổi tối">
-            <img src="images/gallery-thumb-2.jpg" alt="Lớp học cầu lông trẻ em">
-            <img src="images/gallery-thumb-3.jpg" alt="Giải đấu giao hữu tại CLB">
-            <img src="images/gallery-thumb-4.jpg" alt="Học viên thực hành kỹ thuật">
-            <img src="images/gallery-thumb-5.jpg" alt="Không gian nghỉ ngơi tại sân">
-            <img src="images/gallery-thumb-6.jpg" alt="Pha đập cầu đẹp mắt">
-        </div>
-         <div class="text-center">
-             <a href="thu-vien.html" class="btn btn-secondary">Khám phá thư viện ảnh</a>
-         </div>
-    </div>
+<div class="container mx-auto px-4">
+<h2 class="section-title">Khoảnh Khắc Nhơn Phú</h2>
+<div class="gallery-grid-mini grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+<img src="https://placehold.co/300x200/cccccc/ffffff?text=Ảnh+1" alt="Sân cầu lông Nhơn Phú buổi tối">
+<img src="https://placehold.co/300x200/cccccc/ffffff?text=Ảnh+2" alt="Lớp học cầu lông trẻ em">
+<img src="https://placehold.co/300x200/cccccc/ffffff?text=Ảnh+3" alt="Giải đấu giao hữu tại CLB">
+<img src="https://placehold.co/300x200/cccccc/ffffff?text=Ảnh+4" alt="Học viên thực hành kỹ thuật">
+<img src="https://placehold.co/300x200/cccccc/ffffff?text=Ảnh+5" alt="Không gian nghỉ ngơi tại sân">
+<img src="https://placehold.co/300x200/cccccc/ffffff?text=Ảnh+6" alt="Pha đập cầu đẹp mắt">
+</div>
+<div class="text-center mt-10">
+<a href="thu-vien.html" class="btn btn-secondary">Khám phá thư viện ảnh</a>
+</div>
+</div>
 </section>
 
 <section class="testimonials section-padding">
-    <div class="container">
-        <h2 class="section-title">Học Viên & Thành Viên Nói Gì?</h2>
-        <div class="testimonial-slider"> <div class="testimonial-item">
-                <blockquote>
-                    <p>"Sân chơi ở đây rất tốt, sạch sẽ, thoáng mát. Mình rất thích không khí ở CLB Nhơn Phú, mọi người thân thiện, nhiệt tình."</p>
-                    <footer>- Anh Tuấn Anh</footer>
-                </blockquote>
-            </div>
-            <div class="testimonial-item">
-                 <blockquote>
-                    <p>"Các thầy dạy rất nhiệt tình, dễ hiểu. Mình tiến bộ rõ rệt sau khóa học cơ bản tại sân cầu lông Viện Sốt Rét. Sẽ tiếp tục đăng ký lớp nâng cao."</p>
-                    <footer>- Bạn Minh Châu</footer>
-                </blockquote>
-            </div>
-            </div>
-    </div>
+<div class="container mx-auto px-4 max-w-4xl">
+<h2 class="section-title">Học Viên & Thành Viên Nói Gì?</h2>
+<div class="space-y-8">
+<div class="testimonial-item">
+<blockquote class="text-center">
+<p class="text-lg italic text-gray-700 mb-4">"Sân chơi ở đây rất tốt, sạch sẽ, thoáng mát. Mình rất thích không khí ở CLB Nhơn Phú, mọi người thân thiện, nhiệt tình."</p>
+<footer class="font-semibold text-gray-600">- Anh Tuấn Anh</footer>
+</blockquote>
+</div>
+<div class="testimonial-item">
+<blockquote class="text-center">
+<p class="text-lg italic text-gray-700 mb-4">"Các thầy dạy rất nhiệt tình, dễ hiểu. Mình tiến bộ rõ rệt sau khóa học cơ bản tại sân cầu lông Viện Sốt Rét. Sẽ tiếp tục đăng ký lớp nâng cao."</p>
+<footer class="font-semibold text-gray-600">- Bạn Minh Châu</footer>
+</blockquote>
+</div>
+</div>
+</div>
 </section>
 
-<section class="secondary-cta section-padding bg-primary-gradient text-light">
-    <div class="container text-center">
-        <h2>Sẵn Sàng Tham Gia Cùng Chúng Tôi?</h2>
-        <p>Liên hệ ngay CLB Cầu Lông Nhơn Phú để được tư vấn về lớp học phù hợp hoặc đặt sân thi đấu, giao hữu cầu lông tại Quy Nhơn.</p>
-        <a href="lien-he.html" class="btn btn-light">Liên Hệ Ngay</a>
-    </div>
+<section class="secondary-cta section-padding bg-gradient-to-r from-primary to-blue-600 text-white">
+<div class="container mx-auto px-4 text-center">
+<h2 class="text-3xl font-bold mb-4">Sẵn Sàng Tham Gia Cùng Chúng Tôi?</h2>
+<p class="text-lg mb-8">Liên hệ ngay CLB Cầu Lông Nhơn Phú để được tư vấn về lớp học phù hợp hoặc đặt sân thi đấu, giao hữu cầu lông tại Quy Nhơn.</p>
+<a href="lien-he.html" class="btn btn-light text-lg">Liên Hệ Ngay</a>
+</div>
 </section>
 
 <section class="map-contact-summary section-padding">
-    <div class="container">
-       <div class="map-contact-grid">
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d[Your Coordinates]!2d[Your Longitude]!3d[Your Latitude]!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x[Your Map ID]!2zU8OibiBD4bqndSBsw7RuZyBWaeG7h24gU-G7kXQgcsOpdA!5e0!3m2!1svi!2s!4v[Timestamp]" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Bản đồ vị trí Sân Cầu lông Viện Sốt Rét Nhơn Phú"></iframe>
-                 <p class="text-center"><a href="https://maps.app.goo.gl/yWrsuk8GkssQQz9q6" target="_blank" rel="noopener noreferrer">Xem bản đồ lớn hơn</a></p>
-            </div>
-            <div class="contact-summary">
-                 <h3>Thông Tin Liên Hệ</h3>
-                 <p><i class="fas fa-map-marker-alt"></i> <strong>Địa chỉ:</strong> Sân Cầu lông Viện Sốt rét, Khu vực 8, P. Nhơn Phú, TP. Quy Nhơn, Bình Định.</p>
-                 <p><i class="fas fa-phone-alt"></i> <strong>Hotline:</strong></p>
-                 <ul>
-                    <li>HLV Biền: <a href="tel:0988809890">0988.809.890</a> (Lớp học)</li>
-                    <li>HLV Hoàng: <a href="tel:0935185558">0935.185.558</a> (Đặt sân)</li>
-                 </ul>
-                 <p><i class="fas fa-clock"></i> <strong>Giờ mở cửa:</strong> Sáng 5h-7h, Chiều 17h-21h</p>
-            </div>
-       </div>
-    </div>
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="map-container rounded-lg overflow-hidden shadow-md">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3874.521137866889!2d109.21004067588836!3d13.80759349621968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316f6c971541b6bb%3A0x55a37f44fde65c87!2zU8OibiBD4bqndSBsw7RuZyBWaeG7h24gU-G7kXQgcsOpdA!5e0!3m2!1svi!2s!4v1712019299873!5m2!1svi!2s" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Bản đồ vị trí Sân Cầu lông Viện Sốt Rét Nhơn Phú"></iframe>
+<p class="text-center mt-2"><a href="https://maps.app.goo.gl/v2T5eR5fXkY7Zz9u6" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Xem bản đồ lớn hơn</a></p>
+</div>
+<div class="contact-summary text-gray-700">
+<h3 class="text-2xl font-semibold mb-4 text-dark">Thông Tin Liên Hệ</h3>
+<p class="mb-3 flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-3 text-primary w-5 text-center"></i> <strong>Địa chỉ:</strong> Sân Cầu lông Viện Sốt rét, Khu vực 8, P. Nhơn Phú, TP. Quy Nhơn, Bình Định.</p>
+<p class="mb-1 flex items-start"><i class="fas fa-phone-alt mt-1 mr-3 text-primary w-5 text-center"></i> <strong>Hotline:</strong></p>
+<ul class="ml-8 mb-3 list-disc list-inside">
+<li>HLV Biền: <a href="tel:0988809890" class="text-primary hover:underline font-medium">0988.809.890</a> (Lớp học)</li>
+<li>HLV Hoàng: <a href="tel:0935185558" class="text-primary hover:underline font-medium">0935.185.558</a> (Đặt sân)</li>
+</ul>
+<p class="flex items-start"><i class="fas fa-clock mt-1 mr-3 text-primary w-5 text-center"></i> <strong>Giờ mở cửa:</strong> Sáng 5h-7h, Chiều 17h-21h</p>
+</div>
+</div>
+</div>
 </section>
 
-<section class="page-header">
-    <div class="container">
-        <h1>Chào Mừng Đến Với Câu Lạc Bộ Cầu Lông Nhơn Phú</h1>
-    </div>
-</section>
+</main>
 
-<section class="about-intro section-padding">
-    <div class="container">
-        <p>CLB Cầu Lông Nhơn Phú tự hào là điểm đến quen thuộc và uy tín của cộng đồng yêu cầu lông tại thành phố Quy Nhơn, tỉnh Bình Định. Tọa lạc tại khuôn viên Viện Sốt Rét - Ký sinh trùng - Côn trùng Quy Nhơn (Khu vực 8, Phường Nhơn Phú), CLB mang đến không gian tập luyện, thi đấu cầu lông lý tưởng và môi trường giao lưu thân thiện.</p>
-        <p>Với phương châm "Sân chơi đẳng cấp - Đam mê kết nối", chúng tôi không ngừng nỗ lực nâng cao chất lượng dịch vụ cầu lông, cơ sở vật chất sân cầu và chương trình đào tạo cầu lông, nhằm đáp ứng nhu cầu đa dạng của mọi người chơi, từ người mới bắt đầu đến vận động viên phong trào.</p>
-    </div>
-</section>
-
-<section class="facilities section-padding bg-light" id="co-so-vat-chat">
-    <div class="container">
-        <h2 class="section-title">Thông Tin Chi Tiết Về Sân Bãi</h2>
-        <div class="facility-details">
-            <p><i class="fas fa-map-marker-alt"></i> <strong>Địa chỉ:</strong> Sân Cầu lông Viện Sốt rét, Khu vực 8, Phường Nhơn Phú, TP. Quy Nhơn, Bình Định.</p>
-             <div class="map-large">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d[Your Coordinates]!2d[Your Longitude]!3d[Your Latitude]!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x[Your Map ID]!2zU8OibiBD4bqndSBsw7RuZyBWaeG7h24gU-G7kXQgcsOpdA!5e0!3m2!1svi!2s!4v[Timestamp]" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Bản đồ vị trí Sân Cầu lông Viện Sốt Rét Nhơn Phú"></iframe>
-            </div>
-            <h3>Cơ sở vật chất hiện đại:</h3>
-            <ul>
-                <li><i class="fas fa-layer-group"></i> <strong>Số lượng sân:</strong> 3 sân cầu lông đạt tiêu chuẩn thi đấu.</li>
-                <li><i class="fas fa-shoe-prints"></i> <strong>Thảm sân:</strong> Sử dụng thảm nhựa PVC Ecostar S7000 chất lượng cao, độ dày 4,5 mm, đảm bảo độ bám, êm ái và giảm chấn thương khi chơi cầu lông.</li>
-                <li><i class="fas fa-lightbulb"></i> <strong>Ánh sáng:</strong> Hệ thống đèn LED chuyên dụng cho sân thể thao, chống chói được bố trí khoa học, cung cấp ánh sáng đồng đều, rõ nét trên toàn bộ mặt sân, phục vụ tốt cả ban ngày lẫn ban đêm.</li>
-                <li><i class="fas fa-wind"></i> <strong>Không gian:</strong> Trần cao thoáng đãng, có hệ thống thông gió tự nhiên, đảm bảo không khí lưu thông tốt.</li>
-                <li><i class="fas fa-couch"></i> <strong>Tiện ích đi kèm:</strong> Khu vực ghế ngồi nghỉ ngơi cho người chơi và bạn bè; Chỗ để xe rộng rãi, an toàn; Hệ thống nhà vệ sinh sạch sẽ, tiện nghi; Có phục vụ nước uống giải khát tại sân cầu.</li>
-            </ul>
-            <h3>Hình ảnh thực tế sân cầu lông Viện Sốt Rét:</h3>
-            <div class="gallery-grid">
-                <img src="images/san-cau-long-1.jpg" alt="Tổng quan sân cầu lông Nhơn Phú">
-                <img src="images/san-cau-long-2.jpg" alt="Thảm sân Ecostar S7000">
-                <img src="images/san-cau-long-3.jpg" alt="Hệ thống đèn LED sân cầu lông">
-                <img src="images/san-cau-long-4.jpg" alt="Khu vực nghỉ ngơi tại sân">
-                </div>
-        </div>
-    </div>
-</section>
-
-<section class="coaches section-padding">
-    <div class="container">
-        <h2 class="section-title">Đội Ngũ Huấn Luyện Viên</h2>
-        <p>CLB được dẫn dắt và cố vấn chuyên môn bởi đội ngũ Huấn luyện viên tâm huyết, giàu kinh nghiệm thực tế và giảng dạy cầu lông tại Quy Nhơn, nổi bật là:</p>
-        <div class="coach-profiles">
-            <div class="coach-profile">
-                <img src="images/hlv-bien.jpg" alt="HLV Biền - Dạy cầu lông Quy Nhơn" class="coach-photo">
-                <div class="coach-info">
-                    <h3>HLV Biền</h3>
-                    <p><strong>Điện thoại:</strong> <a href="tel:0988809890">0988.809.890</a></p>
-                    <p>Với nhiều năm kinh nghiệm thi đấu và huấn luyện cầu lông, HLV Biền có phương pháp sư phạm dễ hiểu, tập trung vào việc xây dựng nền tảng kỹ thuật vững chắc và phát triển tư duy chiến thuật cho học viên mọi lứa tuổi.</p>
-                </div>
-            </div>
-            <div class="coach-profile">
-                <img src="images/hlv-hoang.jpg" alt="HLV Hoàng - CLB Cầu Lông Nhơn Phú" class="coach-photo">
-                 <div class="coach-info">
-                    <h3>HLV Hoàng</h3>
-                    <p><strong>Điện thoại:</strong> <a href="tel:0935185558">0935.185.558</a></p>
-                    <p>HLV Hoàng có kinh nghiệm tổ chức các hoạt động, giải đấu phong trào, luôn nhiệt tình hỗ trợ các thành viên CLB. Đồng thời, HLV Hoàng cũng tham gia hướng dẫn, đặc biệt trong việc nâng cao thể lực và kỹ năng thực chiến.</p>
-                 </div>
-            </div>
-        </div>
-        <p class="text-center">Đội ngũ HLV luôn sẵn sàng hướng dẫn kỹ thuật, chia sẻ kinh nghiệm và đồng hành cùng sự tiến bộ của bạn. <a href="lop-hoc.html">Tìm hiểu thêm về các lớp học cầu lông.</a></p>
-    </div>
-</section>
-
-<section class="operating-hours section-padding bg-light">
-    <div class="container">
-        <h2 class="section-title">Giờ Hoạt Động</h2>
-        <div class="hours-info">
-            <p><strong>Tất cả các ngày trong tuần:</strong></p>
-            <ul>
-                <li><i class="far fa-clock"></i> Buổi Sáng: <strong>5h00 – 7h00</strong></li>
-                <li><i class="far fa-clock"></i> Buổi Chiều: <strong>17h00 – 21h00</strong></li>
-            </ul>
-            <p><em>Lưu ý: Giờ học các lớp có thể khác, vui lòng xem chi tiết tại trang Lớp Học hoặc liên hệ HLV.</em></p>
-        </div>
-    </div>
-</section>
-
-<section class="page-header">
-    <div class="container">
-        <h1>Phát Triển Kỹ Năng Cầu Lông Cùng CLB Nhơn Phú</h1>
-    </div>
-</section>
-
-<section class="class-intro section-padding">
-    <div class="container">
-        <p>Bạn đam mê cầu lông và muốn bắt đầu hành trình chinh phục môn thể thao này tại Quy Nhơn? Hay bạn đã có nền tảng và mong muốn nâng cao kỹ thuật, chiến thuật thi đấu cầu lông? Các lớp học cầu lông tại CLB Nhơn Phú (Sân Viện Sốt Rét) được thiết kế khoa học, phù hợp với mọi lứa tuổi và trình độ.</p>
-        <p>Tham gia cùng chúng tôi để rèn luyện sức khỏe, cải thiện kỹ năng chơi cầu lông và hòa mình vào cộng đồng cầu lông sôi động tại Nhơn Phú, Bình Định!</p>
-    </div>
-</section>
-
-<section class="why-choose-us section-padding bg-light">
-    <div class="container">
-        <h2 class="section-title">Tại Sao Chọn Lớp Học Cầu Lông Của Chúng Tôi?</h2>
-        <ul class="benefits-list">
-            <li><i class="fas fa-chalkboard-teacher"></i> <strong>Huấn Luyện Viên Kinh Nghiệm:</strong> Được hướng dẫn trực tiếp bởi HLV Biền, HLV Hoàng và các trợ giảng tận tâm, có chuyên môn cao về đào tạo cầu lông.</li>
-            <li><i class="fas fa-book-open"></i> <strong>Giáo Trình Bài Bản:</strong> Chương trình học cầu lông được xây dựng logic, từ cơ bản đến nâng cao, dễ tiếp thu.</li>
-            <li><i class="fas fa-running"></i> <strong>Thực Hành Tối Đa:</strong> Chú trọng thời gian thực hành trên sân cầu lông, sửa lỗi kỹ thuật chi tiết.</li>
-            <li><i class="fas fa-users"></i> <strong>Môi Trường Thân Thiện:</strong> Không khí lớp học vui vẻ, tạo động lực học tập và giao lưu tại CLB Nhơn Phú.</li>
-            <li><i class="fas fa-medal"></i> <strong>Cơ Sở Vật Chất Tốt:</strong> Tập luyện trên sân cầu lông Viện Sốt Rét đạt chuẩn, ánh sáng đầy đủ.</li>
-            <li><i class="far fa-calendar-alt"></i> <strong>Lịch Học Linh Hoạt:</strong> Có nhiều khung giờ để lựa chọn (vui lòng liên hệ để biết chi tiết).</li>
-        </ul>
-    </div>
-</section>
-
-<section class="training-programs section-padding">
-    <div class="container">
-        <h2 class="section-title">Các Chương Trình Đào Tạo Cầu Lông</h2>
-        <div class="program-grid">
-            <div class="program-item">
-                <h3><i class="fas fa-star"></i> Lớp Cầu Lông Cơ Bản</h3>
-                <p><strong>Đối tượng:</strong> Người mới bắt đầu làm quen với cầu lông, chưa có kiến thức nền tảng. Phù hợp cho cả người lớn và trẻ em (từ 7 tuổi).</p>
-                <p><strong>Mục tiêu:</strong> Nắm vững các kỹ thuật cầu lông cơ bản (cầm vợt, di chuyển, giao cầu, đánh cầu cao sâu, phông cầu, bỏ nhỏ...), luật chơi cơ bản.</p>
-                <p><strong>Lịch học & Học phí:</strong> <a href="tel:0988809890">Liên hệ HLV Biền: 0988.809.890</a> để biết chi tiết lịch khai giảng và học phí lớp học cầu lông tại Quy Nhơn.</p>
-            </div>
-            <div class="program-item">
-                <h3><i class="fas fa-level-up-alt"></i> Lớp Cầu Lông Nâng Cao</h3>
-                 <p><strong>Đối tượng:</strong> Người đã chơi cầu lông, nắm vững kỹ thuật cơ bản, muốn cải thiện kỹ năng và chiến thuật thi đấu cầu lông.</p>
-                 <p><strong>Mục tiêu:</strong> Hoàn thiện các kỹ thuật nâng cao (đập cầu, cắt cầu, ve cầu, phòng thủ...), rèn luyện chiến thuật đánh đơn/đôi, nâng cao thể lực và phản xạ.</p>
-                 <p><strong>Lịch học & Học phí:</strong> <a href="tel:0988809890">Liên hệ HLV Biền: 0988.809.890</a> để biết chi tiết lịch học và chi phí.</p>
-            </div>
-            <div class="program-item">
-                 <h3><i class="fas fa-child"></i> Lớp Cầu Lông Trẻ Em</h3>
-                 <p><strong>Đối tượng:</strong> Các bé từ 7 đến 15 tuổi tại Quy Nhơn.</p>
-                 <p><strong>Mục tiêu:</strong> Tạo niềm yêu thích với cầu lông, rèn luyện sức khỏe, sự nhanh nhẹn, khéo léo, tính kỷ luật và tinh thần đồng đội thông qua các bài tập vui nhộn, phù hợp lứa tuổi.</p>
-                 <p><strong>Lịch học & Học phí:</strong> <a href="tel:0988809890">Liên hệ HLV Biền: 0988.809.890</a> để tư vấn lớp học cầu lông phù hợp cho bé.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="meet-coaches section-padding bg-light">
-    <div class="container">
-        <h2 class="section-title">Gặp Gỡ Huấn Luyện Viên Dạy Cầu Lông</h2>
-         <div class="coach-profiles">
-            <div class="coach-profile">
-                <img src="images/hlv-bien.jpg" alt="HLV Biền - Dạy cầu lông cơ bản, nâng cao" class="coach-photo">
-                <div class="coach-info">
-                    <h3>HLV Biền</h3>
-                    <p>HLV Biền có [Số năm] năm kinh nghiệm trực tiếp giảng dạy cầu lông tại Quy Nhơn, đã đào tạo nhiều học viên từ chưa biết gì đến chơi tốt. Phương pháp huấn luyện tập trung vào sửa lỗi sai, xây dựng kỹ thuật chuẩn và tạo cảm hứng cho người học.</p>
-                    <p><strong>SĐT Tư vấn Lớp học:</strong> <a href="tel:0988809890">0988.809.890</a></p>
-                </div>
-            </div>
-            <div class="coach-profile">
-                 <img src="images/hlv-hoang.jpg" alt="HLV Hoàng - Hỗ trợ đào tạo cầu lông" class="coach-photo">
-                 <div class="coach-info">
-                     <h3>HLV Hoàng</h3>
-                     <p>HLV Hoàng tham gia trợ giảng, đặc biệt chú trọng vào các bài tập thể lực bổ trợ và rèn luyện kỹ năng thực chiến qua các buổi đấu tập. Luôn nhiệt tình và tạo không khí vui vẻ trong các buổi học tại CLB Nhơn Phú.</p>
-                     <p><strong>SĐT Tư vấn Chung:</strong> <a href="tel:0935185558">0935.185.558</a></p>
-                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="registration-form section-padding">
-    <div class="container">
-        <h2 class="section-title">Đăng Ký Tư Vấn & Nhận Lịch Học</h2>
-        <p>Vui lòng điền thông tin dưới đây, chúng tôi sẽ liên hệ lại để tư vấn chi tiết về lớp học cầu lông phù hợp và lịch khai giảng gần nhất tại CLB Nhơn Phú (Sân Viện Sốt Rét).</p>
-        <form id="class-inquiry-form" action="/api/class-inquiry" method="POST"> <div class="form-group">
-                <label for="fullName">Họ và Tên:*</label>
-                <input type="text" id="fullName" name="fullName" required>
-            </div>
-            <div class="form-group">
-                <label for="birthYear">Năm Sinh:*</label>
-                <input type="number" id="birthYear" name="birthYear" required min="1950" max="2020">
-            </div>
-             <div class="form-group">
-                 <label>Giới tính:</label>
-                 <label><input type="radio" name="gender" value="Nam"> Nam</label>
-                 <label><input type="radio" name="gender" value="Nữ"> Nữ</label>
-                 <label><input type="radio" name="gender" value="Khác"> Khác</label>
-             </div>
-            <div class="form-group">
-                <label for="phone">Số Điện Thoại:*</label>
-                <input type="tel" id="phone" name="phone" required pattern="[0-9]{10,11}" title="Số điện thoại gồm 10-11 chữ số">
-            </div>
-            <div class="form-group">
-                <label for="email">Email (Không bắt buộc):</label>
-                <input type="email" id="email" name="email">
-            </div>
-            <div class="form-group">
-                <label for="classInterest">Lớp học quan tâm:*</label>
-                <select id="classInterest" name="classInterest" required>
-                    <option value="">-- Chọn lớp học --</option>
-                    <option value="Cơ Bản">Lớp Cơ Bản</option>
-                    <option value="Nâng Cao">Lớp Nâng Cao</option>
-                    <option value="Trẻ Em">Lớp Trẻ Em</option>
-                    <option value="Tư vấn thêm">Cần tư vấn thêm</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="currentLevel">Trình độ hiện tại (ước lượng):</label>
-                 <select id="currentLevel" name="currentLevel">
-                    <option value="Chưa biết chơi">Chưa biết chơi</option>
-                    <option value="Biết chơi cơ bản">Biết chơi cơ bản</option>
-                    <option value="Chơi khá">Chơi khá</option>
-                    <option value="Chơi tốt">Chơi tốt</option>
-                </select>
-            </div>
-             <div class="form-group">
-                 <label for="notes">Nhu cầu/Ghi chú khác:</label>
-                 <textarea id="notes" name="notes" rows="4"></textarea>
-             </div>
-             <button type="submit" class="btn btn-primary">Gửi Yêu Cầu Tư Vấn</button>
-        </form>
-        <div id="form-success-message" style="display: none; margin-top: 15px; color: green;">
-            Yêu cầu của bạn đã được gửi! HLV của CLB Nhơn Phú sẽ liên hệ lại trong thời gian sớm nhất. Xin cảm ơn!
-        </div>
-         <div id="form-error-message" style="display: none; margin-top: 15px; color: red;">
-            Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp qua Hotline.
-        </div>
-    </div>
-</section>
-
-<section class="page-header">
-    <div class="container">
-        <h1>Đặt Sân Cầu Lông Nhanh Chóng Tại Nhơn Phú</h1>
-    </div>
-</section>
-
-<section class="booking-intro section-padding">
-    <div class="container">
-        <p>Chủ động chọn sân và khung giờ yêu thích của bạn với hệ thống đặt lịch trực tuyến tiện lợi của CLB Cầu lông Nhơn Phú. Xem trạng thái sân trống tại Viện Sốt Rét Quy Nhơn theo thời gian thực và đặt chỗ chỉ với vài thao tác đơn giản.</p>
-        <p>Bạn cũng có thể liên hệ trực tiếp HLV Hoàng: <a href="tel:0935185558">0935.185.558</a> để đặt sân cầu lông.</p>
-    </div>
-</section>
-
-<section class="online-booking-system section-padding bg-light">
-    <div class="container">
-        <h2 class="section-title">Lịch Đặt Sân Cầu Lông Trực Tuyến</h2>
-        <div class="booking-instructions">
-            <h3>Hướng dẫn đặt sân:</h3>
-            <ol>
-                <li>Chọn ngày bạn muốn thuê sân trên lịch bên dưới.</li>
-                <li>Các khung giờ còn trống sẽ hiển thị màu <span class="slot-available">Xanh</span>. Khung giờ đã được đặt sẽ hiển thị màu <span class="slot-booked">Cam</span>. Khung giờ ngoài giờ hoạt động sẽ hiển thị màu <span class="slot-unavailable">Xám</span>.</li>
-                <li>Nhấp vào khung giờ <span class="slot-available">Xanh</span> bạn muốn đặt.</li>
-                <li>Điền thông tin vào form xác nhận hiện ra bên dưới lịch.</li>
-            </ol>
-            <p><strong>Khung giờ hoạt động cho thuê sân:</strong></p>
-            <ul>
-                <li>Buổi Sáng: 5h00 - 6h00 | 6h00 - 7h00</li>
-                <li>Buổi Chiều: 17h00 - 18h00 | 18h00 - 19h00 | 19h00 - 20h00 | 20h00 - 21h00</li>
-            </ul>
-        </div>
-
-        <div id="booking-calendar-placeholder">
-            <h3 style="text-align: center; padding: 40px; border: 1px dashed #ccc;">
-                [Placeholder: Hệ thống Lịch Tương Tác]
-            </h3>
-            <p style="text-align: center;">(Đây là nơi hiển thị lịch chọn ngày và các khung giờ theo trạng thái. Cần JavaScript và Backend để hoạt động)</p>
-            </div>
-
-        <div id="booking-confirmation-form" style="display: none; margin-top: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
-            <h3 class="section-title">Xác Nhận Thông Tin Đặt Sân</h3>
-            <form id="confirm-booking-form" action="/api/book-court" method="POST"> <p><strong>Ngày đặt:</strong> <span id="selected-date">[Ngày đã chọn]</span></p>
-                <p><strong>Khung giờ:</strong> <span id="selected-time">[Giờ đã chọn]</span></p>
-                <p><strong>Sân số:</strong> <span id="selected-court">[Sân đã chọn]</span></p>
-                <input type="hidden" id="bookingDate" name="bookingDate">
-                <input type="hidden" id="bookingTime" name="bookingTime">
-                <input type="hidden" id="bookingCourt" name="bookingCourt">
-
-                <div class="form-group">
-                    <label for="bookerName">Họ và Tên Người Đặt:*</label>
-                    <input type="text" id="bookerName" name="bookerName" required>
-                </div>
-                <div class="form-group">
-                    <label for="bookerPhone">Số Điện Thoại Liên Hệ:*</label>
-                    <input type="tel" id="bookerPhone" name="bookerPhone" required pattern="[0-9]{10,11}" title="Số điện thoại gồm 10-11 chữ số">
-                </div>
-                 <div class="form-group">
-                     <label for="bookingNotes">Ghi chú (nếu có):</label>
-                     <textarea id="bookingNotes" name="bookingNotes" rows="3"></textarea>
-                 </div>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" id="agreeTerms" name="agreeTerms" required> Tôi đã đọc và đồng ý với <a href="#booking-rules" class="scroll-link">Quy định đặt sân</a> của CLB.
-                    </label>
-                </div>
-                 <button type="submit" class="btn btn-primary">Xác Nhận Đặt Sân</button>
-            </form>
-             <div id="booking-success-message" style="display: none; margin-top: 15px; color: green;">
-                Đặt sân thành công! Thông tin đặt sân của bạn: Ngày <span class="confirm-date"></span>, Giờ <span class="confirm-time"></span>, Sân <span class="confirm-court"></span>. Vui lòng đến đúng giờ. Hẹn gặp bạn tại CLB Nhơn Phú!
-            </div>
-             <div id="booking-error-message" style="display: none; margin-top: 15px; color: red;">
-                Đã có lỗi xảy ra khi đặt sân (có thể khung giờ vừa được người khác đặt). Vui lòng thử lại hoặc liên hệ HLV Hoàng.
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="pricing section-padding">
-    <div class="container">
-        <h2 class="section-title">Bảng Giá Thuê Sân Cầu Lông</h2>
-         <table class="pricing-table">
-             <thead>
-                 <tr>
-                     <th>Khung Giờ</th>
-                     <th>Giá (VNĐ / giờ / sân)</th>
-                 </tr>
-             </thead>
-             <tbody>
-                 <tr>
-                     <td>18h00 - 20h00 (Thứ 2 - Chủ Nhật)</td>
-                     <td><strong>60.000</strong></td>
-                 </tr>
-                 <tr>
-                     <td>Các khung giờ còn lại (5h-7h, 17h-18h, 20h-21h)</td>
-                      <td><strong>50.000</strong></td>
-                 </tr>
-             </tbody>
-         </table>
-         <p class="text-center note"><em>Giá có thể thay đổi, vui lòng kiểm tra lại khi đặt sân hoặc liên hệ HLV Hoàng.</em></p>
-    </div>
-</section>
-
-<section class="booking-rules section-padding bg-light" id="booking-rules">
-    <div class="container">
-        <h2 class="section-title">Quy Định Đặt Sân & Sử Dụng Sân</h2>
-        <ul>
-            <li><strong>Đặt sân:</strong> Vui lòng đặt sân trước giờ chơi ít nhất 1 tiếng để đảm bảo giữ sân. Ưu tiên các lượt đặt qua hệ thống online hoặc hotline HLV Hoàng: <a href="tel:0935185558">0935.185.558</a>.</li>
-            <li><strong>Hủy sân:</strong> Nếu muốn hủy sân đã đặt, vui lòng báo trước ít nhất <strong>4 tiếng</strong> qua Hotline HLV Hoàng. Hủy sân muộn hoặc không đến có thể bị tính phí hoặc hạn chế đặt sân cầu lông lần sau.</li>
-            <li><strong>Thanh toán:</strong> Thanh toán trực tiếp tại sân trước hoặc ngay sau khi kết thúc giờ chơi. (Hiện tại CLB Nhơn Phú chưa hỗ trợ chuyển khoản online).</li>
-            <li><strong>Sử dụng sân:</strong>
-                <ul>
-                    <li>Vui lòng đi giày chuyên dụng cho sân cầu lông (giày đế bằng, sạch, không phải giày chạy bộ hoặc giày đinh).</li>
-                    <li>Giữ gìn vệ sinh chung tại sân cầu và khu vực xung quanh.</li>
-                    <li>Không mang đồ ăn thức uống vào khu vực thi đấu (thảm sân).</li>
-                    <li>Tuân thủ các nội quy khác của CLB Cầu lông Nhơn Phú và Viện Sốt Rét Quy Nhơn.</li>
-                 </ul>
-             </li>
-        </ul>
-    </div>
-</section>
-
-<section class="page-header">
-    <div class="container">
-        <h1>Khoảnh Khắc Đáng Nhớ Tại CLB Cầu Lông Nhơn Phú</h1>
-    </div>
-</section>
-
-<section class="gallery-intro section-padding">
-    <div class="container">
-        <p>Cùng nhìn lại những hình ảnh sống động và chân thực về cơ sở vật chất khang trang của sân cầu lông Viện Sốt Rét, các buổi tập luyện cầu lông sôi nổi, những trận cầu hấp dẫn và các sự kiện đáng nhớ của cộng đồng CLB Cầu lông Nhơn Phú tại Quy Nhơn.</p>
-    </div>
-</section>
-
-<section class="gallery-content section-padding bg-light">
-    <div class="container">
-        <div class="tabs">
-            <button class="tab-link active" onclick="openAlbum(event, 'san-bai')">Sân Bãi & Cơ Sở Vật Chất</button>
-            <button class="tab-link" onclick="openAlbum(event, 'lop-hoc')">Hoạt Động Lớp Học</button>
-            <button class="tab-link" onclick="openAlbum(event, 'giai-dau')">Giải Đấu & Sự Kiện</button>
-            <button class="tab-link" onclick="openAlbum(event, 'videos')">Video Highlights</button>
-        </div>
-
-        <div id="san-bai" class="tab-content active">
-            <h3 class="album-title">Album: Sân Bãi & Cơ Sở Vật Chất Sân Cầu Lông Viện Sốt Rét</h3>
-            <div class="gallery-grid">
-                <a href="images/san-lon-1.jpg" data-lightbox="san-bai" data-title="Tổng quan 3 sân cầu lông"><img src="images/san-nho-1.jpg" alt="Sân cầu lông Nhơn Phú tổng quan"></a>
-                <a href="images/san-lon-2.jpg" data-lightbox="san-bai" data-title="Thảm Ecostar S7000 dày 4.5mm"><img src="images/san-nho-2.jpg" alt="Thảm sân cầu lông chất lượng"></a>
-                <a href="images/san-lon-3.jpg" data-lightbox="san-bai" data-title="Hệ thống đèn LED chống chói"><img src="images/san-nho-3.jpg" alt="Ánh sáng sân cầu lông ban đêm"></a>
-                 <a href="images/san-lon-4.jpg" data-lightbox="san-bai" data-title="Không gian trần cao thoáng đãng"><img src="images/san-nho-4.jpg" alt="Không gian sân cầu lông Nhơn Phú"></a>
-                 <a href="images/san-lon-5.jpg" data-lightbox="san-bai" data-title="Khu vực ghế nghỉ cho VĐV"><img src="images/san-nho-5.jpg" alt="Chỗ nghỉ ngơi sân cầu lông"></a>
-                 <a href="images/san-lon-6.jpg" data-lightbox="san-bai" data-title="Lối vào sân cầu lông Viện Sốt Rét"><img src="images/san-nho-6.jpg" alt="Lối vào CLB Nhơn Phú"></a>
-                 </div>
-        </div>
-
-        <div id="lop-hoc" class="tab-content">
-            <h3 class="album-title">Album: Hoạt Động Lớp Học & Tập Luyện Cầu Lông</h3>
-             <div class="gallery-grid">
-                <a href="images/lop-hoc-lon-1.jpg" data-lightbox="lop-hoc" data-title="HLV Biền hướng dẫn kỹ thuật cơ bản"><img src="images/lop-hoc-nho-1.jpg" alt="Dạy cầu lông cơ bản Quy Nhơn"></a>
-                 <a href="images/lop-hoc-lon-2.jpg" data-lightbox="lop-hoc" data-title="Lớp cầu lông trẻ em vui nhộn"><img src="images/lop-hoc-nho-2.jpg" alt="Học cầu lông trẻ em Nhơn Phú"></a>
-                 <a href="images/lop-hoc-lon-3.jpg" data-lightbox="lop-hoc" data-title="Học viên lớp nâng cao tập di chuyển"><img src="images/lop-hoc-nho-3.jpg" alt="Đào tạo cầu lông nâng cao"></a>
-                 <a href="images/lop-hoc-lon-4.jpg" data-lightbox="lop-hoc" data-title="Thực hành đánh đôi tại lớp"><img src="images/lop-hoc-nho-4.jpg" alt="Tập luyện cầu lông đôi"></a>
-                 </div>
-        </div>
-
-        <div id="giai-dau" class="tab-content">
-             <h3 class="album-title">Album: Giải Đấu Cầu Lông & Sự Kiện CLB</h3>
-             <div class="gallery-grid">
-                 <a href="images/giai-dau-lon-1.jpg" data-lightbox="giai-dau" data-title="Không khí thi đấu giải giao hữu"><img src="images/giai-dau-nho-1.jpg" alt="Giải cầu lông Quy Nhơn"></a>
-                 <a href="images/giai-dau-lon-2.jpg" data-lightbox="giai-dau" data-title="Trao giải cho các VĐV xuất sắc"><img src="images/giai-dau-nho-2.jpg" alt="Trao giải cầu lông"></a>
-                 <a href="images/giai-dau-lon-3.jpg" data-lightbox="giai-dau" data-title="Tiệc cuối năm CLB Nhơn Phú"><img src="images/giai-dau-nho-3.jpg" alt="Sự kiện CLB cầu lông"></a>
-                  </div>
-        </div>
-
-         <div id="videos" class="tab-content">
-             <h3 class="album-title">Album: Video Highlights</h3>
-             <div class="video-grid">
-                <div class="video-item">
-                     <iframe width="560" height="315" src="https://www.youtube.com/embed/[VideoID1]" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                     <p>Giới thiệu CLB Cầu Lông Nhơn Phú</p>
-                 </div>
-                 <div class="video-item">
-                      <iframe width="560" height="315" src="https://www.youtube.com/embed/[VideoID2]" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                     <p>Pha cầu hay tại giải đấu tháng 3</p>
-                 </div>
-                 </div>
-         </div>
-    </div>
-</section>
-
-<section class="page-header">
-    <div class="container">
-        <h1>Cập Nhật Thông Tin Từ CLB Cầu Lông Nhơn Phú</h1>
-    </div>
-</section>
-
-<section class="news-intro section-padding">
-    <div class="container">
-        <p>Nơi cập nhật những thông tin chính thức và mới nhất về lịch trình hoạt động, các giải đấu cầu lông sắp diễn ra tại Quy Nhơn, kết quả thi đấu, thông báo quan trọng, các hoạt động cộng đồng và bài viết chia sẻ kiến thức, kinh nghiệm về cầu lông từ CLB Nhơn Phú.</p>
-    </div>
-</section>
-
-<section class="news-list section-padding bg-light">
-    <div class="container">
-        <div class="blog-layout">
-            <div class="main-content">
-                <article class="blog-post-summary">
-                    <img src="images/news-thumb-1.jpg" alt="Kết quả giải cầu lông tháng 3">
-                    <div class="post-content">
-                        <h2><a href="/tin-tuc/ket-qua-giai-giao-huu-thang-3-2025.html">[Giải đấu] Kết quả Giải Giao hữu CLB Nhơn Phú Tháng 3/2025</a></h2>
-                        <div class="post-meta">
-                            <span><i class="far fa-calendar-alt"></i> 28 Tháng 3, 2025</span> |
-                            <span><i class="fas fa-folder-open"></i> Giải đấu</span>
-                        </div>
-                        <p>Giải đấu cầu lông giao hữu tháng 3 đã diễn ra thành công tốt đẹp với những trận cầu hấp dẫn. Xin chúc mừng các VĐV đạt giải và cảm ơn sự tham gia nhiệt tình của mọi người...</p>
-                        <a href="/tin-tuc/ket-qua-giai-giao-huu-thang-3-2025.html" class="btn btn-secondary btn-sm">Đọc tiếp &gt;&gt;</a>
-                    </div>
-                </article>
-
-                 <article class="blog-post-summary">
-                    <img src="images/news-thumb-2.jpg" alt="Thông báo lịch nghỉ lễ">
-                    <div class="post-content">
-                        <h2><a href="/tin-tuc/thong-bao-lich-hoat-dong-dip-le.html">[Thông báo] Lịch hoạt động CLB Cầu lông Nhơn Phú dịp Lễ sắp tới</a></h2>
-                        <div class="post-meta">
-                            <span><i class="far fa-calendar-alt"></i> 25 Tháng 3, 2025</span> |
-                            <span><i class="fas fa-folder-open"></i> Thông báo</span>
-                        </div>
-                        <p>CLB Cầu Lông Nhơn Phú xin trân trọng thông báo lịch hoạt động của sân cầu lông Viện Sốt Rét trong dịp Lễ [Tên Lễ] sắp tới để quý thành viên và khách thuê sân tiện sắp xếp...</p>
-                        <a href="/tin-tuc/thong-bao-lich-hoat-dong-dip-le.html" class="btn btn-secondary btn-sm">Đọc tiếp &gt;&gt;</a>
-                    </div>
-                </article>
-
-                 <article class="blog-post-summary">
-                     <img src="images/news-thumb-3.jpg" alt="Chọn vợt cầu lông">
-                     <div class="post-content">
-                        <h2><a href="/tin-tuc/meo-chon-vot-cau-long-cho-nguoi-moi.html">[Chia sẻ] Mẹo chọn vợt cầu lông cho người mới bắt đầu từ HLV Biền</a></h2>
-                         <div class="post-meta">
-                             <span><i class="far fa-calendar-alt"></i> 20 Tháng 3, 2025</span> |
-                             <span><i class="fas fa-folder-open"></i> Chia sẻ kinh nghiệm</span>
-                         </div>
-                         <p>Bạn mới bắt đầu chơi cầu lông tại Quy Nhơn và băn khoăn không biết chọn vợt như thế nào? HLV Biền của CLB Nhơn Phú sẽ chia sẻ những mẹo hữu ích giúp bạn...</p>
-                         <a href="/tin-tuc/meo-chon-vot-cau-long-cho-nguoi-moi.html" class="btn btn-secondary btn-sm">Đọc tiếp &gt;&gt;</a>
-                     </div>
-                 </article>
-
-                 <nav class="pagination">
-                     <ul>
-                         <li class="disabled"><a href="#">&laquo; Trước</a></li>
-                         <li class="active"><a href="#">1</a></li>
-                         <li><a href="#">2</a></li>
-                         <li><a href="#">3</a></li>
-                         <li><a href="#">Sau &raquo;</a></li>
-                     </ul>
-                 </nav>
-            </div>
-
-            <aside class="sidebar">
-                <div class="widget">
-                    <h4>Tìm kiếm bài viết</h4>
-                    <form action="/tin-tuc/tim-kiem" method="GET">
-                        <input type="search" name="q" placeholder="Nhập từ khóa...">
-                        <button type="submit"><i class="fas fa-search"></i></button>
-                    </form>
-                </div>
-                 <div class="widget">
-                     <h4>Chuyên mục</h4>
-                     <ul>
-                         <li><a href="/tin-tuc/category/thong-bao">Thông báo CLB</a></li>
-                         <li><a href="/tin-tuc/category/giai-dau">Giải đấu cầu lông</a></li>
-                         <li><a href="/tin-tuc/category/lop-hoc">Thông tin lớp học</a></li>
-                         <li><a href="/tin-tuc/category/chia-se">Chia sẻ kinh nghiệm</a></li>
-                     </ul>
-                 </div>
-                 <div class="widget">
-                     <h4>Bài viết mới nhất</h4>
-                     <ul>
-                         <li><a href="#">[Giải đấu] Kết quả Giải Giao hữu Tháng 3/2025</a></li>
-                         <li><a href="#">[Thông báo] Lịch hoạt động CLB dịp Lễ</a></li>
-                         <li><a href="#">[Chia sẻ] Mẹo chọn vợt cầu lông</a></li>
-                     </ul>
-                 </div>
-            </aside>
-        </div>
-    </div>
-</section>
-
-<section class="page-header">
-    <div class="container">
-        <h1>Liên Hệ Với Chúng Tôi</h1>
-    </div>
-</section>
-
-<section class="contact-intro section-padding">
-    <div class="container">
-        <p>CLB Cầu lông Nhơn Phú luôn sẵn lòng lắng nghe ý kiến đóng góp và giải đáp mọi thắc mắc của bạn về việc thuê sân cầu lông, học cầu lông, hoặc tham gia các hoạt động tại Quy Nhơn. Đừng ngần ngại liên hệ với chúng tôi qua các thông tin dưới đây hoặc gửi tin nhắn trực tiếp qua form liên hệ.</p>
-    </div>
-</section>
-
-<section class="contact-details section-padding bg-light">
-    <div class="container">
-        <div class="contact-grid">
-            <div class="contact-info">
-                 <h3>Thông Tin Liên Hệ Chi Tiết</h3>
-                 <p><strong><i class="fas fa-basketball-ball"></i> Tên Câu lạc bộ:</strong> Câu lạc bộ Cầu lông Nhơn Phú</p>
-                 <p><strong><i class="fas fa-map-marker-alt"></i> Địa chỉ:</strong> Sân Cầu lông Viện Sốt rét - Ký sinh trùng - Côn trùng Quy Nhơn, Khu vực 8, Phường Nhơn Phú, Thành phố Quy Nhơn, Tỉnh Bình Định.</p>
-                 <p><i class="fas fa-directions"></i> <a href="https://maps.app.goo.gl/yWrsuk8GkssQQz9q6" target="_blank" rel="noopener noreferrer"><strong>Chỉ đường đến CLB Nhơn Phú trên Google Maps</strong></a></p>
-                 <p><strong><i class="fas fa-phone-alt"></i> Hotline Hỗ Trợ:</strong></p>
-                 <ul>
-                    <li>HLV Biền (Tư vấn lớp học, chuyên môn): <a href="tel:0988809890"><strong>0988.809.890</strong></a></li>
-                    <li>HLV Hoàng (Đặt sân, lịch trình, thông tin chung): <a href="tel:0935185558"><strong>0935.185.558</strong></a></li>
-                 </ul>
-                 <p><strong><i class="fas fa-envelope"></i> Email:</strong> <a href="mailto:clbnhonphu@gmail.com">clbnhonphu@gmail.com</a></p>
-                 <p><strong><i class="fab fa-facebook-square"></i> Fanpage Facebook:</strong> <a href="https://www.facebook.com/NHONPHUBADMINTONCLUB/" target="_blank" rel="noopener noreferrer">CLB Cầu Lông Nhơn Phú</a></p>
-                 <p><strong><i class="far fa-clock"></i> Giờ Hoạt Động & Hỗ Trợ:</strong></p>
-                 <ul>
-                    <li>Sân mở cửa: Sáng 5h00 - 7h00 | Chiều 17h00 - 21h00 (Hàng ngày)</li>
-                    <li>Hỗ trợ qua điện thoại/tin nhắn: 8h00 - 21h00 (Hàng ngày)</li>
-                </ul>
-            </div>
-            <div class="contact-form-container">
-                 <h3>Gửi Tin Nhắn Cho CLB Nhơn Phú</h3>
-                 <form id="contact-form" action="/api/contact" method="POST"> <div class="form-group">
-                         <label for="contactName">Họ và Tên:*</label>
-                         <input type="text" id="contactName" name="contactName" required>
-                     </div>
-                     <div class="form-group">
-                         <label for="contactEmail">Email:*</label>
-                         <input type="email" id="contactEmail" name="contactEmail" required>
-                     </div>
-                     <div class="form-group">
-                          <label for="contactPhone">Số Điện Thoại (Không bắt buộc):</label>
-                          <input type="tel" id="contactPhone" name="contactPhone" pattern="[0-9]{10,11}" title="Số điện thoại gồm 10-11 chữ số">
-                     </div>
-                     <div class="form-group">
-                         <label for="contactSubject">Chủ đề:*</label>
-                         <input type="text" id="contactSubject" name="contactSubject" required>
-                     </div>
-                     <div class="form-group">
-                         <label for="contactMessage">Nội dung tin nhắn:*</label>
-                         <textarea id="contactMessage" name="contactMessage" rows="5" required></textarea>
-                     </div>
-                     <button type="submit" class="btn btn-primary">Gửi Tin Nhắn</button>
-                 </form>
-                 <div id="contact-success-message" style="display: none; margin-top: 15px; color: green;">
-                    Cảm ơn bạn đã liên hệ! Tin nhắn của bạn đã được gửi thành công. Chúng tôi sẽ phản hồi trong thời gian sớm nhất.
-                </div>
-                <div id="contact-error-message" style="display: none; margin-top: 15px; color: red;">
-                     Đã có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại hoặc liên hệ trực tiếp qua Hotline.
-                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="location-map section-padding">
-    <div class="container">
-        <h2 class="section-title">Bản Đồ Vị Trí Sân Cầu Lông Viện Sốt Rét</h2>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d[Your Coordinates]!2d[Your Longitude]!3d[Your Latitude]!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x[Your Map ID]!2zU8OibiBD4bqndSBsw7RuZyBWaeG7h24gU-G7kXQgcsOpdA!5e0!3m2!1svi!2s!4v[Timestamp]" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Bản đồ vị trí Sân Cầu lông Viện Sốt Rét Nhơn Phú"></iframe>
-    </div>
-</section>
-
-<!-- Nguồn: -->
-<!-- 1. https://nentang.vn/app/exam/bai-tap/html-css-js/tao-chuong-trinh-tinh-toan-cong-tru-nhan-chia-bang-su-kien-click -->
-<!-- 2. https://foobar123.com/make-the-blog-prettier-with-bootstrap-and-blacktie-3ad0aa10542c -->
-<!-- 3. https://github.com/kirilldikalin/kirilldikalin.io -->
-<!-- 4. https://github.com/iqbalhassan-021/E-Store-Laravel- -->
-<!-- 5. https://github.com/Vinhle1804/ASM3 -->
-<!-- 6. https://github.com/hhhhuy/Laravel-WPD-Exam-CGMD000492 -->
-<!-- 7. https://github.com/Hiendzklo/Project-M24 -->
-<!-- 8. https://github.com/pallavi-shinde-sulochana/baby-ama -->
-<!-- 9. https://github.com/IvanGMtz/PirateYutu -->
-<!-- 10. https://github.com/Talha-4/talha-f2020266207-assignment-03 -->
-<!-- 11. https://github.com/carrikm/Eternal-Hub -->
-<!-- 12. https://github.com/Swapnilden/FrontendDevProject -->
-<!-- 13. https://github.com/BheemNaragonda/pet-website -->
-<!-- 14. https://github.com/denisptra/project-dirbass -->
-<!-- 15. https://github.com/pramadanif/GoBonsai -->
-<!-- 16. https://github.com/GabrieleBoni42/Siw-food -->
-<!-- 17. https://github.com/Aplikasi-Pemesanan-Obat-Herbal/Halaman-Web -->
-<!-- 18. https://github.com/Kisan88/Janapada-Loka-Technical -->
-<!-- 19. https://github.com/Mrezky69/HistoryCafe -->
-<!-- 20. https://github.com/Steveqks/CSIT321 -->
-<!-- 21. https://github.com/liviagalletti/wdd230 -->
-<!-- 22. https://github.com/HirutAssefa/Jewlery-landing-page-website -->
-<!-- 23. https://github.com/BarrathTb/TechTrove-Web-Vue-V1 -->
-<!-- 24. https://github.com/Gogostus/Responsive-Design -->
+<footer class="bg-dark text-gray-300 section-padding pb-8">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+<div class="md:col-span-2">
+<h4 class="text-lg font-semibold text-white mb-3">CLB Cầu Lông Nhơn Phú</h4>
+<p class="mb-2"><i class="fas fa-map-marker-alt mr-2 w-4 text-center"></i>Địa chỉ: Sân Cầu lông Viện Sốt rét, Khu vực 8, P. Nhơn Phú, TP. Quy Nhơn, Bình Định.</p>
+<p class="mb-2"><i class="fas fa-phone-alt mr-2 w-4 text-center"></i>Hotline: HLV Biền: <a href="tel:0988809890" class="hover:text-white hover:underline">0988.809.890</a> | HLV Hoàng: <a 
+(Content truncated due to size limit. Use line ranges to read in chunks)
