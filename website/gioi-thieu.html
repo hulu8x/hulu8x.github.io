@@ -3,133 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="[Meta Description cho từng trang - chứa từ khóa liên quan]">
-    <meta name="keywords" content="cầu lông, sân cầu lông, dạy cầu lông, Nhơn Phú, Quy Nhơn, Bình Định, đánh cầu, chơi cầu lông, sân cầu, học cầu, học cầu lông, đào tạo cầu lông, thi đấu cầu lông, tuyển sinh cầu lông, dịch vụ cầu lông, thuê sân cầu lông, thuê sân, cầu lông viện sốt rét, sân cầu lông Việt sốt rét, Viện sốt rét Ký sinh trùng Côn trùng Quy Nhơn, Sốt rét Quy Nhơn, Cầu lông Quy Nhơn, Cầu lông Nhơn Phú, Câu lạc bộ Nhơn Phú, Câu lạc bộ cầu lông">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title></title>
+    <title>Giới thiệu CLB Cầu Lông Nhơn Phú & Sân Viện Sốt Rét Quy Nhơn</title>
+    <meta name="description" content="Tìm hiểu về CLB Cầu Lông Nhơn Phú tại Quy Nhơn: sân bãi hiện đại ở Viện Sốt Rét, đội ngũ HLV kinh nghiệm (HLV Biền, HLV Hoàng), giờ hoạt động và cơ sở vật chất.">
+    <meta name="keywords" content="cầu lông, sân cầu lông, giới thiệu câu lạc bộ cầu lông, CLB Nhơn Phú, Sân Viện Sốt Rét, cầu lông Quy Nhơn, cầu lông Bình Định, HLV Biền, HLV Hoàng, cơ sở vật chất sân cầu lông">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      @font-face {
+        font-family: 'LucideIcons';
+        src: url('https://cdn.jsdelivr.net/npm/lucide-static@latest/font/Lucide.ttf') format('truetype');
+      }
+      .lucide {
+        font-family: 'LucideIcons';
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        /* Better Font Rendering */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      /* Tùy chỉnh cơ bản nếu cần */
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .hero-bg { /* Ví dụ background cho hero section */
+        background-image: url('https://placehold.co/1200x400/a0aec0/ffffff?text=Sân+Cầu+Lông+Nhơn+Phú');
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
 </head>
-<body>
-    <header>
-        <nav class="navbar">
-            <div class="container">
-                <a href="index.html" class="navbar-brand">
-                    <img src="images/logo.png" alt="Logo CLB Nhơn Phú" class="logo">
-                    <span class="club-name">CLB Cầu Lông Nhơn Phú</span>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2 no-underline">
+                <img src="images/logo.png" alt="Logo CLB Nhơn Phú" class="h-10">
+                <span class="text-xl font-bold text-dark hidden md:inline">CLB Cầu Lông Nhơn Phú</span>
+            </a>
+            <ul class="hidden md:flex space-x-6 items-center">
+                <li><a href="index.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Trang chủ</a></li>
+                <li><a href="gioi-thieu.html" class="text-blue-600 font-semibold border-b-2 border-blue-600 pb-1">Giới thiệu</a></li>
+                <li><a href="lop-hoc.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Lớp học</a></li>
+                <li><a href="dat-san.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Đặt sân</a></li>
+                <li><a href="thu-vien.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Thư viện</a></li>
+                <li><a href="tin-tuc.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Tin tức</a></li>
+                <li><a href="lien-he.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Liên hệ</a></li>
+            </ul>
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <span class="lucide text-2xl">&#xe9ac;</span> </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white absolute top-full left-0 w-full shadow-lg">
+            <ul class="flex flex-col items-center py-4 space-y-2">
+                <li><a href="index.html" class="block px-4 py-2 text-gray-600 hover:bg-blue-50 w-full text-center">Trang chủ</a></li>
+                <li><a href="gioi-thieu.html" class="block px-4 py-2 text-blue-600 bg-blue-100 font-semibold w-full text-center">Giới thiệu</a></li>
+                <li><a href="lop-hoc.html" class="block px-4 py-2 text-gray-600 hover:bg-blue-50 w-full text-center">Lớp học</a></li>
+                <li><a href="dat-san.html" class="block px-4 py-2 text-gray-600 hover:bg-blue-50 w-full text-center">Đặt sân</a></li>
+                <li><a href="thu-vien.html" class="block px-4 py-2 text-gray-600 hover:bg-blue-50 w-full text-center">Thư viện</a></li>
+                <li><a href="tin-tuc.html" class="block px-4 py-2 text-gray-600 hover:bg-blue-50 w-full text-center">Tin tức</a></li>
+                <li><a href="lien-he.html" class="block px-4 py-2 text-gray-600 hover:bg-blue-50 w-full text-center">Liên hệ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section class="mb-16 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-700 mb-4">Chào Mừng Đến Với Câu Lạc Bộ Cầu Lông Nhơn Phú</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                CLB Cầu Lông Nhơn Phú tự hào là điểm đến quen thuộc và uy tín của cộng đồng yêu cầu lông tại thành phố Quy Nhơn, tỉnh Bình Định. Tọa lạc tại khuôn viên Viện Sốt Rét (Khu vực 8, Phường Nhơn Phú), CLB mang đến không gian tập luyện, thi đấu lý tưởng và môi trường giao lưu thân thiện.
+            </p>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Với phương châm <strong class="text-blue-600">"Sân chơi đẳng cấp - Đam mê kết nối"</strong>, chúng tôi không ngừng nỗ lực nâng cao chất lượng dịch vụ, cơ sở vật chất và chương trình đào tạo, nhằm đáp ứng nhu cầu đa dạng của mọi người chơi, từ người mới bắt đầu đến vận động viên phong trào và chuyên nghiệp.
+            </p>
+        </section>
+
+        <section class="mb-16 bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">Thông Tin Chi Tiết Về Sân Bãi</h2>
+
+            <div class="mb-8 text-center">
+                <p class="text-lg font-medium mb-2">
+                    <span class="lucide text-blue-500 align-middle mr-2">&#xe998;</span> Địa chỉ: Sân Cầu lông Viện Sốt rét, Khu vực 8, Phường Nhơn Phú, TP. Quy Nhơn, Bình Định.
+                </p>
+                <a href="https://maps.app.goo.gl/yWrsuk8GkssQQz9q6" target="_blank" rel="noopener noreferrer" class="inline-block px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 text-sm">
+                    <span class="lucide align-middle mr-1">&#xe99a;</span> Xem bản đồ Google Maps
                 </a>
-                <button class="navbar-toggler" aria-label="Toggle navigation">&#9776;</button>
-                <ul class="navbar-nav">
-                    <li><a href="index.html">Trang Chủ</a></li>
-                    <li><a href="gioi-thieu.html">Giới Thiệu</a></li>
-                    <li><a href="lop-hoc.html">Lớp Học</a></li>
-                    <li><a href="dat-san.html">Đặt Sân</a></li>
-                    <li><a href="thu-vien.html">Thư Viện</a></li>
-                    <li><a href="tin-tuc.html">Tin Tức</a></li>
-                    <li><a href="lien-he.html">Liên Hệ</a></li>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-700 mb-4">Cơ sở vật chất hiện đại:</h3>
+                <ul class="space-y-3 text-gray-600 list-none pl-0">
+                    <li class="flex items-start">
+                        <span class="lucide text-green-500 mr-3 mt-1 flex-shrink-0">&#xea31;</span> <div>
+                            <strong class="font-medium text-gray-700">Số lượng sân:</strong> 3 sân cầu lông đạt tiêu chuẩn thi đấu.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="lucide text-green-500 mr-3 mt-1 flex-shrink-0">&#xea2b;</span> <div>
+                            <strong class="font-medium text-gray-700">Thảm sân:</strong> Sử dụng thảm nhựa PVC Ecostar S7000 chất lượng cao, độ dày 4,5 mm, đảm bảo độ bám, êm ái và giảm chấn thương.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="lucide text-green-500 mr-3 mt-1 flex-shrink-0">&#xeb3c;</span> <div>
+                            <strong class="font-medium text-gray-700">Ánh sáng:</strong> Hệ thống đèn LED chuyên dụng cho sân thể thao, chống chói được bố trí khoa học, cung cấp ánh sáng đồng đều, rõ nét trên toàn bộ mặt sân, phục vụ tốt cả ban ngày lẫn ban đêm.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="lucide text-green-500 mr-3 mt-1 flex-shrink-0">&#xe9d0;</span> <div>
+                            <strong class="font-medium text-gray-700">Không gian:</strong> Trần cao thoáng đãng, có hệ thống thông gió tự nhiên, đảm bảo không khí lưu thông tốt.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="lucide text-green-500 mr-3 mt-1 flex-shrink-0">&#xea36;</span> <div>
+                            <strong class="font-medium text-gray-700">Tiện ích đi kèm:</strong> Khu vực ghế ngồi nghỉ ngơi; Chỗ để xe rộng rãi, an toàn; Nhà vệ sinh sạch sẽ; Phục vụ nước uống giải khát.
+                        </div>
+                    </li>
                 </ul>
             </div>
-        </nav>
-    </header>
-    <main>
-<section class="page-header">
-    <div class="container">
-        <h1>Chào Mừng Đến Với Câu Lạc Bộ Cầu Lông Nhơn Phú</h1>
-    </div>
-</section>
 
-<section class="about-intro section-padding">
-    <div class="container">
-        <p>CLB Cầu Lông Nhơn Phú tự hào là điểm đến quen thuộc và uy tín của cộng đồng yêu cầu lông tại thành phố Quy Nhơn, tỉnh Bình Định. Tọa lạc tại khuôn viên Viện Sốt Rét - Ký sinh trùng - Côn trùng Quy Nhơn (Khu vực 8, Phường Nhơn Phú), CLB mang đến không gian tập luyện, thi đấu cầu lông lý tưởng và môi trường giao lưu thân thiện.</p>
-        <p>Với phương châm "Sân chơi đẳng cấp - Đam mê kết nối", chúng tôi không ngừng nỗ lực nâng cao chất lượng dịch vụ cầu lông, cơ sở vật chất sân cầu và chương trình đào tạo cầu lông, nhằm đáp ứng nhu cầu đa dạng của mọi người chơi, từ người mới bắt đầu đến vận động viên phong trào.</p>
-    </div>
-</section>
-
-<section class="facilities section-padding bg-light" id="co-so-vat-chat">
-    <div class="container">
-        <h2 class="section-title">Thông Tin Chi Tiết Về Sân Bãi</h2>
-        <div class="facility-details">
-            <p><i class="fas fa-map-marker-alt"></i> <strong>Địa chỉ:</strong> Sân Cầu lông Viện Sốt rét, Khu vực 8, Phường Nhơn Phú, TP. Quy Nhơn, Bình Định.</p>
-             <div class="map-large">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d[Your Coordinates]!2d[Your Longitude]!3d[Your Latitude]!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x[Your Map ID]!2zU8OibiBD4bqndSBsw7RuZyBWaeG7h24gU-G7kXQgcsOpdA!5e0!3m2!1svi!2s!4v[Timestamp]" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Bản đồ vị trí Sân Cầu lông Viện Sốt Rét Nhơn Phú"></iframe>
-            </div>
-            <h3>Cơ sở vật chất hiện đại:</h3>
-            <ul>
-                <li><i class="fas fa-layer-group"></i> <strong>Số lượng sân:</strong> 3 sân cầu lông đạt tiêu chuẩn thi đấu.</li>
-                <li><i class="fas fa-shoe-prints"></i> <strong>Thảm sân:</strong> Sử dụng thảm nhựa PVC Ecostar S7000 chất lượng cao, độ dày 4,5 mm, đảm bảo độ bám, êm ái và giảm chấn thương khi chơi cầu lông.</li>
-                <li><i class="fas fa-lightbulb"></i> <strong>Ánh sáng:</strong> Hệ thống đèn LED chuyên dụng cho sân thể thao, chống chói được bố trí khoa học, cung cấp ánh sáng đồng đều, rõ nét trên toàn bộ mặt sân, phục vụ tốt cả ban ngày lẫn ban đêm.</li>
-                <li><i class="fas fa-wind"></i> <strong>Không gian:</strong> Trần cao thoáng đãng, có hệ thống thông gió tự nhiên, đảm bảo không khí lưu thông tốt.</li>
-                <li><i class="fas fa-couch"></i> <strong>Tiện ích đi kèm:</strong> Khu vực ghế ngồi nghỉ ngơi cho người chơi và bạn bè; Chỗ để xe rộng rãi, an toàn; Hệ thống nhà vệ sinh sạch sẽ, tiện nghi; Có phục vụ nước uống giải khát tại sân cầu.</li>
-            </ul>
-            <h3>Hình ảnh thực tế sân cầu lông Viện Sốt Rét:</h3>
-            <div class="gallery-grid">
-                <img src="images/san-cau-long-1.jpg" alt="Tổng quan sân cầu lông Nhơn Phú">
-                <img src="images/san-cau-long-2.jpg" alt="Thảm sân Ecostar S7000">
-                <img src="images/san-cau-long-3.jpg" alt="Hệ thống đèn LED sân cầu lông">
-                <img src="images/san-cau-long-4.jpg" alt="Khu vực nghỉ ngơi tại sân">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-700 mb-4 text-center">Hình ảnh thực tế:</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Ảnh+Sân+1" alt="Hình ảnh sân cầu lông 1" class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                    <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Ảnh+Sân+2" alt="Hình ảnh sân cầu lông 2" class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                    <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Ảnh+Sân+3" alt="Hình ảnh sân cầu lông 3" class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                    <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Khu+Vực+Nghỉ" alt="Khu vực nghỉ ngơi" class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                    <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Hệ+Thống+Đèn" alt="Hệ thống ánh sáng" class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                    <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Thảm+Sân" alt="Thảm sân cầu lông" class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300">
                 </div>
-        </div>
-    </div>
-</section>
-
-<section class="coaches section-padding">
-    <div class="container">
-        <h2 class="section-title">Đội Ngũ Huấn Luyện Viên</h2>
-        <p>CLB được dẫn dắt và cố vấn chuyên môn bởi đội ngũ Huấn luyện viên tâm huyết, giàu kinh nghiệm thực tế và giảng dạy cầu lông tại Quy Nhơn, nổi bật là:</p>
-        <div class="coach-profiles">
-            <div class="coach-profile">
-                <img src="images/hlv-bien.jpg" alt="HLV Biền - Dạy cầu lông Quy Nhơn" class="coach-photo">
-                <div class="coach-info">
-                    <h3>HLV Biền</h3>
-                    <p><strong>Điện thoại:</strong> <a href="tel:0988809890">0988.809.890</a></p>
-                    <p>Với nhiều năm kinh nghiệm thi đấu và huấn luyện cầu lông, HLV Biền có phương pháp sư phạm dễ hiểu, tập trung vào việc xây dựng nền tảng kỹ thuật vững chắc và phát triển tư duy chiến thuật cho học viên mọi lứa tuổi.</p>
-                </div>
-            </div>
-            <div class="coach-profile">
-                <img src="images/hlv-hoang.jpg" alt="HLV Hoàng - CLB Cầu Lông Nhơn Phú" class="coach-photo">
-                 <div class="coach-info">
-                    <h3>HLV Hoàng</h3>
-                    <p><strong>Điện thoại:</strong> <a href="tel:0935185558">0935.185.558</a></p>
-                    <p>HLV Hoàng có kinh nghiệm tổ chức các hoạt động, giải đấu phong trào, luôn nhiệt tình hỗ trợ các thành viên CLB. Đồng thời, HLV Hoàng cũng tham gia hướng dẫn, đặc biệt trong việc nâng cao thể lực và kỹ năng thực chiến.</p>
+                 <div class="text-center mt-6">
+                     <a href="thu-vien.html" class="inline-block px-6 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300">
+                        Xem thêm ảnh trong thư viện
+                        <span class="lucide align-middle ml-1">&#xe90c;</span> </a>
                  </div>
             </div>
-        </div>
-        <p class="text-center">Đội ngũ HLV luôn sẵn sàng hướng dẫn kỹ thuật, chia sẻ kinh nghiệm và đồng hành cùng sự tiến bộ của bạn. <a href="lop-hoc.html">Tìm hiểu thêm về các lớp học cầu lông.</a></p>
-    </div>
-</section>
+        </section>
 
-<section class="operating-hours section-padding bg-light">
-    <div class="container">
-        <h2 class="section-title">Giờ Hoạt Động</h2>
-        <div class="hours-info">
-            <p><strong>Tất cả các ngày trong tuần:</strong></p>
-            <ul>
-                <li><i class="far fa-clock"></i> Buổi Sáng: <strong>5h00 – 7h00</strong></li>
-                <li><i class="far fa-clock"></i> Buổi Chiều: <strong>17h00 – 21h00</strong></li>
-            </ul>
-            <p><em>Lưu ý: Giờ học các lớp có thể khác, vui lòng xem chi tiết tại trang Lớp Học hoặc liên hệ HLV.</em></p>
-        </div>
-    </div>
-</section>
+        <section class="mb-16">
+            <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">Đội Ngũ Huấn Luyện Viên</h2>
+            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+                CLB được dẫn dắt và cố vấn chuyên môn bởi đội ngũ Huấn luyện viên tâm huyết, giàu kinh nghiệm thực tế và giảng dạy.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition duration-300">
+                    <img src="https://placehold.co/150x150/e0f2fe/0ea5e9?text=HLV+Biền" alt="HLV Biền" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-blue-200 object-cover">
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">HLV Biền</h3>
+                    <p class="text-gray-600 mb-3">
+                        Huấn luyện viên với hơn 15 năm kinh nghiệm trong lĩnh vực đào tạo cầu lông. Chuyên sâu về kỹ thuật cơ bản và nâng cao cho mọi lứa tuổi.
+                    </p>
+                    <a href="tel:0988809890" class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-md text-sm font-medium hover:bg-blue-200 transition duration-300">
+                        <span class="lucide mr-2 text-base">&#xe9d5;</span> Liên hệ: 0988.809.890
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition duration-300">
+                    <img src="https://placehold.co/150x150/fef3c7/f59e0b?text=HLV+Hoàng" alt="HLV Hoàng" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-amber-200 object-cover">
+                    <h3 class="text-xl font-semibold text-amber-700 mb-2">HLV Hoàng</h3>
+                    <p class="text-gray-600 mb-3">
+                        Huấn luyện viên trẻ, năng động với phương pháp giảng dạy hiện đại. Chuyên về đào tạo đội tuyển trẻ và phát triển chiến thuật thi đấu.
+                    </p>
+                     <a href="tel:0935185558" class="inline-flex items-center px-4 py-2 bg-amber-100 text-amber-700 rounded-md text-sm font-medium hover:bg-amber-200 transition duration-300">
+                        <span class="lucide mr-2 text-base">&#xe9d5;</span> Liên hệ: 0935.185.558
+                    </a>
+                </div>
+            </div>
+            <p class="text-center text-gray-600 mt-8">
+                Đội ngũ HLV luôn sẵn sàng hướng dẫn kỹ thuật, chia sẻ kinh nghiệm và đồng hành cùng sự tiến bộ của bạn.
+            </p>
+            <div class="text-center mt-4">
+                <a href="lop-hoc.html" class="inline-block px-6 py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition duration-300 shadow-md">
+                    Tìm hiểu thêm về lớp học
+                </a>
+            </div>
+        </section>
+
+        <section class="mb-16 bg-gradient-to-r from-cyan-50 to-blue-100 p-8 rounded-lg shadow-md">
+            <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">
+                <span class="lucide text-cyan-600 align-middle mr-2">&#xe92e;</span> Giờ Hoạt Động
+            </h2>
+            <p class="text-center text-gray-700 font-medium text-lg mb-4">Tất cả các ngày trong tuần:</p>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 text-center">
+                <div class="bg-white p-4 rounded-md shadow w-full md:w-auto">
+                    <p class="font-semibold text-blue-600">Buổi Sáng</p>
+                    <p class="text-xl font-bold text-gray-800">5h00 – 7h00</p>
+                </div>
+                <div class="bg-white p-4 rounded-md shadow w-full md:w-auto">
+                    <p class="font-semibold text-orange-600">Buổi Chiều</p>
+                    <p class="text-xl font-bold text-gray-800">17h00 – 21h00</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+             <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">Vị Trí Của Chúng Tôi</h2>
+             <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg">
+                 <iframe
+                     src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1202.0870575281947!2d109.1803057!3d13.782894!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316f1300733e69f9%3A0x92543a16cc942d7f!2zU8OibiBD4bqndSBsw7RuZyBWaeG7h24gU-G7kXQgcsOpdC1LU1QtQ1QgUXV5IE5oxqFu!5e1!3m2!1sen!2s!4v1743653457972!5m2!1sen!2s"
+                     width="600"
+                     height="450"
+                     style="border:0;"
+                     allowfullscreen=""
+                     loading="lazy"
+                     referrerpolicy="no-referrer-when-downgrade">
+                 </iframe>
+             </div>
+        </section>
+
+        <section class="text-center bg-white p-10 rounded-lg shadow-xl border border-blue-100">
+            <h2 class="text-2xl md:text-3xl font-bold text-blue-700 mb-3">Sẵn Sàng Tham Gia Cùng Chúng Tôi?</h2>
+            <p class="text-lg text-gray-600 mb-6">
+                Hãy đến và trải nghiệm không gian chơi cầu lông chuyên nghiệp tại CLB Nhơn Phú!
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="dat-san.html" class="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-300 shadow-md w-full sm:w-auto">
+                    Đặt Sân Ngay
+                </a>
+                <a href="lop-hoc.html" class="inline-block px-8 py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition duration-300 shadow-md w-full sm:w-auto">
+                    Tìm Hiểu Lớp Học
+                </a>
+            </div>
+        </section>
 
     </main>
-    <footer>
-        <div class="container footer-content">
-            <div class="footer-info">
-                <p>&copy; <span id="current-year"></span> CLB Cầu Lông Nhơn Phú. Bảo lưu mọi quyền.</p>
-                <p>Địa chỉ: Sân Cầu lông Viện Sốt rét, Khu vực 8, P. Nhơn Phú, TP. Quy Nhơn, Bình Định.</p>
-                <p>Hotline: HLV Biền: <a href="tel:0988809890">0988.809.890</a> | HLV Hoàng: <a href="tel:0935185558">0935.185.558</a></p>
-                <p>Email: <a href="mailto:clbnhonphu@gmail.com">clbnhonphu@gmail.com</a></p>
+
+    <footer class="bg-gray-800 text-gray-300 pt-12 pb-8 mt-16">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">CLB Cầu Lông Nhơn Phú</h4>
+                    <p class="mb-2 flex items-start">
+                        <span class="lucide text-blue-400 mr-2 mt-1 flex-shrink-0">&#xe998;</span> Sân Cầu lông Viện Sốt rét, Khu vực 8, P. Nhơn Phú, TP. Quy Nhơn, Bình Định.
+                    </p>
+                    <p class="mb-2 flex items-center">
+                        <span class="lucide text-blue-400 mr-2">&#xe9d5;</span> HLV Biền: <a href="tel:0988809890" class="ml-1 hover:text-white">0988.809.890</a>
+                    </p>
+                     <p class="mb-2 flex items-center">
+                        <span class="lucide text-blue-400 mr-2">&#xe9d5;</span> HLV Hoàng: <a href="tel:0935185558" class="ml-1 hover:text-white">0935.185.558</a>
+                    </p>
+                    <p class="mb-2 flex items-center">
+                        <span class="lucide text-blue-400 mr-2">&#xe98f;</span> <a href="mailto:clbnhonphu@gmail.com" class="hover:text-white">clbnhonphu@gmail.com</a>
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Liên kết nhanh</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-white transition duration-300">Trang chủ</a></li>
+                        <li><a href="gioi-thieu.html" class="hover:text-white transition duration-300">Giới thiệu</a></li>
+                        <li><a href="lop-hoc.html" class="hover:text-white transition duration-300">Lớp học</a></li>
+                        <li><a href="dat-san.html" class="hover:text-white transition duration-300">Đặt sân</a></li>
+                        <li><a href="thu-vien.html" class="hover:text-white transition duration-300">Thư viện</a></li>
+                        <li><a href="tin-tuc.html" class="hover:text-white transition duration-300">Tin tức</a></li>
+                        <li><a href="lien-he.html" class="hover:text-white transition duration-300">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Theo dõi chúng tôi</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/NHONPHUBADMINTONCLUB/" target="_blank" rel="noopener noreferrer" aria-label="Facebook CLB Nhơn Phú" class="text-gray-400 hover:text-white transition duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                        </a>
+                        </div>
+                </div>
             </div>
-            <div class="footer-social">
-                <p>Theo dõi chúng tôi:</p>
-                <a href="https://www.facebook.com/NHONPHUBADMINTONCLUB/" target="_blank" rel="noopener noreferrer" aria-label="Facebook CLB Nhơn Phú"><i class="fab fa-facebook-square"></i></a>
-            </div>
-            <div class="footer-links">
+
+            <div class="border-t border-gray-700 pt-8 text-center text-sm">
+                Bản quyền © <span id="current-year"></span> CLB Cầu Lông Nhơn Phú. Bảo lưu mọi quyền.
             </div>
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
-    </body>
+    <script>
+        // Mobile Menu Toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Cập nhật năm hiện tại trong Footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
 </html>
