@@ -1,0 +1,97 @@
+<footer class="bg-dark text-gray-300 section-padding pb-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div class="md:col-span-2">
+                <h4 class="text-lg font-semibold text-white mb-3">CLB Cầu Lông Nhơn Phú</h4>
+                <p class="mb-2"><i class="fas fa-map-marker-alt mr-2 w-4 text-center"></i>Địa chỉ: Sân Cầu lông Viện Sốt rét, Khu vực 8, P. Nhơn Phú, TP. Quy Nhơn, Bình Định.</p>
+                <p class="mb-2"><i class="fas fa-phone-alt mr-2 w-4 text-center"></i>Hotline: HLV Biền: <a href="tel:0988809890" class="hover:text-white hover:underline">0988.809.890</a> | HLV Hoàng: <a href="tel:0935185558" class="hover:text-white hover:underline">0935.185.558</a></p>
+                <p><i class="fas fa-envelope mr-2 w-4 text-center"></i>Email: <a href="mailto:clbnhonphu@gmail.com" class="hover:text-white hover:underline">clbnhonphu@gmail.com</a></p>
+            </div>
+            <div>
+                 <h4 class="text-lg font-semibold text-white mb-3">Theo dõi chúng tôi</h4>
+                 <a href="https://www.facebook.com/NHONPHUBADMINTONCLUB/" target="_blank" rel="noopener noreferrer" aria-label="Facebook CLB Nhơn Phú" class="text-gray-300 hover:text-white text-2xl mr-4 transition duration-300"><i class="fab fa-facebook-square"></i></a>
+                 {/* */}
+                 {/* */}
+            </div>
+        </div>
+        <div class="border-t border-gray-700 pt-6 text-center text-sm">
+            <p>© <span id="current-year"></span> CLB Cầu Lông Nhơn Phú. Bảo lưu mọi quyền.</p>
+             {/* */}
+             {/* */}
+        </div>
+    </div>
+</footer>
+
+<script>
+    // !!! Lưu ý: Mã JS này nên được đặt trong một tệp .js riêng và liên kết vào đây
+    // hoặc được include bởi templating engine để tránh lặp lại.
+    // Đặt ở đây để footer.html có thể hoạt động độc lập (với các chức năng cơ bản) nếu cần test.
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // --- Update Copyright Year ---
+        const currentYearSpan = document.getElementById('current-year');
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
+
+        // --- Mobile Navbar Toggle (Cần có trong header hoặc tệp JS chung) ---
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        const mobileNav = document.querySelector('.navbar-nav.md\\:hidden'); // Select the mobile nav specifically
+
+        if (navbarToggler && mobileNav) {
+            navbarToggler.addEventListener('click', () => {
+                mobileNav.classList.toggle('active'); // Toggle the 'active' class to show/hide
+            });
+        }
+
+        // --- Smooth Scrolling for Anchor Links (Cần có trong header hoặc tệp JS chung) ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#') && href.length > 1) {
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        e.preventDefault();
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70, // Adjust offset for fixed header
+                            behavior: 'smooth'
+                        });
+                        // Close mobile menu if open after click
+                        if (mobileNav && mobileNav.classList.contains('active')) {
+                            mobileNav.classList.remove('active');
+                        }
+                    }
+                }
+            });
+        });
+
+         // --- Highlight Active Nav Link (Cần có trong header hoặc tệp JS chung) ---
+         // Logic này cần chạy trên mỗi trang để xác định đúng trang hiện tại
+         try {
+             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+             const navLinks = document.querySelectorAll('.navbar-nav a'); // Cần đảm bảo header đã được tải
+
+             navLinks.forEach(link => {
+                 const linkPage = link.getAttribute('href').split('/').pop();
+                 if (linkPage === currentPage) {
+                     link.classList.add('active-link');
+                 } else {
+                     link.classList.remove('active-link');
+                 }
+             });
+         } catch (e) {
+             console.error("Error highlighting nav link:", e);
+         }
+
+
+        // --- Placeholder for Booking Calendar/Widget Interaction ---
+        // console.log("Booking widget/calendar needs JavaScript implementation for fetching data and interaction.");
+
+        // --- Placeholder for Testimonial Slider ---
+        // console.log("Testimonial section could use a JavaScript slider (like Swiper.js or Slick) for better display.");
+
+    });
+</script>
+
+</body>
+</html>

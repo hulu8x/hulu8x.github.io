@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLB Cầu Lông Nhơn Phú | Sân Cầu Lông Viện Sốt Rét Quy Nhơn - Đặt sân & Học cầu lông</title>
+    <meta name="description" content="CLB Cầu Lông Nhơn Phú tại Viện Sốt Rét Quy Nhơn. Cung cấp sân cầu lông hiện đại, lớp học cầu lông chất lượng cho mọi lứa tuổi ở Nhơn Phú, Bình Định. Đặt sân online, tham gia cộng đồng đam mê cầu lông.">
+    <meta name="keywords" content="cầu lông, sân cầu lông, dạy cầu lông, Nhơn Phú, Quy Nhơn, Bình Định, đánh cầu, chơi cầu lông, sân cầu, học cầu, học cầu lông, đào tạo cầu lông, thi đấu cầu lông, tuyển sinh cầu lông, dịch vụ cầu lông, thuê sân cầu lông, thuê sân, cầu lông viện sốt rét, sân cầu lông Việt sốt rét, Viện sốt rét Ký sinh trùng Côn trùng Quy Nhơn, Sốt rét Quy Nhơn, Cầu lông Quy Nhơn, Cầu lông Nhơn Phú, Câu lạc bộ Nhơn Phú, Câu lạc bộ cầu lông">
+    <link rel="icon" href="https://placehold.co/32x32/007bff/ffffff?text=NP" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              fontFamily: {
+                sans: ['Inter', 'sans-serif'], // Use Inter font
+              },
+              colors: {
+                primary: {
+                    DEFAULT: '#007bff', // Blue
+                    dark: '#0056b3',
+                },
+                secondary: {
+                    DEFAULT: '#6c757d', // Gray
+                    dark: '#5a6268',
+                },
+                light: '#f8f9fa',
+                dark: '#1a2a4a', // Dark Blue/Gray for footer/text
+              },
+              borderRadius: {
+                DEFAULT: '0.5rem', // Default rounded corners
+                'lg': '0.75rem',
+                'full': '9999px',
+              },
+            }
+          }
+        }
+      </script>
+      <style type="text/tailwindcss">
+        /* Custom CSS can be added here if needed, but prefer Tailwind classes */
+        body {
+            @apply font-sans text-gray-800;
+        }
+        .section-padding {
+            @apply py-12 md:py-16;
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-center mb-10 text-dark relative pb-4;
+        }
+        .section-title::after {
+            content: '';
+            @apply block w-16 h-1 bg-primary absolute bottom-0 left-1/2 -translate-x-1/2;
+        }
+        .btn {
+            @apply inline-block px-6 py-3 rounded font-semibold text-center transition duration-300 ease-in-out no-underline;
+        }
+        .btn-primary {
+            @apply bg-primary text-white hover:bg-primary-dark transform hover:-translate-y-0.5 shadow-md hover:shadow-lg;
+        }
+        .btn-secondary {
+            @apply bg-secondary text-white hover:bg-secondary-dark transform hover:-translate-y-0.5 shadow-md hover:shadow-lg;
+        }
+        .btn-light {
+             @apply bg-light text-dark border border-gray-300 hover:bg-gray-200 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg;
+        }
+        /* Style for active navigation link (example) */
+        .navbar-nav li a.active-link {
+             @apply text-primary font-semibold;
+        }
+        .navbar-nav li a.active-link::after {
+             @apply w-full; /* Underline active link */
+        }
+        .navbar-nav a {
+            @apply text-dark hover:text-primary relative py-2;
+        }
+        .navbar-nav a::after {
+            content: '';
+            @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-out;
+        }
+        .navbar-nav a:hover::after {
+            @apply w-full;
+        }
+        .hero-overlay {
+             background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
+        }
+        .service-item {
+            @apply bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 text-center;
+        }
+        .service-icon {
+             @apply h-12 mx-auto mb-4;
+        }
+        .news-item {
+            @apply bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300;
+        }
+        .news-item img {
+            @apply w-full h-48 object-cover;
+        }
+        .gallery-grid-mini img {
+             @apply w-full h-32 object-cover rounded-lg cursor-pointer transition-transform duration-300 hover:scale-105 shadow-sm hover:shadow-md;
+        }
+        .testimonial-item {
+             @apply bg-light p-6 rounded-lg shadow;
+        }
+        .slot { @apply p-2 mb-1 rounded text-sm; }
+        .slot-available { @apply bg-green-100 border-l-4 border-green-500 text-green-800; }
+        .slot-booked { @apply bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 line-through; }
+        .slot-unavailable { @apply bg-gray-200 border-l-4 border-gray-400 text-gray-500; }
+
+        /* Responsive Navbar Toggle */
+        @media (max-width: 768px) {
+            .navbar-nav {
+                display: none; /* Hidden by default */
+            }
+            .navbar-nav.active {
+                display: flex; /* Shown when active class is added */
+            }
+        }
+      </style>
+</head>
+<body class="bg-gray-50">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-2 no-underline">
+                    <img src="https://placehold.co/100x40/007bff/ffffff?text=CLB+NP" alt="Logo CLB Nhơn Phú" class="h-10">
+                    <span class="text-xl font-bold text-dark hidden md:inline">CLB Cầu Lông Nhơn Phú</span>
+                </a>
+                <button class="md:hidden navbar-toggler focus:outline-none">
+                    <i class="fas fa-bars text-2xl text-dark"></i>
+                </button>
+                <ul class="navbar-nav hidden md:flex space-x-6 items-center">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="gioi-thieu.html">Giới Thiệu</a></li>
+                    <li><a href="tuyen-sinh.html">Lớp Học</a></li>
+                    <li><a href="dat-san.html">Đặt Sân</a></li>
+                    <li><a href="thu-vien.html">Thư Viện</a></li>
+                    <li><a href="tin-tuc.html">Tin Tức</a></li>
+                    <li><a href="lien-he.html">Liên Hệ</a></li>
+                </ul>
+            </div>
+             <ul class="navbar-nav md:hidden flex-col mt-3 space-y-2 text-center bg-white pb-3">
+                 <li><a href="index.html">Trang Chủ</a></li>
+                 <li><a href="gioi-thieu.html">Giới Thiệu</a></li>
+                 <li><a href="tuyen-sinh.html">Lớp Học</a></li>
+                 <li><a href="dat-san.html">Đặt Sân</a></li>
+                 <li><a href="thu-vien.html">Thư Viện</a></li>
+                 <li><a href="tin-tuc.html">Tin Tức</a></li>
+                 <li><a href="lien-he.html">Liên Hệ</a></li>
+             </ul>
+        </nav>
+    </header>
+
+    
