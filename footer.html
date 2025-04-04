@@ -1,97 +1,355 @@
-<footer class="bg-dark text-gray-300 section-padding pb-8">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div class="md:col-span-2">
-                <h4 class="text-lg font-semibold text-white mb-3">CLB Cầu Lông Nhơn Phú</h4>
-                <p class="mb-2"><i class="fas fa-map-marker-alt mr-2 w-4 text-center"></i>Địa chỉ: Sân Cầu lông Viện Sốt rét, Khu vực 8, P. Nhơn Phú, TP. Quy Nhơn, Bình Định.</p>
-                <p class="mb-2"><i class="fas fa-phone-alt mr-2 w-4 text-center"></i>Hotline: HLV Biền: <a href="tel:0988809890" class="hover:text-white hover:underline">0988.809.890</a> | HLV Hoàng: <a href="tel:0935185558" class="hover:text-white hover:underline">0935.185.558</a></p>
-                <p><i class="fas fa-envelope mr-2 w-4 text-center"></i>Email: <a href="mailto:clbnhonphu@gmail.com" class="hover:text-white hover:underline">clbnhonphu@gmail.com</a></p>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer - CLB Cầu Lông Nhơn Phú</title>
+    <style>
+        :root {
+            --primary-color: #3a86ff;
+            --accent-color: #ff5a5f;
+            --dark-color: #2b2d42;
+            --light-color: #f8f9fa;
+            --footer-bg: #1a1e2e;
+            --footer-text: #e9ecef;
+            --footer-link: #a8dadc;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 3rem 0 1.5rem;
+            position: relative;
+        }
+        
+        .footer-wave {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%231a1e2e' fill-opacity='1' d='M0,192L48,176C96,160,192,128,288,122.7C384,117,480,139,576,149.3C672,160,768,160,864,138.7C960,117,1056,75,1152,69.3C1248,64,1344,96,1392,112L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section {
+            padding: 0 1rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 5px;
+        }
+        
+        .footer-about p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: var(--footer-link);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+        
+        .footer-links i {
+            font-size: 0.9rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 0.8rem;
+        }
+        
+        .contact-info i {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-top: 3px;
+        }
+        
+        .contact-info-text {
+            line-height: 1.5;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(58, 134, 255, 0.3);
+        }
+        
+        .social-icons i {
+            font-size: 1.2rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        
+        .footer-bottom a {
+            color: var(--footer-link);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-bottom a:hover {
+            color: var(--accent-color);
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo img {
+            height: 60px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .footer-logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--footer-text);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 3px 10px rgba(255, 90, 95, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(58, 134, 255, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .contact-info {
+                justify-content: center;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+            
+            .footer-logo {
+                justify-content: center;
+            }
+            
+            .footer-links a:hover {
+                transform: translateX(0);
+            }
+        }
+    </style>
+    <!-- Font Awesome cho icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <footer class="footer">
+        <div class="footer-wave"></div>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section footer-about">
+                    <div class="footer-logo">
+                        <img src="images/logo.png" alt="Logo CLB Cầu Lông Nhơn Phú">
+                        <div class="footer-logo-text">CLB Cầu Lông Nhơn Phú</div>
+                    </div>
+                    <p>Câu lạc bộ Cầu lông Nhơn Phú là điểm đến lý tưởng cho người yêu cầu lông tại Quy Nhơn với hệ thống sân hiện đại tại Viện Sốt Rét và các lớp học chất lượng.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/NHONPHUBADMINTONCLUB/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank" title="Zalo"><i class="fas fa-comment-dots"></i></a>
+                        <a href="https://www.youtube.com/" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.tiktok.com/" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section footer-links">
+                    <h3>Liên kết nhanh</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Trang chủ</a></li>
+                        <li><a href="gioi-thieu.html"><i class="fas fa-chevron-right"></i> Giới thiệu</a></li>
+                        <li><a href="lop-hoc.html"><i class="fas fa-chevron-right"></i> Lớp học</a></li>
+                        <li><a href="dat-san.html"><i class="fas fa-chevron-right"></i> Đặt sân</a></li>
+                        <li><a href="thu-vien.html"><i class="fas fa-chevron-right"></i> Thư viện</a></li>
+                        <li><a href="tin-tuc.html"><i class="fas fa-chevron-right"></i> Tin tức</a></li>
+                        <li><a href="lien-he.html"><i class="fas fa-chevron-right"></i> Liên hệ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section footer-contact">
+                    <h3>Thông tin liên hệ</h3>
+                    <div class="contact-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-info-text">Sân Cầu lông Viện Sốt rét, Khu vực 8, P. Nhơn Phú, TP. Quy Nhơn, Bình Định</div>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-phone-alt"></i>
+                        <div class="contact-info-text">
+                            HLV Biền: <a href="tel:0988809890">0988.809.890</a><br>
+                            HLV Hoàng: <a href="tel:0935185558">0935.185.558</a>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-info-text">
+                            <a href="mailto:clbnhonphu@gmail.com">clbnhonphu@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-clock"></i>
+                        <div class="contact-info-text">
+                            Sáng: 5h00 - 7h00<br>
+                            Chiều: 17h00 - 21h00
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section footer-map">
+                    <h3>Bản đồ</h3>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4853.763362893282!2d109.17890430985435!3d13.782616911802112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316f1300733e69f9%3A0x92543a16cc942d7f!2zU8OibiBD4bqndSBsw7RuZyBWaeG7h24gU-G7kXQgcsOpdC1LU1QtQ1QgUXV5IE5oxqFu!5e1!3m2!1svi!2s!4v1743731251480!5m2!1svi!2s" width="100%" height="200" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
-            <div>
-                 <h4 class="text-lg font-semibold text-white mb-3">Theo dõi chúng tôi</h4>
-                 <a href="https://www.facebook.com/NHONPHUBADMINTONCLUB/" target="_blank" rel="noopener noreferrer" aria-label="Facebook CLB Nhơn Phú" class="text-gray-300 hover:text-white text-2xl mr-4 transition duration-300"><i class="fab fa-facebook-square"></i></a>
-                 {/* */}
-                 {/* */}
+            
+            <div class="footer-bottom">
+                <p>Bản quyền &copy; 2025 <strong>CLB Cầu Lông Nhơn Phú</strong>. Bảo lưu mọi quyền.</p>
+                <p>
+                    <a href="chinh-sach-bao-mat.html">Chính sách bảo mật</a> | 
+                    <a href="dieu-khoan-su-dung.html">Điều khoản sử dụng</a>
+                </p>
             </div>
         </div>
-        <div class="border-t border-gray-700 pt-6 text-center text-sm">
-            <p>© <span id="current-year"></span> CLB Cầu Lông Nhơn Phú. Bảo lưu mọi quyền.</p>
-             {/* */}
-             {/* */}
-        </div>
-    </div>
-</footer>
+    </footer>
+    
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
 
-<script>
-    // !!! Lưu ý: Mã JS này nên được đặt trong một tệp .js riêng và liên kết vào đây
-    // hoặc được include bởi templating engine để tránh lặp lại.
-    // Đặt ở đây để footer.html có thể hoạt động độc lập (với các chức năng cơ bản) nếu cần test.
-    document.addEventListener('DOMContentLoaded', function() {
-
-        // --- Update Copyright Year ---
-        const currentYearSpan = document.getElementById('current-year');
-        if (currentYearSpan) {
-            currentYearSpan.textContent = new Date().getFullYear();
-        }
-
-        // --- Mobile Navbar Toggle (Cần có trong header hoặc tệp JS chung) ---
-        const navbarToggler = document.querySelector('.navbar-toggler');
-        const mobileNav = document.querySelector('.navbar-nav.md\\:hidden'); // Select the mobile nav specifically
-
-        if (navbarToggler && mobileNav) {
-            navbarToggler.addEventListener('click', () => {
-                mobileNav.classList.toggle('active'); // Toggle the 'active' class to show/hide
-            });
-        }
-
-        // --- Smooth Scrolling for Anchor Links (Cần có trong header hoặc tệp JS chung) ---
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href.startsWith('#') && href.length > 1) {
-                    const targetElement = document.querySelector(href);
-                    if (targetElement) {
-                        e.preventDefault();
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 70, // Adjust offset for fixed header
-                            behavior: 'smooth'
-                        });
-                        // Close mobile menu if open after click
-                        if (mobileNav && mobileNav.classList.contains('active')) {
-                            mobileNav.classList.remove('active');
-                        }
-                    }
-                }
+    <script>
+        // Hiển thị nút Back to Top khi cuộn xuống
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
+        // Cuộn lên đầu trang khi nhấp vào nút
+        document.getElementById('backToTop').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
-
-         // --- Highlight Active Nav Link (Cần có trong header hoặc tệp JS chung) ---
-         // Logic này cần chạy trên mỗi trang để xác định đúng trang hiện tại
-         try {
-             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-             const navLinks = document.querySelectorAll('.navbar-nav a'); // Cần đảm bảo header đã được tải
-
-             navLinks.forEach(link => {
-                 const linkPage = link.getAttribute('href').split('/').pop();
-                 if (linkPage === currentPage) {
-                     link.classList.add('active-link');
-                 } else {
-                     link.classList.remove('active-link');
-                 }
-             });
-         } catch (e) {
-             console.error("Error highlighting nav link:", e);
-         }
-
-
-        // --- Placeholder for Booking Calendar/Widget Interaction ---
-        // console.log("Booking widget/calendar needs JavaScript implementation for fetching data and interaction.");
-
-        // --- Placeholder for Testimonial Slider ---
-        // console.log("Testimonial section could use a JavaScript slider (like Swiper.js or Slick) for better display.");
-
-    });
-</script>
-
+    </script>
 </body>
 </html>
