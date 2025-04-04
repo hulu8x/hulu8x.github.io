@@ -1,3 +1,14 @@
+<div id="header-placeholder"></div>
+<script>
+    // Load the content of header.html into the placeholder
+    fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading header:', error));
+</script>
+
 <section class="page-header">
     <div class="container">
         <h1>Đặt Sân Cầu Lông Nhanh Chóng Tại Nhơn Phú</h1>
@@ -117,3 +128,14 @@
         </ul>
     </div>
 </section>
+
+<div id="footer-placeholder"></div>
+<script>
+    // Load the content of footer.html into the placeholder
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+</script>
