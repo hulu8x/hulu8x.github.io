@@ -3,231 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLB Cầu Lông Nhơn Phú</title>
+    <title>Header CLB Cầu Lông Nhơn Phú</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Định nghĩa các biến màu sắc và hiệu ứng chuyển đổi */
         :root {
-            --primary-color: #3a86ff;
-            --accent-color: #ff5a5f;
-            --dark-color: #2b2d42;
-            --light-color: #f8f9fa;
-            --transition: all 0.3s ease;
+            --np-primary-color: #3a86ff; /* Màu chính */
+            --np-accent-color: #ff5a5f; /* Màu nhấn */
+            --np-dark-color: #2b2d42;   /* Màu tối */
+            --np-light-color: #f8f9fa;  /* Màu sáng */
+            --np-transition: all 0.3s ease; /* Hiệu ứng chuyển đổi */
         }
-        
-        * {
+
+        /* Reset một số thuộc tính mặc định và thiết lập font chữ cơ bản */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* --- Phần Header --- */
+        .np-header {
+            position: sticky; /* Giữ header cố định khi cuộn trang */
+            top: 0;
+            z-index: 1000; /* Đảm bảo header luôn ở trên cùng */
+            background-color: white; /* Nền trắng */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+            padding: 0.8rem 5%; /* Padding bên trong header */
+            display: flex; /* Sử dụng flexbox để căn chỉnh */
+            justify-content: space-between; /* Căn chỉnh các phần tử con */
+            align-items: center; /* Căn giữa theo chiều dọc */
+        }
+
+        /* --- Logo và Tên CLB --- */
+        .np-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem; /* Khoảng cách giữa logo và tên */
+        }
+
+        .np-logo {
+            height: 60px; /* Chiều cao logo */
+            transition: var(--np-transition); /* Hiệu ứng chuyển đổi */
+            object-fit: contain; /* Đảm bảo logo không bị méo */
+        }
+
+        .np-logo:hover {
+            transform: scale(1.05); /* Phóng to nhẹ khi hover */
+        }
+
+        .np-logo-text {
+            font-size: 1.5rem; /* Cỡ chữ tên CLB */
+            font-weight: 700; /* Độ đậm chữ */
+            color: var(--np-primary-color); /* Màu chữ */
+            text-decoration: none; /* Bỏ gạch chân */
+        }
+
+        /* --- Menu Điều Hướng --- */
+        .np-nav-menu {
+            display: flex;
+            gap: 1.5rem; /* Khoảng cách giữa các mục menu */
+            list-style: none; /* Bỏ dấu chấm đầu dòng */
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            align-items: center; /* Căn giữa các mục menu */
         }
-        
-        body {
-            background-color: var(--light-color);
+
+        .np-nav-link {
+            text-decoration: none; /* Bỏ gạch chân */
+            color: var(--np-dark-color); /* Màu chữ */
+            font-weight: 600; /* Độ đậm chữ */
+            font-size: 1.1rem; /* Cỡ chữ */
+            padding: 0.5rem 0.8rem; /* Padding */
+            border-radius: 5px; /* Bo góc nhẹ */
+            transition: var(--np-transition); /* Hiệu ứng chuyển đổi */
+            position: relative; /* Để định vị gạch chân giả */
         }
-        
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 0.8rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+
+        .np-nav-link:hover {
+            color: var(--np-primary-color); /* Đổi màu khi hover */
         }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .logo {
-            height: 60px;
-            transition: var(--transition);
-        }
-        
-        .logo:hover {
-            transform: scale(1.05);
-        }
-        
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-        
-        .nav-menu {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-        
-        .nav-link {
-            text-decoration: none;
-            color: var(--dark-color);
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 0.5rem 0.8rem;
-            border-radius: 5px;
-            transition: var(--transition);
-            position: relative;
-        }
-        
-        .nav-link:hover {
-            color: var(--primary-color);
-        }
-        
-        .nav-link::after {
+
+        /* Gạch chân giả khi hover hoặc active */
+        .np-nav-link::after {
             content: '';
             position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: 0;
-            left: 50%;
-            background-color: var(--primary-color);
-            transition: var(--transition);
-            transform: translateX(-50%);
+            width: 0; /* Ban đầu không có chiều rộng */
+            height: 3px; /* Độ dày gạch chân */
+            bottom: 0; /* Vị trí ở dưới */
+            left: 50%; /* Bắt đầu từ giữa */
+            background-color: var(--np-primary-color); /* Màu gạch chân */
+            transition: var(--np-transition); /* Hiệu ứng chuyển đổi */
+            transform: translateX(-50%); /* Căn giữa gạch chân */
         }
-        
-        .nav-link:hover::after {
-            width: 80%;
+
+        .np-nav-link:hover::after {
+            width: 80%; /* Hiển thị gạch chân khi hover */
         }
-        
-        .nav-link.active {
-            color: var(--primary-color);
+
+        /* Kiểu cho mục menu đang active */
+        .np-nav-link.np-active {
+            color: var(--np-primary-color);
         }
-        
-        .nav-link.active::after {
-            width: 80%;
+
+        .np-nav-link.np-active::after {
+            width: 80%; /* Hiển thị gạch chân cho mục active */
         }
-        
-        .hamburger {
-            display: none;
+
+        /* --- Nút Hamburger (cho màn hình nhỏ) --- */
+        .np-hamburger {
+            display: none; /* Mặc định ẩn trên màn hình lớn */
             cursor: pointer;
             background: none;
             border: none;
-            font-size: 1.8rem;
-            color: var(--dark-color);
+            font-size: 1.8rem; /* Cỡ icon */
+            color: var(--np-dark-color);
+            padding: 0.5rem;
         }
-        
-        .cta-button {
-            background-color: var(--accent-color);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 4px 8px rgba(255, 90, 95, 0.2);
+
+        /* --- Nút Call-to-Action (Đặt sân ngay) --- */
+        .np-cta-button {
+            background-color: var(--np-accent-color); /* Màu nền */
+            color: white; /* Màu chữ */
+            padding: 0.6rem 1.2rem; /* Padding */
+            border-radius: 50px; /* Bo tròn */
+            font-weight: 600; /* Độ đậm chữ */
+            transition: var(--np-transition); /* Hiệu ứng chuyển đổi */
+            text-decoration: none; /* Bỏ gạch chân */
+            display: inline-block; /* Để áp dụng padding và margin */
+            box-shadow: 0 4px 8px rgba(255, 90, 95, 0.2); /* Đổ bóng */
         }
-        
-        .cta-button:hover {
-            background-color: #ff4146;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(255, 90, 95, 0.3);
+
+        .np-cta-button:hover {
+            background-color: #ff4146; /* Đổi màu nền khi hover */
+            transform: translateY(-2px); /* Nâng nhẹ nút lên */
+            box-shadow: 0 6px 12px rgba(255, 90, 95, 0.3); /* Tăng độ đổ bóng */
         }
-        
+
+        /* --- Responsive Design --- */
+        /* Màn hình nhỏ hơn 992px (tablets) */
         @media (max-width: 992px) {
-            .nav-menu {
-                position: fixed;
-                top: 80px;
-                right: -100%;
-                flex-direction: column;
-                background-color: white;
-                width: 70%;
-                height: 100vh;
-                padding: 2rem;
-                transition: var(--transition);
-                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-                gap: 2rem;
+            .np-nav-menu {
+                position: fixed; /* Cố định vị trí */
+                top: 80px; /* Vị trí tính từ đỉnh (bằng chiều cao header) */
+                right: -100%; /* Ban đầu ẩn ngoài màn hình bên phải */
+                flex-direction: column; /* Xếp các mục menu theo chiều dọc */
+                background-color: white; /* Nền trắng */
+                width: 70%; /* Chiều rộng menu */
+                height: calc(100vh - 80px); /* Chiều cao menu (toàn màn hình trừ header) */
+                padding: 2rem; /* Padding bên trong menu */
+                transition: var(--np-transition); /* Hiệu ứng trượt vào/ra */
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1); /* Đổ bóng bên trái */
+                gap: 2rem; /* Khoảng cách giữa các mục menu */
+                align-items: flex-start; /* Căn các mục menu về bên trái */
+                overflow-y: auto; /* Cho phép cuộn nếu nội dung dài */
             }
-            
-            .nav-menu.active {
-                right: 0;
+
+            /* Lớp active để hiện menu */
+            .np-nav-menu.np-active {
+                right: 0; /* Trượt menu vào màn hình */
             }
-            
-            .hamburger {
+
+            /* Hiện nút hamburger */
+            .np-hamburger {
                 display: block;
             }
-            
-            .cta-button {
-                margin-top: 1rem;
+
+            /* Điều chỉnh nút CTA trong menu dọc */
+            .np-cta-button {
+                margin-top: 1rem; /* Thêm khoảng cách phía trên */
+                display: block; /* Chiếm toàn bộ chiều rộng */
+                text-align: center; /* Căn giữa chữ */
             }
+             /* Điều chỉnh padding header */
+             .np-header {
+                 padding: 0.8rem 2%;
+             }
         }
-        
+
+        /* Màn hình nhỏ hơn 576px (smartphones) */
         @media (max-width: 576px) {
-            .logo-text {
-                font-size: 1.2rem;
+            .np-logo-text {
+                font-size: 1.2rem; /* Giảm cỡ chữ tên CLB */
             }
-            
-            .logo {
-                height: 50px;
+
+            .np-logo {
+                height: 50px; /* Giảm chiều cao logo */
             }
-            
-            .nav-menu {
+
+            /* Menu chiếm toàn bộ chiều rộng trên điện thoại */
+            .np-nav-menu {
                 width: 100%;
+                top: 70px; /* Điều chỉnh vị trí top nếu chiều cao header thay đổi */
+                 height: calc(100vh - 70px);
             }
+             /* Điều chỉnh chiều cao header */
+             .np-header {
+                 /* Có thể điều chỉnh padding hoặc chiều cao nếu cần */
+                 min-height: 70px;
+             }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo-container">
+
+    <div class="np-header">
+        <div class="np-logo-container">
             <a href="index.html">
-                <img src="images/logo.png" alt="Logo CLB Cầu Lông Nhơn Phú" class="logo">
+                <img src="./images/logo.png" alt="Logo CLB Cầu Lông Nhơn Phú" class="np-logo" onerror="this.onerror=null; this.src='./images/LOGO2.PNG';">
             </a>
-            <a href="index.html" class="logo-text">CLB Cầu Lông Nhơn Phú</a>
+            <a href="index.html" class="np-logo-text">CLB Cầu Lông Nhơn Phú</a>
         </div>
-        
-        <button class="hamburger" id="hamburger">
-            <i class="fas fa-bars"></i>
+
+        <button class="np-hamburger" id="npHamburger" aria-label="Mở menu">
+            <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
-        
-        <ul class="nav-menu" id="nav-menu">
-            <li><a href="index.html" class="nav-link active">Trang chủ</a></li>
-            <li><a href="gioi-thieu.html" class="nav-link">Giới thiệu</a></li>
-            <li><a href="lop-hoc.html" class="nav-link">Lớp học</a></li>
-            <li><a href="dat-san.html" class="nav-link">Đặt sân</a></li>
-            <li><a href="thu-vien.html" class="nav-link">Thư viện</a></li>
-            <li><a href="tin-tuc.html" class="nav-link">Tin tức</a></li>
-            <li><a href="lien-he.html" class="nav-link">Liên hệ</a></li>
-            <li><a href="dat-san.html" class="cta-button">Đặt sân ngay</a></li>
+
+        <ul class="np-nav-menu" id="npNavMenu">
+            <li><a href="index.html" class="np-nav-link">Trang chủ</a></li>
+            <li><a href="gioi-thieu.html" class="np-nav-link">Giới thiệu</a></li>
+            <li><a href="lop-hoc.html" class="np-nav-link">Lớp học</a></li>
+            <li><a href="dat-san.html" class="np-nav-link">Đặt sân</a></li>
+            <li><a href="thu-vien.html" class="np-nav-link">Thư viện</a></li>
+            <li><a href="tin-tuc.html" class="np-nav-link">Tin tức</a></li>
+            <li><a href="lien-he.html" class="np-nav-link">Liên hệ</a></li>
+            <li><a href="dat-san.html" class="np-cta-button">Đặt sân ngay</a></li>
         </ul>
-    </header>
+    </div>
+  
 
     <script>
-        // JavaScript cho hamburger menu
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('nav-menu');
-        
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-        
-        // Đóng menu khi click vào link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
+        // Đảm bảo script chỉ chạy sau khi DOM đã được tải hoàn chỉnh
+        document.addEventListener('DOMContentLoaded', function() {
+            // JavaScript cho hamburger menu
+            const npHamburger = document.getElementById('npHamburger');
+            const npNavMenu = document.getElementById('npNavMenu');
+
+            // Kiểm tra sự tồn tại của các phần tử trước khi thêm sự kiện
+            if (npHamburger && npNavMenu) {
+                // Sự kiện click vào nút hamburger
+                npHamburger.addEventListener('click', (event) => {
+                    // Ngăn sự kiện click lan ra ngoài (quan trọng khi xử lý đóng menu)
+                    event.stopPropagation();
+                    // Thêm/xóa lớp 'np-active' để hiện/ẩn menu
+                    npNavMenu.classList.toggle('np-active');
+                    // Cập nhật trạng thái aria-expanded cho nút hamburger
+                    const isExpanded = npNavMenu.classList.contains('np-active');
+                    npHamburger.setAttribute('aria-expanded', isExpanded);
+                });
+
+                // Đóng menu khi click vào một link trong menu (trên màn hình nhỏ)
+                document.querySelectorAll('.np-nav-link, .np-cta-button').forEach(link => {
+                    link.addEventListener('click', () => {
+                        // Chỉ đóng nếu menu đang mở (có lớp np-active)
+                        if (npNavMenu.classList.contains('np-active')) {
+                            npNavMenu.classList.remove('np-active');
+                            npHamburger.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                });
+
+                // Đánh dấu mục menu active dựa trên URL hiện tại
+                const currentLocation = window.location.href;
+                const menuItems = npNavMenu.querySelectorAll('.np-nav-link'); // Chọn các link trong menu
+
+                menuItems.forEach(item => {
+                    // So sánh href của link với URL hiện tại
+                    // Cần xử lý trường hợp URL có hoặc không có dấu / cuối cùng, hoặc có query params/hash
+                    if (item.href === currentLocation || item.href === currentLocation.replace(/\/$/, '')) {
+                         // Bỏ lớp active khỏi tất cả các mục trước khi thêm vào mục đúng
+                         menuItems.forEach(i => i.classList.remove('np-active'));
+                         item.classList.add('np-active');
+                    }
+                    // Xử lý trường hợp trang chủ (index.html hoặc /)
+                    const homepageUrl = new URL('index.html', window.location.origin).href;
+                    if ((item.href === homepageUrl || item.getAttribute('href') === 'index.html') && (currentLocation === window.location.origin + '/' || currentLocation === homepageUrl)) {
+                         menuItems.forEach(i => i.classList.remove('np-active'));
+                         item.classList.add('np-active');
+                    }
+                });
+            }
+
+            // Đóng menu khi click ra bên ngoài menu (trên màn hình nhỏ)
+            document.addEventListener('click', function(event) {
+                // Kiểm tra xem menu có đang mở không và click có xảy ra bên ngoài menu và nút hamburger không
+                if (npNavMenu && npNavMenu.classList.contains('np-active') &&
+                    !npNavMenu.contains(event.target) &&
+                    event.target !== npHamburger && !npHamburger.contains(event.target) /* Kiểm tra cả icon bên trong nút */ ) {
+                    npNavMenu.classList.remove('np-active');
+                    npHamburger.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+             // Đóng menu khi nhấn phím Escape
+             document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && npNavMenu && npNavMenu.classList.contains('np-active')) {
+                    npNavMenu.classList.remove('np-active');
+                    npHamburger.setAttribute('aria-expanded', 'false');
+                    npHamburger.focus(); // Chuyển focus về nút hamburger sau khi đóng menu
+                }
             });
         });
-        
-        // Đánh dấu menu active dựa trên URL hiện tại
-        const currentLocation = location.href;
-        const menuItems = document.querySelectorAll('.nav-link');
-        
-        menuItems.forEach(item => {
-            if(item.href === currentLocation) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
-        });
     </script>
-    
-    <!-- Font Awesome cho icon hamburger menu -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
 </body>
 </html>
