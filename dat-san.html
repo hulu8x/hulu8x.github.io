@@ -1,141 +1,442 @@
-<div id="header-placeholder"></div>
-<script>
-    // Load the content of header.html into the placeholder
-    fetch('header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header-placeholder').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading header:', error));
-</script>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Sân Cầu Lông - CLB Cầu Lông Nhơn Phú</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Consistent section title styling */
+        .section-title {
+            @apply text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8 md:mb-12;
+        }
+        /* Styles for booking status spans */
+        .slot-available { @apply bg-green-100 text-green-800 px-2 py-0.5 rounded font-medium; }
+        .slot-booked { @apply bg-orange-100 text-orange-800 px-2 py-0.5 rounded font-medium; }
+        .slot-unavailable { @apply bg-gray-200 text-gray-600 px-2 py-0.5 rounded font-medium; }
 
-<section class="page-header">
-    <div class="container">
-        <h1>Đặt Sân Cầu Lông Nhanh Chóng Tại Nhơn Phú</h1>
-    </div>
-</section>
+        /* Styles for the simulated calendar */
+        .calendar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.5rem; }
+        .calendar-day { border: 1px solid #e5e7eb; border-radius: 0.375rem; padding: 0.75rem; }
+        .calendar-day h4 { font-weight: 600; margin-bottom: 0.5rem; text-align: center; font-size: 0.875rem; }
+        .time-slot {
+            display: block; /* Changed from inline-block */
+            width: 100%; /* Make slots take full width */
+            padding: 0.5rem;
+            margin-bottom: 0.25rem; /* Add space between slots */
+            border-radius: 0.25rem;
+            text-align: center;
+            font-size: 0.75rem; /* Smaller font size */
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid transparent;
+        }
+        .time-slot.available { background-color: #dcfce7; color: #166534; border-color: #bbf7d0; }
+        .time-slot.available:hover { background-color: #bbf7d0; border-color: #86efac; }
+        .time-slot.booked { background-color: #ffedd5; color: #9a3412; cursor: not-allowed; opacity: 0.8; }
+        .time-slot.unavailable { background-color: #f3f4f6; color: #6b7280; cursor: not-allowed; opacity: 0.7; }
 
-<section class="booking-intro section-padding">
-    <div class="container">
-        <p>Chủ động chọn sân và khung giờ yêu thích của bạn với hệ thống đặt lịch trực tuyến tiện lợi của CLB Cầu lông Nhơn Phú. Xem trạng thái sân trống tại Viện Sốt Rét Quy Nhơn theo thời gian thực và đặt chỗ chỉ với vài thao tác đơn giản.</p>
-        <p>Bạn cũng có thể liên hệ trực tiếp HLV Hoàng: <a href="tel:0935185558">0935.185.558</a> để đặt sân cầu lông.</p>
-    </div>
-</section>
+        /* Styles for pricing table */
+        .pricing-table { @apply w-full max-w-2xl mx-auto border-collapse border border-gray-300 shadow-sm rounded-lg overflow-hidden; }
+        .pricing-table th, .pricing-table td { @apply border border-gray-200 px-4 py-3 text-sm text-left; }
+        .pricing-table th { @apply bg-gray-100 font-semibold text-gray-700; }
+        .pricing-table tbody tr:nth-child(even) { @apply bg-gray-50; }
+        .pricing-table td:last-child { @apply text-center font-semibold text-gray-800; }
 
-<section class="online-booking-system section-padding bg-light">
-    <div class="container">
-        <h2 class="section-title">Lịch Đặt Sân Cầu Lông Trực Tuyến</h2>
-        <div class="booking-instructions">
-            <h3>Hướng dẫn đặt sân:</h3>
-            <ol>
-                <li>Chọn ngày bạn muốn thuê sân trên lịch bên dưới.</li>
-                <li>Các khung giờ còn trống sẽ hiển thị màu <span class="slot-available">Xanh</span>. Khung giờ đã được đặt sẽ hiển thị màu <span class="slot-booked">Cam</span>. Khung giờ ngoài giờ hoạt động sẽ hiển thị màu <span class="slot-unavailable">Xám</span>.</li>
-                <li>Nhấp vào khung giờ <span class="slot-available">Xanh</span> bạn muốn đặt.</li>
-                <li>Điền thông tin vào form xác nhận hiện ra bên dưới lịch.</li>
-            </ol>
-            <p><strong>Khung giờ hoạt động cho thuê sân:</strong></p>
-            <ul>
-                <li>Buổi Sáng: 5h00 - 6h00 | 6h00 - 7h00</li>
-                <li>Buổi Chiều: 17h00 - 18h00 | 18h00 - 19h00 | 19h00 - 20h00 | 20h00 - 21h00</li>
-            </ul>
+        /* Styles for booking rules list */
+        .rules-list { @apply list-none space-y-4; }
+        .rules-list > li { @apply pl-6 relative; }
+        .rules-list > li::before {
+            content: ''; @apply absolute left-0 top-1.5 w-2 h-2 bg-blue-500 rounded-full; /* Custom bullet */
+        }
+        .rules-list ul { @apply list-none mt-2 pl-4 space-y-1; }
+        .rules-list ul li { @apply pl-5 relative text-sm text-gray-600; }
+         .rules-list ul li::before {
+            content: '-'; @apply absolute left-0 top-0 text-blue-600 font-bold; /* Dash bullet */
+        }
+
+        /* Ensure icons are sized correctly */
+        .icon {
+            width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; margin-right: 0.25rem; flex-shrink: 0;
+        }
+        /* Form styling (reusing from previous example) */
+         .form-group label:not([type="radio"]):not([type="checkbox"]) { @apply block text-sm font-medium text-gray-700 mb-1; }
+         .form-group input[type="text"], .form-group input[type="tel"], .form-group textarea { @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-150 ease-in-out; }
+         .form-group input[type="checkbox"] { @apply focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mr-2; }
+         .form-group label[type="checkbox"] { @apply inline-flex items-center text-sm text-gray-700; }
+         .form-group a { @apply text-blue-600 hover:underline; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div id="header-placeholder"></div>
+
+    <section class="page-header bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-16 md:py-24 text-center shadow-md">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl md:text-5xl font-bold mb-2">Đặt Sân Cầu Lông Nhanh Chóng</h1>
+            <p class="text-lg md:text-xl font-light">Tại CLB Nhơn Phú (Sân Viện Sốt Rét)</p>
         </div>
+    </section>
 
-        <div id="booking-calendar-placeholder">
-            <h3 style="text-align: center; padding: 40px; border: 1px dashed #ccc;">
-                [Placeholder: Hệ thống Lịch Tương Tác]
-            </h3>
-            <p style="text-align: center;">(Đây là nơi hiển thị lịch chọn ngày và các khung giờ theo trạng thái. Cần JavaScript và Backend để hoạt động)</p>
+    <section class="booking-intro py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl text-center space-y-4">
+            <p class="text-base md:text-lg leading-relaxed text-gray-700">
+                Chủ động chọn sân và khung giờ yêu thích của bạn với hệ thống đặt lịch trực tuyến tiện lợi của CLB Cầu lông Nhơn Phú. Xem trạng thái sân trống tại Viện Sốt Rét Quy Nhơn theo thời gian thực và đặt chỗ chỉ với vài thao tác đơn giản.
+            </p>
+            <p class="text-base md:text-lg leading-relaxed text-gray-700">
+                Bạn cũng có thể liên hệ trực tiếp HLV Hoàng:
+                <a href="tel:0935185558" class="font-semibold text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-phone w-4 h-4"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    0935.185.558
+                </a> để đặt sân cầu lông.
+            </p>
+        </div>
+    </section>
+
+    <section class="online-booking-system py-12 md:py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Lịch Đặt Sân Cầu Lông Trực Tuyến</h2>
+
+            <div class="booking-instructions bg-blue-50 border border-blue-200 text-blue-800 p-6 rounded-lg mb-8 md:mb-12 max-w-4xl mx-auto shadow-sm">
+                <h3 class="text-lg font-semibold mb-3">Hướng dẫn đặt sân:</h3>
+                <ol class="list-decimal list-inside space-y-1 text-sm mb-4">
+                    <li>Chọn ngày bạn muốn thuê sân trên lịch bên dưới.</li>
+                    <li>Các khung giờ còn trống sẽ hiển thị màu <span class="slot-available">Xanh</span>. Khung giờ đã được đặt sẽ hiển thị màu <span class="slot-booked">Cam</span>. Khung giờ ngoài giờ hoạt động sẽ hiển thị màu <span class="slot-unavailable">Xám</span>.</li>
+                    <li>Nhấp vào khung giờ <span class="slot-available">Xanh</span> bạn muốn đặt (ví dụ bên dưới).</li>
+                    <li>Điền thông tin vào form xác nhận hiện ra bên dưới lịch.</li>
+                </ol>
+                <p class="text-sm font-semibold mb-1"><strong>Khung giờ hoạt động cho thuê sân:</strong></p>
+                <ul class="list-disc list-inside text-sm space-y-1">
+                    <li>Buổi Sáng: 5h00 - 6h00 | 6h00 - 7h00</li>
+                    <li>Buổi Chiều: 17h00 - 18h00 | 18h00 - 19h00 | 19h00 - 20h00 | 20h00 - 21h00</li>
+                </ul>
             </div>
 
-        <div id="booking-confirmation-form" style="display: none; margin-top: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
-            <h3 class="section-title">Xác Nhận Thông Tin Đặt Sân</h3>
-            <form id="confirm-booking-form" action="/api/book-court" method="POST"> <p><strong>Ngày đặt:</strong> <span id="selected-date">[Ngày đã chọn]</span></p>
-                <p><strong>Khung giờ:</strong> <span id="selected-time">[Giờ đã chọn]</span></p>
-                <p><strong>Sân số:</strong> <span id="selected-court">[Sân đã chọn]</span></p>
-                <input type="hidden" id="bookingDate" name="bookingDate">
-                <input type="hidden" id="bookingTime" name="bookingTime">
-                <input type="hidden" id="bookingCourt" name="bookingCourt">
-
-                <div class="form-group">
-                    <label for="bookerName">Họ và Tên Người Đặt:*</label>
-                    <input type="text" id="bookerName" name="bookerName" required>
-                </div>
-                <div class="form-group">
-                    <label for="bookerPhone">Số Điện Thoại Liên Hệ:*</label>
-                    <input type="tel" id="bookerPhone" name="bookerPhone" required pattern="[0-9]{10,11}" title="Số điện thoại gồm 10-11 chữ số">
-                </div>
-                 <div class="form-group">
-                     <label for="bookingNotes">Ghi chú (nếu có):</label>
-                     <textarea id="bookingNotes" name="bookingNotes" rows="3"></textarea>
+            <div id="booking-calendar-placeholder" class="mb-8 md:mb-12 bg-white p-6 rounded-lg shadow">
+                 <h3 class="text-xl font-semibold text-center text-gray-800 mb-6 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-calendar-days mr-2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+                    Chọn Ngày & Giờ Đặt Sân (Ví dụ Mô Phỏng)
+                 </h3>
+                 <div class="calendar-grid">
+                    <div class="calendar-day">
+                        <h4>Hôm nay (06/04)</h4>
+                        <span class="time-slot unavailable">5h-6h</span>
+                        <span class="time-slot booked" data-court="Sân 1">6h-7h (S1)</span>
+                        <span class="time-slot booked" data-court="Sân 2">6h-7h (S2)</span>
+                        <span class="time-slot unavailable">...</span>
+                        <span class="time-slot booked" data-court="Sân 1">17h-18h (S1)</span>
+                        <button class="time-slot available" data-date="2025-04-06" data-time="17:00 - 18:00" data-court="Sân 2">17h-18h (S2)</button>
+                        <button class="time-slot available" data-date="2025-04-06" data-time="18:00 - 19:00" data-court="Sân 1">18h-19h (S1)</button>
+                        <span class="time-slot booked" data-court="Sân 2">18h-19h (S2)</span>
+                        <button class="time-slot available" data-date="2025-04-06" data-time="19:00 - 20:00" data-court="Sân 1">19h-20h (S1)</button>
+                        <button class="time-slot available" data-date="2025-04-06" data-time="19:00 - 20:00" data-court="Sân 2">19h-20h (S2)</button>
+                        <span class="time-slot booked" data-court="Sân 1">20h-21h (S1)</span>
+                        <button class="time-slot available" data-date="2025-04-06" data-time="20:00 - 21:00" data-court="Sân 2">20h-21h (S2)</button>
+                    </div>
+                     <div class="calendar-day">
+                        <h4>Ngày mai (07/04)</h4>
+                        <button class="time-slot available" data-date="2025-04-07" data-time="05:00 - 06:00" data-court="Sân 1">5h-6h (S1)</button>
+                        <button class="time-slot available" data-date="2025-04-07" data-time="05:00 - 06:00" data-court="Sân 2">5h-6h (S2)</button>
+                        <button class="time-slot available" data-date="2025-04-07" data-time="06:00 - 07:00" data-court="Sân 1">6h-7h (S1)</button>
+                        <span class="time-slot booked" data-court="Sân 2">6h-7h (S2)</span>
+                         <span class="time-slot unavailable">...</span>
+                        <button class="time-slot available" data-date="2025-04-07" data-time="17:00 - 18:00" data-court="Sân 1">17h-18h (S1)</button>
+                        <button class="time-slot available" data-date="2025-04-07" data-time="17:00 - 18:00" data-court="Sân 2">17h-18h (S2)</button>
+                        <span class="time-slot booked" data-court="Sân 1">18h-19h (S1)</span>
+                        <button class="time-slot available" data-date="2025-04-07" data-time="18:00 - 19:00" data-court="Sân 2">18h-19h (S2)</button>
+                        <span class="time-slot booked" data-court="Sân 1">19h-20h (S1)</span>
+                        <span class="time-slot booked" data-court="Sân 2">19h-20h (S2)</span>
+                        <button class="time-slot available" data-date="2025-04-07" data-time="20:00 - 21:00" data-court="Sân 1">20h-21h (S1)</button>
+                        <button class="time-slot available" data-date="2025-04-07" data-time="20:00 - 21:00" data-court="Sân 2">20h-21h (S2)</button>
+                    </div>
+                     <div class="calendar-day">
+                        <h4>Ngày kia (08/04)</h4>
+                         <button class="time-slot available" data-date="2025-04-08" data-time="05:00 - 06:00" data-court="Sân 1">5h-6h (S1)</button>
+                         <button class="time-slot available" data-date="2025-04-08" data-time="05:00 - 06:00" data-court="Sân 2">5h-6h (S2)</button>
+                         <button class="time-slot available" data-date="2025-04-08" data-time="06:00 - 07:00" data-court="Sân 1">6h-7h (S1)</button>
+                         <button class="time-slot available" data-date="2025-04-08" data-time="06:00 - 07:00" data-court="Sân 2">6h-7h (S2)</button>
+                         <span class="time-slot unavailable">...</span>
+                         <button class="time-slot available" data-date="2025-04-08" data-time="17:00 - 18:00" data-court="Sân 1">17h-18h (S1)</button>
+                         <span class="time-slot booked" data-court="Sân 2">17h-18h (S2)</span>
+                         <button class="time-slot available" data-date="2025-04-08" data-time="18:00 - 19:00" data-court="Sân 1">18h-19h (S1)</button>
+                         <button class="time-slot available" data-date="2025-04-08" data-time="18:00 - 19:00" data-court="Sân 2">18h-19h (S2)</button>
+                         <button class="time-slot available" data-date="2025-04-08" data-time="19:00 - 20:00" data-court="Sân 1">19h-20h (S1)</button>
+                         <span class="time-slot booked" data-court="Sân 2">19h-20h (S2)</span>
+                         <button class="time-slot available" data-date="2025-04-08" data-time="20:00 - 21:00" data-court="Sân 1">20h-21h (S1)</button>
+                         <button class="time-slot available" data-date="2025-04-08" data-time="20:00 - 21:00" data-court="Sân 2">20h-21h (S2)</button>
+                    </div>
                  </div>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" id="agreeTerms" name="agreeTerms" required> Tôi đã đọc và đồng ý với <a href="#booking-rules" class="scroll-link">Quy định đặt sân</a> của CLB.
-                    </label>
-                </div>
-                 <button type="submit" class="btn btn-primary">Xác Nhận Đặt Sân</button>
-            </form>
-             <div id="booking-success-message" style="display: none; margin-top: 15px; color: green;">
-                Đặt sân thành công! Thông tin đặt sân của bạn: Ngày <span class="confirm-date"></span>, Giờ <span class="confirm-time"></span>, Sân <span class="confirm-court"></span>. Vui lòng đến đúng giờ. Hẹn gặp bạn tại CLB Nhơn Phú!
+                 <p class="text-center text-xs text-gray-500 mt-4">
+                    (Lịch trên chỉ là ví dụ mô phỏng. Hệ thống thực tế cần JavaScript và dữ liệu từ máy chủ để hoạt động.)
+                 </p>
             </div>
-             <div id="booking-error-message" style="display: none; margin-top: 15px; color: red;">
-                Đã có lỗi xảy ra khi đặt sân (có thể khung giờ vừa được người khác đặt). Vui lòng thử lại hoặc liên hệ HLV Hoàng.
+
+            <div id="booking-confirmation-form" class="hidden mt-8 md:mt-12 max-w-lg mx-auto bg-white p-6 md:p-8 rounded-lg shadow-md border border-gray-200">
+                <h3 class="text-xl font-semibold text-center text-gray-800 mb-6">Xác Nhận Thông Tin Đặt Sân</h3>
+                <form id="confirm-booking-form" class="space-y-4">
+                    <div class="bg-gray-50 p-3 rounded-md border border-gray-200 text-sm space-y-1">
+                        <p><strong>Ngày đặt:</strong> <span id="selected-date" class="font-medium text-blue-700">[Ngày]</span></p>
+                        <p><strong>Khung giờ:</strong> <span id="selected-time" class="font-medium text-blue-700">[Giờ]</span></p>
+                        <p><strong>Sân số:</strong> <span id="selected-court" class="font-medium text-blue-700">[Sân]</span></p>
+                    </div>
+
+                    <input type="hidden" id="bookingDate" name="bookingDate">
+                    <input type="hidden" id="bookingTime" name="bookingTime">
+                    <input type="hidden" id="bookingCourt" name="bookingCourt">
+
+                    <div class="form-group">
+                        <label for="bookerName">Họ và Tên Người Đặt:*</label>
+                        <input type="text" id="bookerName" name="bookerName" required placeholder="Nguyễn Văn A">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookerPhone">Số Điện Thoại Liên Hệ:*</label>
+                        <input type="tel" id="bookerPhone" name="bookerPhone" required pattern="[0-9]{10,11}" title="Số điện thoại gồm 10-11 chữ số" placeholder="09xxxxxxxx">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingNotes">Ghi chú (nếu có):</label>
+                        <textarea id="bookingNotes" name="bookingNotes" rows="3" placeholder="Ví dụ: Cần thuê vợt..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label type="checkbox">
+                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                            Tôi đã đọc và đồng ý với <a href="#booking-rules" class="scroll-link">Quy định đặt sân</a> của CLB.
+                        </label>
+                    </div>
+                    <div class="text-center pt-2">
+                        <button type="submit" class="inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                            Xác Nhận Đặt Sân
+                        </button>
+                    </div>
+                </form>
+
+                 <div id="booking-success-message" class="hidden mt-5 p-4 bg-green-100 border border-green-300 text-green-800 rounded-md text-sm text-center flex items-center justify-center gap-2">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-check-circle-2 w-5 h-5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                    <span>Đặt sân thành công! Ngày <strong class="confirm-date"></strong>, Giờ <strong class="confirm-time"></strong>, Sân <strong class="confirm-court"></strong>. Hẹn gặp bạn!</span>
+                </div>
+                <div id="booking-error-message" class="hidden mt-5 p-4 bg-red-100 border border-red-300 text-red-800 rounded-md text-sm text-center flex items-center justify-center gap-2">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-x-circle w-5 h-5"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                    <span>Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ HLV Hoàng.</span>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="pricing section-padding">
-    <div class="container">
-        <h2 class="section-title">Bảng Giá Thuê Sân Cầu Lông</h2>
-         <table class="pricing-table">
-             <thead>
-                 <tr>
-                     <th>Khung Giờ</th>
-                     <th>Giá (VNĐ / giờ / sân)</th>
-                 </tr>
-             </thead>
-             <tbody>
-                 <tr>
-                     <td>18h00 - 20h00 (Thứ 2 - Chủ Nhật)</td>
-                     <td><strong>60.000</strong></td>
-                 </tr>
-                 <tr>
-                     <td>Các khung giờ còn lại (5h-7h, 17h-18h, 20h-21h)</td>
-                      <td><strong>50.000</strong></td>
-                 </tr>
-             </tbody>
-         </table>
-         <p class="text-center note"><em>Giá có thể thay đổi, vui lòng kiểm tra lại khi đặt sân hoặc liên hệ HLV Hoàng.</em></p>
-    </div>
-</section>
+    <section class="pricing py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Bảng Giá Thuê Sân Cầu Lông</h2>
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Khung Giờ</th>
+                        <th>Giá (VNĐ / giờ / sân)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>18h00 - 20h00 (Thứ 2 - Chủ Nhật)</td>
+                        <td><strong>60.000</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Các khung giờ còn lại (5h-7h, 17h-18h, 20h-21h)</td>
+                        <td><strong>50.000</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-center text-sm text-gray-500 mt-4 italic">
+                Giá có thể thay đổi, vui lòng kiểm tra lại khi đặt sân hoặc liên hệ HLV Hoàng.
+            </p>
+        </div>
+    </section>
 
-<section class="booking-rules section-padding bg-light" id="booking-rules">
-    <div class="container">
-        <h2 class="section-title">Quy Định Đặt Sân & Sử Dụng Sân</h2>
-        <ul>
-            <li><strong>Đặt sân:</strong> Vui lòng đặt sân trước giờ chơi ít nhất 1 tiếng để đảm bảo giữ sân. Ưu tiên các lượt đặt qua hệ thống online hoặc hotline HLV Hoàng: <a href="tel:0935185558">0935.185.558</a>.</li>
-            <li><strong>Hủy sân:</strong> Nếu muốn hủy sân đã đặt, vui lòng báo trước ít nhất <strong>4 tiếng</strong> qua Hotline HLV Hoàng. Hủy sân muộn hoặc không đến có thể bị tính phí hoặc hạn chế đặt sân cầu lông lần sau.</li>
-            <li><strong>Thanh toán:</strong> Thanh toán trực tiếp tại sân trước hoặc ngay sau khi kết thúc giờ chơi. (Hiện tại CLB Nhơn Phú chưa hỗ trợ chuyển khoản online).</li>
-            <li><strong>Sử dụng sân:</strong>
-                <ul>
-                    <li>Vui lòng đi giày chuyên dụng cho sân cầu lông (giày đế bằng, sạch, không phải giày chạy bộ hoặc giày đinh).</li>
-                    <li>Giữ gìn vệ sinh chung tại sân cầu và khu vực xung quanh.</li>
-                    <li>Không mang đồ ăn thức uống vào khu vực thi đấu (thảm sân).</li>
-                    <li>Tuân thủ các nội quy khác của CLB Cầu lông Nhơn Phú và Viện Sốt Rét Quy Nhơn.</li>
-                 </ul>
-             </li>
-        </ul>
-    </div>
-</section>
+    <section class="booking-rules py-12 md:py-16 bg-gray-100" id="booking-rules">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <h2 class="section-title">Quy Định Đặt Sân & Sử Dụng Sân</h2>
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <ul class="rules-list text-sm md:text-base text-gray-700">
+                    <li>
+                        <strong>Đặt sân:</strong> Vui lòng đặt sân trước giờ chơi ít nhất 1 tiếng. Ưu tiên đặt qua hệ thống online hoặc hotline HLV Hoàng: <a href="tel:0935185558" class="text-blue-600 hover:underline font-medium">0935.185.558</a>.
+                    </li>
+                    <li>
+                        <strong>Hủy sân:</strong> Báo trước ít nhất <strong>4 tiếng</strong> qua Hotline HLV Hoàng. Hủy muộn hoặc không đến có thể bị tính phí/hạn chế đặt lần sau.
+                    </li>
+                    <li>
+                        <strong>Thanh toán:</strong> Thanh toán trực tiếp tại sân trước hoặc sau giờ chơi (Chưa hỗ trợ chuyển khoản online).
+                    </li>
+                    <li>
+                        <strong>Sử dụng sân:</strong>
+                        <ul>
+                            <li>Đi giày chuyên dụng cho sân cầu lông (đế bằng, sạch).</li>
+                            <li>Giữ gìn vệ sinh chung.</li>
+                            <li>Không mang đồ ăn thức uống vào khu vực thảm sân.</li>
+                            <li>Tuân thủ các nội quy khác của CLB và Viện Sốt Rét.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-<div id="footer-placeholder"></div>
-<script>
-    // Load the content of footer.html into the placeholder
-    fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer-placeholder').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading footer:', error));
-</script>
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Function to load HTML content from a file into an element
+        async function loadHTML(elementId, filePath) {
+            const element = document.getElementById(elementId);
+            if (!element) {
+                console.error(`Element with ID "${elementId}" not found.`);
+                return;
+            }
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const html = await response.text();
+                element.innerHTML = html;
+                console.log(`Successfully loaded ${filePath} into #${elementId}`);
+            } catch (error) {
+                console.error(`Could not load HTML from ${filePath}:`, error);
+                element.innerHTML = `<p class="text-red-500 text-center p-4">Lỗi khi tải ${elementId}. Vui lòng thử lại sau.</p>`;
+            }
+        }
+
+        // --- Booking Simulation Logic ---
+        const calendarPlaceholder = document.getElementById('booking-calendar-placeholder');
+        const confirmationFormDiv = document.getElementById('booking-confirmation-form');
+        const bookingForm = document.getElementById('confirm-booking-form');
+        const successMessageDiv = document.getElementById('booking-success-message');
+        const errorMessageDiv = document.getElementById('booking-error-message');
+
+        // Add event listener to the calendar placeholder (delegation)
+        if (calendarPlaceholder) {
+            calendarPlaceholder.addEventListener('click', function(event) {
+                // Check if the clicked element is an available time slot button
+                if (event.target.matches('.time-slot.available')) {
+                    const button = event.target;
+                    const date = button.dataset.date;
+                    const time = button.dataset.time;
+                    const court = button.dataset.court;
+
+                    // Populate the confirmation form
+                    document.getElementById('selected-date').textContent = date;
+                    document.getElementById('selected-time').textContent = time;
+                    document.getElementById('selected-court').textContent = court;
+                    document.getElementById('bookingDate').value = date;
+                    document.getElementById('bookingTime').value = time;
+                    document.getElementById('bookingCourt').value = court;
+
+                    // Show the confirmation form and scroll to it
+                    confirmationFormDiv.classList.remove('hidden');
+                    confirmationFormDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    // Hide any previous messages
+                    successMessageDiv.classList.add('hidden');
+                    errorMessageDiv.classList.add('hidden');
+                    // Reset checkbox
+                    document.getElementById('agreeTerms').checked = false;
+                     // Clear previous validation styles
+                    bookingForm.querySelectorAll('.border-red-500').forEach(el => el.classList.remove('border-red-500'));
+
+                }
+            });
+        }
+
+        // Handle Confirmation Form Submission
+        if (bookingForm) {
+            bookingForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent actual submission
+
+                // Basic Validation
+                let isValid = true;
+                const requiredInputs = bookingForm.querySelectorAll('[required]');
+                const agreeTermsCheckbox = document.getElementById('agreeTerms');
+
+                requiredInputs.forEach(input => {
+                    if (input.type === 'checkbox') {
+                        if (!input.checked) {
+                            isValid = false;
+                            // Optionally add visual feedback near checkbox label
+                            input.closest('label').classList.add('text-red-600'); // Example feedback
+                        } else {
+                             input.closest('label').classList.remove('text-red-600');
+                        }
+                    } else {
+                         if (!input.value.trim()) {
+                            isValid = false;
+                            input.classList.add('border-red-500');
+                        } else {
+                            input.classList.remove('border-red-500');
+                        }
+                    }
+                });
+
+                 // Check phone pattern
+                const phoneInput = bookingForm.querySelector('#bookerPhone');
+                if (phoneInput && !phoneInput.validity.valid) {
+                     isValid = false;
+                     phoneInput.classList.add('border-red-500');
+                } else if (phoneInput) {
+                     phoneInput.classList.remove('border-red-500');
+                }
+
+
+                if (isValid) {
+                    // --- Simulation Success ---
+                    console.log('Booking confirmed (simulation)');
+
+                    // Populate success message details
+                    successMessageDiv.querySelector('.confirm-date').textContent = document.getElementById('bookingDate').value;
+                    successMessageDiv.querySelector('.confirm-time').textContent = document.getElementById('bookingTime').value;
+                    successMessageDiv.querySelector('.confirm-court').textContent = document.getElementById('bookingCourt').value;
+
+                    // Show success, hide error and form
+                    successMessageDiv.classList.remove('hidden');
+                    errorMessageDiv.classList.add('hidden');
+                    // bookingForm.classList.add('hidden'); // Hide the form itself within the container
+                    bookingForm.reset(); // Reset form fields after successful "submission"
+
+                     // Optional: Hide confirmation section after a delay
+                     setTimeout(() => {
+                         // confirmationFormDiv.classList.add('hidden');
+                     }, 7000); // 7 seconds
+
+                    // --- End Simulation ---
+                } else {
+                    // Show error message
+                    errorMessageDiv.querySelector('span').textContent = 'Vui lòng điền đầy đủ thông tin bắt buộc (*) và đồng ý với quy định.';
+                    errorMessageDiv.classList.remove('hidden');
+                    successMessageDiv.classList.add('hidden');
+                }
+            });
+        }
+
+        // Smooth scroll for rules link
+        document.querySelectorAll('.scroll-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href'); // #booking-rules
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Load header and footer when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHTML('header-placeholder', 'header.html');
+            loadHTML('footer-placeholder', 'footer.html');
+        });
+    </script>
+
+</body>
+</html>
