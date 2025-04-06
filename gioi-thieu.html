@@ -12,202 +12,182 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      @font-face {
-        font-family: 'LucideIcons';
-        src: url('https://cdn.jsdelivr.net/npm/lucide-static@latest/font/Lucide.ttf') format('truetype');
-      }
-      .lucide {
-        font-family: 'LucideIcons';
-        font-style: normal;
-        font-weight: normal;
-        font-variant: normal;
-        text-transform: none;
-        line-height: 1;
-        /* Better Font Rendering */
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      /* Tùy chỉnh cơ bản nếu cần */
-      body {
-        font-family: 'Inter', sans-serif;
-      }
-      .hero-bg { /* Ví dụ background cho hero section */
-        background-image: url('https://placehold.co/1200x400/a0aec0/ffffff?text=Sân+Cầu+Lông+Nhơn+Phú');
-        background-size: cover;
-        background-position: center;
-      }
+        /* Custom base styles (Minimal) */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Ensure icons are sized correctly */
+        .icon {
+            width: 1.1em; /* Adjust size as needed */
+            height: 1.1em;
+            display: inline-block;
+            vertical-align: -0.15em; /* Fine-tune vertical alignment */
+            margin-right: 0.35rem;
+            flex-shrink: 0;
+        }
+         /* Specific icon adjustments if needed */
+        .facility-icon {
+            width: 1.25rem; /* 20px */
+            height: 1.25rem;
+            margin-top: 0.125rem; /* Adjust top margin slightly */
+        }
+         .coach-icon {
+             width: 1rem; /* 16px */
+             height: 1rem;
+         }
+         .cta-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            vertical-align: -0.25em;
+         }
+         /* Tailwind CSS Aspect Ratio Plugin classes (if not using native aspect-ratio) */
+         /* @import url('https://unpkg.com/@tailwindcss/aspect-ratio/dist/aspect-ratio.min.css'); */
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased">
+<body class="bg-gray-50 text-gray-800">
 
-    <!-- Chèn nội dung của header.html -->
-    <include src="header.html"></include>
-    
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2 no-underline">
-                <img src="images/logo.png" alt="Logo CLB Nhơn Phú" class="h-10">
-                <span class="text-xl font-bold text-dark hidden md:inline">CLB Cầu Lông Nhơn Phú</span>
-            </a>
-            <ul class="hidden md:flex space-x-6 items-center">
-                <li><a href="index.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Trang chủ</a></li>
-                <li><a href="gioi-thieu.html" class="text-blue-600 font-semibold border-b-2 border-blue-600 pb-1">Giới thiệu</a></li>
-                <li><a href="lop-hoc.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Lớp học</a></li>
-                <li><a href="dat-san.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Đặt sân</a></li>
-                <li><a href="thu-vien.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Thư viện</a></li>
-                <li><a href="tin-tuc.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Tin tức</a></li>
-                <li><a href="lien-he.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Liên hệ</a></li>
-            </ul>
-            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
-                <span class="lucide text-2xl">&#xe9ac;</span> </button>
-        </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-white absolute top-full left-0 w-full shadow-lg">
-            <ul class="flex flex-col items-center py-4 space-y-2">
-                <li><a href="index.html" class="block px-4 py-2 text-gray-600 hover:bg-blue-50 w-full text-center">Trang chủ</a></li>
-                <li><a href="gioi-thieu.html" class="block px-4 py-2 text-blue-600 bg-blue-100 font-semibold w-full text-center">Giới thiệu</a></li>
-                <li><a href="lop-hoc.html" class="block px-4 py-2 text-gray-600 hover:bg-blue-50 w-full text-center">Lớp học</a></li>
-                <li><a href="dat-san.html" class="block px-4 py-2 text-gray-600 hover:bg-blue-50 w-full text-center">Đặt sân</a></li>
-                <li><a href="thu-vien.html" class="block px-4 py-2 text-gray-600 hover:bg-blue-50 w-full text-center">Thư viện</a></li>
-                <li><a href="tin-tuc.html" class="block px-4 py-2 text-gray-600 hover:bg-blue-50 w-full text-center">Tin tức</a></li>
-                <li><a href="lien-he.html" class="block px-4 py-2 text-gray-600 hover:bg-blue-50 w-full text-center">Liên hệ</a></li>
-            </ul>
+    <div id="header-placeholder"></div>
+
+    <section class="page-header bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white py-16 md:py-24 text-center shadow-md">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">Chào Mừng Đến Với CLB Cầu Lông Nhơn Phú</h1>
+            <p class="text-lg md:text-xl font-light max-w-3xl mx-auto leading-relaxed">
+                Tự hào là điểm đến quen thuộc và uy tín của cộng đồng yêu cầu lông tại Quy Nhơn. Tọa lạc tại khuôn viên Viện Sốt Rét, CLB mang đến không gian tập luyện, thi đấu lý tưởng và môi trường giao lưu thân thiện.
+            </p>
+             <p class="mt-4 text-base md:text-lg font-light max-w-3xl mx-auto italic">
+                Với phương châm <strong class="font-semibold">"Sân chơi đẳng cấp - Đam mê kết nối"</strong>, chúng tôi không ngừng nỗ lực nâng cao chất lượng dịch vụ và cơ sở vật chất.
+            </p>
         </div>
-    </header>
+    </section>
 
-    <main class="container mx-auto px-6 py-12">
+    <main class="container mx-auto px-4 md:px-6 py-12 md:py-16 space-y-12 md:space-y-16">
 
-        <section class="mb-16 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold text-blue-700 mb-4">Chào Mừng Đến Với Câu Lạc Bộ Cầu Lông Nhơn Phú</h1>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                CLB Cầu Lông Nhơn Phú tự hào là điểm đến quen thuộc và uy tín của cộng đồng yêu cầu lông tại thành phố Quy Nhơn, tỉnh Bình Định. Tọa lạc tại khuôn viên Viện Sốt Rét (Khu vực 8, Phường Nhơn Phú), CLB mang đến không gian tập luyện, thi đấu lý tưởng và môi trường giao lưu thân thiện.
-            </p>
-            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Với phương châm <strong class="text-blue-600">"Sân chơi đẳng cấp - Đam mê kết nối"</strong>, chúng tôi không ngừng nỗ lực nâng cao chất lượng dịch vụ, cơ sở vật chất và chương trình đào tạo, nhằm đáp ứng nhu cầu đa dạng của mọi người chơi, từ người mới bắt đầu đến vận động viên phong trào và chuyên nghiệp.
-            </p>
-        </section>
-
-        <section class="mb-16 bg-white p-8 rounded-lg shadow-lg">
+        <section class="bg-white p-6 md:p-8 rounded-lg shadow-lg border border-gray-100">
             <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">Thông Tin Chi Tiết Về Sân Bãi</h2>
 
-            <div class="mb-8 text-center">
-                <p class="text-lg font-medium mb-2">
-                    <span class="lucide text-blue-500 align-middle mr-2">&#xe998;</span> Địa chỉ: Sân Cầu lông Viện Sốt rét, Khu vực 8, Phường Nhơn Phú, TP. Quy Nhơn, Bình Định.
+            <div class="mb-8 text-center border-b pb-6 border-gray-100">
+                <p class="text-base md:text-lg font-medium mb-3 inline-flex items-center text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-map-pin text-blue-500 mr-2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Địa chỉ: Sân Cầu lông Viện Sốt rét, KV8, P. Nhơn Phú, TP. Quy Nhơn, Bình Định.
                 </p>
-                <a href="https://maps.app.goo.gl/yWrsuk8GkssQQz9q6" target="_blank" rel="noopener noreferrer" class="inline-block px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 text-sm">
-                    <span class="lucide align-middle mr-1">&#xe99a;</span> Xem bản đồ Google Maps
-                </a>
-            </div>
-
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold text-gray-700 mb-4">Cơ sở vật chất hiện đại:</h3>
-                <ul class="space-y-3 text-gray-600 list-none pl-0">
-                    <li class="flex items-start">
-                        <span class="lucide text-green-500 mr-3 mt-1 flex-shrink-0">&#xea31;</span> <div>
-                            <strong class="font-medium text-gray-700">Số lượng sân:</strong> 3 sân cầu lông đạt tiêu chuẩn thi đấu.
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="lucide text-green-500 mr-3 mt-1 flex-shrink-0">&#xea2b;</span> <div>
-                            <strong class="font-medium text-gray-700">Thảm sân:</strong> Sử dụng thảm nhựa PVC Ecostar S7000 chất lượng cao, độ dày 4,5 mm, đảm bảo độ bám, êm ái và giảm chấn thương.
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="lucide text-green-500 mr-3 mt-1 flex-shrink-0">&#xeb3c;</span> <div>
-                            <strong class="font-medium text-gray-700">Ánh sáng:</strong> Hệ thống đèn LED chuyên dụng cho sân thể thao, chống chói được bố trí khoa học, cung cấp ánh sáng đồng đều, rõ nét trên toàn bộ mặt sân, phục vụ tốt cả ban ngày lẫn ban đêm.
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="lucide text-green-500 mr-3 mt-1 flex-shrink-0">&#xe9d0;</span> <div>
-                            <strong class="font-medium text-gray-700">Không gian:</strong> Trần cao thoáng đãng, có hệ thống thông gió tự nhiên, đảm bảo không khí lưu thông tốt.
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="lucide text-green-500 mr-3 mt-1 flex-shrink-0">&#xea36;</span> <div>
-                            <strong class="font-medium text-gray-700">Tiện ích đi kèm:</strong> Khu vực ghế ngồi nghỉ ngơi; Chỗ để xe rộng rãi, an toàn; Nhà vệ sinh sạch sẽ; Phục vụ nước uống giải khát.
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div>
-                <h3 class="text-xl font-semibold text-gray-700 mb-4 text-center">Hình ảnh thực tế:</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Ảnh+Sân+1" alt="Hình ảnh sân cầu lông 1" class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                    <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Ảnh+Sân+2" alt="Hình ảnh sân cầu lông 2" class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                    <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Ảnh+Sân+3" alt="Hình ảnh sân cầu lông 3" class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                    <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Khu+Vực+Nghỉ" alt="Khu vực nghỉ ngơi" class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                    <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Hệ+Thống+Đèn" alt="Hệ thống ánh sáng" class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                    <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Thảm+Sân" alt="Thảm sân cầu lông" class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                <div class="mt-2">
+                    <a href="https://maps.app.goo.gl/yWrsuk8GkssQQz9q6" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 text-sm shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-external-link mr-1.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                        Xem bản đồ Google Maps
+                    </a>
                 </div>
-                 <div class="text-center mt-6">
-                     <a href="thu-vien.html" class="inline-block px-6 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300">
-                        Xem thêm ảnh trong thư viện
-                        <span class="lucide align-middle ml-1">&#xe90c;</span> </a>
-                 </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Cơ sở vật chất hiện đại:</h3>
+                    <ul class="space-y-4 text-gray-600 list-none pl-0 text-sm md:text-base">
+                        <li class="flex items-start gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="facility-icon icon lucide lucide-check-circle-2 text-green-500 flex-shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <div><strong class="font-medium text-gray-700">Số lượng sân:</strong> 3 sân cầu lông đạt tiêu chuẩn thi đấu.</div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="facility-icon icon lucide lucide-check-circle-2 text-green-500 flex-shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <div><strong class="font-medium text-gray-700">Thảm sân:</strong> Thảm PVC Ecostar S7000 (4,5mm), độ bám tốt, êm ái, giảm chấn thương.</div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="facility-icon icon lucide lucide-check-circle-2 text-green-500 flex-shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <div><strong class="font-medium text-gray-700">Ánh sáng:</strong> Hệ thống đèn LED chuyên dụng, chống chói, ánh sáng đồng đều.</div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="facility-icon icon lucide lucide-check-circle-2 text-green-500 flex-shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <div><strong class="font-medium text-gray-700">Không gian:</strong> Trần cao thoáng đãng, hệ thống thông gió tự nhiên tốt.</div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="facility-icon icon lucide lucide-check-circle-2 text-green-500 flex-shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <div><strong class="font-medium text-gray-700">Tiện ích:</strong> Ghế ngồi nghỉ, chỗ để xe rộng rãi, nhà vệ sinh sạch sẽ, nước uống.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4 lg:text-right">Hình ảnh thực tế:</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Ảnh+Sân+1" alt="Hình ảnh sân cầu lông 1" class="w-full h-32 md:h-40 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300 cursor-pointer" onclick="openImageModal(this.src)">
+                        <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Ảnh+Sân+2" alt="Hình ảnh sân cầu lông 2" class="w-full h-32 md:h-40 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300 cursor-pointer" onclick="openImageModal(this.src)">
+                        <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Ảnh+Sân+3" alt="Hình ảnh sân cầu lông 3" class="w-full h-32 md:h-40 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300 cursor-pointer" onclick="openImageModal(this.src)">
+                        <img src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Khu+Vực+Nghỉ" alt="Khu vực nghỉ ngơi" class="w-full h-32 md:h-40 object-cover rounded-lg shadow-md hover:shadow-xl transition duration-300 cursor-pointer" onclick="openImageModal(this.src)">
+                        </div>
+                    <div class="text-center lg:text-right mt-4">
+                        <a href="thu-vien.html" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-300 text-sm">
+                            Xem thêm ảnh
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-arrow-right w-4 h-4 ml-1.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="mb-16">
+        <section>
             <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">Đội Ngũ Huấn Luyện Viên</h2>
-            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p class="text-center text-gray-600 mb-8 md:mb-10 max-w-2xl mx-auto">
                 CLB được dẫn dắt và cố vấn chuyên môn bởi đội ngũ Huấn luyện viên tâm huyết, giàu kinh nghiệm thực tế và giảng dạy.
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition duration-300">
-                    <img src="https://placehold.co/150x150/e0f2fe/0ea5e9?text=HLV+Biền" alt="HLV Biền" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-blue-200 object-cover">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">HLV Biền</h3>
-                    <p class="text-gray-600 mb-3">
-                        Huấn luyện viên với hơn 15 năm kinh nghiệm trong lĩnh vực đào tạo cầu lông. Chuyên sâu về kỹ thuật cơ bản và nâng cao cho mọi lứa tuổi.
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition duration-300 flex flex-col items-center border border-gray-100">
+                    <img src="https://placehold.co/150x150/e0f2fe/0ea5e9?text=HLV+Biền" alt="HLV Biền" class="w-28 h-28 rounded-full mb-4 border-4 border-blue-200 object-cover shadow-sm">
+                    <h3 class="text-xl font-semibold text-blue-700 mb-1">HLV Biền</h3>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">
+                        Hơn 15 năm kinh nghiệm đào tạo cầu lông. Chuyên sâu kỹ thuật cơ bản & nâng cao cho mọi lứa tuổi.
                     </p>
-                    <a href="tel:0988809890" class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-md text-sm font-medium hover:bg-blue-200 transition duration-300">
-                        <span class="lucide mr-2 text-base">&#xe9d5;</span> Liên hệ: 0988.809.890
+                    <a href="tel:0988809890" class="inline-flex items-center px-3 py-1.5 bg-blue-50 text-blue-700 rounded-md text-xs font-medium hover:bg-blue-100 transition duration-300 mt-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="coach-icon icon lucide lucide-phone mr-1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Liên hệ: 0988.809.890
                     </a>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition duration-300">
-                    <img src="https://placehold.co/150x150/fef3c7/f59e0b?text=HLV+Hoàng" alt="HLV Hoàng" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-amber-200 object-cover">
-                    <h3 class="text-xl font-semibold text-amber-700 mb-2">HLV Hoàng</h3>
-                    <p class="text-gray-600 mb-3">
-                        Huấn luyện viên trẻ, năng động với phương pháp giảng dạy hiện đại. Chuyên về đào tạo đội tuyển trẻ và phát triển chiến thuật thi đấu.
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition duration-300 flex flex-col items-center border border-gray-100">
+                    <img src="https://placehold.co/150x150/fef3c7/f59e0b?text=HLV+Hoàng" alt="HLV Hoàng" class="w-28 h-28 rounded-full mb-4 border-4 border-amber-200 object-cover shadow-sm">
+                    <h3 class="text-xl font-semibold text-amber-700 mb-1">HLV Hoàng</h3>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">
+                        Năng động, phương pháp hiện đại. Chuyên đào tạo đội tuyển trẻ và phát triển chiến thuật thi đấu.
                     </p>
-                     <a href="tel:0935185558" class="inline-flex items-center px-4 py-2 bg-amber-100 text-amber-700 rounded-md text-sm font-medium hover:bg-amber-200 transition duration-300">
-                        <span class="lucide mr-2 text-base">&#xe9d5;</span> Liên hệ: 0935.185.558
+                     <a href="tel:0935185558" class="inline-flex items-center px-3 py-1.5 bg-amber-50 text-amber-700 rounded-md text-xs font-medium hover:bg-amber-100 transition duration-300 mt-auto">
+                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="coach-icon icon lucide lucide-phone mr-1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Liên hệ: 0935.185.558
                     </a>
                 </div>
             </div>
-            <p class="text-center text-gray-600 mt-8">
+             <p class="text-center text-gray-600 mt-8 text-sm md:text-base">
                 Đội ngũ HLV luôn sẵn sàng hướng dẫn kỹ thuật, chia sẻ kinh nghiệm và đồng hành cùng sự tiến bộ của bạn.
             </p>
-            <div class="text-center mt-4">
-                <a href="lop-hoc.html" class="inline-block px-6 py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition duration-300 shadow-md">
+            <div class="text-center mt-6">
+                <a href="lop-hoc.html" class="inline-block px-6 py-2.5 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition duration-300 shadow hover:shadow-md text-sm md:text-base">
                     Tìm hiểu thêm về lớp học
                 </a>
             </div>
         </section>
 
-        <section class="mb-16 bg-gradient-to-r from-cyan-50 to-blue-100 p-8 rounded-lg shadow-md">
-            <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">
-                <span class="lucide text-cyan-600 align-middle mr-2">&#xe92e;</span> Giờ Hoạt Động
+        <section class="bg-gradient-to-r from-cyan-50 to-blue-100 p-6 md:p-8 rounded-lg shadow-md border border-cyan-100">
+            <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-clock text-cyan-600 mr-2 w-7 h-7"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Giờ Hoạt Động
             </h2>
-            <p class="text-center text-gray-700 font-medium text-lg mb-4">Tất cả các ngày trong tuần:</p>
-            <div class="flex flex-col md:flex-row justify-center items-center gap-6 text-center">
-                <div class="bg-white p-4 rounded-md shadow w-full md:w-auto">
-                    <p class="font-semibold text-blue-600">Buổi Sáng</p>
+            <p class="text-center text-gray-700 font-medium text-base md:text-lg mb-5">Tất cả các ngày trong tuần:</p>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6 text-center">
+                <div class="bg-white p-4 rounded-lg shadow-sm w-full md:w-48 border border-gray-100">
+                    <p class="font-semibold text-blue-600 text-sm">Buổi Sáng</p>
                     <p class="text-xl font-bold text-gray-800">5h00 – 7h00</p>
                 </div>
-                <div class="bg-white p-4 rounded-md shadow w-full md:w-auto">
-                    <p class="font-semibold text-orange-600">Buổi Chiều</p>
+                <div class="bg-white p-4 rounded-lg shadow-sm w-full md:w-48 border border-gray-100">
+                    <p class="font-semibold text-orange-600 text-sm">Buổi Chiều</p>
                     <p class="text-xl font-bold text-gray-800">17h00 – 21h00</p>
                 </div>
             </div>
         </section>
 
-        <section class="mb-16">
-             <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">Vị Trí Của Chúng Tôi</h2>
-             <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg">
+        <section>
+             <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">Vị Trí Của Chúng Tôi Trên Bản Đồ</h2>
+             <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg border border-gray-200">
                  <iframe
                      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1202.0870575281947!2d109.1803057!3d13.782894!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316f1300733e69f9%3A0x92543a16cc942d7f!2zU8OibiBD4bqndSBsw7RuZyBWaeG7h24gU-G7kXQgcsOpdC1LU1QtQ1QgUXV5IE5oxqFu!5e1!3m2!1sen!2s!4v1743653457972!5m2!1sen!2s"
-                     width="600"
-                     height="450"
+                     class="w-full h-full"
                      style="border:0;"
                      allowfullscreen=""
                      loading="lazy"
@@ -216,16 +196,18 @@
              </div>
         </section>
 
-        <section class="text-center bg-white p-10 rounded-lg shadow-xl border border-blue-100">
+        <section class="text-center bg-white p-8 md:p-10 rounded-lg shadow-xl border border-blue-100">
             <h2 class="text-2xl md:text-3xl font-bold text-blue-700 mb-3">Sẵn Sàng Tham Gia Cùng Chúng Tôi?</h2>
-            <p class="text-lg text-gray-600 mb-6">
+            <p class="text-base md:text-lg text-gray-600 mb-6">
                 Hãy đến và trải nghiệm không gian chơi cầu lông chuyên nghiệp tại CLB Nhơn Phú!
             </p>
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a href="dat-san.html" class="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-300 shadow-md w-full sm:w-auto">
+                <a href="dat-san.html" class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-300 shadow-md hover:shadow-lg w-full sm:w-auto text-sm md:text-base">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cta-icon icon lucide lucide-calendar-check mr-2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
                     Đặt Sân Ngay
                 </a>
-                <a href="lop-hoc.html" class="inline-block px-8 py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition duration-300 shadow-md w-full sm:w-auto">
+                <a href="lop-hoc.html" class="inline-flex items-center justify-center px-6 py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition duration-300 shadow-md hover:shadow-lg w-full sm:w-auto text-sm md:text-base">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cta-icon icon lucide lucide-graduation-cap mr-2"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12v5a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-5"/></svg>
                     Tìm Hiểu Lớp Học
                 </a>
             </div>
@@ -233,29 +215,110 @@
 
     </main>
 
-    <footer class="bg-gray-800 text-gray-300 pt-12 pb-8 mt-16" id="footer-container">
-        <!-- Nội dung footer sẽ được tải động -->
-    </footer>
+    <div id="footer-placeholder"></div>
+
+     <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden" onclick="closeImageModal()">
+        <div class="relative max-w-3xl max-h-full" onclick="event.stopPropagation()"> <button onclick="closeImageModal()" class="absolute -top-4 -right-4 text-white bg-red-500 rounded-full w-8 h-8 flex items-center justify-center text-2xl font-bold leading-none hover:bg-red-600">&times;</button>
+            <img id="modalImage" src="" alt="Hình ảnh phóng to" class="max-w-full max-h-[80vh] rounded-lg shadow-lg">
+        </div>
+    </div>
+
 
     <script>
-        // Mobile Menu Toggle
-        const menuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+        // Function to load HTML content from a file into an element (Robust version)
+        async function loadHTML(elementId, filePath) {
+            const element = document.getElementById(elementId);
+            if (!element) {
+                console.error(`Element with ID "${elementId}" not found.`);
+                return;
+            }
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    if (response.status === 404) {
+                         console.warn(`File not found: ${filePath}. Cannot load content into #${elementId}.`);
+                         element.innerHTML = '';
+                         return;
+                    }
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const html = await response.text();
+                element.innerHTML = html;
+                console.log(`Successfully loaded ${filePath} into #${elementId}`);
+                // Execute scripts loaded within header/footer if necessary
+                // Example: Re-run mobile menu script if it's in header.html
+                if (elementId === 'header-placeholder') {
+                    const menuButton = document.getElementById('mobile-menu-button');
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (menuButton && mobileMenu) {
+                         menuButton.addEventListener('click', () => {
+                            mobileMenu.classList.toggle('hidden');
+                         });
+                    }
+                }
+                 // Example: Re-run back-to-top script if it's in footer.html
+                 if (elementId === 'footer-placeholder') {
+                    const backToTopButton = document.getElementById('backToTop');
+                    if (backToTopButton) {
+                         window.addEventListener('scroll', function() {
+                             if (window.pageYOffset > 300) {
+                                backToTopButton.classList.remove('opacity-0', 'invisible');
+                                backToTopButton.classList.add('opacity-100', 'visible');
+                             } else {
+                                 backToTopButton.classList.remove('opacity-100', 'visible');
+                                 backToTopButton.classList.add('opacity-0', 'invisible');
+                             }
+                         });
+                         backToTopButton.addEventListener('click', function(e) {
+                             e.preventDefault();
+                             window.scrollTo({ top: 0, behavior: 'smooth' });
+                         });
+                    }
+                    // Update year if needed
+                    const yearSpan = document.getElementById('current-year');
+                    if(yearSpan) yearSpan.textContent = new Date().getFullYear();
+                 }
 
-        menuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+            } catch (error) {
+                console.error(`Could not load HTML from ${filePath}:`, error);
+                 if (element) {
+                    element.innerHTML = `<p class="text-red-500 text-center p-4">Lỗi khi tải ${elementId}.</p>`;
+                 }
+            }
+        }
+
+         // Image Modal Functions
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+
+        function openImageModal(src) {
+            if (modal && modalImage) {
+                modalImage.src = src;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+        }
+
+        function closeImageModal() {
+             if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore background scrolling
+             }
+        }
+
+        // Close modal on Escape key press
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeImageModal();
+            }
         });
 
-        // Tải nội dung của footer.html
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading footer:', error));
 
-        // Cập nhật năm hiện tại trong Footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        // Load header and footer when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHTML('header-placeholder', 'header.html');
+            loadHTML('footer-placeholder', 'footer.html');
+        });
     </script>
 
 </body>
