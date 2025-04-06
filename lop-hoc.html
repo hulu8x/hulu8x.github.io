@@ -1,136 +1,380 @@
-<section class="page-header">
-    <div class="container">
-        <h1>Phát Triển Kỹ Năng Cầu Lông Cùng CLB Nhơn Phú</h1>
-    </div>
-</section>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lớp Học Cầu Lông - CLB Cầu Lông Nhơn Phú</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Consistent section title styling */
+        .section-title {
+            @apply text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8 md:mb-12;
+        }
+        /* Style for form elements for better consistency */
+        .form-group label:not([type="radio"]) {
+            @apply block text-sm font-medium text-gray-700 mb-1;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="tel"],
+        .form-group input[type="email"],
+        .form-group select,
+        .form-group textarea {
+            @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-150 ease-in-out;
+        }
+        .form-group input[type="radio"] {
+            @apply focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 mr-1;
+        }
+        .form-group label[type="radio"] {
+             @apply inline-flex items-center mr-4 text-sm text-gray-700;
+        }
+        /* Ensure icons are sized correctly */
+        .icon {
+            width: 1.25em; /* Slightly larger for visual impact */
+            height: 1.25em;
+            display: inline-block;
+            vertical-align: -0.25em; /* Adjust alignment */
+            margin-right: 0.5rem; /* Add space after icon */
+            flex-shrink: 0; /* Prevent icon shrinking */
+        }
+        .benefit-item .icon {
+             width: 1.5em;
+             height: 1.5em;
+             margin-bottom: 0.5rem; /* Space below icon in benefit list */
+        }
+        .program-item h3 .icon {
+             margin-right: 0.75rem;
+        }
+        /* Style for coach photos */
+        .coach-photo {
+            @apply w-full md:w-48 h-48 object-cover rounded-lg shadow-md flex-shrink-0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
 
-<section class="class-intro section-padding">
-    <div class="container">
-        <p>Bạn đam mê cầu lông và muốn bắt đầu hành trình chinh phục môn thể thao này tại Quy Nhơn? Hay bạn đã có nền tảng và mong muốn nâng cao kỹ thuật, chiến thuật thi đấu cầu lông? Các lớp học cầu lông tại CLB Nhơn Phú (Sân Viện Sốt Rét) được thiết kế khoa học, phù hợp với mọi lứa tuổi và trình độ.</p>
-        <p>Tham gia cùng chúng tôi để rèn luyện sức khỏe, cải thiện kỹ năng chơi cầu lông và hòa mình vào cộng đồng cầu lông sôi động tại Nhơn Phú, Bình Định!</p>
-    </div>
-</section>
+    <div id="header-placeholder"></div>
 
-<section class="why-choose-us section-padding bg-light">
-    <div class="container">
-        <h2 class="section-title">Tại Sao Chọn Lớp Học Cầu Lông Của Chúng Tôi?</h2>
-        <ul class="benefits-list">
-            <li><i class="fas fa-chalkboard-teacher"></i> <strong>Huấn Luyện Viên Kinh Nghiệm:</strong> Được hướng dẫn trực tiếp bởi HLV Biền, HLV Hoàng và các trợ giảng tận tâm, có chuyên môn cao về đào tạo cầu lông.</li>
-            <li><i class="fas fa-book-open"></i> <strong>Giáo Trình Bài Bản:</strong> Chương trình học cầu lông được xây dựng logic, từ cơ bản đến nâng cao, dễ tiếp thu.</li>
-            <li><i class="fas fa-running"></i> <strong>Thực Hành Tối Đa:</strong> Chú trọng thời gian thực hành trên sân cầu lông, sửa lỗi kỹ thuật chi tiết.</li>
-            <li><i class="fas fa-users"></i> <strong>Môi Trường Thân Thiện:</strong> Không khí lớp học vui vẻ, tạo động lực học tập và giao lưu tại CLB Nhơn Phú.</li>
-            <li><i class="fas fa-medal"></i> <strong>Cơ Sở Vật Chất Tốt:</strong> Tập luyện trên sân cầu lông Viện Sốt Rét đạt chuẩn, ánh sáng đầy đủ.</li>
-            <li><i class="far fa-calendar-alt"></i> <strong>Lịch Học Linh Hoạt:</strong> Có nhiều khung giờ để lựa chọn (vui lòng liên hệ để biết chi tiết).</li>
-        </ul>
-    </div>
-</section>
-
-<section class="training-programs section-padding">
-    <div class="container">
-        <h2 class="section-title">Các Chương Trình Đào Tạo Cầu Lông</h2>
-        <div class="program-grid">
-            <div class="program-item">
-                <h3><i class="fas fa-star"></i> Lớp Cầu Lông Cơ Bản</h3>
-                <p><strong>Đối tượng:</strong> Người mới bắt đầu làm quen với cầu lông, chưa có kiến thức nền tảng. Phù hợp cho cả người lớn và trẻ em (từ 7 tuổi).</p>
-                <p><strong>Mục tiêu:</strong> Nắm vững các kỹ thuật cầu lông cơ bản (cầm vợt, di chuyển, giao cầu, đánh cầu cao sâu, phông cầu, bỏ nhỏ...), luật chơi cơ bản.</p>
-                <p><strong>Lịch học & Học phí:</strong> <a href="tel:0988809890">Liên hệ HLV Biền: 0988.809.890</a> để biết chi tiết lịch khai giảng và học phí lớp học cầu lông tại Quy Nhơn.</p>
-            </div>
-            <div class="program-item">
-                <h3><i class="fas fa-level-up-alt"></i> Lớp Cầu Lông Nâng Cao</h3>
-                 <p><strong>Đối tượng:</strong> Người đã chơi cầu lông, nắm vững kỹ thuật cơ bản, muốn cải thiện kỹ năng và chiến thuật thi đấu cầu lông.</p>
-                 <p><strong>Mục tiêu:</strong> Hoàn thiện các kỹ thuật nâng cao (đập cầu, cắt cầu, ve cầu, phòng thủ...), rèn luyện chiến thuật đánh đơn/đôi, nâng cao thể lực và phản xạ.</p>
-                 <p><strong>Lịch học & Học phí:</strong> <a href="tel:0988809890">Liên hệ HLV Biền: 0988.809.890</a> để biết chi tiết lịch học và chi phí.</p>
-            </div>
-            <div class="program-item">
-                 <h3><i class="fas fa-child"></i> Lớp Cầu Lông Trẻ Em</h3>
-                 <p><strong>Đối tượng:</strong> Các bé từ 7 đến 15 tuổi tại Quy Nhơn.</p>
-                 <p><strong>Mục tiêu:</strong> Tạo niềm yêu thích với cầu lông, rèn luyện sức khỏe, sự nhanh nhẹn, khéo léo, tính kỷ luật và tinh thần đồng đội thông qua các bài tập vui nhộn, phù hợp lứa tuổi.</p>
-                 <p><strong>Lịch học & Học phí:</strong> <a href="tel:0988809890">Liên hệ HLV Biền: 0988.809.890</a> để tư vấn lớp học cầu lông phù hợp cho bé.</p>
-            </div>
+    <section class="page-header bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-16 md:py-24 text-center shadow-md">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl md:text-5xl font-bold mb-2">Phát Triển Kỹ Năng Cầu Lông</h1>
+            <p class="text-lg md:text-xl font-light">Cùng CLB Nhơn Phú</p>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="meet-coaches section-padding bg-light">
-    <div class="container">
-        <h2 class="section-title">Gặp Gỡ Huấn Luyện Viên Dạy Cầu Lông</h2>
-         <div class="coach-profiles">
-            <div class="coach-profile">
-                <img src="images/hlv-bien.jpg" alt="HLV Biền - Dạy cầu lông cơ bản, nâng cao" class="coach-photo">
-                <div class="coach-info">
-                    <h3>HLV Biền</h3>
-                    <p>HLV Biền có [Số năm] năm kinh nghiệm trực tiếp giảng dạy cầu lông tại Quy Nhơn, đã đào tạo nhiều học viên từ chưa biết gì đến chơi tốt. Phương pháp huấn luyện tập trung vào sửa lỗi sai, xây dựng kỹ thuật chuẩn và tạo cảm hứng cho người học.</p>
-                    <p><strong>SĐT Tư vấn Lớp học:</strong> <a href="tel:0988809890">0988.809.890</a></p>
+    <section class="class-intro py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl text-center space-y-4">
+            <p class="text-base md:text-lg leading-relaxed text-gray-700">
+                Bạn đam mê cầu lông và muốn bắt đầu hành trình chinh phục môn thể thao này tại Quy Nhơn? Hay bạn đã có nền tảng và mong muốn nâng cao kỹ thuật, chiến thuật thi đấu cầu lông? Các lớp học cầu lông tại CLB Nhơn Phú (Sân Viện Sốt Rét) được thiết kế khoa học, phù hợp với mọi lứa tuổi và trình độ.
+            </p>
+            <p class="text-base md:text-lg leading-relaxed text-gray-700">
+                Tham gia cùng chúng tôi để rèn luyện sức khỏe, cải thiện kỹ năng chơi cầu lông và hòa mình vào cộng đồng cầu lông sôi động tại Nhơn Phú, Bình Định!
+            </p>
+        </div>
+    </section>
+
+    <section class="why-choose-us py-12 md:py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Tại Sao Chọn Lớp Học Cầu Lông Của Chúng Tôi?</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <div class="benefit-item bg-white p-6 rounded-lg shadow-sm flex flex-col items-center text-center transition duration-300 hover:shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-presentation text-blue-500"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/></svg>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Huấn Luyện Viên Kinh Nghiệm</h3>
+                    <p class="text-sm text-gray-600">Hướng dẫn bởi HLV Biền, HLV Hoàng và trợ giảng tận tâm, chuyên môn cao.</p>
+                </div>
+                <div class="benefit-item bg-white p-6 rounded-lg shadow-sm flex flex-col items-center text-center transition duration-300 hover:shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-book-open text-green-500"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Giáo Trình Bài Bản</h3>
+                    <p class="text-sm text-gray-600">Chương trình học logic, từ cơ bản đến nâng cao, dễ tiếp thu.</p>
+                </div>
+                <div class="benefit-item bg-white p-6 rounded-lg shadow-sm flex flex-col items-center text-center transition duration-300 hover:shadow-md">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-activity text-red-500"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Thực Hành Tối Đa</h3>
+                    <p class="text-sm text-gray-600">Chú trọng thực hành trên sân, sửa lỗi kỹ thuật chi tiết.</p>
+                </div>
+                <div class="benefit-item bg-white p-6 rounded-lg shadow-sm flex flex-col items-center text-center transition duration-300 hover:shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-users text-yellow-500"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Môi Trường Thân Thiện</h3>
+                    <p class="text-sm text-gray-600">Không khí lớp học vui vẻ, tạo động lực và giao lưu.</p>
+                </div>
+                <div class="benefit-item bg-white p-6 rounded-lg shadow-sm flex flex-col items-center text-center transition duration-300 hover:shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-medal text-purple-500"><path d="M7 4V2"/><path d="M17 4V2"/><path d="M12 11.8 7 15l5 3 5-3-5-3.2Z"/><path d="m17 10-1.4-1.4"/><path d="m7 10 1.4-1.4"/><path d="M12 6 7 4 2.5 9.5 7 15Z"/><path d="m12 6 5-2 4.5 5.5L17 15Z"/></svg>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Cơ Sở Vật Chất Tốt</h3>
+                    <p class="text-sm text-gray-600">Tập luyện trên sân Viện Sốt Rét đạt chuẩn, ánh sáng tốt.</p>
+                </div>
+                 <div class="benefit-item bg-white p-6 rounded-lg shadow-sm flex flex-col items-center text-center transition duration-300 hover:shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-calendar-days text-teal-500"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Lịch Học Linh Hoạt</h3>
+                    <p class="text-sm text-gray-600">Nhiều khung giờ lựa chọn (vui lòng liên hệ để biết chi tiết).</p>
                 </div>
             </div>
-            <div class="coach-profile">
-                 <img src="images/hlv-hoang.jpg" alt="HLV Hoàng - Hỗ trợ đào tạo cầu lông" class="coach-photo">
-                 <div class="coach-info">
-                     <h3>HLV Hoàng</h3>
-                     <p>HLV Hoàng tham gia trợ giảng, đặc biệt chú trọng vào các bài tập thể lực bổ trợ và rèn luyện kỹ năng thực chiến qua các buổi đấu tập. Luôn nhiệt tình và tạo không khí vui vẻ trong các buổi học tại CLB Nhơn Phú.</p>
-                     <p><strong>SĐT Tư vấn Chung:</strong> <a href="tel:0935185558">0935.185.558</a></p>
-                 </div>
-            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="registration-form section-padding">
-    <div class="container">
-        <h2 class="section-title">Đăng Ký Tư Vấn & Nhận Lịch Học</h2>
-        <p>Vui lòng điền thông tin dưới đây, chúng tôi sẽ liên hệ lại để tư vấn chi tiết về lớp học cầu lông phù hợp và lịch khai giảng gần nhất tại CLB Nhơn Phú (Sân Viện Sốt Rét).</p>
-        <form id="class-inquiry-form" action="/api/class-inquiry" method="POST"> <div class="form-group">
-                <label for="fullName">Họ và Tên:*</label>
-                <input type="text" id="fullName" name="fullName" required>
+    <section class="training-programs py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Các Chương Trình Đào Tạo Cầu Lông</h2>
+            <div class="program-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <div class="program-item border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition duration-300 flex flex-col">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-star text-yellow-500 fill-yellow-400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        Lớp Cầu Lông Cơ Bản
+                    </h3>
+                    <div class="text-sm text-gray-600 space-y-3 flex-grow">
+                        <p><strong>Đối tượng:</strong> Người mới bắt đầu, chưa có nền tảng. Phù hợp cho cả người lớn và trẻ em (từ 7 tuổi).</p>
+                        <p><strong>Mục tiêu:</strong> Nắm vững kỹ thuật cơ bản (cầm vợt, di chuyển, giao cầu, phông cầu, bỏ nhỏ...), luật chơi cơ bản.</p>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-4 pt-4 border-t border-gray-100">
+                        <strong>Lịch học & Học phí:</strong> <a href="tel:0988809890" class="text-blue-600 hover:text-blue-800 font-medium hover:underline">Liên hệ HLV Biền: 0988.809.890</a>
+                    </p>
+                </div>
+                <div class="program-item border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition duration-300 flex flex-col">
+                     <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-trending-up text-green-500"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                        Lớp Cầu Lông Nâng Cao
+                    </h3>
+                    <div class="text-sm text-gray-600 space-y-3 flex-grow">
+                        <p><strong>Đối tượng:</strong> Người đã chơi, nắm vững cơ bản, muốn cải thiện kỹ năng và chiến thuật.</p>
+                        <p><strong>Mục tiêu:</strong> Hoàn thiện kỹ thuật nâng cao (đập, cắt, ve, phòng thủ...), chiến thuật đơn/đôi, thể lực, phản xạ.</p>
+                    </div>
+                     <p class="text-sm text-gray-600 mt-4 pt-4 border-t border-gray-100">
+                        <strong>Lịch học & Học phí:</strong> <a href="tel:0988809890" class="text-blue-600 hover:text-blue-800 font-medium hover:underline">Liên hệ HLV Biền: 0988.809.890</a>
+                    </p>
+                </div>
+                <div class="program-item border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition duration-300 flex flex-col">
+                     <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-smile text-pink-500"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+                        Lớp Cầu Lông Trẻ Em
+                    </h3>
+                    <div class="text-sm text-gray-600 space-y-3 flex-grow">
+                        <p><strong>Đối tượng:</strong> Các bé từ 7 đến 15 tuổi tại Quy Nhơn.</p>
+                        <p><strong>Mục tiêu:</strong> Tạo niềm yêu thích, rèn luyện sức khỏe, nhanh nhẹn, khéo léo, kỷ luật, đồng đội qua bài tập vui nhộn.</p>
+                    </div>
+                     <p class="text-sm text-gray-600 mt-4 pt-4 border-t border-gray-100">
+                        <strong>Lịch học & Học phí:</strong> <a href="tel:0988809890" class="text-blue-600 hover:text-blue-800 font-medium hover:underline">Liên hệ HLV Biền: 0988.809.890</a>
+                    </p>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="birthYear">Năm Sinh:*</label>
-                <input type="number" id="birthYear" name="birthYear" required min="1950" max="2020">
-            </div>
-             <div class="form-group">
-                 <label>Giới tính:</label>
-                 <label><input type="radio" name="gender" value="Nam"> Nam</label>
-                 <label><input type="radio" name="gender" value="Nữ"> Nữ</label>
-                 <label><input type="radio" name="gender" value="Khác"> Khác</label>
-             </div>
-            <div class="form-group">
-                <label for="phone">Số Điện Thoại:*</label>
-                <input type="tel" id="phone" name="phone" required pattern="[0-9]{10,11}" title="Số điện thoại gồm 10-11 chữ số">
-            </div>
-            <div class="form-group">
-                <label for="email">Email (Không bắt buộc):</label>
-                <input type="email" id="email" name="email">
-            </div>
-            <div class="form-group">
-                <label for="classInterest">Lớp học quan tâm:*</label>
-                <select id="classInterest" name="classInterest" required>
-                    <option value="">-- Chọn lớp học --</option>
-                    <option value="Cơ Bản">Lớp Cơ Bản</option>
-                    <option value="Nâng Cao">Lớp Nâng Cao</option>
-                    <option value="Trẻ Em">Lớp Trẻ Em</option>
-                    <option value="Tư vấn thêm">Cần tư vấn thêm</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="currentLevel">Trình độ hiện tại (ước lượng):</label>
-                 <select id="currentLevel" name="currentLevel">
-                    <option value="Chưa biết chơi">Chưa biết chơi</option>
-                    <option value="Biết chơi cơ bản">Biết chơi cơ bản</option>
-                    <option value="Chơi khá">Chơi khá</option>
-                    <option value="Chơi tốt">Chơi tốt</option>
-                </select>
-            </div>
-             <div class="form-group">
-                 <label for="notes">Nhu cầu/Ghi chú khác:</label>
-                 <textarea id="notes" name="notes" rows="4"></textarea>
-             </div>
-             <button type="submit" class="btn btn-primary">Gửi Yêu Cầu Tư Vấn</button>
-        </form>
-        <div id="form-success-message" style="display: none; margin-top: 15px; color: green;">
-            Yêu cầu của bạn đã được gửi! HLV của CLB Nhơn Phú sẽ liên hệ lại trong thời gian sớm nhất. Xin cảm ơn!
         </div>
-         <div id="form-error-message" style="display: none; margin-top: 15px; color: red;">
-            Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp qua Hotline.
+    </section>
+
+    <section class="meet-coaches py-12 md:py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Gặp Gỡ Huấn Luyện Viên Dạy Cầu Lông</h2>
+            <div class="coach-profiles space-y-8 md:space-y-10 max-w-4xl mx-auto">
+                <div class="coach-profile bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row items-center gap-6">
+                    <img src="images/hlv-bien.jpg" alt="HLV Biền - Dạy cầu lông cơ bản, nâng cao tại Quy Nhơn" class="coach-photo" onerror="this.onerror=null;this.src='https://placehold.co/200x200/e2e8f0/94a3b8?text=Ảnh+HLV';">
+                    <div class="coach-info text-center md:text-left">
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">HLV Biền</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-3">
+                            HLV Biền có nhiều năm kinh nghiệm giảng dạy cầu lông tại Quy Nhơn, đào tạo nhiều học viên từ chưa biết đến chơi tốt. Phương pháp tập trung sửa lỗi sai, xây dựng kỹ thuật chuẩn và tạo cảm hứng.
+                        </p>
+                        <p class="text-sm font-medium text-gray-700">
+                            <strong>SĐT Tư vấn Lớp học:</strong>
+                            <a href="tel:0988809890" class="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-phone w-3 h-3 mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                0988.809.890
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="coach-profile bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row items-center gap-6">
+                     <img src="images/hlv-hoang.jpg" alt="HLV Hoàng - Hỗ trợ đào tạo cầu lông CLB Nhơn Phú" class="coach-photo" onerror="this.onerror=null;this.src='https://placehold.co/200x200/e2e8f0/94a3b8?text=Ảnh+HLV';">
+                    <div class="coach-info text-center md:text-left">
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">HLV Hoàng</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-3">
+                            HLV Hoàng tham gia trợ giảng, chú trọng bài tập thể lực bổ trợ và rèn luyện kỹ năng thực chiến qua các buổi đấu tập. Luôn nhiệt tình và tạo không khí vui vẻ.
+                        </p>
+                         <p class="text-sm font-medium text-gray-700">
+                            <strong>SĐT Tư vấn Chung:</strong>
+                            <a href="tel:0935185558" class="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-phone w-3 h-3 mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                0935.185.558
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <section class="registration-form py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-2xl">
+            <h2 class="section-title">Đăng Ký Tư Vấn & Nhận Lịch Học</h2>
+            <p class="text-center text-gray-600 mb-8 text-sm md:text-base">
+                Vui lòng điền thông tin dưới đây, chúng tôi sẽ liên hệ lại để tư vấn chi tiết về lớp học cầu lông phù hợp và lịch khai giảng gần nhất tại CLB Nhơn Phú (Sân Viện Sốt Rét).
+            </p>
+            <form id="class-inquiry-form" class="space-y-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="form-group">
+                        <label for="fullName">Họ và Tên:*</label>
+                        <input type="text" id="fullName" name="fullName" required placeholder="Nguyễn Văn A">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthYear">Năm Sinh:*</label>
+                        <input type="number" id="birthYear" name="birthYear" required min="1950" max="2020" placeholder="1995">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Giới tính:</label>
+                    <div class="flex items-center space-x-4">
+                       <label type="radio"><input type="radio" name="gender" value="Nam" checked> Nam</label>
+                       <label type="radio"><input type="radio" name="gender" value="Nữ"> Nữ</label>
+                       <label type="radio"><input type="radio" name="gender" value="Khác"> Khác</label>
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="phone">Số Điện Thoại:*</label>
+                    <input type="tel" id="phone" name="phone" required pattern="[0-9]{10,11}" title="Số điện thoại gồm 10-11 chữ số" placeholder="09xxxxxxxx">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email (Không bắt buộc):</label>
+                    <input type="email" id="email" name="email" placeholder="email@example.com">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="form-group">
+                        <label for="classInterest">Lớp học quan tâm:*</label>
+                        <select id="classInterest" name="classInterest" required>
+                            <option value="">-- Chọn lớp học --</option>
+                            <option value="Cơ Bản">Lớp Cơ Bản</option>
+                            <option value="Nâng Cao">Lớp Nâng Cao</option>
+                            <option value="Trẻ Em">Lớp Trẻ Em</option>
+                            <option value="Tư vấn thêm">Cần tư vấn thêm</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="currentLevel">Trình độ hiện tại (ước lượng):</label>
+                        <select id="currentLevel" name="currentLevel">
+                            <option value="Chưa biết chơi">Chưa biết chơi</option>
+                            <option value="Biết chơi cơ bản">Biết chơi cơ bản</option>
+                            <option value="Chơi khá">Chơi khá</option>
+                            <option value="Chơi tốt">Chơi tốt</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Nhu cầu/Ghi chú khác:</label>
+                    <textarea id="notes" name="notes" rows="4" placeholder="Ví dụ: Mong muốn học vào cuối tuần, cần tư vấn thêm về dụng cụ..."></textarea>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                        Gửi Yêu Cầu Tư Vấn
+                    </button>
+                </div>
+            </form>
+
+            <div id="form-success-message" class="hidden mt-6 p-4 bg-green-100 border border-green-300 text-green-800 rounded-md text-center">
+                Yêu cầu của bạn đã được gửi! HLV của CLB Nhơn Phú sẽ liên hệ lại trong thời gian sớm nhất. Xin cảm ơn!
+            </div>
+            <div id="form-error-message" class="hidden mt-6 p-4 bg-red-100 border border-red-300 text-red-800 rounded-md text-center">
+                Đã có lỗi xảy ra khi gửi yêu cầu. Vui lòng thử lại hoặc liên hệ trực tiếp qua Hotline.
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Function to load HTML content from a file into an element
+        async function loadHTML(elementId, filePath) {
+            const element = document.getElementById(elementId);
+            if (!element) {
+                console.error(`Element with ID "${elementId}" not found.`);
+                return;
+            }
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const html = await response.text();
+                element.innerHTML = html;
+                console.log(`Successfully loaded ${filePath} into #${elementId}`);
+            } catch (error) {
+                console.error(`Could not load HTML from ${filePath}:`, error);
+                element.innerHTML = `<p class="text-red-500 text-center p-4">Lỗi khi tải ${elementId}. Vui lòng thử lại sau.</p>`;
+            }
+        }
+
+        // Handle Form Submission (Simulation)
+        const inquiryForm = document.getElementById('class-inquiry-form');
+        const successMessage = document.getElementById('form-success-message');
+        const errorMessage = document.getElementById('form-error-message');
+
+        if (inquiryForm) {
+            inquiryForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent actual form submission
+
+                // Basic validation check (example: check required fields)
+                let isValid = true;
+                inquiryForm.querySelectorAll('[required]').forEach(input => {
+                    if (!input.value) {
+                        isValid = false;
+                        // Optional: Add visual feedback for invalid fields
+                        input.classList.add('border-red-500');
+                    } else {
+                         input.classList.remove('border-red-500');
+                    }
+                });
+
+                 // Check phone pattern if needed (HTML pattern attribute handles basic cases)
+                const phoneInput = inquiryForm.querySelector('#phone');
+                if (phoneInput && phoneInput.validity && !phoneInput.validity.valid) {
+                     isValid = false;
+                     phoneInput.classList.add('border-red-500');
+                } else if (phoneInput) {
+                     phoneInput.classList.remove('border-red-500');
+                }
+
+
+                if (isValid) {
+                    // --- Simulation ---
+                    // In a real application, you would send data via fetch/AJAX here
+                    console.log('Form data submitted (simulation)');
+                    // Hide form, show success message
+                    // inquiryForm.classList.add('hidden'); // Optional: hide form
+                    inquiryForm.reset(); // Clear the form fields
+                    successMessage.classList.remove('hidden');
+                    errorMessage.classList.add('hidden');
+
+                    // Optional: Hide success message after a few seconds
+                    setTimeout(() => {
+                        successMessage.classList.add('hidden');
+                        // inquiryForm.classList.remove('hidden'); // Optional: show form again
+                    }, 5000); // 5 seconds
+                     // --- End Simulation ---
+                } else {
+                     // Show error message if validation fails
+                     errorMessage.textContent = "Vui lòng điền đầy đủ các trường bắt buộc (*)."; // Update error text
+                     errorMessage.classList.remove('hidden');
+                     successMessage.classList.add('hidden');
+                }
+
+            });
+        }
+
+
+        // Load header and footer when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHTML('header-placeholder', 'header.html');
+            loadHTML('footer-placeholder', 'footer.html');
+        });
+    </script>
+
+</body>
+</html>
