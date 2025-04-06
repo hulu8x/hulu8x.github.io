@@ -6,70 +6,97 @@
     <title>Footer - CLB Cầu Lông Nhơn Phú</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Sử dụng namespace để tránh xung đột CSS */
+        /* * CSS cho Footer CLB Cầu Lông Nhơn Phú
+         * Tất cả các quy tắc được giới hạn trong lớp .np-footer-wrapper để tránh xung đột.
+         * Sử dụng biến CSS (--np-...) để dễ dàng tùy chỉnh và bảo trì.
+         */
         .np-footer-wrapper {
-            --np-primary-color: #3a86ff;
-            --np-accent-color: #ff5a5f;
-            --np-dark-color: #2b2d42;
-            --np-light-color: #f8f9fa;
-            --np-footer-bg: #1a1e2e;
-            --np-footer-text: #e9ecef;
-            --np-footer-link: #a8dadc;
-            --np-transition: all 0.3s ease;
-        }
-        
-        .np-footer-wrapper * {
-            box-sizing: border-box;
+            /* Định nghĩa các biến màu sắc và hiệu ứng chuyển tiếp trong phạm vi của wrapper */
+            --np-primary-color: #3a86ff; /* Màu chính */
+            --np-accent-color: #ff5a5f;  /* Màu nhấn */
+            --np-dark-color: #2b2d42;   /* Màu tối */
+            --np-light-color: #f8f9fa;  /* Màu sáng */
+            --np-footer-bg: #1a1e2e;    /* Màu nền footer */
+            --np-footer-text: #e9ecef;  /* Màu chữ footer */
+            --np-footer-link: #a8dadc;  /* Màu liên kết footer */
+            --np-transition: all 0.3s ease; /* Hiệu ứng chuyển tiếp */
+
+            /* Đảm bảo font chữ thống nhất cho toàn bộ footer */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6; /* Cải thiện khả năng đọc */
+            width: 100%; /* Đảm bảo wrapper chiếm toàn bộ chiều rộng */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Đảm bảo padding và border được tính vào kích thước */
         }
         
-        .np-footer {
+        /* Áp dụng box-sizing cho tất cả phần tử con */
+        .np-footer-wrapper *,
+        .np-footer-wrapper *::before,
+        .np-footer-wrapper *::after {
+            box-sizing: inherit; 
+        }
+        
+        /* Kiểu dáng chính cho phần footer */
+        .np-footer-wrapper .np-footer {
             background-color: var(--np-footer-bg);
             color: var(--np-footer-text);
-            padding: 3rem 0 1.5rem;
+            padding: 5rem 0 1.5rem; /* Tăng padding top để có không gian cho wave */
             position: relative;
             margin: 0;
             width: 100%;
+            overflow: hidden; /* Ngăn wave tràn ra ngoài nếu có lỗi */
         }
         
-        .np-footer-wave {
+        /* Hiệu ứng sóng trang trí phía trên footer */
+        .np-footer-wrapper .np-footer-wave {
             position: absolute;
-            top: -50px;
+            top: -1px; /* Điều chỉnh để khớp liền mạch hơn */
             left: 0;
             width: 100%;
-            height: 50px;
-            /* Inline SVG for the wave effect */
+            height: 50px; /* Chiều cao của sóng */
+            /* SVG được mã hóa URL để làm nền */
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%231a1e2e' fill-opacity='1' d='M0,192L48,176C96,160,192,128,288,122.7C384,117,480,139,576,149.3C672,160,768,160,864,138.7C960,117,1056,75,1152,69.3C1248,64,1344,96,1392,112L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
             background-size: cover;
             background-repeat: no-repeat;
+            z-index: 1; /* Đảm bảo wave nằm trên nền nhưng dưới nội dung nếu cần */
         }
         
-        .np-footer-container {
+        /* Container giới hạn chiều rộng nội dung */
+        .np-footer-wrapper .np-footer-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem; /* Sử dụng padding nhất quán */
+            position: relative; /* Để các phần tử con có thể định vị tương đối */
+            z-index: 2; /* Đảm bảo nội dung nằm trên wave */
         }
         
-        .np-footer-content {
+        /* Lưới bố cục cho nội dung footer */
+        .np-footer-wrapper .np-footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            /* Tự động điều chỉnh cột, tối thiểu 250px */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 2.5rem; /* Tăng khoảng cách giữa các cột */
+            margin-bottom: 2.5rem; /* Tăng khoảng cách với phần bottom */
         }
         
-        .np-footer-section {
-            padding: 0 1rem;
+        /* Kiểu dáng chung cho mỗi cột trong footer */
+        .np-footer-wrapper .np-footer-section {
+            /* Không cần padding thêm ở đây nếu container đã có */
         }
         
-        .np-footer-section h3 {
+        /* Tiêu đề của mỗi cột */
+        .np-footer-wrapper .np-footer-section h3 {
             color: var(--np-primary-color);
-            font-size: 1.5rem;
+            font-size: 1.4rem; /* Điều chỉnh kích thước font */
             margin-bottom: 1.2rem;
             position: relative;
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.6rem; /* Tăng khoảng cách dưới */
+            font-weight: 600; /* Làm đậm hơn một chút */
         }
         
-        .np-footer-section h3::after {
+        /* Đường gạch chân trang trí dưới tiêu đề */
+        .np-footer-wrapper .np-footer-section h3::after {
             content: '';
             position: absolute;
             left: 0;
@@ -80,124 +107,157 @@
             border-radius: 5px;
         }
         
-        .np-footer-about p {
+        /* Đoạn văn giới thiệu */
+        .np-footer-wrapper .np-footer-about p {
             margin-bottom: 1rem;
-            line-height: 1.6;
+            color: var(--np-footer-text); /* Đảm bảo màu chữ nhất quán */
         }
         
-        .np-footer-links ul {
+        /* Logo dạng text */
+         .np-footer-wrapper .np-footer-logo-text {
+            font-size: 1.8rem; /* Tăng kích thước */
+            font-weight: 700;
+            color: var(--np-light-color); /* Sử dụng màu sáng hơn cho nổi bật */
+            margin-bottom: 1rem;
+            text-align: center; /* Căn giữa logo text */
+        }
+
+        /* Danh sách liên kết */
+        .np-footer-wrapper .np-footer-links ul {
             list-style: none;
             padding: 0;
             margin: 0;
         }
         
-        .np-footer-links li {
+        .np-footer-wrapper .np-footer-links li {
             margin-bottom: 0.8rem;
         }
         
-        .np-footer-links a {
+        .np-footer-wrapper .np-footer-links a {
             color: var(--np-footer-link);
             text-decoration: none;
             transition: var(--np-transition);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem; /* Tăng khoảng cách với icon */
         }
         
-        .np-footer-links a:hover {
+        .np-footer-wrapper .np-footer-links a:hover {
             color: var(--np-accent-color);
-            transform: translateX(5px);
+            transform: translateX(5px); /* Hiệu ứng di chuyển nhẹ khi hover */
         }
         
-        .np-footer-links i {
-            font-size: 0.9rem;
+        .np-footer-wrapper .np-footer-links i {
+            font-size: 0.8rem; /* Kích thước icon nhỏ hơn một chút */
+            width: 1em; /* Đảm bảo icon chiếm không gian nhất quán */
+            text-align: center;
         }
         
-        .np-contact-info {
+        /* Thông tin liên hệ */
+        .np-footer-wrapper .np-contact-info {
             display: flex;
-            align-items: flex-start;
+            align-items: flex-start; /* Căn chỉnh icon và text */
             margin-bottom: 1rem;
             gap: 0.8rem;
         }
         
-        .np-contact-info i {
-            font-size: 1.2rem;
+        .np-footer-wrapper .np-contact-info i {
+            font-size: 1.1rem; /* Điều chỉnh kích thước icon */
             color: var(--np-primary-color);
-            margin-top: 3px;
+            margin-top: 4px; /* Căn chỉnh vị trí icon */
+            width: 1.2em; /* Đảm bảo icon chiếm không gian */
+            text-align: center;
+            flex-shrink: 0; /* Ngăn icon bị co lại */
         }
         
-        .np-contact-info-text {
-            line-height: 1.5;
+        .np-footer-wrapper .np-contact-info-text {
+            color: var(--np-footer-text);
         }
         
-        .np-contact-info-text a {
+        .np-footer-wrapper .np-contact-info-text a {
             color: var(--np-footer-link);
             text-decoration: none;
             transition: var(--np-transition);
         }
         
-        .np-contact-info-text a:hover {
+        .np-footer-wrapper .np-contact-info-text a:hover {
             color: var(--np-accent-color);
+            text-decoration: underline; /* Thêm gạch chân khi hover link */
         }
         
-        .np-social-icons {
+        /* Icon mạng xã hội */
+        .np-footer-wrapper .np-social-icons {
             display: flex;
-            gap: 1rem;
+            flex-wrap: wrap; /* Cho phép xuống dòng nếu không đủ chỗ */
+            gap: 0.8rem; /* Giảm khoảng cách */
             margin-top: 1.5rem;
         }
         
-        .np-social-icons a {
+        .np-footer-wrapper .np-social-icons a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 38px; /* Giảm kích thước */
+            height: 38px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.1);
             color: var(--np-footer-text);
             text-decoration: none;
             transition: var(--np-transition);
+            font-size: 1.1rem; /* Điều chỉnh kích thước icon */
         }
         
-        .np-social-icons a:hover {
+        .np-footer-wrapper .np-social-icons a:hover {
             background-color: var(--np-primary-color);
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(58, 134, 255, 0.3);
+            transform: translateY(-3px); /* Giảm hiệu ứng nâng */
+            box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
         }
         
-        .np-social-icons i {
-            font-size: 1.2rem;
+        /* Phần bản đồ */
+        .np-footer-wrapper .np-footer-map iframe {
+            border: 0;
+            border-radius: 8px; /* Bo góc nhẹ */
+            width: 100%;
+            height: 200px; /* Chiều cao cố định */
+            display: block; /* Loại bỏ khoảng trắng thừa dưới iframe */
         }
-        
-        .np-footer-bottom {
+
+        /* Phần dưới cùng của footer (copyright, link chính sách) */
+        .np-footer-wrapper .np-footer-bottom {
             text-align: center;
-            padding-top: 1.5rem;
+            padding-top: 2rem; /* Tăng padding */
+            margin-top: 2rem; /* Thêm margin top */
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.9rem;
+            color: var(--np-footer-link); /* Sử dụng màu link cho dễ đọc hơn */
         }
         
-        .np-footer-bottom a {
+        .np-footer-wrapper .np-footer-bottom p {
+            margin-bottom: 0.5rem; /* Khoảng cách giữa các dòng text */
+        }
+
+        .np-footer-wrapper .np-footer-bottom strong {
+             color: var(--np-footer-text); /* Làm nổi bật tên CLB */
+        }
+
+        .np-footer-wrapper .np-footer-bottom a {
             color: var(--np-footer-link);
             text-decoration: none;
             transition: var(--np-transition);
         }
         
-        .np-footer-bottom a:hover {
+        .np-footer-wrapper .np-footer-bottom a:hover {
             color: var(--np-accent-color);
+            text-decoration: underline;
         }
         
-        .np-footer-logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--np-footer-text);
-        }
-        
-        .np-back-to-top {
+        /* Nút Back to Top */
+        .np-footer-wrapper .np-back-to-top {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
+            bottom: 25px; /* Điều chỉnh vị trí */
+            right: 25px;
+            width: 45px; /* Giảm kích thước */
+            height: 45px;
             border-radius: 50%;
             background-color: var(--np-accent-color);
             color: white;
@@ -205,48 +265,108 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            box-shadow: 0 3px 10px rgba(255, 90, 95, 0.3);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Bóng đổ tinh tế hơn */
             opacity: 0;
             visibility: hidden;
-            transition: var(--np-transition);
-            z-index: 999;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            z-index: 1000; /* Đảm bảo nút nằm trên cùng */
+            border: none; /* Bỏ border mặc định nếu có */
+            cursor: pointer;
         }
         
-        .np-back-to-top.active {
-            opacity: 1;
+        /* Trạng thái hiển thị của nút Back to Top */
+        .np-footer-wrapper .np-back-to-top.active {
+            opacity: 0.8; /* Hơi trong suốt */
             visibility: visible;
         }
         
-        .np-back-to-top:hover {
+        /* Hiệu ứng hover cho nút Back to Top */
+        .np-footer-wrapper .np-back-to-top:hover {
             background-color: var(--np-primary-color);
-            transform: translateY(-5px);
+            transform: translateY(-4px); /* Hiệu ứng nâng nhẹ */
+            opacity: 1; /* Rõ hơn khi hover */
             box-shadow: 0 5px 15px rgba(58, 134, 255, 0.4);
+        }
+
+        .np-footer-wrapper .np-back-to-top i {
+            font-size: 1.1rem; /* Kích thước icon trong nút */
         }
         
         /* Responsive adjustments */
+        @media (max-width: 992px) {
+             /* Điều chỉnh cho tablet */
+             .np-footer-wrapper .np-footer-content {
+                 gap: 2rem; /* Giảm khoảng cách trên tablet */
+             }
+        }
+
         @media (max-width: 768px) {
-            .np-footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
+            /* Điều chỉnh cho mobile */
+            .np-footer-wrapper .np-footer {
+                padding-top: 4rem; /* Giảm padding top trên mobile */
+            }
+            .np-footer-wrapper .np-footer-content {
+                grid-template-columns: 1fr; /* Chuyển thành 1 cột */
+                text-align: center; /* Căn giữa nội dung trong cột */
+                gap: 2rem;
             }
             
-            .np-footer-section h3::after {
+            /* Căn giữa đường gạch chân dưới tiêu đề */
+            .np-footer-wrapper .np-footer-section h3::after {
                 left: 50%;
                 transform: translateX(-50%);
             }
             
-            .np-contact-info {
+            /* Căn giữa thông tin liên hệ và icon */
+            .np-footer-wrapper .np-contact-info {
+                justify-content: center;
+                text-align: left; /* Giữ text căn trái trong mục contact */
+                 max-width: 350px; /* Giới hạn chiều rộng để căn giữa đẹp hơn */
+                 margin-left: auto;
+                 margin-right: auto;
+            }
+             .np-footer-wrapper .np-contact-info i {
+                 margin-top: 5px; /* Điều chỉnh căn chỉnh icon */
+             }
+            
+            /* Căn giữa icon mạng xã hội */
+            .np-footer-wrapper .np-social-icons {
                 justify-content: center;
             }
             
-            .np-social-icons {
-                justify-content: center;
+            /* Bỏ hiệu ứng translateX cho link trên mobile */
+            .np-footer-wrapper .np-footer-links a:hover {
+                transform: translateX(0);
             }
-            
-            .np-footer-links a:hover {
-                transform: translateX(0); /* Disable horizontal shift on hover for smaller screens */
-            }
+
+             /* Căn giữa logo */
+             .np-footer-wrapper .np-footer-logo-text {
+                 text-align: center;
+             }
+             .np-footer-wrapper .np-footer-about .np-social-icons {
+                 justify-content: center; /* Đảm bảo social icons trong about cũng căn giữa */
+             }
         }
+
+         @media (max-width: 480px) {
+             /* Điều chỉnh nhỏ hơn cho màn hình rất nhỏ */
+             .np-footer-wrapper .np-footer-container {
+                 padding: 0 1rem;
+             }
+             .np-footer-wrapper .np-footer-section h3 {
+                 font-size: 1.3rem;
+             }
+             .np-footer-wrapper .np-back-to-top {
+                 width: 40px;
+                 height: 40px;
+                 bottom: 20px;
+                 right: 20px;
+             }
+             .np-footer-wrapper .np-back-to-top i {
+                 font-size: 1rem;
+             }
+         }
+
     </style>
 </head>
 <body>
@@ -256,25 +376,28 @@
             <div class="np-footer-container">
                 <div class="np-footer-content">
                     <div class="np-footer-section np-footer-about">
-                        <div class="np-footer-logo-text" style="text-align: center; font-size: 1.8rem; font-weight: bold; margin-bottom: 1.5rem;">
+                        <div class="np-footer-logo-text">
                             CLB Cầu Lông Nhơn Phú
                         </div>
-                        <p style="text-align: center;">Câu lạc bộ Cầu lông Nhơn Phú là điểm đến lý tưởng cho người yêu cầu lông tại Quy Nhơn với hệ thống sân hiện đại tại Viện Sốt Rét và các lớp học chất lượng.</p>
-                        <div class="np-social-icons" style="justify-content: center;">
-                            <a href="https://www.facebook.com/NHONPHUBADMINTONCLUB/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" target="_blank" title="Zalo"><i class="fas fa-comment-dots"></i></a> <a href="https://www.youtube.com/" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a> <a href="https://www.tiktok.com/" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a> </div>
+                        <p>Câu lạc bộ Cầu lông Nhơn Phú là điểm đến lý tưởng cho người yêu cầu lông tại Quy Nhơn với hệ thống sân hiện đại và các lớp học chất lượng.</p>
+                        <div class="np-social-icons">
+                            <a href="https://www.facebook.com/NHONPHUBADMINTONCLUB/" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#!" target="_blank" rel="noopener noreferrer" title="Zalo"><i class="fas fa-comment-dots"></i></a>
+                             <a href="#!" target="_blank" rel="noopener noreferrer" title="YouTube"><i class="fab fa-youtube"></i></a>
+                            <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        </div>
                     </div>
                     
                     <div class="np-footer-section np-footer-links">
                         <h3>Liên kết nhanh</h3>
                         <ul>
-                            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Trang chủ</a></li>
-                            <li><a href="gioi-thieu.html"><i class="fas fa-chevron-right"></i> Giới thiệu</a></li>
-                            <li><a href="lop-hoc.html"><i class="fas fa-chevron-right"></i> Lớp học</a></li>
-                            <li><a href="dat-san.html"><i class="fas fa-chevron-right"></i> Đặt sân</a></li>
-                            <li><a href="thu-vien.html"><i class="fas fa-chevron-right"></i> Thư viện</a></li>
-                            <li><a href="tin-tuc.html"><i class="fas fa-chevron-right"></i> Tin tức</a></li>
-                            <li><a href="lien-he.html"><i class="fas fa-chevron-right"></i> Liên hệ</a></li>
+                            <li><a href="#!"><i class="fas fa-chevron-right"></i> Trang chủ</a></li>
+                            <li><a href="#!"><i class="fas fa-chevron-right"></i> Giới thiệu</a></li>
+                            <li><a href="#!"><i class="fas fa-chevron-right"></i> Lớp học</a></li>
+                            <li><a href="#!"><i class="fas fa-chevron-right"></i> Đặt sân</a></li>
+                            <li><a href="#!"><i class="fas fa-chevron-right"></i> Thư viện</a></li>
+                            <li><a href="#!"><i class="fas fa-chevron-right"></i> Tin tức</a></li>
+                            <li><a href="#!"><i class="fas fa-chevron-right"></i> Liên hệ</a></li>
                         </ul>
                     </div>
                     
@@ -308,47 +431,91 @@
                     
                     <div class="np-footer-section np-footer-map">
                         <h3>Bản đồ</h3>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4853.763362893282!2d109.17890430985435!3d13.782616911802112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316f1300733e69f9%3A0x92543a16cc942d7f!2zU8OibiBD4bqndSBsw7RuZyBWaeG7h24gU-G7kXQgcsOpdC1LU1QtQ1QgUXV5IE5oxqFu!5e1!3m2!1svi!2s!4v1743731251480!5m2!1svi!2s" width="100%" height="200" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3878.952923199454!2d109.2100306153456!3d13.75881099040916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316f6ce4a7f3b7a1%3A0x4c3ac4b3e8a8b4e6!2zU8OibiBj4bqndSBsw7RuZyBWaeG7h24gU-G7kXQgUsOpdA!5e0!3m2!1svi!2s!4v1678886400000!5m2!1svi!2s" 
+                            width="100%" 
+                            height="200" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Bản đồ vị trí CLB Cầu Lông Nhơn Phú">
+                        </iframe>
                     </div>
                 </div>
                 
                 <div class="np-footer-bottom">
-                    <p>Bản quyền © 2025 <strong>CLB Cầu Lông Nhơn Phú</strong>. Bảo lưu mọi quyền.</p>
+                    <p>Bản quyền © <span id="np-current-year">2025</span> <strong>CLB Cầu Lông Nhơn Phú</strong>. Bảo lưu mọi quyền.</p>
                     <p>
-                        <a href="chinh-sach-bao-mat.html">Chính sách bảo mật</a> | 
-                        <a href="dieu-khoan-su-dung.html">Điều khoản sử dụng</a>
+                        <a href="#!">Chính sách bảo mật</a> | 
+                        <a href="#!">Điều khoản sử dụng</a>
                     </p>
                 </div>
             </div>
         </footer>
         
-        <a href="#" class="np-back-to-top" id="npBackToTop">
+        <a href="#" class="np-back-to-top" id="npBackToTop" title="Lên đầu trang" aria-label="Lên đầu trang">
             <i class="fas fa-arrow-up"></i>
         </a>
     </div>
 
     <script>
-        // Use an IIFE (Immediately Invoked Function Expression) to avoid polluting the global scope
+        // Sử dụng IIFE để đóng gói mã JavaScript, tránh xung đột biến toàn cục
         (function() {
-            // Show/hide the Back to Top button based on scroll position
-            window.addEventListener('scroll', function() {
-                const backToTop = document.getElementById('npBackToTop');
-                if (window.pageYOffset > 300) { // Show button after scrolling down 300px
-                    backToTop.classList.add('active');
-                } else {
-                    backToTop.classList.remove('active');
+            'use strict'; // Bật chế độ nghiêm ngặt để phát hiện lỗi sớm
+
+            // Lấy phần tử nút Back to Top
+            const backToTopButton = document.getElementById('npBackToTop');
+            // Lấy phần tử để hiển thị năm hiện tại
+            const currentYearSpan = document.getElementById('np-current-year');
+
+            // --- Chức năng Back to Top ---
+            // Hàm xử lý hiển thị/ẩn nút dựa trên vị trí cuộn
+            function toggleBackToTopButton() {
+                // Kiểm tra xem nút có tồn tại không
+                if (!backToTopButton) {
+                    // console.warn("Phần tử #npBackToTop không tìm thấy."); // Ghi log cảnh báo nếu không tìm thấy nút
+                    return; // Thoát nếu không tìm thấy nút
                 }
-            });
-            
-            // Smooth scroll to top when the button is clicked
-            document.getElementById('npBackToTop').addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent default anchor behavior
+
+                if (window.pageYOffset > 300) { // Hiển thị nút nếu cuộn xuống hơn 300px
+                    backToTopButton.classList.add('active');
+                } else { // Ẩn nút nếu ở gần đầu trang
+                    backToTopButton.classList.remove('active');
+                }
+            }
+
+            // Hàm xử lý cuộn lên đầu trang mượt mà
+            function scrollToTop(event) {
+                event.preventDefault(); // Ngăn hành vi mặc định của thẻ <a>
                 window.scrollTo({
                     top: 0,
-                    behavior: 'smooth' // Enable smooth scrolling
+                    behavior: 'smooth' // Tạo hiệu ứng cuộn mượt
                 });
-            });
-        })();
+            }
+
+            // Thêm trình nghe sự kiện scroll vào window
+            window.addEventListener('scroll', toggleBackToTopButton);
+
+            // Thêm trình nghe sự kiện click vào nút (chỉ khi nút tồn tại)
+            if (backToTopButton) {
+                backToTopButton.addEventListener('click', scrollToTop);
+            } else {
+                // console.warn("Không thể thêm sự kiện click: Phần tử #npBackToTop không tìm thấy.");
+            }
+
+             // --- Cập nhật năm hiện tại ---
+             if (currentYearSpan) {
+                 currentYearSpan.textContent = new Date().getFullYear();
+             } else {
+                 // console.warn("Không thể cập nhật năm: Phần tử #np-current-year không tìm thấy.");
+             }
+
+            // Gọi lần đầu để đặt trạng thái nút chính xác khi tải trang
+            // (hữu ích nếu trang tải lại ở vị trí đã cuộn)
+            // toggleBackToTopButton(); // Bỏ comment nếu muốn kiểm tra ngay khi tải
+
+        })(); // Kết thúc IIFE
     </script>
 </body>
 </html>
