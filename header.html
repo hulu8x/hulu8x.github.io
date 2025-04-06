@@ -3,227 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLB Cầu Lông Nhơn Phú - Sân Chơi Đẳng Cấp Tại Quy Nhơn</title>
-    <meta name="description" content="CLB Cầu Lông Nhơn Phú tại Quy Nhơn cung cấp sân chơi hiện đại (Sân Viện Sốt Rét), lớp học cầu lông chất lượng, đặt sân online tiện lợi. Tham gia cộng đồng đam mê cầu lông!">
-    <meta name="keywords" content="cầu lông Quy Nhơn, CLB cầu lông Nhơn Phú, sân cầu lông Quy Nhơn, học cầu lông Quy Nhơn, đặt sân cầu lông, Viện Sốt Rét Quy Nhơn, cầu lông Bình Định">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Header CLB Cầu Lông Nhơn Phú</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Custom base styles (Minimal) */
+        /* Định nghĩa các biến màu sắc và hiệu ứng chuyển đổi */
+        :root {
+            --np-primary-color: #3a86ff; /* Màu chính */
+            --np-accent-color: #ff5a5f; /* Màu nhấn */
+            --np-dark-color: #2b2d42;   /* Màu tối */
+            --np-light-color: #f8f9fa;  /* Màu sáng */
+            --np-transition: all 0.3s ease; /* Hiệu ứng chuyển đổi */
+        }
+
+        /* Reset một số thuộc tính mặc định và thiết lập font chữ cơ bản */
         body {
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
         }
-        /* Ensure icons are sized correctly */
-        .icon {
-            width: 1.1em; /* Adjust size as needed */
-            height: 1.1em;
-            display: inline-block;
-            vertical-align: -0.15em; /* Fine-tune vertical alignment */
-            margin-right: 0.35rem;
-            flex-shrink: 0;
+
+        /* --- Phần Header --- */
+        .np-header {
+            position: sticky; /* Giữ header cố định khi cuộn trang */
+            top: 0;
+            z-index: 1000; /* Đảm bảo header luôn ở trên cùng */
+            background-color: white; /* Nền trắng */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+            padding: 0.8rem 5%; /* Padding bên trong header */
+            display: flex; /* Sử dụng flexbox để căn chỉnh */
+            justify-content: space-between; /* Căn chỉnh các phần tử con */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            min-height: 70px; /* Đảm bảo chiều cao tối thiểu cho header */
         }
-        .feature-icon svg { /* Larger icons for feature cards */
-            width: 2.5rem;
-            height: 2.5rem;
+
+        /* --- Logo và Tên CLB --- */
+        .np-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem; /* Khoảng cách giữa logo và tên */
         }
-        .cta-icon svg { /* Icons in CTA buttons */
-             width: 1.25rem;
-             height: 1.25rem;
-             margin-right: 0.5rem;
+
+        .np-logo {
+            height: 60px; /* Chiều cao logo */
+            transition: var(--np-transition); /* Hiệu ứng chuyển đổi */
+            /* Sử dụng placeholder nếu ảnh gốc không tải được */
+            content: url('https://placehold.co/150x60/eeeeee/333333?text=Logo'); /* Placeholder mặc định */
+            object-fit: contain; /* Đảm bảo logo không bị méo */
+            display: block; /* Tránh khoảng trống thừa bên dưới ảnh */
+        }
+
+        .np-logo:hover {
+            transform: scale(1.05); /* Phóng to nhẹ khi hover */
+        }
+
+        .np-logo-text {
+            font-size: 1.5rem; /* Cỡ chữ tên CLB */
+            font-weight: 700; /* Độ đậm chữ */
+            color: var(--np-primary-color); /* Màu chữ */
+            text-decoration: none; /* Bỏ gạch chân */
+        }
+
+        /* --- Menu Điều Hướng --- */
+        .np-nav-menu {
+            display: flex;
+            gap: 1.5rem; /* Khoảng cách giữa các mục menu */
+            list-style: none; /* Bỏ dấu chấm đầu dòng */
+            margin: 0;
+            padding: 0;
+            align-items: center; /* Căn giữa các mục menu */
+        }
+
+        .np-nav-link {
+            text-decoration: none; /* Bỏ gạch chân */
+            color: var(--np-dark-color); /* Màu chữ */
+            font-weight: 600; /* Độ đậm chữ */
+            font-size: 1.1rem; /* Cỡ chữ */
+            padding: 0.5rem 0.8rem; /* Padding */
+            border-radius: 5px; /* Bo góc nhẹ */
+            transition: var(--np-transition); /* Hiệu ứng chuyển đổi */
+            position: relative; /* Để định vị gạch chân giả */
+            white-space: nowrap; /* Ngăn các mục menu xuống dòng không mong muốn */
+        }
+
+        .np-nav-link:hover {
+            color: var(--np-primary-color); /* Đổi màu khi hover */
+        }
+
+        /* Gạch chân giả khi hover hoặc active */
+        .np-nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0; /* Ban đầu không có chiều rộng */
+            height: 3px; /* Độ dày gạch chân */
+            bottom: 0; /* Vị trí ở dưới */
+            left: 50%; /* Bắt đầu từ giữa */
+            background-color: var(--np-primary-color); /* Màu gạch chân */
+            transition: var(--np-transition); /* Hiệu ứng chuyển đổi */
+            transform: translateX(-50%); /* Căn giữa gạch chân */
+        }
+
+        .np-nav-link:hover::after {
+            width: 80%; /* Hiển thị gạch chân khi hover */
+        }
+
+        /* Kiểu cho mục menu đang active */
+        .np-nav-link.np-active {
+            color: var(--np-primary-color);
+        }
+
+        .np-nav-link.np-active::after {
+            width: 80%; /* Hiển thị gạch chân cho mục active */
+        }
+
+        /* --- Nút Hamburger (cho màn hình nhỏ) --- */
+        .np-hamburger {
+            display: none; /* Mặc định ẩn trên màn hình lớn */
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.8rem; /* Cỡ icon */
+            color: var(--np-dark-color);
+            padding: 0.5rem;
+        }
+
+        /* --- Nút Call-to-Action (Đặt sân ngay) --- */
+        .np-cta-button {
+            background-color: var(--np-accent-color); /* Màu nền */
+            color: white; /* Màu chữ */
+            padding: 0.6rem 1.2rem; /* Padding */
+            border-radius: 50px; /* Bo tròn */
+            font-weight: 600; /* Độ đậm chữ */
+            transition: var(--np-transition); /* Hiệu ứng chuyển đổi */
+            text-decoration: none; /* Bỏ gạch chân */
+            display: inline-block; /* Để áp dụng padding và margin */
+            box-shadow: 0 4px 8px rgba(255, 90, 95, 0.2); /* Đổ bóng */
+            white-space: nowrap; /* Ngăn nút bị xuống dòng */
+        }
+
+        .np-cta-button:hover {
+            background-color: #ff4146; /* Đổi màu nền khi hover */
+            transform: translateY(-2px); /* Nâng nhẹ nút lên */
+            box-shadow: 0 6px 12px rgba(255, 90, 95, 0.3); /* Tăng độ đổ bóng */
+        }
+
+        /* --- Responsive Design --- */
+        /* Màn hình nhỏ hơn 992px (tablets) */
+        @media (max-width: 992px) {
+            .np-header {
+                 padding: 0.8rem 2%; /* Giảm padding ngang */
+            }
+            .np-nav-menu {
+                position: fixed; /* Cố định vị trí */
+                top: 0; /* Menu bắt đầu từ đỉnh */
+                right: -100%; /* Ban đầu ẩn ngoài màn hình bên phải */
+                flex-direction: column; /* Xếp các mục menu theo chiều dọc */
+                background-color: white; /* Nền trắng */
+                width: 70%; /* Chiều rộng menu */
+                max-width: 300px; /* Giới hạn chiều rộng tối đa */
+                height: 100vh; /* Chiều cao menu toàn màn hình */
+                padding: 2rem; /* Padding bên trong menu */
+                padding-top: 80px; /* Padding top để không bị che bởi header (nếu header không ẩn) hoặc để tạo khoảng trống */
+                transition: var(--np-transition); /* Hiệu ứng trượt vào/ra */
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1); /* Đổ bóng bên trái */
+                gap: 1.5rem; /* Khoảng cách giữa các mục menu */
+                align-items: flex-start; /* Căn các mục menu về bên trái */
+                overflow-y: auto; /* Cho phép cuộn nếu nội dung dài */
+                z-index: 999; /* Đảm bảo menu dưới header */
+            }
+
+            /* Lớp active để hiện menu */
+            .np-nav-menu.np-active {
+                right: 0; /* Trượt menu vào màn hình */
+            }
+
+            /* Hiện nút hamburger */
+            .np-hamburger {
+                display: block;
+                z-index: 1001; /* Đảm bảo nút hamburger luôn trên menu */
+            }
+
+            /* Điều chỉnh nút CTA trong menu dọc */
+            .np-cta-button {
+                margin-top: 1rem; /* Thêm khoảng cách phía trên */
+                display: block; /* Chiếm toàn bộ chiều rộng */
+                text-align: center; /* Căn giữa chữ */
+            }
+        }
+
+        /* Màn hình nhỏ hơn 576px (smartphones) */
+        @media (max-width: 576px) {
+            .np-logo-text {
+                font-size: 1.2rem; /* Giảm cỡ chữ tên CLB */
+            }
+
+            .np-logo {
+                height: 50px; /* Giảm chiều cao logo */
+            }
+
+            /* Menu chiếm nhiều chiều rộng hơn trên điện thoại */
+            .np-nav-menu {
+                width: 85%;
+                max-width: none; /* Bỏ giới hạn max-width */
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
 
-    <div id="header-placeholder"></div>
-
-    <section class="hero-section bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 text-white pt-28 pb-24 md:pt-40 md:pb-32 text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-black opacity-10"></div> <div class="container mx-auto px-4 relative z-10">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
-                CLB Cầu Lông Nhơn Phú
-            </h1>
-            <p class="text-lg md:text-xl lg:text-2xl font-light mb-8 max-w-3xl mx-auto">
-                Sân chơi đẳng cấp - Đam mê kết nối. Trải nghiệm sân cầu lông hiện đại và tham gia cộng đồng sôi động tại Quy Nhơn.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a href="dat-san.html" class="inline-flex items-center justify-center px-8 py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition duration-300 shadow-md hover:shadow-lg w-full sm:w-auto text-base md:text-lg cta-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-calendar-check"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
-                    Đặt Sân Online
-                </a>
-                <a href="lop-hoc.html" class="inline-flex items-center justify-center px-8 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-md hover:shadow-lg w-full sm:w-auto text-base md:text-lg cta-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-graduation-cap"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12v5a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-5"/></svg>
-                    Xem Lớp Học
-                </a>
-            </div>
+    <div class="np-header">
+        <div class="np-logo-container">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Logo CLB Cầu Lông Nhơn Phú" class="np-logo" onerror="this.onerror=null; this.src='https://placehold.co/150x60/eeeeee/333333?text=Logo+L%E1%BB%97i';">
+            </a>
+            <a href="index.html" class="np-logo-text">CLB Cầu Lông Nhơn Phú</a>
         </div>
-    </section>
 
-    <main class="space-y-16 md:space-y-20 py-16 md:py-20">
+        <button class="np-hamburger" id="npHamburger" aria-label="Mở menu" aria-expanded="false" aria-controls="npNavMenu">
+            <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
 
-        <section class="container mx-auto px-4 md:px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Tại Sao Chọn CLB Nhơn Phú?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="feature-card bg-white p-6 rounded-lg shadow-lg border border-gray-100 text-center hover:shadow-xl transition duration-300">
-                    <div class="feature-icon inline-flex items-center justify-center p-3 bg-blue-100 text-blue-600 rounded-full mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-swords"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" x2="19" y1="19" y2="13"/><line x1="16" x2="20" y1="16" y2="20"/><line x1="19" x2="21" y1="21" y2="19"/></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Sân Bãi Hiện Đại</h3>
-                    <p class="text-gray-600 text-sm">3 sân đạt chuẩn với thảm Ecostar S7000, hệ thống đèn LED chống chói, không gian thoáng đãng.</p>
-                    <a href="gioi-thieu.html" class="inline-block mt-4 text-sm text-blue-600 hover:text-blue-800 font-medium">Xem chi tiết <span aria-hidden="true">&rarr;</span></a>
-                </div>
-                <div class="feature-card bg-white p-6 rounded-lg shadow-lg border border-gray-100 text-center hover:shadow-xl transition duration-300">
-                     <div class="feature-icon inline-flex items-center justify-center p-3 bg-green-100 text-green-600 rounded-full mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12v5a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-5"/></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Lớp Học Chất Lượng</h3>
-                    <p class="text-gray-600 text-sm">Các lớp từ cơ bản đến nâng cao cho mọi lứa tuổi, giảng dạy bởi HLV Biền, HLV Hoàng giàu kinh nghiệm.</p>
-                     <a href="lop-hoc.html" class="inline-block mt-4 text-sm text-blue-600 hover:text-blue-800 font-medium">Tìm lớp phù hợp <span aria-hidden="true">&rarr;</span></a>
-                </div>
-                 <div class="feature-card bg-white p-6 rounded-lg shadow-lg border border-gray-100 text-center hover:shadow-xl transition duration-300">
-                     <div class="feature-icon inline-flex items-center justify-center p-3 bg-orange-100 text-orange-600 rounded-full mb-4">
-                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Đặt Sân Tiện Lợi</h3>
-                    <p class="text-gray-600 text-sm">Hệ thống đặt sân online nhanh chóng, xem lịch trống dễ dàng hoặc liên hệ trực tiếp qua hotline.</p>
-                     <a href="dat-san.html" class="inline-block mt-4 text-sm text-blue-600 hover:text-blue-800 font-medium">Đặt sân ngay <span aria-hidden="true">&rarr;</span></a>
-                </div>
-            </div>
-        </section>
+        <ul class="np-nav-menu" id="npNavMenu" role="menu">
+            <li role="none"><a href="index.html" class="np-nav-link" role="menuitem">Trang chủ</a></li>
+            <li role="none"><a href="gioi-thieu.html" class="np-nav-link" role="menuitem">Giới thiệu</a></li>
+            <li role="none"><a href="lop-hoc.html" class="np-nav-link" role="menuitem">Lớp học</a></li>
+            <li role="none"><a href="dat-san.html" class="np-nav-link" role="menuitem">Đặt sân</a></li>
+            <li role="none"><a href="thu-vien.html" class="np-nav-link" role="menuitem">Thư viện</a></li>
+            <li role="none"><a href="tin-tuc.html" class="np-nav-link" role="menuitem">Tin tức</a></li>
+            <li role="none"><a href="lien-he.html" class="np-nav-link" role="menuitem">Liên hệ</a></li>
+            <li role="none"><a href="dat-san.html" class="np-cta-button" role="menuitem">Đặt sân ngay</a></li>
+        </ul>
+    </div>
 
-        <section class="container mx-auto px-4 md:px-6">
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden lg:grid lg:grid-cols-2 lg:items-center border border-gray-100">
-                <div class="p-8 lg:p-12">
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3">Về CLB Cầu Lông Nhơn Phú</h2>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Thành lập với niềm đam mê cầu lông, CLB Nhơn Phú mong muốn tạo ra một sân chơi chuyên nghiệp, thân thiện, là nơi rèn luyện sức khỏe, nâng cao kỹ năng và kết nối những người cùng sở thích tại Quy Nhơn.
-                    </p>
-                    <a href="gioi-thieu.html" class="inline-flex items-center px-5 py-2.5 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition duration-300 shadow hover:shadow-md text-sm md:text-base">
-                        Tìm Hiểu Thêm Về Chúng Tôi
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-chevron-right w-5 h-5 ml-1"><path d="m9 18 6-6-6-6"/></svg>
-                    </a>
-                </div>
-                <div class="aspect-w-16 aspect-h-9 lg:aspect-none lg:h-full">
-                    <img src="https://placehold.co/800x600/a0aec0/ffffff?text=Ảnh+CLB+Nhơn+Phú" alt="Hình ảnh CLB Cầu Lông Nhơn Phú" class="w-full h-full object-cover">
-                </div>
-            </div>
-        </section>
-
-         <section class="container mx-auto px-4 md:px-6">
-             <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Tin Tức & Sự Kiện Mới Nhất</h2>
-             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                 <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 flex flex-col">
-                     <img src="https://placehold.co/600x400/dbeafe/1e3a8a?text=Tin+Tức+1" alt="Tin tức 1" class="w-full h-48 object-cover">
-                     <div class="p-5 flex flex-col flex-grow">
-                         <span class="text-xs text-gray-500 mb-1">28 Tháng 3, 2025 | Giải đấu</span>
-                         <h3 class="text-lg font-semibold text-gray-800 mb-2 flex-grow">Kết quả Giải Giao hữu CLB Nhơn Phú Tháng 3/2025</h3>
-                         <a href="tin-tuc/ket-qua-giai-giao-huu-thang-3-2025.html" class="text-sm text-blue-600 hover:text-blue-800 font-medium mt-2 self-start">Đọc tiếp <span aria-hidden="true">&rarr;</span></a>
-                     </div>
-                 </div>
-                 <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 flex flex-col">
-                     <img src="https://placehold.co/600x400/d1fae5/065f46?text=Tin+Tức+2" alt="Tin tức 2" class="w-full h-48 object-cover">
-                     <div class="p-5 flex flex-col flex-grow">
-                         <span class="text-xs text-gray-500 mb-1">25 Tháng 3, 2025 | Thông báo</span>
-                         <h3 class="text-lg font-semibold text-gray-800 mb-2 flex-grow">Lịch hoạt động CLB dịp Lễ sắp tới</h3>
-                         <a href="tin-tuc/thong-bao-lich-hoat-dong-dip-le.html" class="text-sm text-blue-600 hover:text-blue-800 font-medium mt-2 self-start">Đọc tiếp <span aria-hidden="true">&rarr;</span></a>
-                     </div>
-                 </div>
-                 <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 flex flex-col">
-                     <img src="https://placehold.co/600x400/fef3c7/92400e?text=Tin+Tức+3" alt="Tin tức 3" class="w-full h-48 object-cover">
-                     <div class="p-5 flex flex-col flex-grow">
-                         <span class="text-xs text-gray-500 mb-1">20 Tháng 3, 2025 | Chia sẻ</span>
-                         <h3 class="text-lg font-semibold text-gray-800 mb-2 flex-grow">Mẹo chọn vợt cầu lông cho người mới bắt đầu</h3>
-                         <a href="tin-tuc/meo-chon-vot-cau-long-cho-nguoi-moi.html" class="text-sm text-blue-600 hover:text-blue-800 font-medium mt-2 self-start">Đọc tiếp <span aria-hidden="true">&rarr;</span></a>
-                     </div>
-                 </div>
-             </div>
-              <div class="text-center mt-10">
-                <a href="tin-tuc.html" class="inline-flex items-center px-6 py-2.5 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition duration-300 text-sm md:text-base">
-                    Xem Tất Cả Tin Tức
-                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-chevron-right w-5 h-5 ml-1"><path d="m9 18 6-6-6-6"/></svg>
-                </a>
-            </div>
-        </section>
-
-        <section class="container mx-auto px-4 md:px-6">
-            <div class="text-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-10 md:p-14 rounded-lg shadow-xl">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Tham Gia Cộng Đồng Cầu Lông Nhơn Phú!</h2>
-                <p class="text-lg text-blue-100 mb-8 max-w-xl mx-auto">
-                    Dù bạn muốn nâng cao kỹ năng, tìm bạn chơi hay đơn giản là rèn luyện sức khỏe, CLB luôn chào đón bạn.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <a href="dat-san.html" class="inline-flex items-center justify-center px-8 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-md hover:shadow-lg w-full sm:w-auto text-base md:text-lg cta-icon">
-                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-calendar-check"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
-                        Đặt Sân Ngay
-                    </a>
-                    <a href="lien-he.html" class="inline-flex items-center justify-center px-8 py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition duration-300 shadow-md hover:shadow-lg w-full sm:w-auto text-base md:text-lg cta-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        Liên Hệ Tư Vấn
-                    </a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <div id="footer-placeholder"></div>
+    <div style="height: 150vh; padding: 20px; background-color: #f0f0f0;">
+        <h1>Nội dung trang web</h1>
+        <p>Đây là phần nội dung mẫu để kiểm tra header cố định và menu.</p>
+        <p>Thử thay đổi kích thước cửa sổ trình duyệt để xem menu responsive.</p>
+    </div>
 
     <script>
-        // Function to load HTML content from a file into an element (Robust version)
-        async function loadHTML(elementId, filePath) {
-            const element = document.getElementById(elementId);
-            if (!element) {
-                console.error(`Element with ID "${elementId}" not found.`);
-                return;
-            }
-            try {
-                const response = await fetch(filePath);
-                if (!response.ok) {
-                    if (response.status === 404) {
-                         console.warn(`File not found: ${filePath}. Cannot load content into #${elementId}.`);
-                         element.innerHTML = ''; // Clear placeholder content
-                         return;
-                    }
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const html = await response.text();
-                element.innerHTML = html;
-                console.log(`Successfully loaded ${filePath} into #${elementId}`);
+        // Đảm bảo script chỉ chạy sau khi DOM đã được tải hoàn chỉnh
+        document.addEventListener('DOMContentLoaded', function() {
+            // JavaScript cho hamburger menu
+            const npHamburger = document.getElementById('npHamburger');
+            const npNavMenu = document.getElementById('npNavMenu');
+            const body = document.body; // Thêm biến body
 
-                // Find and execute the script within the loaded content
-                const scriptElement = element.querySelector('script');
-                if (scriptElement) {
-                    // Create a new script element to execute the code
-                    const newScript = document.createElement('script');
-                    if (scriptElement.src) { // If the original script had a src attribute
-                        newScript.src = scriptElement.src;
-                        // Optionally handle onload/onerror for external scripts
-                    } else { // If the original script had inline code
-                        newScript.textContent = scriptElement.textContent;
-                    }
-                    // Append the new script to the head or body to execute it
-                    document.body.appendChild(newScript).remove(); // Append and immediately remove to execute
-                    console.log(`Executed script from ${filePath}`);
-                }
+            // Kiểm tra sự tồn tại của các phần tử trước khi thêm sự kiện
+            if (npHamburger && npNavMenu) {
+                // Sự kiện click vào nút hamburger
+                npHamburger.addEventListener('click', (event) => {
+                    // Ngăn sự kiện click lan ra ngoài (quan trọng khi xử lý đóng menu)
+                    event.stopPropagation();
+                    // Thêm/xóa lớp 'np-active' để hiện/ẩn menu
+                    const isActive = npNavMenu.classList.toggle('np-active');
+                    // Cập nhật trạng thái aria-expanded cho nút hamburger
+                    npHamburger.setAttribute('aria-expanded', isActive);
+                    // Thêm/xóa lớp để ngăn cuộn body khi menu mở (tùy chọn)
+                    // body.classList.toggle('no-scroll', isActive);
+                });
 
-            } catch (error) {
-                console.error(`Could not load HTML from ${filePath}:`, error);
-                 if (element) {
-                    element.innerHTML = `<p class="text-red-500 text-center p-4">Lỗi khi tải ${elementId}.</p>`;
+                // Đóng menu khi click vào một link trong menu (trên màn hình nhỏ)
+                npNavMenu.querySelectorAll('.np-nav-link, .np-cta-button').forEach(link => {
+                    link.addEventListener('click', () => {
+                        // Chỉ đóng nếu menu đang mở (có lớp np-active)
+                        if (npNavMenu.classList.contains('np-active')) {
+                            npNavMenu.classList.remove('np-active');
+                            npHamburger.setAttribute('aria-expanded', 'false');
+                            // body.classList.remove('no-scroll'); // Bỏ lớp ngăn cuộn
+                        }
+                    });
+                });
+
+                // Đánh dấu mục menu active dựa trên URL hiện tại
+                const currentLocation = window.location.href;
+                const menuItems = npNavMenu.querySelectorAll('.np-nav-link'); // Chọn các link trong menu
+
+                let isHomepage = (currentLocation === window.location.origin + '/' || currentLocation.endsWith('index.html'));
+                let activeSet = false;
+
+                // Xóa active khỏi tất cả trước
+                menuItems.forEach(i => i.classList.remove('np-active'));
+
+                menuItems.forEach(item => {
+                    // So sánh href của link với URL hiện tại một cách chặt chẽ hơn
+                    // Loại bỏ dấu / cuối cùng và query string/hash để so sánh
+                    const itemHrefClean = item.href.replace(/\/$/, '').split('?')[0].split('#')[0];
+                    const currentLocationClean = currentLocation.replace(/\/$/, '').split('?')[0].split('#')[0];
+
+                    if(itemHrefClean === currentLocationClean && !isHomepage) {
+                         item.classList.add('np-active');
+                         activeSet = true;
+                    }
+                });
+
+                // Xử lý trường hợp trang chủ riêng biệt nếu chưa có mục nào được đánh dấu active
+                 if (!activeSet) {
+                     menuItems.forEach(item => {
+                         const itemHref = item.getAttribute('href');
+                         if ((itemHref === 'index.html' || itemHref === './' || itemHref === '/') && isHomepage) {
+                             item.classList.add('np-active');
+                         }
+                     });
                  }
             }
-        }
 
-        // Load header and footer when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            loadHTML('header-placeholder', 'header.html');
-            loadHTML('footer-placeholder', 'footer.html');
+            // Đóng menu khi click ra bên ngoài menu (trên màn hình nhỏ)
+            document.addEventListener('click', function(event) {
+                // Kiểm tra xem menu có đang mở không và click có xảy ra bên ngoài menu và nút hamburger không
+                if (npNavMenu && npNavMenu.classList.contains('np-active') &&
+                    !npNavMenu.contains(event.target) &&
+                    event.target !== npHamburger && !npHamburger.contains(event.target) /* Kiểm tra cả icon bên trong nút */ ) {
+                    npNavMenu.classList.remove('np-active');
+                    npHamburger.setAttribute('aria-expanded', 'false');
+                    // body.classList.remove('no-scroll'); // Bỏ lớp ngăn cuộn
+                }
+            });
+
+             // Đóng menu khi nhấn phím Escape
+             document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && npNavMenu && npNavMenu.classList.contains('np-active')) {
+                    npNavMenu.classList.remove('np-active');
+                    npHamburger.setAttribute('aria-expanded', 'false');
+                    npHamburger.focus(); // Chuyển focus về nút hamburger sau khi đóng menu
+                    // body.classList.remove('no-scroll'); // Bỏ lớp ngăn cuộn
+                }
+            });
         });
     </script>
-
-</body>
+    </body>
 </html>
