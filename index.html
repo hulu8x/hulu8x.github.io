@@ -10,8 +10,6 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/Lucide.css" />
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
@@ -25,32 +23,66 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
-         /* Style cho icon */
-        .lucide {
-            display: inline-block;
-            width: 1em;
-            height: 1em;
-            stroke-width: 2;
-            stroke: currentColor;
-            fill: none;
+        /* Style cho icon SVG nhúng */
+        .icon-inline {
+             display: inline-block;
+             width: 1.1em; /* Điều chỉnh kích thước nếu cần */
+             height: 1.1em;
+             vertical-align: -0.15em; /* Căn chỉnh theo dòng chữ */
+             margin-right: 0.4em; /* Khoảng cách với chữ */
         }
+         .icon-inline-sm { /* Icon nhỏ hơn cho link */
+             display: inline-block;
+             width: 0.9em;
+             height: 0.9em;
+             vertical-align: -0.1em;
+             margin-left: 0.2em;
+        }
+         .icon-large { /* Icon lớn hơn cho khối dịch vụ */
+             width: 2rem; /* tương đương h-8 */
+             height: 2rem; /* tương đương w-8 */
+             stroke-width: 1.5; /* Nét mảnh hơn một chút */
+         }
+         .icon-quote { /* Icon quote lớn */
+             width: 3rem; /* ~h-12 */
+             height: 3rem; /* ~w-12 */
+             stroke-width: 1;
+         }
+
         /* Đảm bảo iframe bản đồ responsive */
         .map-container iframe {
             width: 100%;
-            height: 450px; /* Giữ chiều cao cố định hoặc điều chỉnh theo ý muốn */
+            height: 450px;
             border: 0;
         }
         /* Placeholder cho hình ảnh */
         .placeholder-img {
-            background-color: #e0e0e0; /* Màu nền placeholder */
+            background-color: #e0e0e0;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #a0a0a0;
-            font-size: 0.875rem; /* text-sm */
-            aspect-ratio: 16 / 9; /* Tỷ lệ khung hình phổ biến */
+            font-size: 0.875rem;
+            aspect-ratio: 16 / 9;
             border-radius: 0.375rem; /* rounded-md */
         }
+        /* Custom animation classes (Optional) */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in-down { animation: fadeInDown 0.8s ease-out forwards; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out 0.2s forwards; opacity: 0; } /* Delay added */
+        .animate-fade-in { animation: fadeIn 1s ease-out 0.5s forwards; opacity:0; } /* Delay added */
+
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -62,61 +94,61 @@
         <section class="relative bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-24 md:py-32 px-4 overflow-hidden">
              <div class="absolute inset-0 z-0 opacity-20">
                  <img src="https://placehold.co/1920x1080/3B82F6/FFFFFF?text=Hero+Background+(images/hero-background.png)"
-                     alt="Hình ảnh nền sân cầu lông"
-                     class="w-full h-full object-cover">
-            </div>
-            <div class="container mx-auto relative z-10 text-center">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight animate-fade-in-down">
-                    CLB Cầu Lông Nhơn Phú: <br class="md:hidden"> Sân Chơi Đẳng Cấp - Đam Mê Kết Nối
-                </h1>
-                <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto animate-fade-in-up">
-                    Chào mừng bạn đến với Câu lạc bộ Cầu lông Nhơn Phú - điểm đến lý tưởng cho người yêu cầu lông tại Quy Nhơn. Với hệ thống sân hiện đại tại Viện Sốt Rét và các lớp học chất lượng, chúng tôi mang đến trải nghiệm tốt nhất cho mọi trình độ.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in">
-                    <a href="dat-san.html" class="cta-button bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg text-lg shadow-md">
-                       <i class="lucide lucide-calendar-check mr-2"></i> Đặt Sân Ngay
-                    </a>
-                    <a href="lop-hoc.html" class="cta-button bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 px-8 rounded-lg text-lg shadow-md">
-                       <i class="lucide lucide-graduation-cap mr-2"></i> Tìm Hiểu Lớp Học
-                    </a>
-                </div>
-            </div>
+                      alt="Hình ảnh nền sân cầu lông"
+                      class="w-full h-full object-cover"
+                      onerror="this.style.display='none'"> </div>
+             <div class="container mx-auto relative z-10 text-center">
+                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight animate-fade-in-down">
+                     CLB Cầu Lông Nhơn Phú: <br class="md:hidden"> Sân Chơi Đẳng Cấp - Đam Mê Kết Nối
+                 </h1>
+                 <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto animate-fade-in-up">
+                     Chào mừng bạn đến với Câu lạc bộ Cầu lông Nhơn Phú - điểm đến lý tưởng cho người yêu cầu lông tại Quy Nhơn. Với hệ thống sân hiện đại tại Viện Sốt Rét và các lớp học chất lượng, chúng tôi mang đến trải nghiệm tốt nhất cho mọi trình độ.
+                 </p>
+                 <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in">
+                     <a href="dat-san.html" class="cta-button bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg text-lg shadow-md inline-flex items-center justify-center">
+                         <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/calendar-check.svg" alt="Đặt sân" class="icon-inline"/> Đặt Sân Ngay
+                     </a>
+                     <a href="lop-hoc.html" class="cta-button bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 px-8 rounded-lg text-lg shadow-md inline-flex items-center justify-center">
+                         <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/graduation-cap.svg" alt="Lớp học" class="icon-inline"/> Tìm Hiểu Lớp Học
+                     </a>
+                 </div>
+             </div>
         </section>
 
         <section class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="text-center p-6 bg-gray-100 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                    <div class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 border-t-4 border-blue-500">
                         <div class="mb-4 inline-block p-3 bg-blue-100 text-blue-600 rounded-full">
-                            <i class="lucide lucide-swords text-3xl"></i>
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/swords.svg" alt="Sân bãi" class="icon-large"/>
                         </div>
                         <h3 class="text-xl font-semibold mb-2 text-gray-900">Sân Bãi Hiện Đại</h3>
                         <p class="text-gray-600 mb-4">Hệ thống 3 sân đạt chuẩn, thảm mới 4,5mm giảm chấn, ánh sáng tốt, không gian thoáng đãng.</p>
-                        <a href="gioi-thieu.html#san-bai" class="text-blue-600 hover:text-blue-800 font-medium">Xem chi tiết sân <i class="lucide lucide-arrow-right ml-1 text-sm"></i></a>
+                        <a href="gioi-thieu.html#san-bai" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">Xem chi tiết sân <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/arrow-right.svg" alt="" class="icon-inline-sm"/></a>
                     </div>
-                    <div class="text-center p-6 bg-gray-100 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                    <div class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 border-t-4 border-green-500">
                         <div class="mb-4 inline-block p-3 bg-green-100 text-green-600 rounded-full">
-                            <i class="lucide lucide-users text-3xl"></i>
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/users.svg" alt="Lớp học" class="icon-large"/>
                         </div>
                         <h3 class="text-xl font-semibold mb-2 text-gray-900">Lớp Học Chất Lượng</h3>
                         <p class="text-gray-600 mb-4">Đào tạo bài bản từ cơ bản đến nâng cao cho mọi lứa tuổi cùng HLV Biền, HLV Hoàng và đội ngũ giàu kinh nghiệm.</p>
-                        <a href="lop-hoc.html" class="text-green-600 hover:text-green-800 font-medium">Khám phá lớp học <i class="lucide lucide-arrow-right ml-1 text-sm"></i></a>
+                        <a href="lop-hoc.html" class="text-green-600 hover:text-green-800 font-medium inline-flex items-center">Khám phá lớp học <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/arrow-right.svg" alt="" class="icon-inline-sm"/></a>
                     </div>
-                    <div class="text-center p-6 bg-gray-100 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                    <div class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 border-t-4 border-purple-500">
                         <div class="mb-4 inline-block p-3 bg-purple-100 text-purple-600 rounded-full">
-                             <i class="lucide lucide-calendar-plus text-3xl"></i>
+                             <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/calendar-plus.svg" alt="Đặt sân" class="icon-large"/>
                         </div>
                         <h3 class="text-xl font-semibold mb-2 text-gray-900">Đặt Sân Dễ Dàng</h3>
                         <p class="text-gray-600 mb-4">Hệ thống đặt lịch trực tuyến 24/7 nhanh chóng, xem trạng thái sân theo thời gian thực.</p>
-                        <a href="dat-san.html" class="text-purple-600 hover:text-purple-800 font-medium">Đặt sân online <i class="lucide lucide-arrow-right ml-1 text-sm"></i></a>
+                        <a href="dat-san.html" class="text-purple-600 hover:text-purple-800 font-medium inline-flex items-center">Đặt sân online <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/arrow-right.svg" alt="" class="icon-inline-sm"/></a>
                     </div>
-                    <div class="text-center p-6 bg-gray-100 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                    <div class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 border-t-4 border-red-500">
                         <div class="mb-4 inline-block p-3 bg-red-100 text-red-600 rounded-full">
-                            <i class="lucide lucide-heart-handshake text-3xl"></i>
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/heart-handshake.svg" alt="Cộng đồng" class="icon-large"/>
                         </div>
                         <h3 class="text-xl font-semibold mb-2 text-gray-900">Cộng Đồng Sôi Nổi</h3>
                         <p class="text-gray-600 mb-4">Tham gia các buổi giao lưu định kỳ, giải đấu hấp dẫn và kết nối với những người cùng đam mê.</p>
-                        <a href="tin-tuc.html" class="text-red-600 hover:text-red-800 font-medium">Xem hoạt động <i class="lucide lucide-arrow-right ml-1 text-sm"></i></a>
+                        <a href="tin-tuc.html" class="text-red-600 hover:text-red-800 font-medium inline-flex items-center">Xem hoạt động <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/arrow-right.svg" alt="" class="icon-inline-sm"/></a>
                     </div>
                 </div>
             </div>
@@ -126,14 +158,14 @@
             <div class="container mx-auto px-4 text-center">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-blue-800">Kiểm tra sân trống hôm nay</h2>
                 <div class="bg-white p-8 rounded-lg shadow-md max-w-3xl mx-auto mb-6">
-                    <p class="text-gray-600 text-lg">
-                        <i class="lucide lucide-calendar-search mr-2 text-blue-600"></i>
+                    <p class="text-gray-600 text-lg inline-flex items-center">
+                        <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/calendar-search.svg" alt="Lịch sân" class="icon-inline text-blue-600"/>
                         Widget hiển thị lịch sân trống sẽ được tích hợp tại đây.
                         Bạn có thể xem nhanh các khung giờ còn trống gần nhất.
                     </p>
                      <div class="mt-6 p-6 border border-dashed border-gray-300 rounded-md text-gray-500">
-                        [Widget Lịch Đặt Sân Mini]
-                    </div>
+                         [Widget Lịch Đặt Sân Mini]
+                     </div>
                 </div>
                 <a href="dat-san.html" class="cta-button bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg text-lg shadow-md">
                     Xem lịch đầy đủ & Đặt sân
@@ -152,7 +184,7 @@
                         <div class="p-6">
                             <h3 class="text-xl font-semibold mb-2 text-gray-800">Kết quả Giải Giao hữu Tháng 3/2025</h3>
                             <p class="text-gray-600 mb-4 text-sm">Cập nhật kết quả và những khoảnh khắc đáng nhớ từ giải đấu giao hữu vừa qua...</p>
-                            <a href="tin-tuc.html#bai-viet-1" class="text-blue-600 hover:text-blue-800 font-medium">Đọc tiếp <i class="lucide lucide-arrow-right ml-1 text-sm"></i></a>
+                            <a href="tin-tuc.html#bai-viet-1" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">Đọc tiếp <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/arrow-right.svg" alt="" class="icon-inline-sm"/></a>
                         </div>
                     </div>
                     <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
@@ -162,7 +194,7 @@
                         <div class="p-6">
                             <h3 class="text-xl font-semibold mb-2 text-gray-800">Thông báo Lịch hoạt động CLB dịp Lễ</h3>
                             <p class="text-gray-600 mb-4 text-sm">CLB Nhơn Phú xin thông báo lịch hoạt động trong dịp lễ sắp tới để quý hội viên tiện sắp xếp...</p>
-                            <a href="tin-tuc.html#bai-viet-2" class="text-blue-600 hover:text-blue-800 font-medium">Đọc tiếp <i class="lucide lucide-arrow-right ml-1 text-sm"></i></a>
+                            <a href="tin-tuc.html#bai-viet-2" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">Đọc tiếp <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/arrow-right.svg" alt="" class="icon-inline-sm"/></a>
                         </div>
                     </div>
                     <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
@@ -172,7 +204,7 @@
                         <div class="p-6">
                             <h3 class="text-xl font-semibold mb-2 text-gray-800">Mẹo chọn vợt cầu lông cho người mới</h3>
                             <p class="text-gray-600 mb-4 text-sm">Bạn mới bắt đầu chơi cầu lông và băn khoăn không biết chọn vợt thế nào cho phù hợp?...</p>
-                            <a href="tin-tuc.html#bai-viet-3" class="text-blue-600 hover:text-blue-800 font-medium">Đọc tiếp <i class="lucide lucide-arrow-right ml-1 text-sm"></i></a>
+                            <a href="tin-tuc.html#bai-viet-3" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">Đọc tiếp <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/arrow-right.svg" alt="" class="icon-inline-sm"/></a>
                         </div>
                     </div>
                 </div>
@@ -189,24 +221,24 @@
                 <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center text-gray-900">Khoảnh Khắc Nhơn Phú</h2>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity">
-                        <img src="https://placehold.co/400x400/7DD3FC/FFFFFF?text=Ảnh+sân+1" alt="Ảnh sân cầu lông 1" class="w-full h-full object-cover">
+                        <img src="https://placehold.co/400x400/7DD3FC/FFFFFF?text=Ảnh+sân+1" alt="Ảnh sân cầu lông 1" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
                     </div>
                      <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity">
-                        <img src="https://placehold.co/400x400/6EE7B7/FFFFFF?text=Ảnh+lớp+học+1" alt="Ảnh lớp học 1" class="w-full h-full object-cover">
+                        <img src="https://placehold.co/400x400/6EE7B7/FFFFFF?text=Ảnh+lớp+học+1" alt="Ảnh lớp học 1" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
                     </div>
                      <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity">
-                        <img src="https://placehold.co/400x400/FBCFE8/FFFFFF?text=Ảnh+giải+đấu+1" alt="Ảnh giải đấu 1" class="w-full h-full object-cover">
+                        <img src="https://placehold.co/400x400/FBCFE8/FFFFFF?text=Ảnh+giải+đấu+1" alt="Ảnh giải đấu 1" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
                     </div>
                      <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity">
-                        <img src="https://placehold.co/400x400/FDE68A/FFFFFF?text=Ảnh+sân+2" alt="Ảnh sân cầu lông 2" class="w-full h-full object-cover">
+                        <img src="https://placehold.co/400x400/FDE68A/FFFFFF?text=Ảnh+sân+2" alt="Ảnh sân cầu lông 2" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
                     </div>
                      <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity hidden md:block">
-                        <img src="https://placehold.co/400x400/C4B5FD/FFFFFF?text=Ảnh+lớp+học+2" alt="Ảnh lớp học 2" class="w-full h-full object-cover">
+                        <img src="https://placehold.co/400x400/C4B5FD/FFFFFF?text=Ảnh+lớp+học+2" alt="Ảnh lớp học 2" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
                     </div>
                      <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity hidden lg:block">
-                        <img src="https://placehold.co/400x400/FECACA/FFFFFF?text=Ảnh+giao+lưu" alt="Ảnh giao lưu" class="w-full h-full object-cover">
+                        <img src="https://placehold.co/400x400/FECACA/FFFFFF?text=Ảnh+giao+lưu" alt="Ảnh giao lưu" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
                     </div>
-                </div>
+                    </div>
                  <div class="text-center mt-12">
                     <a href="thu-vien.html" class="cta-button bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg text-lg shadow-md">
                         Khám phá thư viện ảnh
@@ -220,20 +252,20 @@
                 <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center text-gray-900">Học Viên & Thành Viên Nói Gì?</h2>
                 <div class="space-y-8">
                     <blockquote class="bg-gray-100 p-6 rounded-lg shadow-sm relative">
-                         <div class="absolute top-0 left-0 transform -translate-x-3 -translate-y-3 text-5xl text-blue-200 opacity-80">
-                            <i class="lucide lucide-quote"></i>
-                        </div>
-                        <p class="text-lg text-gray-700 italic mb-4">"Sân chơi ở đây rất tốt, sạch sẽ, thoáng mát. Mình rất thích không khí ở CLB."</p>
-                        <footer class="text-right text-gray-600 font-medium">— Anh Tuấn Anh</footer>
+                         <div class="absolute top-0 left-0 transform -translate-x-3 -translate-y-3 text-blue-200 opacity-80">
+                             <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/quote.svg" alt="Quote" class="icon-quote"/>
+                         </div>
+                         <p class="text-lg text-gray-700 italic mb-4 pl-8">"Sân chơi ở đây rất tốt, sạch sẽ, thoáng mát. Mình rất thích không khí ở CLB."</p>
+                         <footer class="text-right text-gray-600 font-medium">— Anh Tuấn Anh</footer>
                     </blockquote>
                     <blockquote class="bg-gray-100 p-6 rounded-lg shadow-sm relative">
-                         <div class="absolute top-0 left-0 transform -translate-x-3 -translate-y-3 text-5xl text-green-200 opacity-80">
-                            <i class="lucide lucide-quote"></i>
-                        </div>
-                        <p class="text-lg text-gray-700 italic mb-4">"Các thầy dạy rất nhiệt tình, dễ hiểu. Mình tiến bộ rõ rệt sau khóa học cơ bản."</p>
-                        <footer class="text-right text-gray-600 font-medium">— Bạn Minh Châu</footer>
+                         <div class="absolute top-0 left-0 transform -translate-x-3 -translate-y-3 text-green-200 opacity-80">
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/quote.svg" alt="Quote" class="icon-quote"/>
+                         </div>
+                         <p class="text-lg text-gray-700 italic mb-4 pl-8">"Các thầy dạy rất nhiệt tình, dễ hiểu. Mình tiến bộ rõ rệt sau khóa học cơ bản."</p>
+                         <footer class="text-right text-gray-600 font-medium">— Bạn Minh Châu</footer>
                     </blockquote>
-                </div>
+                    </div>
             </div>
         </section>
 
@@ -243,8 +275,8 @@
                 <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
                     Liên hệ ngay để được tư vấn về lớp học phù hợp, đặt sân thi đấu giao hữu hoặc tìm hiểu thêm về các hoạt động sôi nổi tại CLB Nhơn Phú!
                 </p>
-                <a href="lien-he.html" class="cta-button bg-white text-teal-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg text-lg shadow-md">
-                   <i class="lucide lucide-phone-call mr-2"></i> Liên Hệ Ngay
+                <a href="lien-he.html" class="cta-button bg-white text-teal-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg text-lg shadow-md inline-flex items-center justify-center">
+                   <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/phone-call.svg" alt="Liên hệ" class="icon-inline"/> Liên Hệ Ngay
                 </a>
             </div>
         </section>
@@ -254,33 +286,33 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div class="map-container rounded-lg overflow-hidden shadow-lg">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3874.563116651078!2d109.2119018153449!3d13.80443009031268!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316f6c5a44227e7b%3A0x4d6b937e0347e21d!2zU8OibiBj4bqndSBsw7RuZyBWaeG7h24gU-G7kXQgcsOpdA!5e0!3m2!1svi!2s!4v1678886400000!5m2!1svi!2s"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3874.441099375844!2d109.1908628748574!3d13.81200639607566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316f1515a817d73f%3A0x6e0b8e6b6e2e559d!2zU8OibiBj4bqndSBsw7RuZyBWaeG7h24gU-G7kXQgcsOpdA!5e0!3m2!1svi!2s!4v1712552045187!5m2!1svi!2s" /* Replace with your actual Google Maps embed URL */
                             allowfullscreen=""
                             loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"
                             title="Bản đồ vị trí CLB Cầu Lông Nhơn Phú">
                         </iframe>
-                        </div>
+                    </div>
                     <div class="text-gray-700">
                         <h3 class="text-2xl font-semibold mb-4 text-gray-900">Thông Tin Liên Hệ</h3>
                         <p class="mb-3 flex items-start">
-                            <i class="lucide lucide-map-pin mr-3 mt-1 text-blue-600 flex-shrink-0"></i>
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/map-pin.svg" alt="Địa chỉ" class="icon-inline mt-1 mr-3 text-blue-600 flex-shrink-0"/>
                             <span><strong>Địa chỉ:</strong> Sân Cầu lông Viện Sốt rét, Khu vực 8, P. Nhơn Phú, TP. Quy Nhơn, Bình Định.</span>
                         </p>
                         <p class="mb-3 flex items-center">
-                            <i class="lucide lucide-phone mr-3 text-green-600 flex-shrink-0"></i>
+                             <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/phone.svg" alt="Hotline" class="icon-inline mr-3 text-green-600 flex-shrink-0"/>
                             <span><strong>Hotline:</strong></span>
                         </p>
-                        <ul class="list-none ml-8 mb-3">
+                        <ul class="list-none ml-10 mb-3">
                              <li>HLV Biền: <a href="tel:0988809890" class="text-blue-600 hover:underline">0988.809.890</a> (Tư vấn lớp học)</li>
                              <li>HLV Hoàng: <a href="tel:0935185558" class="text-blue-600 hover:underline">0935.185.558</a> (Đặt sân)</li>
                         </ul>
                          <p class="mb-3 flex items-center">
-                            <i class="lucide lucide-mail mr-3 text-purple-600 flex-shrink-0"></i>
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/mail.svg" alt="Email" class="icon-inline mr-3 text-purple-600 flex-shrink-0"/>
                              <span><strong>Email:</strong> <a href="mailto:clbnhonphu@gmail.com" class="text-blue-600 hover:underline">clbnhonphu@gmail.com</a></span>
                         </p>
                          <p class="flex items-center">
-                            <i class="lucide lucide-clock mr-3 text-red-600 flex-shrink-0"></i>
+                            <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/clock.svg" alt="Giờ mở cửa" class="icon-inline mr-3 text-red-600 flex-shrink-0"/>
                             <span><strong>Giờ mở cửa:</strong> Sáng 5h00 - 7h00 | Chiều 17h00 - 21h00</span>
                         </p>
                     </div>
@@ -307,17 +339,17 @@
                     const element = document.getElementById(elementId);
                     if (element) {
                         element.innerHTML = data;
-                        // Nếu header có script cần chạy (ví dụ: hamburger menu), bạn cần xử lý thêm ở đây
-                        // Ví dụ: Tìm và thực thi các thẻ script trong nội dung vừa tải
+                        // Re-run scripts inside the loaded content if necessary
                         const scripts = element.querySelectorAll('script');
-                        scripts.forEach(script => {
+                        scripts.forEach(oldScript => {
                             const newScript = document.createElement('script');
-                            if (script.src) {
-                                newScript.src = script.src;
-                            } else {
-                                newScript.textContent = script.textContent;
+                            Array.from(oldScript.attributes).forEach(attr => {
+                                newScript.setAttribute(attr.name, attr.value);
+                            });
+                            if (!oldScript.src) {
+                                newScript.appendChild(document.createTextNode(oldScript.innerHTML));
                             }
-                            document.body.appendChild(newScript).parentNode.removeChild(newScript); // Chạy script
+                            oldScript.parentNode.replaceChild(newScript, oldScript);
                         });
                     } else {
                         console.error(`Element with id '${elementId}' not found.`);
@@ -327,7 +359,7 @@
                     console.error(`Could not load HTML from ${url}:`, error);
                     const element = document.getElementById(elementId);
                     if(element) {
-                        element.innerHTML = `<p class="text-red-500 text-center p-4">Lỗi: Không thể tải ${elementId.replace('-placeholder', '.html')}. Vui lòng kiểm tra đường dẫn file.</p>`;
+                        element.innerHTML = `<p class="text-red-500 text-center p-4">Lỗi: Không thể tải ${elementId.replace('-placeholder', '.html')}. Vui lòng kiểm tra đường dẫn file và đảm bảo file tồn tại.</p>`;
                     }
                 });
         };
@@ -338,40 +370,7 @@
             loadHTML('footer.html', 'footer-placeholder');
         });
 
-        // Thêm hiệu ứng animation đơn giản khi cuộn (tùy chọn)
-        const addFadeInAnimation = () => {
-            const elements = document.querySelectorAll('.animate-fade-in, .animate-fade-in-down, .animate-fade-in-up');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('opacity-100', 'translate-y-0');
-                        entry.target.classList.remove('opacity-0');
-                        if (entry.target.classList.contains('animate-fade-in-down')) {
-                             entry.target.classList.remove('-translate-y-4');
-                        }
-                         if (entry.target.classList.contains('animate-fade-in-up')) {
-                             entry.target.classList.remove('translate-y-4');
-                        }
-                        observer.unobserve(entry.target); // Chỉ chạy 1 lần
-                    }
-                });
-            }, { threshold: 0.1 }); // Kích hoạt khi 10% phần tử hiển thị
-
-            elements.forEach(el => {
-                el.classList.add('opacity-0', 'transition-all', 'duration-1000', 'ease-out');
-                 if (el.classList.contains('animate-fade-in-down')) {
-                     el.classList.add('-translate-y-4');
-                 } else if (el.classList.contains('animate-fade-in-up')) {
-                     el.classList.add('translate-y-4');
-                 }
-                observer.observe(el);
-            });
-        };
-
-        // Khởi tạo animation khi trang tải xong
-        // document.addEventListener('DOMContentLoaded', addFadeInAnimation);
-        // Tạm thời tắt animation mặc định để tránh xung đột nếu header/footer cũng có animation
-         // Bạn có thể bật lại nếu cần và điều chỉnh cho phù hợp
+        // (Optional) Add simple fade-in animations on scroll or load
 
     </script>
 
