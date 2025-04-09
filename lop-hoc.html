@@ -324,63 +324,47 @@
             }
         }
 
-        // Handle Form Submission (Simulation)
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbztwGerwyWonPUzP65io9Tb1x8r4wvMZM7iIKVAXlLqpgOmKvzH5bxyyHpFgWy9jLvSpw/exec';
         const inquiryForm = document.getElementById('class-inquiry-form');
         const successMessage = document.getElementById('form-success-message');
         const errorMessage = document.getElementById('form-error-message');
 
         if (inquiryForm) {
-            inquiryForm.addEventListener('submit', function(event) {
+            inquiryForm.addEventListener('submit', async function(event) {
                 event.preventDefault(); // Prevent actual form submission
 
-                // Basic validation check (example: check required fields)
-                let isValid = true;
-                inquiryForm.querySelectorAll('[required]').forEach(input => {
-                    if (!input.value) {
-                        isValid = false;
-                        // Optional: Add visual feedback for invalid fields
-                        input.classList.add('border-red-500');
+                // Collect form data
+                const formData = new FormData(inquiryForm);
+
+                try {
+                    // Send data to Google Apps Script
+                    const response = await fetch(scriptURL, {
+                        method: 'POST',
+                        body: formData,
+                    });
+
+                    if (response.ok) {
+                        // Show success message
+                        inquiryForm.reset(); // Clear the form fields
+                        successMessage.classList.remove('hidden');
+                        errorMessage.classList.add('hidden');
+
+                        // Optional: Hide success message after a few seconds
+                        setTimeout(() => {
+                            successMessage.classList.add('hidden');
+                        }, 5000); // 5 seconds
                     } else {
-                         input.classList.remove('border-red-500');
+                        throw new Error('Network response was not ok');
                     }
-                });
-
-                 // Check phone pattern if needed (HTML pattern attribute handles basic cases)
-                const phoneInput = inquiryForm.querySelector('#phone');
-                if (phoneInput && phoneInput.validity && !phoneInput.validity.valid) {
-                     isValid = false;
-                     phoneInput.classList.add('border-red-500');
-                } else if (phoneInput) {
-                     phoneInput.classList.remove('border-red-500');
+                } catch (error) {
+                    console.error('Error submitting form:', error);
+                    // Show error message
+                    errorMessage.textContent = "Đã có lỗi xảy ra khi gửi yêu cầu. Vui lòng thử lại.";
+                    errorMessage.classList.remove('hidden');
+                    successMessage.classList.add('hidden');
                 }
-
-
-                if (isValid) {
-                    // --- Simulation ---
-                    // In a real application, you would send data via fetch/AJAX here
-                    console.log('Form data submitted (simulation)');
-                    // Hide form, show success message
-                    // inquiryForm.classList.add('hidden'); // Optional: hide form
-                    inquiryForm.reset(); // Clear the form fields
-                    successMessage.classList.remove('hidden');
-                    errorMessage.classList.add('hidden');
-
-                    // Optional: Hide success message after a few seconds
-                    setTimeout(() => {
-                        successMessage.classList.add('hidden');
-                        // inquiryForm.classList.remove('hidden'); // Optional: show form again
-                    }, 5000); // 5 seconds
-                     // --- End Simulation ---
-                } else {
-                     // Show error message if validation fails
-                     errorMessage.textContent = "Vui lòng điền đầy đủ các trường bắt buộc (*)."; // Update error text
-                     errorMessage.classList.remove('hidden');
-                     successMessage.classList.add('hidden');
-                }
-
             });
         }
-
 
         // Load header and footer when the page loads
         document.addEventListener('DOMContentLoaded', () => {
