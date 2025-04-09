@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Chọn Vợt Cầu Lông Cho Người Mới</title>
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #2e7d32; /* Green */
+            --secondary-color: #ff5722; /* Orange */
+            --accent-color: #ffc107; /* Yellow */
+            --light-bg: #f5f5f5; /* Light Gray Background */
+            --dark-text: #212121; /* Dark Gray Text */
+            --light-text: #ffffff; /* White Text */
+        }
+
+        /* Global Reset and Font */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Body Styling for Sticky Footer */
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            display: flex; /* Enable Flexbox */
+            flex-direction: column; /* Stack children vertically */
+            min-height: 100vh; /* Ensure body takes at least full viewport height */
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto; /* Center container */
+            padding: 0 1rem; /* Padding on sides */
+        }
+
+        /* Main Content Area - Flex Grow */
+        main.container {
+            flex: 1; /* Allow main content to grow and push footer down */
+        }
+
+        /* Headings */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            /* H1 styling likely comes from header.html */
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin: 1.5rem 0 1rem;
+        }
+
+        /* Paragraphs */
+        p {
+            margin-bottom: 1rem;
+            text-align: justify; /* Justify text for better readability */
+        }
+
+        /* Introduction Paragraph */
+        .intro {
+            font-size: 1.1rem;
+            margin: 2rem 0;
+            line-height: 1.8;
+        }
+
+        /* Feature Image */
+        .feature-image {
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px; /* Rounded corners */
+            margin: 2rem 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+            display: block; /* Prevent extra space below image */
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Collapse borders */
+            margin: 2rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Table shadow */
+            overflow-x: auto; /* Allow horizontal scrolling on small screens */
+            display: block; /* Needed for overflow-x */
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #ddd; /* Light gray border */
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            font-weight: 600; /* Bolder header text */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Zebra striping */
+        }
+
+        tr:hover {
+            background-color: #e9e9e9; /* Hover effect */
+        }
+
+        /* Card Styling */
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+        }
+
+        .card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
+        }
+
+        .card-title {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-content {
+            color: #555; /* Slightly lighter text color */
+        }
+        .card-content ul {
+            list-style-position: inside; /* Indent list items */
+            padding-left: 0.5rem; /* Add some padding */
+            margin-top: 0.5rem;
+        }
+        .card-content li {
+            margin-bottom: 0.5rem; /* Space between list items */
+        }
+
+        /* Note Boxes */
+        .important-note, .recommendation {
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px; /* Slightly rounded corners */
+        }
+
+        .important-note {
+            background-color: #fff3e0; /* Light orange background */
+            border-left: 5px solid var(--accent-color); /* Yellow accent border */
+            color: #5d4037; /* Darker text for contrast */
+        }
+        .important-note ol {
+             list-style-position: inside;
+             padding-left: 0.5rem;
+        }
+         .important-note li {
+             margin-bottom: 0.5rem;
+         }
+
+        .recommendation {
+            background-color: #e8f5e9; /* Light green background */
+            border-left: 5px solid var(--primary-color); /* Green accent border */
+            color: #1b5e20; /* Darker green text */
+        }
+        .recommendation strong {
+            color: var(--primary-color); /* Match heading color */
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            /* Create columns that are at least 300px wide, filling available space */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem; /* Space between grid items */
+            margin: 2rem 0;
+        }
+
+        /* Racket Specs Styling */
+        .racket-specs {
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap */
+            gap: 0.75rem; /* Space between spec items */
+            margin: 1.5rem 0 0.5rem; /* Adjust margins */
+        }
+
+        .spec-item {
+            background-color: #e0e0e0; /* Slightly darker background */
+            border-radius: 20px; /* Pill shape */
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            font-size: 0.9rem; /* Slightly smaller font */
+            color: var(--dark-text); /* Use dark text */
+            border: 1px solid #ccc; /* Lighter border */
+            white-space: nowrap; /* Prevent wrapping within the item */
+        }
+
+        /* Conclusion Section */
+        .conclusion {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem 0 2rem;
+        }
+
+        .conclusion h2 {
+            color: var(--light-text); /* White heading */
+            border-bottom-color: var(--light-text); /* White border */
+        }
+         .conclusion ul {
+             list-style-position: inside;
+             padding-left: 0.5rem;
+             margin-top: 1rem;
+         }
+         .conclusion li {
+             margin-bottom: 0.5rem;
+         }
+         .conclusion p {
+             text-align: left; /* Align text left in conclusion */
+         }
+
+        /* Footer Placeholder Styling (Minimal, actual style comes from footer.html) */
+        #footer-placeholder {
+            /* Add margin-top if footer.html doesn't provide enough spacing */
+             margin-top: 2rem;
+        }
+
+        /* Footnote */
+        .footnote {
+            font-size: 0.9rem;
+            color: #777; /* Gray text */
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd; /* Separator line */
+            text-align: center; /* Center footnote */
+        }
+        .footnote p {
+             text-align: center;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            h3 {
+                font-size: 1.3rem;
+            }
+
+            /* Stack grid items on smaller screens */
+            .grid {
+                grid-template-columns: 1fr; /* Single column */
+            }
+
+            /* Adjust table padding for smaller screens */
+            th, td {
+                padding: 0.75rem;
+            }
+        }
+         @media (max-width: 480px) {
+             h1 {
+                 font-size: 1.8rem;
+             }
+             h2 {
+                 font-size: 1.5rem;
+             }
+             h3 {
+                 font-size: 1.2rem;
+             }
+             .card {
+                 padding: 1rem;
+             }
+             th, td {
+                 font-size: 0.9rem; /* Smaller font in tables */
+             }
+         }
+    </style>
+</head>
+<body>
+
+    <div id="header-placeholder">
+        <p style="text-align:center; padding: 2rem; color: #777;">Đang tải header...</p>
+    </div>
+
+    <main class="container">
+        <p class="intro">
+            Việc lựa chọn một cây vợt cầu lông phù hợp là bước đầu tiên và quan trọng trên hành trình khám phá môn thể thao này.
+            Đối với người mới chơi, một cây vợt thích hợp không chỉ giúp bạn nhanh chóng làm quen với các kỹ thuật cơ bản
+            mà còn giảm thiểu nguy cơ chấn thương và tăng niềm vui khi tập luyện.
+        </p>
+
+        <img src="/images/votcaulong.jpg"
+             alt="Vợt cầu lông và quả cầu lông trên sân"
+             class="feature-image"
+             onerror="this.onerror=null; this.src='https://placehold.co/1200x600/cccccc/ffffff?text=Image+Not+Found';">
+
+        <h2>Các tiêu chí quan trọng khi chọn vợt cầu lông</h2>
+
+        <div class="card">
+            <h3 class="card-title">1. Trọng lượng vợt (Weight) - Yếu tố hàng đầu</h3>
+            <div class="card-content">
+                <p>
+                    Trọng lượng vợt là thông số quan trọng nhất khi lựa chọn vợt cầu lông.
+                    Người mới chơi nên ưu tiên những cây vợt nhẹ để dễ điều khiển và giảm mỏi tay khi tập luyện lâu.
+                </p>
+                <p>Trọng lượng vợt được thể hiện bằng ký hiệu "U" trên thân vợt:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ký hiệu</th>
+                            <th>Trọng lượng (grams)</th>
+                            <th>Đề xuất cho người mới</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>5U</td>
+                            <td>75-79.9g</td>
+                            <td><strong>Rất phù hợp</strong> (Đặc biệt cho nữ giới, người tay yếu)</td>
+                        </tr>
+                        <tr>
+                            <td>4U</td>
+                            <td>80-84.9g</td>
+                            <td><strong>Phù hợp nhất</strong> (Phổ biến, cân bằng)</td>
+                        </tr>
+                        <tr>
+                            <td>3U</td>
+                            <td>85-89.9g</td>
+                            <td>Cho người có lực cổ tay khá, muốn thêm sức mạnh</td>
+                        </tr>
+                        <tr>
+                            <td>2U</td>
+                            <td>90-94.9g</td>
+                            <td>Thường dành cho VĐV chuyên nghiệp (tấn công)</td>
+                        </tr>
+                        </tbody>
+                </table>
+                <div class="recommendation">
+                    <strong>Khuyến nghị:</strong> Người mới bắt đầu nên chọn vợt <strong>4U (80-85g)</strong> hoặc <strong>5U (dưới 80g)</strong>. Trọng lượng này đủ nhẹ để dễ xoay sở, học kỹ thuật và tránh mỏi tay, nhưng vẫn đủ đầm để cảm nhận lực đánh.
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="card-title">2. Điểm cân bằng (Balance Point) - Quyết định lối chơi</h3>
+            <div class="card-content">
+                <p>
+                    Điểm cân bằng (đo từ cuối cán vợt) quyết định sự phân bố trọng lượng và ảnh hưởng trực tiếp đến cảm giác và lối chơi:
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Loại vợt</th>
+                            <th>Điểm cân bằng (BP)</th>
+                            <th>Đặc điểm & Lối chơi phù hợp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nhẹ đầu (Head Light)</td>
+                            <td> < 285mm </td>
+                            <td>Linh hoạt, tốc độ vung vợt nhanh, dễ điều khiển, phòng thủ tốt, phản tạt nhanh.</td>
+                        </tr>
+                        <tr>
+                            <td>Cân bằng (Even Balance)</td>
+                            <td>285mm - 295mm</td>
+                            <td>Toàn diện, cân bằng giữa công và thủ, linh hoạt, dễ làm quen.</td>
+                        </tr>
+                        <tr>
+                            <td>Nặng đầu (Head Heavy)</td>
+                            <td> > 295mm </td>
+                            <td>Tăng sức mạnh cho cú đánh (đập cầu, phông cầu), phù hợp lối chơi tấn công.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                 <div class="recommendation">
+                    <strong>Khuyến nghị:</strong> Người mới chơi nên ưu tiên vợt <strong>Cân bằng (Even Balance)</strong>. Loại vợt này dễ kiểm soát, linh hoạt cho nhiều tình huống và giúp bạn làm quen với cả tấn công lẫn phòng thủ mà không bị quá nghiêng về một hướng.
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="card-title">3. Độ cứng/mềm của thân vợt (Shaft Flexibility)</h3>
+            <div class="card-content">
+                <p>
+                    Độ cứng của thân vợt (đũa vợt) ảnh hưởng đến khả năng truyền lực và kiểm soát cầu:
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Độ cứng</th>
+                            <th>Đặc điểm & Phù hợp với</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dẻo (Flexible)</td>
+                            <td>Trợ lực tốt, dễ phông cầu, phù hợp người mới, lực tay yếu, tốc độ vung vợt chậm. Ít kiểm soát hơn.</td>
+                        </tr>
+                        <tr>
+                            <td>Trung bình (Medium)</td>
+                            <td>Cân bằng giữa trợ lực và kiểm soát, phù hợp nhiều đối tượng, người chơi phong trào, trung cấp.</td>
+                        </tr>
+                        <tr>
+                            <td>Cứng (Stiff / Extra Stiff)</td>
+                            <td>Kiểm soát cầu tốt, độ chính xác cao, yêu cầu lực tay khỏe, tốc độ vung vợt nhanh. Phù hợp VĐV, người chơi khá/giỏi.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                 <div class="recommendation">
+                    <strong>Khuyến nghị:</strong> Người mới bắt đầu nên chọn thân vợt <strong>Dẻo (Flexible)</strong> hoặc <strong>Trung bình (Medium)</strong>. Vợt dẻo giúp trợ lực tốt hơn khi lực tay và kỹ thuật chưa hoàn thiện. Vợt trung bình là lựa chọn an toàn nếu bạn có thể lực khá. Tránh vợt quá cứng vì sẽ khó đánh và dễ gây chấn thương.
+                </div>
+            </div>
+        </div>
+
+        <h2>Yếu tố bổ sung cần cân nhắc</h2>
+
+        <div class="grid">
+            <div class="card">
+                <h3 class="card-title">4. Chất liệu vợt</h3>
+                <div class="card-content">
+                    <p>Chất liệu ảnh hưởng đến độ bền, trọng lượng và cảm giác:</p>
+                    <ul>
+                        <li><strong>Nhôm/Thép:</strong> Rẻ, bền, nặng. Thường thấy ở vợt giải trí, không khuyến khích cho người chơi nghiêm túc.</li>
+                        <li><strong>Graphite/Carbon:</strong> Nhẹ, bền, đàn hồi tốt, hiệu suất cao. Là tiêu chuẩn cho vợt cầu lông hiện đại.</li>
+                        <li><strong>High Modulus Graphite / Nano Carbon:</strong> Cao cấp hơn, nhẹ hơn, cứng hơn, tăng cường hiệu suất.</li>
+                    </ul>
+                    <p><strong>Lời khuyên:</strong> Nên chọn vợt làm từ Graphite/Carbon trở lên để có trải nghiệm tốt nhất.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">5. Độ căng dây (String Tension)</h3>
+                <div class="card-content">
+                    <p>Độ căng ảnh hưởng khả năng kiểm soát và lực đánh (đo bằng lbs hoặc kg):</p>
+                    <ul>
+                        <li><strong>Căng thấp (18-22 lbs / 8-10 kg):</strong> Tăng trợ lực (hiệu ứng lò xo), dễ đánh hơn cho người mới, cảm giác cầu tốt. Ít kiểm soát hơn.</li>
+                        <li><strong>Căng trung bình (23-25 lbs / 10.5-11.5 kg):</strong> Cân bằng giữa lực và kiểm soát, phổ biến cho người chơi phong trào.</li>
+                        <li><strong>Căng cao (26+ lbs / 12+ kg):</strong> Tăng kiểm soát, độ chính xác, yêu cầu lực tay khỏe và kỹ thuật tốt.</li>
+                    </ul>
+                     <p><strong>Lời khuyên:</strong> Người mới nên bắt đầu với mức căng <strong>thấp đến trung bình (20-24 lbs / 9-11 kg)</strong>. Đừng căng quá cao khi mới bắt đầu.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">6. Chu vi cán vợt (Grip Size)</h3>
+                <div class="card-content">
+                    <p>Kích thước cán vợt ảnh hưởng đến cảm giác cầm nắm và sự linh hoạt (thường ký hiệu G):</p>
+                    <ul>
+                        <li><strong>G2, G3:</strong> Cán lớn (ít phổ biến ở VN).</li>
+                        <li><strong>G4:</strong> Cán trung bình/lớn.</li>
+                        <li><strong>G5:</strong> Cán nhỏ (phổ biến nhất ở VN, phù hợp tay người châu Á).</li>
+                        <li><strong>G6:</strong> Cán rất nhỏ.</li>
+                    </ul>
+                    <p><strong>Lời khuyên:</strong> <strong>G5</strong> là lựa chọn phổ biến và phù hợp với đa số người Việt Nam. Bạn có thể tăng kích thước bằng cách quấn thêm cốt cán nếu cần.</p>
+                </div>
+            </div>
+        </div> <h2>Cách chọn vợt theo mục đích và lối chơi</h2>
+
+        <div class="card">
+            <h3 class="card-title">Xác định mục đích sử dụng</h3>
+            <div class="card-content">
+                <p>Bạn mua vợt để làm gì?</p>
+                <ul>
+                    <li><strong>Giải trí, rèn luyện sức khỏe:</strong> Không cần vợt quá đắt tiền, ưu tiên sự thoải mái, dễ chơi (nhẹ, cân bằng, dẻo).</li>
+                    <li><strong>Chơi phong trào, nâng cao kỹ năng:</strong> Chọn vợt chất lượng tốt hơn (Graphite), cân nhắc các thông số phù hợp lối chơi mong muốn.</li>
+                    <li><strong>Thi đấu chuyên nghiệp:</strong> Cần vợt cao cấp, phù hợp lối chơi và thể trạng, thường theo tư vấn HLV.</li>
+                </ul>
+                <div class="important-note">
+                    <strong>Lưu ý:</strong> Đừng chi quá nhiều tiền cho cây vợt đầu tiên khi bạn chưa chắc chắn về đam mê và lối chơi của mình.
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="card-title">Định hướng lối chơi ban đầu</h3>
+            <div class="card-content">
+                <p>Mặc dù là người mới, bạn có thể hình dung sơ bộ về xu hướng của mình:</p>
+                <ul>
+                    <li><strong>Thích điều cầu, kiểm soát, phòng thủ:</strong> Ưu tiên vợt nhẹ đầu hoặc cân bằng, thân dẻo/trung bình.</li>
+                    <li><strong>Muốn đánh mạnh, tấn công:</strong> Có thể thử vợt cân bằng hoặc hơi nặng đầu một chút, thân trung bình. (Nhưng vẫn nên ưu tiên dễ kiểm soát khi mới bắt đầu).</li>
+                    <li><strong>Chưa biết gì cả:</strong> Chọn vợt <strong>cân bằng, thân dẻo/trung bình, trọng lượng 4U/5U</strong> - đây là lựa chọn an toàn nhất.</li>
+                </ul>
+                <div class="recommendation">
+                    <strong>Khuyến nghị:</strong> Hãy bắt đầu với một cây vợt "toàn diện" (cân bằng, 4U/5U, dẻo/trung bình). Sau một thời gian tập luyện, khi đã hiểu rõ hơn về điểm mạnh/yếu và sở thích của mình, bạn có thể chọn cây vợt thứ hai chuyên biệt hơn.
+                </div>
+            </div>
+        </div>
+
+        <h2>Gợi ý một số dòng vợt phù hợp cho người mới chơi</h2>
+        <p>Dưới đây là một vài ví dụ về các dòng vợt thường được khuyên dùng cho người mới (lưu ý kiểm tra thông số cụ thể của từng mã vợt trong dòng):</p>
+
+        <div class="grid">
+             <div class="card">
+                <h3 class="card-title">1. Yonex Astrox Lite / Nanoflare Drive</h3>
+                <div class="card-content">
+                    <p>Các dòng vợt nhẹ, dễ chơi từ Yonex, thường có trợ lực tốt, phù hợp làm quen kỹ thuật.</p>
+                    <div class="racket-specs">
+                        <span class="spec-item">Thường 4U/5U</span>
+                        <span class="spec-item">Cân bằng/Nhẹ đầu</span>
+                        <span class="spec-item">Dẻo/Trung bình</span>
+                    </div>
+                </div>
+            </div>
+             <div class="card">
+                <h3 class="card-title">2. Lining Windstorm / Turbo Charging Z</h3>
+                <div class="card-content">
+                    <p>Lining có nhiều dòng vợt nhẹ (Windstorm) hoặc cân bằng, dễ kiểm soát, thiết kế đẹp mắt.</p>
+                     <div class="racket-specs">
+                        <span class="spec-item">Thường 5U/4U</span>
+                        <span class="spec-item">Cân bằng/Nhẹ đầu</span>
+                        <span class="spec-item">Dẻo/Trung bình</span>
+                    </div>
+                </div>
+            </div>
+             <div class="card">
+                <h3 class="card-title">3. Victor Thruster K / Auraspeed</h3>
+                <div class="card-content">
+                    <p>Victor cung cấp các lựa chọn cân bằng, dễ thuần, phù hợp cho người mới đến trình độ phong trào.</p>
+                     <div class="racket-specs">
+                        <span class="spec-item">Thường 4U</span>
+                        <span class="spec-item">Cân bằng</span>
+                        <span class="spec-item">Trung bình</span>
+                    </div>
+                </div>
+            </div>
+             <div class="card">
+                <h3 class="card-title">4. Apacs (Nhiều dòng giá rẻ)</h3>
+                <div class="card-content">
+                    <p>Thương hiệu giá rẻ, nhiều lựa chọn vợt nhẹ, dễ chơi, phù hợp cho người mới có ngân sách hạn chế.</p>
+                     <div class="racket-specs">
+                        <span class="spec-item">Thường 4U/5U/6U</span>
+                        <span class="spec-item">Đa dạng</span>
+                        <span class="spec-item">Thường Dẻo</span>
+                    </div>
+                </div>
+            </div>
+             <div class="card">
+                <h3 class="card-title">5. VNB (Vợt Việt Nam)</h3>
+                <div class="card-content">
+                    <p>Thương hiệu Việt Nam với các dòng vợt giá tốt, thiết kế phù hợp người mới, dễ tiếp cận.</p>
+                     <div class="racket-specs">
+                        <span class="spec-item">Thường 4U/5U</span>
+                        <span class="spec-item">Cân bằng/Nhẹ đầu</span>
+                        <span class="spec-item">Dẻo/Trung bình</span>
+                    </div>
+                </div>
+            </div>
+        </div> <p><em>Lưu ý: Đây chỉ là gợi ý chung, bạn nên tìm hiểu kỹ thông số của từng mã vợt cụ thể trước khi mua.</em></p>
+
+        <h2>Lưu ý quan trọng cuối cùng</h2>
+
+        <div class="important-note">
+            <ol>
+                <li><strong>Thử vợt nếu có thể:</strong> Cầm nắm trực tiếp sẽ cho bạn cảm nhận tốt nhất về trọng lượng, độ cân bằng và kích thước cán.</li>
+                <li><strong>Đừng chạy theo VĐV chuyên nghiệp:</strong> Vợt họ dùng thường rất nặng và cứng, không phù hợp với người mới.</li>
+                <li><strong>Ngân sách hợp lý:</strong> Không cần mua vợt quá đắt tiền khi mới bắt đầu. Một cây vợt tầm trung (khoảng 500k - 1.5 triệu VNĐ) là đủ tốt.</li>
+                <li><strong>Mua ở cửa hàng uy tín:</strong> Tránh mua phải hàng giả, hàng kém chất lượng.</li>
+                <li><strong>Phụ kiện đi kèm:</strong> Đừng quên mua thêm quấn cán vợt tốt và bao đựng vợt.</li>
+            </ol>
+        </div>
+
+        <div class="conclusion">
+            <h2>Kết luận</h2>
+            <p>
+                Chọn đúng cây vợt cầu lông đầu tiên là bước đệm quan trọng cho hành trình của bạn. Một cây vợt phù hợp sẽ giúp bạn học kỹ thuật nhanh hơn, chơi thoải mái hơn và quan trọng nhất là giữ được niềm vui với môn thể thao này.
+            </p>
+            <p>Tóm lại, hãy ưu tiên các yếu tố sau khi chọn vợt cho người mới:</p>
+            <ul>
+                <li><strong>Trọng lượng:</strong> Nhẹ (4U hoặc 5U)</li>
+                <li><strong>Điểm cân bằng:</strong> Cân bằng (Even Balance)</li>
+                <li><strong>Độ cứng thân vợt:</strong> Dẻo (Flexible) hoặc Trung bình (Medium)</li>
+                <li><strong>Độ căng dây:</strong> Thấp đến trung bình (20-24 lbs / 9-11 kg)</li>
+                <li><strong>Kích thước cán:</strong> G5 (phổ biến nhất)</li>
+            </ul>
+            <p>
+                Đừng quá lo lắng về việc phải chọn "hoàn hảo" ngay lần đầu. Hãy chọn một cây vợt dễ chơi, bắt đầu tập luyện và cảm nhận. Chúc bạn tìm được người bạn đồng hành ưng ý trên sân cầu!
+            </p>
+        </div>
+
+        <div class="footnote">
+            <p>Nguồn tham khảo: Tổng hợp kiến thức từ các diễn đàn cầu lông, website bán hàng uy tín (ShopVNB, HVShop,...) và kinh nghiệm cá nhân.</p>
+        </div>
+    </main>
+
+    <footer id="footer-placeholder">
+        <p style="text-align:center; padding: 2rem; color: #777;">Đang tải footer...</p>
+    </footer>
+
+    <script>
+        /**
+         * Asynchronously loads HTML content from a specified URL into an element.
+         * Also executes any script tags found within the loaded HTML.
+         * @param {string} url - The URL of the HTML file to fetch (e.g., 'header.html').
+         * @param {string} elementId - The ID of the target element to insert HTML into.
+         */
+        async function loadHTML(url, elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) {
+                console.error(`Error: Element with ID "${elementId}" not found.`);
+                return; // Exit if target element doesn't exist
+            }
+
+            try {
+                // Fetch the HTML content
+                const response = await fetch(url);
+
+                // Check if the fetch was successful
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status} for URL: ${url}`);
+                }
+
+                // Get the HTML as text
+                const html = await response.text();
+
+                // Insert the HTML into the target element
+                element.innerHTML = html;
+
+                // Find all script tags within the loaded HTML
+                const scripts = element.querySelectorAll("script");
+
+                // Execute each script to ensure functionality (like dropdowns, etc.)
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement("script");
+
+                    // Copy attributes (like src, type) from the old script to the new one
+                    Array.from(oldScript.attributes).forEach(attr => {
+                        newScript.setAttribute(attr.name, attr.value);
+                    });
+
+                    // Copy the inline script content
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+
+                    // Replace the old script tag with the new one to trigger execution
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+
+            } catch (error) {
+                console.error(`Could not load HTML from ${url}:`, error);
+                // Display an error message within the placeholder
+                element.innerHTML = `<p style="color: red; text-align: center; padding: 1rem;">Lỗi! Không thể tải nội dung từ ${url}. Vui lòng kiểm tra đường dẫn và đảm bảo file tồn tại.</p>`;
+            }
+        }
+
+        // Wait for the main DOM content to be fully loaded before executing the script
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- IMPORTANT ---
+            // Adjust the paths 'header.html' and 'footer.html' if they are
+            // located in a different directory relative to this main HTML file.
+            // For example, if they are in an 'includes' folder: 'includes/header.html'
+            // --- --- --- ---
+
+            // Load the header content into the 'header-placeholder' div
+            loadHTML('header.html', 'header-placeholder');
+
+            // Load the footer content into the 'footer-placeholder' footer element
+            loadHTML('footer.html', 'footer-placeholder');
+        });
+    </script>
+
+</body>
+</html>
