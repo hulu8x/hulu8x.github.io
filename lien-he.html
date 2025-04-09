@@ -255,7 +255,7 @@
         const errorMessage = document.getElementById('form-message-error');
 
         if (contactForm) {
-            contactForm.addEventListener('submit', function(event) {
+            contactForm.addEventListener('submit', async function(event) {
                 event.preventDefault(); // Stop default submission
 
                 let isValid = true;
@@ -278,101 +278,60 @@
 
                 // Validate email format
                 if (emailInput && emailInput.value.trim()) {
-                     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                     if (!emailPattern.test(emailInput.value.trim())) {
-                         isValid = false;
-                         emailInput.classList.add('border-red-500');
-                     }
-                } else if (emailInput && emailInput.hasAttribute('required')) { // Also check if required email is empty
-                     isValid = false; // Already caught by requiredFields loop, but good to be explicit
+                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailPattern.test(emailInput.value.trim())) {
+                        isValid = false;
+                        emailInput.classList.add('border-red-500');
+                    }
                 }
 
-
-                // Validate phone format (basic Vietnamese check)
+                // Validate phone format
                 if (phoneInput && phoneInput.value.trim()) {
                     const cleanedPhone = phoneInput.value.replace(/[\s.-]/g, '');
-                    // Allow 10 or 11 digits starting with 0
                     const phonePattern = /^0[0-9]{9,10}$/;
                     if (!phonePattern.test(cleanedPhone)) {
                         isValid = false;
                         phoneInput.classList.add('border-red-500');
                     }
-                } else if (phoneInput && phoneInput.hasAttribute('required')) {
-                     isValid = false;
                 }
 
-
-                // Show feedback
+                // Show feedback or send data
                 if (isValid) {
-                    // --- Simulate successful submission ---
-                    console.log('Form is valid. Simulating submission...');
-                    successMessage.classList.remove('hidden');
-                    errorMessage.classList.add('hidden');
-                    contactForm.reset(); // Clear the form
-
-                    // Optional: Hide success message after a delay
-                    setTimeout(() => {
-                        successMessage.classList.add('hidden');
-                    }, 5000); // 5 seconds
-
-                    // In a real scenario, you would send data using fetch() here:
-                    /*
                     const formData = new FormData(contactForm);
-                    fetch('/api/contact', { // Replace with your actual API endpoint
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Success:', data);
-                        successMessage.classList.remove('hidden');
-                        contactForm.reset();
-                    })
-                    .catch((error) => {
+
+                    try {
+                        const response = await fetch('https://script.google.com/macros/s/AKfycbzg86YF-nIoTgile5nNpiIocIiIxQ3o5RouJW2GB57fB--xqoYbzI4ZEsLbLAjo_0myfQ/exec', {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        if (response.ok) {
+                            const data = await response.json();
+                            console.log('Success:', data);
+                            successMessage.classList.remove('hidden');
+                            contactForm.reset(); // Clear the form
+
+                            // Optional: Hide success message after a delay
+                            setTimeout(() => {
+                                successMessage.classList.add('hidden');
+                            }, 5000); // 5 seconds
+                        } else {
+                            throw new Error('Network response was not ok');
+                        }
+                    } catch (error) {
                         console.error('Error:', error);
                         errorMessage.textContent = 'Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại.';
                         errorMessage.classList.remove('hidden');
-                    });
-                    */
-                    // --- End Simulation ---
+                    }
                 } else {
                     errorMessage.textContent = 'Vui lòng kiểm tra lại các trường thông tin được đánh dấu màu đỏ.';
                     errorMessage.classList.remove('hidden');
                     successMessage.classList.add('hidden');
-                     // Focus the first invalid field
-                     const firstInvalid = contactForm.querySelector('.border-red-500');
-                     if (firstInvalid) {
-                         firstInvalid.focus();
-                     }
-                }
-            });
-
-            // Remove error border on input
-             contactForm.querySelectorAll('input[required], textarea[required]').forEach(input => {
-                input.addEventListener('input', () => {
-                    if (input.classList.contains('border-red-500')) {
-                         // Also re-validate specific formats if needed on input
-                         let fieldIsValid = true;
-                         if(input.id === 'email' && input.value.trim()){
-                             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                             if (!emailPattern.test(input.value.trim())) fieldIsValid = false;
-                         } else if (input.id === 'phone' && input.value.trim()){
-                             const cleanedPhone = input.value.replace(/[\s.-]/g, '');
-                             const phonePattern = /^0[0-9]{9,10}$/;
-                              if (!phonePattern.test(cleanedPhone)) fieldIsValid = false;
-                         } else if (!input.value.trim()){
-                              fieldIsValid = false; // Still invalid if empty
-                         }
-
-                         if(fieldIsValid || !input.value.trim()){ // Remove border if valid OR empty (let submit handle empty required)
-                             input.classList.remove('border-red-500');
-                         }
+                    const firstInvalid = contactForm.querySelector('.border-red-500');
+                    if (firstInvalid) {
+                        firstInvalid.focus();
                     }
-                     // Hide general error message when user starts typing again
-                     if (!errorMessage.classList.contains('hidden')) {
-                         errorMessage.classList.add('hidden');
-                     }
-                });
+                }
             });
         }
 
