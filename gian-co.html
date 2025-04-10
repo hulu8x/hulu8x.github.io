@@ -22,7 +22,7 @@
             box-sizing: border-box;
         }
 
-        /* Kiểu dáng body */
+        /* Kiểu dáng body - Sử dụng Flexbox để đẩy footer xuống */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -30,46 +30,69 @@
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
             padding: 0;
             margin: 0;
-            display: flex; /* Sử dụng flexbox để footer luôn ở dưới */
+            display: flex; /* Kích hoạt Flexbox */
             flex-direction: column; /* Sắp xếp các phần tử con theo chiều dọc */
             min-height: 100vh; /* Đảm bảo body chiếm ít nhất toàn bộ chiều cao màn hình */
         }
 
-        /* Container chính cần linh hoạt để đẩy footer xuống */
-        .container {
+        /* Container chính (thẻ <main>) cần linh hoạt để đẩy footer xuống */
+        main.container { /* Đổi selector thành main.container */
             max-width: 1100px;
-            margin: 0 auto; /* Bỏ margin top/bottom, để header/footer quản lý */
+            margin: 0 auto; /* Chỉ căn giữa ngang, không thêm margin dọc */
             padding: 2rem;
-            background-color: transparent;
+            background-color: transparent; /* Nền được xử lý bởi body */
             flex-grow: 1; /* Cho phép container chiếm không gian còn lại */
             width: 100%; /* Đảm bảo container chiếm toàn bộ chiều rộng */
         }
 
-         /* --- CSS CHO HEADER VÀ FOOTER ĐÃ BỎ NỀN --- */
-         #header-placeholder header { /* Style cho header được tải động */
-            /* background-color: var(--primary-color); */ /* Đã loại bỏ màu nền */
-            color: var(--text-color); /* Đổi màu chữ thành màu tối */
+        /* --- CSS CHO HEADER VÀ FOOTER ĐƯỢC TẢI ĐỘNG --- */
+        /* Áp dụng kiểu cho thẻ header bên trong #header-placeholder */
+        #header-placeholder header {
+            /* background-color: var(--primary-color); */ /* Bỏ nền để dùng nền body */
+            color: var(--text-color); /* Màu chữ tối */
             padding: 1.5rem 0;
             text-align: center;
-            /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */ /* Có thể bỏ shadow nếu không muốn */
-            border-bottom: 1px solid #ddd; /* Thêm đường viền dưới thay cho nền */
-         }
-         #header-placeholder header h1 {
+            /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */ /* Tùy chọn shadow */
+            border-bottom: 1px solid #ddd; /* Đường viền thay nền */
+            width: 100%; /* Header chiếm toàn bộ chiều rộng */
+        }
+        #header-placeholder header h1 {
              font-size: 1.8rem;
              margin: 0;
-         }
+        }
 
-         #footer-placeholder footer { /* Style cho footer được tải động */
-            /* background-color: var(--primary-color); */ /* Đã loại bỏ màu nền */
-            color: var(--text-color); /* Đổi màu chữ thành màu tối */
+        /* Áp dụng kiểu cho thẻ footer bên trong #footer-placeholder */
+        #footer-placeholder footer {
+            /* background-color: var(--primary-color); */ /* Bỏ nền để dùng nền body */
+            color: var(--text-color); /* Màu chữ tối */
             padding: 1.5rem 0;
             text-align: center;
-            margin-top: auto; /* Đẩy footer xuống dưới cùng */
+            margin-top: auto; /* Quan trọng: Đẩy footer xuống dưới cùng trong flex container */
             width: 100%; /* Footer chiếm toàn bộ chiều rộng */
-            border-top: 1px solid #ddd; /* Thêm đường viền trên thay cho nền */
-         }
-         /* --- KẾT THÚC CSS HEADER/FOOTER --- */
+            border-top: 1px solid #ddd; /* Đường viền thay nền */
+        }
+        /* --- KẾT THÚC CSS HEADER/FOOTER --- */
 
+
+        /* Tiêu đề chính của trang (phần màu xanh) */
+        .page-title-section {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem; /* Khoảng cách với phần dưới */
+            margin-top: 2rem; /* Khoảng cách với header (nếu có) */
+        }
+        .page-title-section h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+         .page-title-section p {
+            margin-top: 0.5rem; /* Khoảng cách nhỏ cho subtitle */
+            font-size: 1rem;
+            opacity: 0.9;
+        }
 
         /* Phần giới thiệu */
         .intro-section {
@@ -78,8 +101,26 @@
             box-shadow: var(--box-shadow);
             padding: 2rem;
             margin-bottom: 2rem;
-            margin-top: 2rem; /* Thêm margin top để không dính vào header */
+            /* Không cần margin-top ở đây vì .page-title-section đã có margin-bottom */
         }
+         .intro-section h2,
+         section h2, /* Áp dụng chung cho các tiêu đề section */
+         section h3,
+         .notes-section h3 {
+             color: var(--primary-color);
+             margin-bottom: 1rem;
+         }
+         .intro-section h2 {
+             font-size: 1.8rem; /* Kích thước tiêu đề section */
+         }
+         section h2 {
+             font-size: 1.8rem;
+             margin-top: 2rem; /* Thêm khoảng cách trên cho các section */
+         }
+         section h3 {
+             font-size: 1.5rem;
+             margin-top: 1.5rem;
+         }
 
         /* Lưới hiển thị lợi ích */
         .benefits-grid {
@@ -95,11 +136,12 @@
             border-radius: 10px;
             box-shadow: var(--box-shadow);
             padding: 1.5rem;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .benefit-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
         }
 
         .benefit-card h3 {
@@ -107,7 +149,7 @@
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            font-size: 1.2rem; /* Điều chỉnh lại nếu cần */
+            font-size: 1.3rem; /* Tăng nhẹ kích thước */
         }
 
         /* Icon trong thẻ lợi ích */
@@ -115,14 +157,14 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 30px;
-            height: 30px;
+            width: 35px; /* Tăng kích thước icon */
+            height: 35px;
             background-color: var(--primary-color);
             color: white;
             border-radius: 50%;
             margin-right: 0.75rem;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 1.1rem; /* Tăng kích thước số */
             flex-shrink: 0; /* Ngăn icon bị co lại */
         }
 
@@ -135,6 +177,9 @@
             padding: 2rem;
             margin: 2rem 0;
         }
+         .stretching-exercises h2 {
+             margin-top: 0; /* Bỏ margin-top vì đã có margin của section */
+         }
 
         /* Container ảnh minh họa */
         .exercise-container {
@@ -150,7 +195,6 @@
             height: auto;
             border-radius: 8px;
             box-shadow: var(--box-shadow);
-             /* Sử dụng thuộc tính src trực tiếp thay vì content */
         }
 
 
@@ -168,16 +212,21 @@
             border-radius: 10px;
             padding: 1.5rem;
             box-shadow: var(--box-shadow);
+            border: 1px solid #eee; /* Thêm viền nhẹ */
         }
 
         .exercise-card h4 {
             color: var(--primary-color);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem; /* Tăng khoảng cách */
             font-size: 1.2rem;
         }
+         .exercise-card p {
+             margin-bottom: 0.5rem;
+         }
          .exercise-card ul {
-             padding-left: 20px; /* Thêm thụt lề cho danh sách */
+             padding-left: 20px; /* Thụt lề cho danh sách */
              margin-top: 0.5rem;
+             list-style-type: disc; /* Đảm bảo có dấu chấm đầu dòng */
          }
          .exercise-card li {
              margin-bottom: 0.3rem;
@@ -185,18 +234,22 @@
 
         /* Container bảng */
         .table-container {
-            overflow-x: auto;
+            overflow-x: auto; /* Cho phép cuộn ngang trên màn hình nhỏ */
             margin: 2rem 0;
+            background: white; /* Nền cho container để bo góc */
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            padding: 0.5rem; /* Padding nhỏ xung quanh bảng */
         }
 
         /* Bảng */
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--box-shadow);
+            /* background: white; */ /* Nền đã chuyển ra container */
+            /* border-radius: 10px; */ /* Bo góc đã chuyển ra container */
+            /* overflow: hidden; */ /* Overflow đã chuyển ra container */
+            /* box-shadow: var(--box-shadow); */ /* Shadow đã chuyển ra container */
         }
 
         th, td {
@@ -204,11 +257,23 @@
             text-align: left;
             border-bottom: 1px solid #eee;
         }
+        /* Bỏ border bottom cho dòng cuối cùng */
+        tr:last-child td {
+            border-bottom: none;
+        }
 
         th {
-            background-color: var(--primary-color);
+            background-color: var(--secondary-color); /* Màu nhẹ hơn cho header bảng */
             color: white;
+            font-weight: 600; /* Đậm vừa phải */
         }
+         /* Bo góc cho ô đầu và cuối của header */
+         th:first-child {
+            border-top-left-radius: 8px; /* Điều chỉnh nếu container đã bo góc */
+         }
+         th:last-child {
+            border-top-right-radius: 8px;
+         }
 
         tr:hover {
             background-color: #f5f5f5;
@@ -222,29 +287,33 @@
             padding: 2rem;
             margin: 2rem 0;
         }
+         .notes-section h2 {
+             margin-top: 0; /* Bỏ margin-top vì đã có margin của section */
+         }
          .notes-section h3 {
-             margin-bottom: 1rem;
-             color: var(--primary-color);
+             margin-top: 1.5rem; /* Khoảng cách giữa các mục lưu ý */
+             font-size: 1.3rem;
          }
 
         /* Danh sách lưu ý */
         .notes-list {
             list-style: none;
-            margin: 1.5rem 0 1.5rem 0; /* Thêm margin bottom */
+            margin: 1rem 0 1.5rem 0; /* Điều chỉnh margin */
             padding-left: 0;
         }
 
         .notes-list li {
             margin-bottom: 1rem;
-            padding-left: 1.5rem;
+            padding-left: 1.8rem; /* Tăng padding để icon không bị sát */
             position: relative;
         }
 
         .notes-list li::before {
-            content: "•";
+            content: "✓"; /* Đổi thành dấu tick */
             color: var(--accent-color);
             position: absolute;
             left: 0;
+            top: 1px; /* Căn chỉnh vị trí */
             font-weight: bold;
             font-size: 1.2rem;
             line-height: 1;
@@ -254,25 +323,30 @@
         .conclusion {
             background-color: var(--light-bg);
             border-left: 5px solid var(--primary-color);
-            padding: 1.5rem;
+            padding: 1.5rem 2rem; /* Tăng padding */
             margin: 2rem 0;
             border-radius: 0 10px 10px 0;
         }
+         .conclusion h2 {
+             margin-top: 0;
+             color: var(--primary-color);
+         }
          .conclusion ul {
-            padding-left: 20px;
-            margin-top: 0.5rem;
+             padding-left: 20px;
+             margin-top: 1rem;
+             list-style-type: disc;
          }
          .conclusion li {
-            margin-bottom: 0.5rem;
+             margin-bottom: 0.5rem;
          }
 
-        /* Phần kêu gọi hành động */
+        /* Phần kêu gọi hành động (nếu có) */
         .cta-section {
             text-align: center;
             margin: 3rem 0 2rem;
         }
 
-        /* Nút kêu gọi hành động */
+        /* Nút kêu gọi hành động (nếu có) */
         .cta-button {
             display: inline-block;
             background-color: var(--accent-color);
@@ -294,45 +368,54 @@
 
         /* Responsive design */
         @media (max-width: 768px) {
-            .benefits-grid, .exercise-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
+            main.container { /* Đảm bảo selector đúng */
                 padding: 1rem;
-                margin: 0 auto; /* Giữ căn giữa */
             }
-             .intro-section {
-                 margin-top: 1rem; /* Giảm margin top trên mobile */
-                 padding: 1.5rem;
+             .page-title-section h1 {
+                 font-size: 1.8rem; /* Giảm kích thước tiêu đề chính */
+             }
+             .page-title-section p {
+                 font-size: 0.9rem;
              }
 
-             h2 {
-                font-size: 1.5rem;
+            .benefits-grid, .exercise-grid {
+                grid-template-columns: 1fr; /* 1 cột trên mobile */
             }
-             h3 {
-                 font-size: 1.2rem; /* Giảm nhẹ h3 */
+
+            .intro-section,
+            .stretching-exercises,
+            .notes-section,
+            .conclusion,
+            .benefit-card,
+            .exercise-card {
+                 padding: 1.5rem; /* Đồng bộ padding */
              }
-             h4 {
+             .intro-section h2, section h2 {
+                 font-size: 1.5rem;
+             }
+             section h3, .notes-section h3, .benefit-card h3 {
+                 font-size: 1.2rem;
+             }
+             .exercise-card h4 {
                  font-size: 1.1rem;
              }
              p, li, td {
-                 font-size: 0.95rem;
+                 font-size: 0.95rem; /* Giảm nhẹ font chữ */
              }
-            .cta-button {
-                padding: 0.8rem 1.5rem;
-            }
+             .cta-button {
+                 padding: 0.8rem 1.5rem;
+             }
              th, td {
                  padding: 0.75rem; /* Giảm padding bảng */
              }
-             .benefit-card, .exercise-card, .notes-section, .conclusion {
-                 padding: 1.5rem; /* Đồng bộ padding */
+             .table-container {
+                 padding: 0.2rem; /* Giảm padding container bảng */
              }
         }
-         /* CSS cho icon chung (nếu cần) */
+        /* CSS cho icon chung (nếu cần) */
         .icon {
-             /* Các thuộc tính chung cho icon nếu có */
-         }
+            /* Các thuộc tính chung cho icon nếu có */
+        }
 
     </style>
 </head>
@@ -340,9 +423,10 @@
 
     <div id="header-placeholder"></div>
 
-    <div class="container">
-        <div style="background-color: #3a6ea5; color: white; text-align: center; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
-            <h1 style="margin: 0; font-size: 2.5rem;">TẦM QUAN TRỌNG CỦA VIỆC GIÃN CƠ SAU KHI CHƠI THỂ THAO</h1>
+    <main class="container">
+
+        <div class="page-title-section">
+            <h1>TẦM QUAN TRỌNG CỦA VIỆC GIÃN CƠ SAU KHI CHƠI THỂ THAO</h1>
             <p>Bí quyết phục hồi toàn diện và tăng cường hiệu quả tập luyện</p>
         </div>
 
@@ -356,15 +440,15 @@
             <p>Khi chúng ta tập luyện, các nhóm cơ hoạt động liên tục và phải đối mặt với áp lực lớn. Trong quá trình này, cơ thể tiết ra axit lactic - sản phẩm phụ của quá trình chuyển hóa năng lượng, khiến cơ bắp cảm thấy đau nhức và mệt mỏi sau buổi tập. Nếu không giãn cơ, lượng axit lactic tích tụ trong các sợi cơ sẽ không được giải phóng đúng cách, gây cản trở cho quá trình phục hồi và thậm chí có thể dẫn đến chấn thương.</p>
 
             <div class="exercise-container">
-                <img src="/images/stretches.jpg" alt="Minh họa quá trình giãn cơ và phục hồi" class="exercise-image" onerror="this.onerror=null; this.src='https://placehold.co/800x400/e4e8f0/333?text=Image+Error';">
+                <img src="/images/stretches.jpg" alt="Minh họa quá trình giãn cơ và phục hồi" class="exercise-image" onerror="this.onerror=null; this.src='https://placehold.co/800x400/e4e8f0/333?text=Lỗi+tải+ảnh'; this.alt='Lỗi tải ảnh minh họa giãn cơ';">
             </div>
 
             <h3>Quá trình co rút và phục hồi của cơ bắp:</h3>
             <ul>
-                <li>Khi tập luyện, cơ bắt đầu làm việc và co rút</li>
-                <li>Nếu không được giãn cơ sau buổi tập, cơ dần trở nên căng thẳng</li>
-                <li>Giãn cơ giúp các nhóm cơ được kéo dài về kích thước ban đầu</li>
-                <li>Quá trình này giảm căng thẳng và thúc đẩy phục hồi</li>
+                <li>Khi tập luyện, cơ bắt đầu làm việc và co rút.</li>
+                <li>Nếu không được giãn cơ sau buổi tập, cơ dần trở nên căng thẳng.</li>
+                <li>Giãn cơ giúp các nhóm cơ được kéo dài về kích thước ban đầu.</li>
+                <li>Quá trình này giảm căng thẳng và thúc đẩy phục hồi.</li>
             </ul>
 
             <p>Một nghiên cứu được công bố trong tạp chí Journal of Sports Sciences đã chứng minh rằng giãn cơ sau buổi tập giúp tăng cường sự linh hoạt và phạm vi chuyển động của cơ và khớp, đồng thời giảm đáng kể nguy cơ chấn thương trong tương lai.</p>
@@ -385,23 +469,23 @@
                     <tbody>
                         <tr>
                             <td>Căng thẳng cơ</td>
-                            <td>Cơ thể dễ bị căng thẳng và bị co rút kéo dài</td>
+                            <td>Cơ thể dễ bị căng thẳng và bị co rút kéo dài.</td>
                         </tr>
                         <tr>
                             <td>Giảm linh hoạt</td>
-                            <td>Mất đi sự linh hoạt và giảm phạm vi chuyển động</td>
+                            <td>Mất đi sự linh hoạt và giảm phạm vi chuyển động.</td>
                         </tr>
                         <tr>
                             <td>Tăng nguy cơ chấn thương</td>
-                            <td>Dễ bị chấn thương trong các buổi tập tiếp theo</td>
+                            <td>Dễ bị chấn thương trong các buổi tập tiếp theo.</td>
                         </tr>
                         <tr>
                             <td>Mất cân bằng cơ</td>
-                            <td>Mất cân bằng giữa các nhóm cơ, ảnh hưởng đến tư thế</td>
+                            <td>Mất cân bằng giữa các nhóm cơ, ảnh hưởng đến tư thế.</td>
                         </tr>
                         <tr>
                             <td>Kéo dài thời gian đau</td>
-                            <td>Đau nhức cơ bắp kéo dài hơn sau khi tập luyện</td>
+                            <td>Đau nhức cơ bắp kéo dài hơn sau khi tập luyện.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -443,7 +527,7 @@
             <h2>Các bài tập giãn cơ hiệu quả sau khi chơi thể thao</h2>
 
             <div class="exercise-container">
-                 <img src="/images/stretch2.jpg" alt="Các bài tập giãn cơ sau khi chơi thể thao" class="exercise-image" onerror="this.onerror=null; this.src='https://placehold.co/800x600/e4e8f0/333?text=Image+Error';">
+                 <img src="/images/stretch2.jpg" alt="Các bài tập giãn cơ sau khi chơi thể thao" class="exercise-image" onerror="this.onerror=null; this.src='https://placehold.co/800x600/e4e8f0/333?text=Lỗi+tải+ảnh'; this.alt='Lỗi tải ảnh minh họa bài tập giãn cơ';">
             </div>
 
             <div class="exercise-grid">
@@ -452,12 +536,12 @@
                     <p><strong>Tác dụng:</strong> Tăng cường sự dẻo dai, linh hoạt của hông và cải thiện hiệu suất vận động.</p>
                     <p><strong>Cách thực hiện:</strong></p>
                     <ul>
-                        <li>Bắt đầu với tư thế quỳ 2 chân xuống sàn</li>
-                        <li>Từ từ nhấc chân phải đặt lên trước mặt, đầu gối tạo thành một góc 90 độ</li>
-                        <li>Lòng bàn chân phải đặt trên mặt sàn</li>
-                        <li>Khom người về phía trước sao cho cảm thấy phần hông được kéo căng</li>
-                        <li>Giữ tư thế này trong vòng 30-60 giây</li>
-                        <li>Đổi chân và làm tương tự với bên còn lại</li>
+                        <li>Bắt đầu với tư thế quỳ 2 chân xuống sàn.</li>
+                        <li>Từ từ nhấc chân phải đặt lên trước mặt, đầu gối tạo thành một góc 90 độ.</li>
+                        <li>Lòng bàn chân phải đặt trên mặt sàn.</li>
+                        <li>Khom người về phía trước sao cho cảm thấy phần hông được kéo căng.</li>
+                        <li>Giữ tư thế này trong vòng 30-60 giây.</li>
+                        <li>Đổi chân và làm tương tự với bên còn lại.</li>
                     </ul>
                 </div>
 
@@ -466,13 +550,13 @@
                     <p><strong>Tác dụng:</strong> Giúp cơ đùi được thả lỏng, tăng tính linh hoạt cho các cơ hông, lưng, chân và mông.</p>
                     <p><strong>Cách thực hiện:</strong></p>
                     <ul>
-                        <li>Bắt đầu với tư thế nằm trên sàn với hai chân duỗi ra trước mặt</li>
-                        <li>Từ từ co cả hai chân lên, chân phải vắt chéo lên đùi chân trái</li>
-                        <li>Giữ đầu thẳng, mắt hướng lên trần nhà</li>
-                        <li>Duy trì tư thế đến khi cảm thấy cơ hông được căng ra</li>
-                        <li>Giữ động tác này trong 30 giây</li>
-                        <li>Lặp lại tương tự với tư thế chân trái đặt lên đùi phải</li>
-                        <li>Thực hiện 2-3 lần với mỗi chân</li>
+                        <li>Bắt đầu với tư thế nằm trên sàn với hai chân duỗi ra trước mặt.</li>
+                        <li>Từ từ co cả hai chân lên, chân phải vắt chéo lên đùi chân trái.</li>
+                        <li>Giữ đầu thẳng, mắt hướng lên trần nhà.</li>
+                        <li>Duy trì tư thế đến khi cảm thấy cơ hông được căng ra.</li>
+                        <li>Giữ động tác này trong 30 giây.</li>
+                        <li>Lặp lại tương tự với tư thế chân trái đặt lên đùi phải.</li>
+                        <li>Thực hiện 2-3 lần với mỗi chân.</li>
                     </ul>
                 </div>
 
@@ -481,10 +565,10 @@
                     <p><strong>Tác dụng:</strong> Tác động lớn đến cơ lưng và cột sống, giúp giảm căng thẳng và đau nhức sau khi tập luyện.</p>
                     <p><strong>Cách thực hiện:</strong></p>
                     <ul>
-                        <li>Bắt đầu với tư thế chống hai bàn tay và đầu gối xuống sàn (tư thế con mèo)</li>
-                        <li>Giãn cổ và nhìn xuống phía bụng, nâng phần lưng lên đồng thời hít thật sâu</li>
-                        <li>Thả lỏng về vị trí ban đầu, mặt hướng lên trần nhà</li>
-                        <li>Lặp lại động tác từ 5 đến 10 nhịp thở</li>
+                        <li>Bắt đầu với tư thế chống hai bàn tay và đầu gối xuống sàn (tư thế con mèo).</li>
+                        <li>Giãn cổ và nhìn xuống phía bụng, nâng phần lưng lên đồng thời hít thật sâu.</li>
+                        <li>Thả lỏng về vị trí ban đầu, mặt hướng lên trần nhà.</li>
+                        <li>Lặp lại động tác từ 5 đến 10 nhịp thở.</li>
                     </ul>
                 </div>
 
@@ -493,11 +577,11 @@
                      <p><strong>Tác dụng:</strong> Giảm căng cứng và cải thiện độ linh hoạt cho bắp chân.</p>
                     <p><strong>Cách thực hiện:</strong></p>
                     <ul>
-                        <li>Sử dụng một chiếc ghế trước mặt để làm điểm tựa hoặc đứng gần tường</li>
-                        <li>Đứng thẳng hai chân, khoảng cách giữa hai lòng bàn chân rộng bằng vai</li>
-                        <li>Giữ chặt ghế hoặc tường, từ từ co chân trái về phía sau hông và tay trái cầm mũi chân trái</li>
-                        <li>Giữ tư thế này trong vòng 20-30 giây</li>
-                        <li>Đổi chân và thực hiện 2-3 lần với mỗi chân</li>
+                        <li>Sử dụng một chiếc ghế trước mặt để làm điểm tựa hoặc đứng gần tường.</li>
+                        <li>Đứng thẳng hai chân, khoảng cách giữa hai lòng bàn chân rộng bằng vai.</li>
+                        <li>Giữ chặt ghế hoặc tường, từ từ co chân trái về phía sau hông và tay trái cầm mũi chân trái.</li>
+                        <li>Giữ tư thế này trong vòng 20-30 giây.</li>
+                        <li>Đổi chân và thực hiện 2-3 lần với mỗi chân.</li>
                     </ul>
                 </div>
             </div>
@@ -508,17 +592,17 @@
 
             <h3>Thời điểm và thời gian giãn cơ</h3>
             <ul class="notes-list">
-                <li>Nên giãn cơ ngay sau khi kết thúc buổi tập khi cơ bắp còn ấm</li>
-                <li>Mỗi động tác giãn cơ nên giữ trong khoảng 20-60 giây</li>
-                <li>Tổng thời gian giãn cơ sau buổi tập nên kéo dài khoảng 5-10 phút</li>
+                <li>Nên giãn cơ ngay sau khi kết thúc buổi tập khi cơ bắp còn ấm.</li>
+                <li>Mỗi động tác giãn cơ nên giữ trong khoảng 20-60 giây.</li>
+                <li>Tổng thời gian giãn cơ sau buổi tập nên kéo dài khoảng 5-10 phút.</li>
             </ul>
 
             <h3>Kỹ thuật giãn cơ đúng</h3>
             <ul class="notes-list">
-                <li>Thực hiện các động tác giãn cơ một cách chậm rãi, vừa sức</li>
-                <li>Không nên kéo căng quá mức có thể gây ra chấn thương</li>
-                <li>Hít thở đều đặn trong khi thực hiện các động tác giãn cơ</li>
-                <li>Cảm nhận sự căng nhẹ ở cơ, không nên đến mức đau</li>
+                <li>Thực hiện các động tác giãn cơ một cách chậm rãi, vừa sức.</li>
+                <li>Không nên kéo căng quá mức có thể gây ra chấn thương.</li>
+                <li>Hít thở đều đặn trong khi thực hiện các động tác giãn cơ.</li>
+                <li>Cảm nhận sự căng nhẹ ở cơ, không nên đến mức đau.</li>
             </ul>
 
             <h3>Đối tượng đặc biệt cần chú ý</h3>
@@ -529,63 +613,61 @@
             <h2>Kết luận</h2>
             <p>Giãn cơ sau khi chơi thể thao không phải là một bước "phụ" mà là một phần thiết yếu trong chu trình tập luyện khoa học. Việc dành ra 5-10 phút để thực hiện các bài tập giãn cơ đơn giản sau mỗi buổi tập sẽ mang lại nhiều lợi ích toàn diện:</p>
             <ul>
-                <li>Tăng cường lưu thông máu đến các cơ</li>
-                <li>Loại bỏ axit lactic nhanh chóng</li>
-                <li>Giảm căng thẳng và đau nhức cơ bắp</li>
-                <li>Cải thiện độ linh hoạt và phạm vi chuyển động</li>
-                <li>Giảm nguy cơ chấn thương trong tương lai</li>
+                <li>Tăng cường lưu thông máu đến các cơ.</li>
+                <li>Loại bỏ axit lactic nhanh chóng.</li>
+                <li>Giảm căng thẳng và đau nhức cơ bắp.</li>
+                <li>Cải thiện độ linh hoạt và phạm vi chuyển động.</li>
+                <li>Giảm nguy cơ chấn thương trong tương lai.</li>
             </ul>
             <p>Các chuyên gia và huấn luyện viên thể dục thể thao đều khuyến nghị rằng việc giãn cơ sau buổi tập nên được thực hiện đúng cách và đều đặn để tối đa hóa lợi ích và giảm nguy cơ chấn thương. Việc bổ sung các bài tập giãn cơ vào thói quen tập luyện hàng ngày sẽ giúp bạn nâng cao chất lượng tập luyện và bảo vệ sức khỏe lâu dài.</p>
         </div>
 
-       
-    </div> <div id="footer-placeholder"></div>
+        </main> <div id="footer-placeholder"></div>
 
     <script>
-      /**
-       * Hàm tải nội dung HTML từ một URL và chèn vào phần tử có ID chỉ định.
-       * @param {string} url Đường dẫn đến tệp HTML cần tải (ví dụ: 'header.html').
-       * @param {string} elementId ID của phần tử HTML nơi nội dung sẽ được chèn.
-       */
-      function loadHTML(url, elementId) {
-        fetch(url) // Gửi yêu cầu lấy nội dung từ URL
-          .then(response => {
-            // Kiểm tra xem yêu cầu có thành công không (status code 200-299)
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`); // Ném lỗi nếu có vấn đề
-            }
-            return response.text(); // Chuyển đổi nội dung phản hồi thành văn bản (HTML)
-          })
-          .then(data => {
-            // Lấy phần tử giữ chỗ bằng ID
-            const placeholder = document.getElementById(elementId);
-            if (placeholder) {
-              placeholder.innerHTML = data; // Chèn HTML đã tải vào phần tử giữ chỗ
-            } else {
-              console.error(`Error: Element with ID "${elementId}" not found.`); // Báo lỗi nếu không tìm thấy phần tử
-            }
-          })
-          .catch(error => {
-            // Xử lý bất kỳ lỗi nào xảy ra trong quá trình fetch hoặc xử lý dữ liệu
-            console.error(`Could not load HTML from ${url}:`, error);
-            const placeholder = document.getElementById(elementId);
-            if (placeholder) {
-              // Hiển thị thông báo lỗi thân thiện với người dùng tại vị trí giữ chỗ
-              placeholder.innerHTML = `<p style="color: red; text-align: center;">Không thể tải nội dung từ ${url}. Vui lòng kiểm tra đường dẫn và thử lại.</p>`;
-            }
-          });
-      }
+     /**
+      * Hàm tải nội dung HTML từ một URL và chèn vào phần tử có ID chỉ định.
+      * @param {string} url Đường dẫn đến tệp HTML cần tải (ví dụ: 'header.html').
+      * @param {string} elementId ID của phần tử HTML nơi nội dung sẽ được chèn.
+      */
+     function loadHTML(url, elementId) {
+       fetch(url) // Gửi yêu cầu lấy nội dung từ URL
+         .then(response => {
+           // Kiểm tra xem yêu cầu có thành công không (status code 200-299)
+           if (!response.ok) {
+             throw new Error(`HTTP error! status: ${response.status}, khi tải ${url}`); // Ném lỗi nếu có vấn đề
+           }
+           return response.text(); // Chuyển đổi nội dung phản hồi thành văn bản (HTML)
+         })
+         .then(data => {
+           // Lấy phần tử giữ chỗ bằng ID
+           const placeholder = document.getElementById(elementId);
+           if (placeholder) {
+             placeholder.innerHTML = data; // Chèn HTML đã tải vào phần tử giữ chỗ
+           } else {
+             console.error(`Lỗi: Không tìm thấy phần tử với ID "${elementId}".`); // Báo lỗi nếu không tìm thấy phần tử
+           }
+         })
+         .catch(error => {
+           // Xử lý bất kỳ lỗi nào xảy ra trong quá trình fetch hoặc xử lý dữ liệu
+           console.error(`Không thể tải HTML từ ${url}:`, error);
+           const placeholder = document.getElementById(elementId);
+           if (placeholder) {
+             // Hiển thị thông báo lỗi thân thiện với người dùng tại vị trí giữ chỗ
+             placeholder.innerHTML = `<p style="color: red; text-align: center; padding: 1rem;">Không thể tải ${elementId.replace('-placeholder', '')}. Vui lòng kiểm tra đường dẫn và thử lại.</p>`;
+           }
+         });
+     }
 
-      // Đảm bảo DOM đã được tải hoàn toàn trước khi chạy mã JavaScript
-      document.addEventListener('DOMContentLoaded', function() {
-        // Tải header.html vào phần tử có id="header-placeholder"
-        loadHTML('header.html', 'header-placeholder');
+     // Đảm bảo DOM đã được tải hoàn toàn trước khi chạy mã JavaScript
+     document.addEventListener('DOMContentLoaded', function() {
+       // Tải header.html vào phần tử có id="header-placeholder"
+       loadHTML('header.html', 'header-placeholder');
 
-        // Tải footer.html vào phần tử có id="footer-placeholder"
-        loadHTML('footer.html', 'footer-placeholder');
-      });
+       // Tải footer.html vào phần tử có id="footer-placeholder"
+       loadHTML('footer.html', 'footer-placeholder');
+     });
     </script>
 
 </body>
 </html>
-``` 
