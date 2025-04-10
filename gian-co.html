@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tầm Quan Trọng Của Việc Giãn Cơ Sau Khi Chơi Thể Thao</title>
+    <style>
+        /* Biến màu sắc và các giá trị cơ bản */
+        :root {
+            --primary-color: #3a6ea5;
+            --secondary-color: #6fa8dc;
+            --accent-color: #ff6b6b;
+            --text-color: #333; /* Màu chữ tối mặc định */
+            --light-bg: #f9f9f9;
+            --box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Reset mặc định */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Kiểu dáng body */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 0;
+            margin: 0;
+            display: flex; /* Sử dụng flexbox để footer luôn ở dưới */
+            flex-direction: column; /* Sắp xếp các phần tử con theo chiều dọc */
+            min-height: 100vh; /* Đảm bảo body chiếm ít nhất toàn bộ chiều cao màn hình */
+        }
+
+        /* Container chính cần linh hoạt để đẩy footer xuống */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto; /* Bỏ margin top/bottom, để header/footer quản lý */
+            padding: 2rem;
+            background-color: transparent;
+            flex-grow: 1; /* Cho phép container chiếm không gian còn lại */
+            width: 100%; /* Đảm bảo container chiếm toàn bộ chiều rộng */
+        }
+
+         /* --- CSS CHO HEADER VÀ FOOTER ĐÃ BỎ NỀN --- */
+         #header-placeholder header { /* Style cho header được tải động */
+            /* background-color: var(--primary-color); */ /* Đã loại bỏ màu nền */
+            color: var(--text-color); /* Đổi màu chữ thành màu tối */
+            padding: 1.5rem 0;
+            text-align: center;
+            /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */ /* Có thể bỏ shadow nếu không muốn */
+            border-bottom: 1px solid #ddd; /* Thêm đường viền dưới thay cho nền */
+         }
+         #header-placeholder header h1 {
+             font-size: 1.8rem;
+             margin: 0;
+         }
+
+         #footer-placeholder footer { /* Style cho footer được tải động */
+            /* background-color: var(--primary-color); */ /* Đã loại bỏ màu nền */
+            color: var(--text-color); /* Đổi màu chữ thành màu tối */
+            padding: 1.5rem 0;
+            text-align: center;
+            margin-top: auto; /* Đẩy footer xuống dưới cùng */
+            width: 100%; /* Footer chiếm toàn bộ chiều rộng */
+            border-top: 1px solid #ddd; /* Thêm đường viền trên thay cho nền */
+         }
+         /* --- KẾT THÚC CSS HEADER/FOOTER --- */
+
+
+        /* Phần giới thiệu */
+        .intro-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            margin-top: 2rem; /* Thêm margin top để không dính vào header */
+        }
+
+        /* Lưới hiển thị lợi ích */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        /* Thẻ lợi ích */
+        .benefit-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem; /* Điều chỉnh lại nếu cần */
+        }
+
+        /* Icon trong thẻ lợi ích */
+        .benefit-card h3 .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            font-weight: bold;
+            font-size: 1rem;
+            flex-shrink: 0; /* Ngăn icon bị co lại */
+        }
+
+
+        /* Phần bài tập giãn cơ */
+        .stretching-exercises {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* Container ảnh minh họa */
+        .exercise-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        /* Ảnh minh họa bài tập */
+        .exercise-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+             /* Sử dụng thuộc tính src trực tiếp thay vì content */
+        }
+
+
+        /* Lưới các bài tập */
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Thẻ bài tập */
+        .exercise-card {
+            background-color: var(--light-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .exercise-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+         .exercise-card ul {
+             padding-left: 20px; /* Thêm thụt lề cho danh sách */
+             margin-top: 0.5rem;
+         }
+         .exercise-card li {
+             margin-bottom: 0.3rem;
+         }
+
+        /* Container bảng */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        /* Bảng */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Phần lưu ý */
+        .notes-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+         .notes-section h3 {
+             margin-bottom: 1rem;
+             color: var(--primary-color);
+         }
+
+        /* Danh sách lưu ý */
+        .notes-list {
+            list-style: none;
+            margin: 1.5rem 0 1.5rem 0; /* Thêm margin bottom */
+            padding-left: 0;
+        }
+
+        .notes-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .notes-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        /* Phần kết luận */
+        .conclusion {
+            background-color: var(--light-bg);
+            border-left: 5px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+         .conclusion ul {
+            padding-left: 20px;
+            margin-top: 0.5rem;
+         }
+         .conclusion li {
+            margin-bottom: 0.5rem;
+         }
+
+        /* Phần kêu gọi hành động */
+        .cta-section {
+            text-align: center;
+            margin: 3rem 0 2rem;
+        }
+
+        /* Nút kêu gọi hành động */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .benefits-grid, .exercise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+                margin: 0 auto; /* Giữ căn giữa */
+            }
+             .intro-section {
+                 margin-top: 1rem; /* Giảm margin top trên mobile */
+                 padding: 1.5rem;
+             }
+
+             h2 {
+                font-size: 1.5rem;
+            }
+             h3 {
+                 font-size: 1.2rem; /* Giảm nhẹ h3 */
+             }
+             h4 {
+                 font-size: 1.1rem;
+             }
+             p, li, td {
+                 font-size: 0.95rem;
+             }
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+            }
+             th, td {
+                 padding: 0.75rem; /* Giảm padding bảng */
+             }
+             .benefit-card, .exercise-card, .notes-section, .conclusion {
+                 padding: 1.5rem; /* Đồng bộ padding */
+             }
+        }
+         /* CSS cho icon chung (nếu cần) */
+        .icon {
+             /* Các thuộc tính chung cho icon nếu có */
+         }
+
+    </style>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <div class="container">
+        <section class="intro-section">
+            <h2>Tại sao nhiều người bỏ qua bước giãn cơ?</h2>
+            <p>Mặc dù giãn cơ là một phần thiết yếu trong chu trình tập luyện khoa học, nhiều người vẫn bỏ qua bước quan trọng này sau khi chơi thể thao. Khảo sát cho thấy hơn 60% người tập thường bỏ qua việc giãn cơ, coi đây là bước "dư thừa". Trong khi khởi động được coi là bắt buộc trước khi tập luyện, giãn cơ sau tập mang lại những lợi ích không kém phần quan trọng cho sức khỏe và hiệu suất luyện tập.</p>
+        </section>
+
+        <section>
+            <h2>Cơ chế và tầm quan trọng của việc giãn cơ</h2>
+            <p>Khi chúng ta tập luyện, các nhóm cơ hoạt động liên tục và phải đối mặt với áp lực lớn. Trong quá trình này, cơ thể tiết ra axit lactic - sản phẩm phụ của quá trình chuyển hóa năng lượng, khiến cơ bắp cảm thấy đau nhức và mệt mỏi sau buổi tập. Nếu không giãn cơ, lượng axit lactic tích tụ trong các sợi cơ sẽ không được giải phóng đúng cách, gây cản trở cho quá trình phục hồi và thậm chí có thể dẫn đến chấn thương.</p>
+
+            <div class="exercise-container">
+                <img src="https://placehold.co/800x400/e4e8f0/333?text=Minh+hoa+gian+co" alt="Minh họa quá trình giãn cơ và phục hồi" class="exercise-image" onerror="this.onerror=null; this.src='https://placehold.co/800x400/e4e8f0/333?text=Image+Error';">
+            </div>
+
+            <h3>Quá trình co rút và phục hồi của cơ bắp:</h3>
+            <ul>
+                <li>Khi tập luyện, cơ bắt đầu làm việc và co rút</li>
+                <li>Nếu không được giãn cơ sau buổi tập, cơ dần trở nên căng thẳng</li>
+                <li>Giãn cơ giúp các nhóm cơ được kéo dài về kích thước ban đầu</li>
+                <li>Quá trình này giảm căng thẳng và thúc đẩy phục hồi</li>
+            </ul>
+
+            <p>Một nghiên cứu được công bố trong tạp chí Journal of Sports Sciences đã chứng minh rằng giãn cơ sau buổi tập giúp tăng cường sự linh hoạt và phạm vi chuyển động của cơ và khớp, đồng thời giảm đáng kể nguy cơ chấn thương trong tương lai.</p>
+        </section>
+
+        <section>
+            <h2>Hậu quả của việc bỏ qua giãn cơ</h2>
+            <p>Nhiều người cho rằng đây chỉ là bước "dư thừa", nhưng nghiên cứu đã chỉ ra những hậu quả rõ ràng khi không giãn cơ sau tập luyện:</p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hậu quả</th>
+                            <th>Mô tả tác động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Căng thẳng cơ</td>
+                            <td>Cơ thể dễ bị căng thẳng và bị co rút kéo dài</td>
+                        </tr>
+                        <tr>
+                            <td>Giảm linh hoạt</td>
+                            <td>Mất đi sự linh hoạt và giảm phạm vi chuyển động</td>
+                        </tr>
+                        <tr>
+                            <td>Tăng nguy cơ chấn thương</td>
+                            <td>Dễ bị chấn thương trong các buổi tập tiếp theo</td>
+                        </tr>
+                        <tr>
+                            <td>Mất cân bằng cơ</td>
+                            <td>Mất cân bằng giữa các nhóm cơ, ảnh hưởng đến tư thế</td>
+                        </tr>
+                        <tr>
+                            <td>Kéo dài thời gian đau</td>
+                            <td>Đau nhức cơ bắp kéo dài hơn sau khi tập luyện</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>Lợi ích toàn diện của việc giãn cơ sau tập luyện</h2>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3><span class="icon">1</span> Cải thiện khả năng vận động và linh hoạt</h3>
+                    <p>Giãn cơ sau khi tập luyện có thể giúp tăng độ linh hoạt của khớp, cải thiện phạm vi chuyển động và giúp cơ thể di chuyển dễ dàng hơn. Phạm vi chuyển động được hiểu là khoảng cách chúng ta có thể di chuyển một khớp theo hướng bình thường trước khi nó dừng lại.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <h3><span class="icon">2</span> Tăng cường lưu thông máu và trao đổi chất</h3>
+                    <p>Giãn cơ giúp tăng cường lưu thông máu đến các cơ, loại bỏ axit lactic và cung cấp oxy, dưỡng chất để giúp cơ phục hồi nhanh hơn. Khi cơ bắp thư giãn, mạch máu sẽ giảm áp lực và giúp máu bên trong lưu thông tốt hơn.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <h3><span class="icon">3</span> Cải thiện tư thế và giảm đau</h3>
+                    <p>Cơ bắp bị căng có thể dẫn đến sai tư thế. Khi chúng ta ngồi hoặc đứng không đúng cách, chúng ta vô tình tạo thêm áp lực và làm căng cơ. Việc giãn cơ đúng cách có thể cải thiện tư thế và giảm đau lưng.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <h3><span class="icon">4</span> Giảm căng thẳng tinh thần</h3>
+                    <p>Quá trình giãn cơ không chỉ giúp thư giãn cơ bắp mà còn giúp thư giãn tâm trí và làm dịu hệ thần kinh. Giãn cơ đúng cách sẽ giúp giảm stress và căng thẳng, bằng cách kích hoạt sự sản sinh của các hormone làm bạn cảm thấy hạnh phúc.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <h3><span class="icon">5</span> Cải thiện hiệu suất tập luyện</h3>
+                    <p>Giãn cơ đều đặn có thể cải thiện hiệu suất trong lần tập luyện tiếp theo. Cơ bắp được thư giãn và phục hồi tốt sẽ hoạt động hiệu quả hơn trong buổi tập kế tiếp, giúp bạn đạt được kết quả tốt hơn trong dài hạn.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stretching-exercises">
+            <h2>Các bài tập giãn cơ hiệu quả sau khi chơi thể thao</h2>
+
+            <div class="exercise-container">
+                 <img src="https://placehold.co/800x600/e4e8f0/333?text=Cac+bai+tap" alt="Các bài tập giãn cơ sau khi chơi thể thao" class="exercise-image" onerror="this.onerror=null; this.src='https://placehold.co/800x600/e4e8f0/333?text=Image+Error';">
+            </div>
+
+            <div class="exercise-grid">
+                <div class="exercise-card">
+                    <h4>1. Bài tập cơ hông</h4>
+                    <p><strong>Tác dụng:</strong> Tăng cường sự dẻo dai, linh hoạt của hông và cải thiện hiệu suất vận động.</p>
+                    <p><strong>Cách thực hiện:</strong></p>
+                    <ul>
+                        <li>Bắt đầu với tư thế quỳ 2 chân xuống sàn</li>
+                        <li>Từ từ nhấc chân phải đặt lên trước mặt, đầu gối tạo thành một góc 90 độ</li>
+                        <li>Lòng bàn chân phải đặt trên mặt sàn</li>
+                        <li>Khom người về phía trước sao cho cảm thấy phần hông được kéo căng</li>
+                        <li>Giữ tư thế này trong vòng 30-60 giây</li>
+                        <li>Đổi chân và làm tương tự với bên còn lại</li>
+                    </ul>
+                </div>
+
+                <div class="exercise-card">
+                    <h4>2. Bài tập cơ đùi</h4>
+                    <p><strong>Tác dụng:</strong> Giúp cơ đùi được thả lỏng, tăng tính linh hoạt cho các cơ hông, lưng, chân và mông.</p>
+                    <p><strong>Cách thực hiện:</strong></p>
+                    <ul>
+                        <li>Bắt đầu với tư thế nằm trên sàn với hai chân duỗi ra trước mặt</li>
+                        <li>Từ từ co cả hai chân lên, chân phải vắt chéo lên đùi chân trái</li>
+                        <li>Giữ đầu thẳng, mắt hướng lên trần nhà</li>
+                        <li>Duy trì tư thế đến khi cảm thấy cơ hông được căng ra</li>
+                        <li>Giữ động tác này trong 30 giây</li>
+                        <li>Lặp lại tương tự với tư thế chân trái đặt lên đùi phải</li>
+                        <li>Thực hiện 2-3 lần với mỗi chân</li>
+                    </ul>
+                </div>
+
+                <div class="exercise-card">
+                    <h4>3. Bài tập cơ lưng - cột sống</h4>
+                    <p><strong>Tác dụng:</strong> Tác động lớn đến cơ lưng và cột sống, giúp giảm căng thẳng và đau nhức sau khi tập luyện.</p>
+                    <p><strong>Cách thực hiện:</strong></p>
+                    <ul>
+                        <li>Bắt đầu với tư thế chống hai bàn tay và đầu gối xuống sàn (tư thế con mèo)</li>
+                        <li>Giãn cổ và nhìn xuống phía bụng, nâng phần lưng lên đồng thời hít thật sâu</li>
+                        <li>Thả lỏng về vị trí ban đầu, mặt hướng lên trần nhà</li>
+                        <li>Lặp lại động tác từ 5 đến 10 nhịp thở</li>
+                    </ul>
+                </div>
+
+                <div class="exercise-card">
+                    <h4>4. Bài tập duỗi bắp chân</h4>
+                     <p><strong>Tác dụng:</strong> Giảm căng cứng và cải thiện độ linh hoạt cho bắp chân.</p>
+                    <p><strong>Cách thực hiện:</strong></p>
+                    <ul>
+                        <li>Sử dụng một chiếc ghế trước mặt để làm điểm tựa hoặc đứng gần tường</li>
+                        <li>Đứng thẳng hai chân, khoảng cách giữa hai lòng bàn chân rộng bằng vai</li>
+                        <li>Giữ chặt ghế hoặc tường, từ từ co chân trái về phía sau hông và tay trái cầm mũi chân trái</li>
+                        <li>Giữ tư thế này trong vòng 20-30 giây</li>
+                        <li>Đổi chân và thực hiện 2-3 lần với mỗi chân</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section">
+            <h2>Lưu ý quan trọng khi giãn cơ</h2>
+
+            <h3>Thời điểm và thời gian giãn cơ</h3>
+            <ul class="notes-list">
+                <li>Nên giãn cơ ngay sau khi kết thúc buổi tập khi cơ bắp còn ấm</li>
+                <li>Mỗi động tác giãn cơ nên giữ trong khoảng 20-60 giây</li>
+                <li>Tổng thời gian giãn cơ sau buổi tập nên kéo dài khoảng 5-10 phút</li>
+            </ul>
+
+            <h3>Kỹ thuật giãn cơ đúng</h3>
+            <ul class="notes-list">
+                <li>Thực hiện các động tác giãn cơ một cách chậm rãi, vừa sức</li>
+                <li>Không nên kéo căng quá mức có thể gây ra chấn thương</li>
+                <li>Hít thở đều đặn trong khi thực hiện các động tác giãn cơ</li>
+                <li>Cảm nhận sự căng nhẹ ở cơ, không nên đến mức đau</li>
+            </ul>
+
+            <h3>Đối tượng đặc biệt cần chú ý</h3>
+            <p>Những người mắc bệnh đái tháo đường typ 2 cần đặc biệt chú ý đến việc giãn cơ sau tập luyện. Nghiên cứu chỉ ra rằng người bệnh đái tháo đường có nguy cơ cao bị tổn thương và chậm hồi phục cơ bắp sau khi tập luyện, do đó việc giãn cơ đúng cách trở nên càng quan trọng đối với nhóm đối tượng này.</p>
+        </section>
+
+        <div class="conclusion">
+            <h2>Kết luận</h2>
+            <p>Giãn cơ sau khi chơi thể thao không phải là một bước "phụ" mà là một phần thiết yếu trong chu trình tập luyện khoa học. Việc dành ra 5-10 phút để thực hiện các bài tập giãn cơ đơn giản sau mỗi buổi tập sẽ mang lại nhiều lợi ích toàn diện:</p>
+            <ul>
+                <li>Tăng cường lưu thông máu đến các cơ</li>
+                <li>Loại bỏ axit lactic nhanh chóng</li>
+                <li>Giảm căng thẳng và đau nhức cơ bắp</li>
+                <li>Cải thiện độ linh hoạt và phạm vi chuyển động</li>
+                <li>Giảm nguy cơ chấn thương trong tương lai</li>
+            </ul>
+            <p>Các chuyên gia và huấn luyện viên thể dục thể thao đều khuyến nghị rằng việc giãn cơ sau buổi tập nên được thực hiện đúng cách và đều đặn để tối đa hóa lợi ích và giảm nguy cơ chấn thương. Việc bổ sung các bài tập giãn cơ vào thói quen tập luyện hàng ngày sẽ giúp bạn nâng cao chất lượng tập luyện và bảo vệ sức khỏe lâu dài.</p>
+        </div>
+
+       
+    </div> <div id="footer-placeholder"></div>
+
+    <script>
+      /**
+       * Hàm tải nội dung HTML từ một URL và chèn vào phần tử có ID chỉ định.
+       * @param {string} url Đường dẫn đến tệp HTML cần tải (ví dụ: 'header.html').
+       * @param {string} elementId ID của phần tử HTML nơi nội dung sẽ được chèn.
+       */
+      function loadHTML(url, elementId) {
+        fetch(url) // Gửi yêu cầu lấy nội dung từ URL
+          .then(response => {
+            // Kiểm tra xem yêu cầu có thành công không (status code 200-299)
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`); // Ném lỗi nếu có vấn đề
+            }
+            return response.text(); // Chuyển đổi nội dung phản hồi thành văn bản (HTML)
+          })
+          .then(data => {
+            // Lấy phần tử giữ chỗ bằng ID
+            const placeholder = document.getElementById(elementId);
+            if (placeholder) {
+              placeholder.innerHTML = data; // Chèn HTML đã tải vào phần tử giữ chỗ
+            } else {
+              console.error(`Error: Element with ID "${elementId}" not found.`); // Báo lỗi nếu không tìm thấy phần tử
+            }
+          })
+          .catch(error => {
+            // Xử lý bất kỳ lỗi nào xảy ra trong quá trình fetch hoặc xử lý dữ liệu
+            console.error(`Could not load HTML from ${url}:`, error);
+            const placeholder = document.getElementById(elementId);
+            if (placeholder) {
+              // Hiển thị thông báo lỗi thân thiện với người dùng tại vị trí giữ chỗ
+              placeholder.innerHTML = `<p style="color: red; text-align: center;">Không thể tải nội dung từ ${url}. Vui lòng kiểm tra đường dẫn và thử lại.</p>`;
+            }
+          });
+      }
+
+      // Đảm bảo DOM đã được tải hoàn toàn trước khi chạy mã JavaScript
+      document.addEventListener('DOMContentLoaded', function() {
+        // Tải header.html vào phần tử có id="header-placeholder"
+        loadHTML('header.html', 'header-placeholder');
+
+        // Tải footer.html vào phần tử có id="footer-placeholder"
+        loadHTML('footer.html', 'footer-placeholder');
+      });
+    </script>
+
+</body>
+</html>
