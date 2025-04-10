@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông báo lịch hoạt động CLB Cầu Lông Nhơn Phú</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'], // Sử dụng font Inter
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Giữ lại font Inter làm mặc định */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Đảm bảo nội dung không bị header/footer che khuất nếu chúng cố định */
+        main {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        /* Căn giữa nội dung bài viết và giới hạn chiều rộng */
+        .article-content {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- CSS tùy chỉnh từ nội dung bạn cung cấp --- */
+        /* Giữ lại kiểu cho icon nếu cần */
+         .icon {
+             /* font-size: 1.25em; */
+             /* vertical-align: middle; */
+         }
+
+        /* Kiểu cho nút và nội dung ẩn/hiện */
+        .content-toggleable {
+            /* transition: opacity 0.5s ease; */
+        }
+
+        .hidden-content {
+            display: none;
+            /* opacity: 0; */
+        }
+
+        /* Kiểu cho banner (có thể dùng Tailwind thay thế) */
+        .banner img {
+             max-width: 100%;
+             height: auto;
+             border-radius: 0.5rem; /* tương đương rounded-lg của Tailwind */
+         }
+        /* --- Kết thúc CSS tùy chỉnh --- */
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header id="header-placeholder" class="bg-white shadow-md rounded-b-lg mb-6"></header>
+
+    <main class="container mx-auto px-4 py-8">
+        <article class="bg-white p-6 md:p-8 rounded-lg shadow-lg article-content">
+
+            <div class="banner text-center mb-6">
+                <img src="/images/nghile.jpg" alt="Banner CLB Cầu Lông Nhơn Phú" class="inline-block rounded-lg shadow-md">
+            </div>
+
+            <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-6">
+                Xin chào các thành viên yêu quý của CLB Cầu Lông Nhơn Phú và các khách hàng thân thiết! <span class="icon">😊</span>
+            </h1>
+
+            <div id="toggleable-section" class="content-toggleable space-y-4">
+                <p class="text-base md:text-lg text-gray-700">
+                    Chúng tôi xin trân trọng thông báo lịch hoạt động của <strong class="font-semibold text-blue-600">sân cầu lông Viện Sốt Rét</strong> trong dịp <strong class="font-semibold text-red-600">Lễ 30-4</strong> sắp tới để mọi người tiện sắp xếp thời gian nhé:
+                </p>
+                <ul class="list-none pl-0 space-y-2">
+                    <li class="bg-blue-50 p-3 rounded-md border border-blue-200">
+                        <strong class="font-semibold text-gray-800">Ngày nghỉ:</strong> Sân cầu lông và Câu lạc bộ sẽ tạm nghỉ vào <strong class="font-semibold text-red-600">2 ngày 30-4 và 1-5</strong>.
+                        <img src="https://flagcdn.com/w20/vn.png" srcset="https://flagcdn.com/w40/vn.png 2x" width="20" alt="Lá cờ Việt Nam" class="inline-block h-4 ml-1 align-middle">
+                    </li>
+                    <li class="bg-green-50 p-3 rounded-md border border-green-200">
+                        <strong class="font-semibold text-gray-800">Ngày hoạt động lại:</strong> Chúng tôi sẽ mở cửa trở lại vào <strong class="font-semibold text-green-700">ngày 2-5-2025</strong>.
+                    </li>
+                </ul>
+                <p class="text-base md:text-lg text-gray-700">
+                    Chúng tôi <strong class="font-semibold text-gray-800">xin trân trọng cảm ơn</strong> sự ủng hộ và thông cảm của các bạn trong thời gian này. Chúc mọi người có một kỳ nghỉ lễ thật vui vẻ, ý nghĩa bên gia đình và người thân nha! <span class="icon">❤️</span>
+                </p>
+                <p class="text-base md:text-lg text-gray-700">
+                    Hẹn gặp lại mọi người trên sân cầu lông nhé! <span class="icon">🏸</span>
+                </p>
+            </div>
+
+            <button
+                id="toggle-button"
+                onclick="toggleContent()"
+                class="block mx-auto mt-8 px-5 py-2 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
+                Ẩn thông báo
+            </button>
+        </article>
+    </main>
+
+    <footer id="footer-placeholder"></footer>
+
+    <script>
+        // Hàm tải header/footer (giữ nguyên)
+        async function loadHTML(url, elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) {
+                console.error(`Lỗi: Không tìm thấy phần tử với ID '${elementId}'.`);
+                return;
+            }
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const htmlContent = await response.text();
+                element.innerHTML = htmlContent;
+                console.log(`Đã tải thành công ${url} vào #${elementId}`);
+            } catch (error) {
+                console.error(`Lỗi khi tải ${url}:`, error);
+                element.innerHTML = `<p class="text-red-500 text-center p-4">Không thể tải ${elementId.replace('-placeholder', '')}. Vui lòng thử lại sau.</p>`;
+            }
+        }
+
+        // Hàm ẩn/hiện nội dung (giữ nguyên)
+        function toggleContent() {
+             const content = document.getElementById('toggleable-section');
+             const button = document.getElementById('toggle-button');
+
+             if (content && button) {
+                content.classList.toggle('hidden'); // Toggle class 'hidden' của Tailwind
+                button.textContent = content.classList.contains('hidden') ? 'Hiện thông báo' : 'Ẩn thông báo';
+             } else {
+                console.error("Không tìm thấy phần tử nội dung hoặc nút bấm.");
+             }
+         }
+
+        // Chờ DOM sẵn sàng
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tải header và footer
+            loadHTML('header.html', 'header-placeholder');
+            loadHTML('footer.html', 'footer-placeholder');
+        });
+    </script>
+
+</body>
+</html>
