@@ -563,6 +563,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            console.log("Header script loaded and DOM ready."); // Thêm log để kiểm tra script có chạy không
+
             // Lấy các phần tử DOM cần thiết
             const hamburgerBtn = document.getElementById('npHamburger');
             const mobileMenu = document.getElementById('npNavMenuMobile');
@@ -575,13 +577,17 @@
             if (!hamburgerBtn || !mobileMenu || !overlay || !headerWrapper || !hamburgerIcon) {
                 console.error("Lỗi: Không tìm thấy một hoặc nhiều phần tử DOM cần thiết cho header.");
                 return; // Dừng nếu thiếu phần tử
+            } else {
+                console.log("Header elements found:", { hamburgerBtn, mobileMenu, overlay, headerWrapper, hamburgerIcon }); // Log các phần tử tìm thấy
             }
+
 
             let isMenuOpen = false; // Trạng thái menu
 
             // Hàm đóng menu mobile
             function closeMobileMenu() {
                 if (!isMenuOpen) return; // Thoát nếu menu đã đóng
+                console.log("Closing mobile menu..."); // Log khi đóng menu
 
                 // 1. Bắt đầu animation đóng
                 mobileMenu.classList.remove('np-active'); // Kích hoạt transition transform translateX(100%)
@@ -599,6 +605,7 @@
                     // Chỉ thêm hidden nếu menu vẫn đang trong trạng thái đóng
                     if (!mobileMenu.classList.contains('np-active')) {
                         mobileMenu.setAttribute('hidden', '');
+                        console.log("Mobile menu hidden attribute set after transition."); // Log sau khi ẩn
                     }
                 }, { once: true }); // Listener chỉ chạy một lần
 
@@ -608,9 +615,11 @@
             // Hàm mở menu mobile
             function openMobileMenu() {
                 if (isMenuOpen) return; // Thoát nếu menu đã mở
+                console.log("Opening mobile menu..."); // Log khi mở menu
 
                 // 1. Xóa 'hidden' để menu có thể hiển thị và animation
                 mobileMenu.removeAttribute('hidden');
+                console.log("Mobile menu hidden attribute removed."); // Log khi xóa hidden
 
                 // 2. Sử dụng requestAnimationFrame để đảm bảo trình duyệt đã xử lý việc xóa 'hidden'
                 // trước khi thêm class 'np-active' để animation chạy đúng
@@ -624,6 +633,7 @@
                     hamburgerIcon.classList.add('fa-times');
                     bodyEl.classList.add('np-menu-open'); // Ngăn cuộn body
                     isMenuOpen = true;
+                    console.log("Mobile menu .np-active class added."); // Log khi thêm class active
                     // Tùy chọn: focus vào mục đầu tiên trong menu để cải thiện accessibility
                     mobileMenu.querySelector('a, button')?.focus();
                 });
@@ -631,6 +641,7 @@
 
             // Xử lý sự kiện click nút hamburger
             hamburgerBtn.addEventListener('click', (event) => {
+                console.log("Hamburger button clicked."); // Log khi click hamburger
                 event.stopPropagation(); // Ngăn sự kiện lan ra ngoài
                 if (isMenuOpen) {
                     closeMobileMenu();
@@ -639,27 +650,36 @@
                 }
             });
 
-            // Đóng menu khi click vào một link hoặc nút CTA trong menu mobile
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', (event) => {
+            // *** SỬ DỤNG EVENT DELEGATION CHO MENU MOBILE ***
+            // Gắn listener vào thẻ ul cha thay vì từng thẻ a
+            mobileMenu.addEventListener('click', (event) => {
+                // Kiểm tra xem phần tử được click có phải là thẻ <a> bên trong không
+                const link = event.target.closest('a'); // Tìm thẻ a gần nhất là cha hoặc chính nó
+
+                if (link) { // Nếu click vào một thẻ a (hoặc phần tử con của nó)
+                    console.log("Link inside mobile menu clicked:", link.href); // Log link được click
+                    const href = link.getAttribute('href');
                     // Chỉ đóng menu nếu click vào link thực sự (không phải link #)
                     // hoặc nếu là nút CTA
-                    const href = link.getAttribute('href');
                     if ((href && href !== '#') || link.classList.contains('np-cta-button-mobile')) {
                          // Đợi một chút để người dùng thấy link được click trước khi menu đóng
-                         // Giúp hiệu ứng mượt hơn, đặc biệt nếu link chuyển trang
                          setTimeout(closeMobileMenu, 150);
                     }
                     // Không cần stopPropagation ở đây trừ khi có lý do cụ thể
-                });
+                }
             });
 
             // Đóng menu khi click vào overlay
-            overlay.addEventListener('click', closeMobileMenu);
+            overlay.addEventListener('click', () => {
+                console.log("Overlay clicked."); // Log khi click overlay
+                closeMobileMenu();
+            });
+
 
             // Đóng menu khi nhấn phím Escape
             document.addEventListener('keydown', (event) => {
                 if (event.key === 'Escape' && isMenuOpen) {
+                    console.log("Escape key pressed."); // Log khi nhấn Esc
                     closeMobileMenu();
                     hamburgerBtn.focus(); // Chuyển focus về nút hamburger sau khi đóng bằng Esc
                 }
@@ -758,6 +778,7 @@
              // Lắng nghe popstate (nếu dùng History API để điều hướng SPA)
              window.addEventListener('popstate', setActiveMenuItem);
 
+             console.log("Header script execution finished."); // Log khi script chạy xong
         });
     </script>
 
