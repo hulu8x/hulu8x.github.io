@@ -13,79 +13,256 @@
     <link rel="icon" type="image/png" href="/images/favicon.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Thêm hiệu ứng hover tinh tế cho nút */
-        .cta-button {
-            transition: all 0.3s ease;
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-        /* Style cho icon SVG nhúng */
-        .icon-inline {
-             display: inline-block;
-             width: 1.1em; /* Điều chỉnh kích thước nếu cần */
-             height: 1.1em;
-             vertical-align: -0.15em; /* Căn chỉnh theo dòng chữ */
-             margin-right: 0.4em; /* Khoảng cách với chữ */
-        }
-         .icon-inline-sm { /* Icon nhỏ hơn cho link */
-             display: inline-block;
-             width: 0.9em;
-             height: 0.9em;
-             vertical-align: -0.1em;
-             margin-left: 0.2em;
-        }
-         .icon-large { /* Icon lớn hơn cho khối dịch vụ */
-             width: 2rem; /* tương đương h-8 */
-             height: 2rem; /* tương đương w-8 */
-             stroke-width: 1.5; /* Nét mảnh hơn một chút */
-         }
-         .icon-quote { /* Icon quote lớn */
-             width: 3rem; /* ~h-12 */
-             height: 3rem; /* ~w-12 */
-             stroke-width: 1;
-         }
 
-        /* Đảm bảo iframe bản đồ responsive */
-        .map-container iframe {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS Variables and Base Styles (từ header.html) --- */
+        :root {
+            --np-primary-color: #3a86ff; /* Màu xanh dương chính */
+            --np-accent-color: #ff5a5f; /* Màu đỏ nhấn */
+            --np-dark-color: #2b2d42; /* Màu tối cho văn bản */
+            --np-light-color: #f8f9fa; /* Màu sáng cho nền */
+            --np-grey-color: #6c757d; /* Màu xám phụ */
+            --np-overlay-color: rgba(43, 45, 66, 0.6); /* Màu lớp phủ tối hơn */
+            --np-transition-fast: all 0.2s ease-out;
+            --np-transition-medium: all 0.3s ease-in-out;
+            --np-transition-slow: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Easing mượt hơn */
+            --np-header-height: 80px; /* Chiều cao header desktop */
+            --np-header-height-mobile: 65px; /* Chiều cao header mobile */
+            --np-max-width: 1320px; /* Chiều rộng tối đa nội dung */
+            --np-font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            --np-border-radius-small: 4px;
+            --np-border-radius-medium: 8px;
+            --np-border-radius-large: 12px;
+            --np-border-radius-pill: 50px;
+            --np-shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.06);
+            --np-shadow-medium: 0 6px 20px rgba(0, 0, 0, 0.1);
+            --np-shadow-strong: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            /* margin: 0; */ /* Bỏ reset margin ở đây để tránh xung đột với Tailwind */
+            /* padding: 0; */ /* Bỏ reset padding ở đây */
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif; /* Ưu tiên font từ index.html */
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+           /* background-color: #f7faff; */ /* Để Tailwind quản lý background body */
+           /* color: var(--np-dark-color); */ /* Để Tailwind quản lý màu chữ body */
+            overflow-x: hidden;
+        }
+        body.np-menu-open { overflow: hidden; }
+        .np-container {
+            max-width: var(--np-max-width);
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 24px;
+            padding-right: 24px;
             width: 100%;
-            height: 450px;
-            border: 0;
         }
+
+        /* --- Header Styles (từ header.html) --- */
+        .np-header-wrapper {
+            position: sticky; top: 0; z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            box-shadow: var(--np-shadow-soft); width: 100%;
+            transition: transform var(--np-transition-medium), box-shadow var(--np-transition-medium), background-color var(--np-transition-medium);
+            will-change: transform, box-shadow;
+        }
+        .np-header-wrapper.np-scrolled {
+            box-shadow: var(--np-shadow-medium);
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .np-header {
+            display: flex; justify-content: space-between; align-items: center;
+            min-height: var(--np-header-height);
+            max-width: var(--np-max-width); margin-left: auto; margin-right: auto;
+            padding: 0 24px; width: 100%;
+            transition: min-height var(--np-transition-medium);
+        }
+        .np-logo-container {
+            display: flex; align-items: center; gap: 1rem;
+            flex-shrink: 0; text-decoration: none;
+        }
+        .np-logo {
+            height: 55px;
+            transition: height var(--np-transition-medium), transform var(--np-transition-fast);
+            object-fit: contain; display: block; will-change: transform, height;
+        }
+        .np-logo[src*="placehold.co"] { height: 55px; width: auto; }
+        .np-logo-container:hover .np-logo { transform: scale(1.03); }
+        .np-logo-text {
+            font-size: 1.6rem; font-weight: 700; color: var(--np-primary-color);
+            text-decoration: none; white-space: nowrap; letter-spacing: -0.5px;
+            transition: color var(--np-transition-fast), font-size var(--np-transition-medium);
+        }
+        .np-logo-container:hover .np-logo-text { color: #2a70e8; }
+        .np-nav-menu-desktop-container {
+             display: flex; align-items: center; gap: 1.5rem;
+        }
+        .np-nav-menu {
+            display: flex; gap: 1.5rem; list-style: none; align-items: center;
+            margin: 0; padding: 0;
+        }
+        .np-nav-link {
+            text-decoration: none; color: var(--np-dark-color); font-weight: 600;
+            font-size: 1rem; padding: 0.5rem 0.25rem; position: relative;
+            transition: color var(--np-transition-fast); white-space: nowrap;
+            border-radius: var(--np-border-radius-small); outline-offset: 4px;
+        }
+        .np-nav-link:focus { outline: none; }
+        .np-nav-link:focus-visible { outline: 2px solid var(--np-primary-color); }
+        .np-nav-link:hover { color: var(--np-primary-color); }
+        .np-nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2.5px; bottom: -8px;
+            left: 50%; background-color: var(--np-primary-color);
+            transition: width var(--np-transition-medium), left var(--np-transition-medium);
+            transform: translateX(-50%); border-radius: 2px;
+        }
+        .np-nav-link:hover::after, .np-nav-link.np-active::after {
+            width: 100%; left: 0; transform: translateX(0);
+        }
+        .np-nav-link.np-active { color: var(--np-primary-color); font-weight: 700; }
+        .np-hamburger {
+            display: none; cursor: pointer; background: none; border: none;
+            font-size: 1.7rem; color: var(--np-dark-color); padding: 0.5rem;
+            z-index: 1001; transition: transform var(--np-transition-fast), color var(--np-transition-fast);
+            margin-left: 1rem; border-radius: var(--np-border-radius-medium); line-height: 1;
+            flex-shrink: 0;
+        }
+        .np-hamburger:hover { transform: scale(1.1); color: var(--np-primary-color); }
+        .np-hamburger:focus { outline: none; }
+        .np-hamburger:focus-visible { outline: 2px solid var(--np-primary-color); outline-offset: 2px; }
+        .np-cta-button-desktop {
+            background: linear-gradient(45deg, var(--np-accent-color), #ff7a80); color: white;
+            padding: 0.75rem 1.75rem; border-radius: var(--np-border-radius-pill);
+            font-weight: 600; transition: var(--np-transition-medium); text-decoration: none;
+            display: inline-block; box-shadow: 0 4px 12px rgba(255, 90, 95, 0.3);
+            white-space: nowrap; will-change: transform, box-shadow; border: none; outline-offset: 4px;
+        }
+        .np-cta-button-desktop:focus { outline: none; }
+        .np-cta-button-desktop:focus-visible { outline: 2px solid var(--np-accent-color); }
+        .np-cta-button-desktop:hover {
+            background: linear-gradient(45deg, #e64a4e, #ff6b70);
+            transform: translateY(-3px) scale(1.02); box-shadow: 0 7px 18px rgba(255, 90, 95, 0.4);
+        }
+        .np-cta-button-desktop:active { transform: translateY(0px) scale(1); box-shadow: 0 3px 8px rgba(255, 90, 95, 0.25); }
+        .np-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--np-overlay-color); z-index: 998; opacity: 0; visibility: hidden;
+            transition: opacity var(--np-transition-slow), visibility 0s linear var(--np-transition-slow);
+            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+        }
+        .np-overlay.np-active {
+            opacity: 1; visibility: visible;
+            transition: opacity var(--np-transition-slow), visibility 0s linear 0s;
+        }
+        .np-nav-menu-mobile {
+            position: fixed; top: 0; right: 0; transform: translateX(100%);
+            width: min(85%, 340px); height: 100vh; background-color: white;
+            padding: calc(var(--np-header-height-mobile) + 1rem) 1.5rem 2rem 1.5rem;
+            transition: transform var(--np-transition-slow); box-shadow: var(--np-shadow-strong);
+            z-index: 999; overflow-y: auto; list-style: none; margin: 0;
+            display: flex; flex-direction: column; gap: 0.5rem; will-change: transform;
+            border-left: 1px solid #eee;
+        }
+        .np-nav-menu-mobile.np-active { transform: translateX(0); }
+        .np-nav-menu-mobile .np-nav-link {
+            display: flex; align-items: center; padding: 0.9rem 1rem; font-size: 1.05rem;
+            border-bottom: 1px solid #f0f0f5; text-align: left; color: var(--np-dark-color);
+            font-weight: 500; transition: background-color var(--np-transition-fast), color var(--np-transition-fast), padding-left var(--np-transition-fast);
+            border-radius: var(--np-border-radius-medium); width: 100%;
+        }
+        .np-nav-menu-mobile .np-nav-link:hover {
+            background-color: #f5f9ff; color: var(--np-primary-color); padding-left: 1.25rem; transform: none;
+        }
+        .np-nav-menu-mobile .np-nav-link:focus { outline: none; }
+        .np-nav-menu-mobile .np-nav-link:focus-visible {
+            outline: 2px solid var(--np-primary-color); outline-offset: -2px; background-color: #eef5ff;
+        }
+        .np-nav-menu-mobile .np-nav-link:last-of-type:not(.np-cta-button-mobile) { border-bottom: none; }
+        .np-nav-menu-mobile .np-nav-link::after { display: none; }
+        .np-nav-menu-mobile .np-nav-link.np-active {
+            background-color: #eaf2ff; color: var(--np-primary-color); font-weight: 600;
+            border-left: 4px solid var(--np-primary-color); padding-left: calc(1rem - 4px);
+        }
+        .np-nav-menu-mobile .np-cta-button-mobile {
+            background: linear-gradient(45deg, var(--np-accent-color), #ff7a80); color: white;
+            padding: 0.9rem 1.5rem; border-radius: var(--np-border-radius-pill); font-weight: 600;
+            transition: var(--np-transition-medium); text-decoration: none; display: block;
+            text-align: center; margin-top: 1.5rem; box-shadow: 0 4px 12px rgba(255, 90, 95, 0.3); border: none;
+        }
+        .np-nav-menu-mobile .np-cta-button-mobile:focus { outline: none; }
+        .np-nav-menu-mobile .np-cta-button-mobile:focus-visible { outline: 2px solid var(--np-accent-color); outline-offset: 2px; }
+        .np-nav-menu-mobile .np-cta-button-mobile:hover {
+            background: linear-gradient(45deg, #e64a4e, #ff6b70); transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 90, 95, 0.4);
+        }
+        .np-nav-menu-mobile .np-cta-button-mobile:active { transform: translateY(0px); box-shadow: 0 3px 8px rgba(255, 90, 95, 0.25); }
+
+        /* --- Responsive Styles (từ header.html) --- */
+        @media (min-width: 992px) {
+            .np-header-wrapper.np-scrolled .np-header { min-height: calc(var(--np-header-height) - 15px); }
+            .np-header-wrapper.np-scrolled .np-logo { height: 48px; }
+            .np-header-wrapper.np-scrolled .np-logo[src*="placehold.co"] { height: 48px; }
+            .np-header-wrapper.np-scrolled .np-logo-text { font-size: 1.5rem; }
+        }
+        @media (max-width: 991px) {
+            .np-header { min-height: var(--np-header-height-mobile); padding: 0 1.5rem; }
+            .np-nav-menu-desktop-container { display: none; }
+            .np-hamburger { display: block; }
+            .np-logo-container { gap: 0.75rem; }
+            .np-logo-text { font-size: 1.25rem; }
+            .np-logo { height: 45px; }
+            .np-logo[src*="placehold.co"] { height: 45px; }
+        }
+        @media (max-width: 767px) {
+            .np-header { padding: 0 1rem; }
+            .np-logo-container { gap: 0.6rem; }
+            .np-logo-text { font-size: 1.15rem; }
+            .np-logo { height: 40px; }
+            .np-logo[src*="placehold.co"] { height: 40px; }
+            .np-nav-menu-mobile { padding-top: calc(var(--np-header-height-mobile) + 0.5rem); }
+            .np-nav-menu-mobile .np-nav-link { padding: 0.8rem 0.9rem; font-size: 1rem; }
+            .np-nav-menu-mobile .np-cta-button-mobile { padding: 0.8rem 1.3rem; font-size: 0.95rem; }
+        }
+        @media (max-width: 480px) {
+            .np-logo-container { gap: 0.5rem; }
+            .np-logo-text { font-size: 1rem; }
+            .np-logo { height: 38px; }
+            .np-logo[src*="placehold.co"] { height: 38px; }
+            .np-header { padding: 0 0.75rem; }
+            .np-hamburger { padding: 0.4rem; font-size: 1.6rem; }
+            .np-nav-menu-mobile { width: min(90%, 300px); }
+        }
+
+        /* --- CSS TỪ INDEX.HTML --- */
+        /* Thêm hiệu ứng hover tinh tế cho nút */
+        .cta-button { transition: all 0.3s ease; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); }
+        /* Style cho icon SVG nhúng */
+        .icon-inline { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -0.15em; margin-right: 0.4em; }
+        .icon-inline-sm { display: inline-block; width: 0.9em; height: 0.9em; vertical-align: -0.1em; margin-left: 0.2em; }
+        .icon-large { width: 2rem; height: 2rem; stroke-width: 1.5; }
+        .icon-quote { width: 3rem; height: 3rem; stroke-width: 1; }
+        /* Đảm bảo iframe bản đồ responsive */
+        .map-container iframe { width: 100%; height: 450px; border: 0; }
         /* Placeholder cho hình ảnh */
-        .placeholder-img {
-            background-color: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #a0a0a0;
-            font-size: 0.875rem;
-            aspect-ratio: 16 / 9;
-            border-radius: 0.375rem; /* rounded-md */
-        }
+        .placeholder-img { background-color: #e0e0e0; display: flex; align-items: center; justify-content: center; color: #a0a0a0; font-size: 0.875rem; aspect-ratio: 16 / 9; border-radius: 0.375rem; }
         /* Custom animation classes (Optional) */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .animate-fade-in-down { animation: fadeInDown 0.8s ease-out forwards; }
         .animate-fade-in-up { animation: fadeInUp 0.8s ease-out 0.2s forwards; opacity: 0; } /* Delay added */
         .animate-fade-in { animation: fadeIn 1s ease-out 0.5s forwards; opacity:0; } /* Delay added */
-
     </style>
     <script type="application/ld+json">
     {
@@ -98,9 +275,42 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <div id="header-placeholder">
-        </div>
-
+    <div class="np-overlay" id="npOverlay"></div>
+    <div class="np-header-wrapper" id="npHeaderWrapper">
+        <header class="np-header">
+            <a href="index.html" class="np-logo-container" aria-label="Trang chủ CLB Cầu Lông Nhơn Phú">
+                <img src="images/logo.png" alt="Logo CLB Cầu Lông Nhơn Phú" class="np-logo"
+                     onerror="this.onerror=null; this.src='https://placehold.co/110x55/3a86ff/ffffff?text=Logo&font=inter';">
+                <span class="np-logo-text">CLB Cầu Lông Nhơn Phú</span>
+            </a>
+            <button class="np-hamburger" id="npHamburger" aria-label="Mở menu" aria-expanded="false" aria-controls="npNavMenuMobile">
+                <i class="fas fa-bars" aria-hidden="true"></i> </button>
+            <div class="np-nav-menu-desktop-container">
+                <nav aria-label="Menu chính">
+                    <ul class="np-nav-menu" role="menubar">
+                        <li role="none"><a href="index.html" class="np-nav-link np-active" role="menuitem">Trang chủ</a></li>
+                        <li role="none"><a href="gioi-thieu.html" class="np-nav-link" role="menuitem">Giới thiệu</a></li>
+                        <li role="none"><a href="lop-hoc.html" class="np-nav-link" role="menuitem">Lớp học</a></li>
+                        <li role="none"><a href="dat-san.html" class="np-nav-link" role="menuitem">Đặt sân</a></li>
+                        <li role="none"><a href="thu-vien.html" class="np-nav-link" role="menuitem">Thư viện</a></li>
+                        <li role="none"><a href="tin-tuc.html" class="np-nav-link" role="menuitem">Tin tức</a></li>
+                        <li role="none"><a href="lien-he.html" class="np-nav-link" role="menuitem">Liên hệ</a></li>
+                    </ul>
+                </nav>
+                <a href="dat-san.html" class="np-cta-button-desktop">Đặt sân ngay</a>
+            </div>
+            <ul class="np-nav-menu-mobile" id="npNavMenuMobile" role="menu" aria-labelledby="npHamburger" hidden>
+                <li role="none"><a href="index.html" class="np-nav-link np-active" role="menuitem">Trang chủ</a></li>
+                <li role="none"><a href="gioi-thieu.html" class="np-nav-link" role="menuitem">Giới thiệu</a></li>
+                <li role="none"><a href="lop-hoc.html" class="np-nav-link" role="menuitem">Lớp học</a></li>
+                <li role="none"><a href="dat-san.html" class="np-nav-link" role="menuitem">Đặt sân</a></li>
+                <li role="none"><a href="thu-vien.html" class="np-nav-link" role="menuitem">Thư viện</a></li>
+                <li role="none"><a href="tin-tuc.html" class="np-nav-link" role="menuitem">Tin tức</a></li>
+                <li role="none"><a href="lien-he.html" class="np-nav-link" role="menuitem">Liên hệ</a></li>
+                <li role="none"><a href="dat-san.html" class="np-cta-button-mobile" role="menuitem">Đặt sân ngay</a></li>
+            </ul>
+        </header>
+    </div>
     <main>
         <section class="relative bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-24 md:py-32 px-4 overflow-hidden">
              <div class="absolute inset-0 z-0 opacity-70">
@@ -231,31 +441,31 @@
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center text-gray-900">Khoảnh Khắc Nhơn Phú</h2>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                        <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity">
-                        <img src="images/san-lon-1.jpg" alt="Ảnh sân lớn 1" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
-                    </div>
-                    <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity">
-                        <img src="images/lop-hoc-lon-1.jpg" alt="Ảnh lớp học lớn 1" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
-                    </div>
-                    <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity hidden md:block">
-                        <img src="images/san-lon-2.jpg" alt="Ảnh sân lớn 2" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
-                    </div>
-                    <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity hidden lg:block">
-                        <img src="images/lop-hoc-lon-2.jpg" alt="Ảnh lớp học lớn 2" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
-                    </div>
-                    <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity">
-                        <img src="images/san-lon-3.jpg" alt="Ảnh sân lớn 3" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
-                    </div>
-                    <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity">
-                        <img src="images/lop-hoc-lon-3.jpg" alt="Ảnh lớp học lớn 3" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
-                    </div>
-                    <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity hidden md:block">
-                        <img src="images/san-lon-4.jpg" alt="Ảnh sân lớn 4" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
-                    </div>
-                    <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity hidden lg:block">
-                        <img src="images/lop-hoc-lon-4.jpg" alt="Ảnh lớp học lớn 4" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
-                    </div>
-                                    </div>
+                        <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity">
+                            <img src="images/san-lon-1.jpg" alt="Ảnh sân lớn 1" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
+                        </div>
+                        <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity">
+                            <img src="images/lop-hoc-lon-1.jpg" alt="Ảnh lớp học lớn 1" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
+                        </div>
+                        <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity hidden md:block">
+                            <img src="images/san-lon-2.jpg" alt="Ảnh sân lớn 2" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
+                        </div>
+                        <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity hidden lg:block">
+                            <img src="images/lop-hoc-lon-2.jpg" alt="Ảnh lớp học lớn 2" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
+                        </div>
+                        <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity">
+                            <img src="images/san-lon-3.jpg" alt="Ảnh sân lớn 3" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
+                        </div>
+                        <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity">
+                            <img src="images/lop-hoc-lon-3.jpg" alt="Ảnh lớp học lớn 3" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
+                        </div>
+                        <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity hidden md:block">
+                            <img src="images/san-lon-4.jpg" alt="Ảnh sân lớn 4" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
+                        </div>
+                        <div class="aspect-square rounded-lg overflow-hidden shadow-md hover:opacity-90 transition-opacity hidden lg:block">
+                            <img src="images/lop-hoc-lon-4.jpg" alt="Ảnh lớp học lớn 4" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/E0E0E0/A0A0A0?text=[Lỗi ảnh]'">
+                        </div>
+                </div>
                  <div class="text-center mt-12">
                     <a href="thu-vien.html" class="cta-button bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg text-lg shadow-md">
                         Khám phá thư viện ảnh
@@ -377,9 +587,9 @@
                 });
         };
 
-        // Tải header.html và footer.html khi trang được tải xong
+        // Chỉ tải footer.html khi trang được tải xong
         document.addEventListener('DOMContentLoaded', () => {
-            loadHTML('header.html', 'header-placeholder');
+            // loadHTML('header.html', 'header-placeholder'); // <- Đã xóa dòng này
             loadHTML('footer.html', 'footer-placeholder');
         });
 
@@ -387,5 +597,167 @@
 
     </script>
 
-</body>
+    <script>
+        // Đảm bảo script này chạy sau khi HTML của header đã được đưa vào DOM
+        // Không cần DOMContentLoaded nữa vì nó đã được tích hợp sẵn
+        // Tuy nhiên, vẫn nên đặt trong DOMContentLoaded của index.html để đảm bảo thứ tự
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Header script (integrated) loaded and DOM ready.");
+
+            const hamburgerBtn = document.getElementById('npHamburger');
+            const mobileMenu = document.getElementById('npNavMenuMobile');
+            const overlay = document.getElementById('npOverlay');
+            const headerWrapper = document.getElementById('npHeaderWrapper');
+            const bodyEl = document.body;
+            const hamburgerIcon = hamburgerBtn?.querySelector('i');
+
+            if (!hamburgerBtn || !mobileMenu || !overlay || !headerWrapper || !hamburgerIcon) {
+                console.error("Lỗi: Không tìm thấy một hoặc nhiều phần tử DOM cần thiết cho header (integrated).");
+                return;
+            } else {
+                 console.log("Header elements (integrated) found:", { hamburgerBtn, mobileMenu, overlay, headerWrapper, hamburgerIcon });
+            }
+
+            let isMenuOpen = false;
+
+            function closeMobileMenu() {
+                if (!isMenuOpen) return;
+                console.log("Closing mobile menu (integrated)...");
+                mobileMenu.classList.remove('np-active');
+                overlay.classList.remove('np-active');
+                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                hamburgerBtn.setAttribute('aria-label', 'Mở menu');
+                hamburgerIcon.classList.remove('fa-times');
+                hamburgerIcon.classList.add('fa-bars');
+                bodyEl.classList.remove('np-menu-open');
+                mobileMenu.addEventListener('transitionend', () => {
+                    if (!mobileMenu.classList.contains('np-active')) {
+                        mobileMenu.setAttribute('hidden', '');
+                        console.log("Mobile menu (integrated) hidden attribute set after transition.");
+                    }
+                }, { once: true });
+                isMenuOpen = false;
+            }
+
+            function openMobileMenu() {
+                if (isMenuOpen) return;
+                console.log("Opening mobile menu (integrated)...");
+                mobileMenu.removeAttribute('hidden');
+                 console.log("Mobile menu (integrated) hidden attribute removed.");
+                requestAnimationFrame(() => {
+                    mobileMenu.classList.add('np-active');
+                    overlay.classList.add('np-active');
+                    hamburgerBtn.setAttribute('aria-expanded', 'true');
+                    hamburgerBtn.setAttribute('aria-label', 'Đóng menu');
+                    hamburgerIcon.classList.remove('fa-bars');
+                    hamburgerIcon.classList.add('fa-times');
+                    bodyEl.classList.add('np-menu-open');
+                    isMenuOpen = true;
+                    console.log("Mobile menu (integrated) .np-active class added.");
+                    mobileMenu.querySelector('a, button')?.focus();
+                });
+            }
+
+            hamburgerBtn.addEventListener('click', (event) => {
+                console.log("Hamburger button (integrated) clicked.");
+                event.stopPropagation();
+                if (isMenuOpen) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            });
+
+            mobileMenu.addEventListener('click', (event) => {
+                const link = event.target.closest('a');
+                if (link) {
+                    console.log("Link inside mobile menu (integrated) clicked:", link.href);
+                    const href = link.getAttribute('href');
+                    if ((href && href !== '#') || link.classList.contains('np-cta-button-mobile')) {
+                         setTimeout(closeMobileMenu, 150);
+                    }
+                }
+            });
+
+            overlay.addEventListener('click', () => {
+                 console.log("Overlay (integrated) clicked.");
+                closeMobileMenu();
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && isMenuOpen) {
+                    console.log("Escape key (integrated) pressed.");
+                    closeMobileMenu();
+                    hamburgerBtn.focus();
+                }
+            });
+
+            let lastScrollY = window.scrollY;
+            const scrollThreshold = 50;
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+                if (headerWrapper) { // Kiểm tra headerWrapper tồn tại
+                    if (currentScrollY > scrollThreshold) {
+                        headerWrapper.classList.add('np-scrolled');
+                    } else {
+                        headerWrapper.classList.remove('np-scrolled');
+                    }
+                }
+                lastScrollY = currentScrollY;
+            }, { passive: true });
+
+             function setActiveMenuItem() {
+                 let currentPath = window.location.pathname;
+                 if (currentPath === '/' || currentPath.endsWith('/index.html') || currentPath.endsWith('/index.php')) {
+                     currentPath = 'index.html';
+                 } else {
+                     currentPath = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+                     if (!currentPath && window.location.pathname !== '/') {
+                         currentPath = window.location.pathname.substring(1);
+                         if (currentPath.endsWith('/')) {
+                             currentPath = currentPath.slice(0, -1);
+                         }
+                     }
+                 }
+                 currentPath = currentPath.split('?')[0].split('#')[0];
+
+                 // Cập nhật selector để chỉ lấy link trong header tích hợp
+                 const menuItems = document.querySelectorAll('.np-header-wrapper .np-nav-link:not(.np-cta-button-mobile)');
+
+                 menuItems.forEach(item => {
+                     item.classList.remove('np-active');
+                     let itemHref = item.getAttribute('href') || '';
+                     if (itemHref === 'index.html' || itemHref === '/' || itemHref === './') {
+                         itemHref = 'index.html';
+                     } else {
+                         itemHref = itemHref.split('?')[0].split('#')[0];
+                         const lastSlashIndex = itemHref.lastIndexOf('/');
+                         if (lastSlashIndex !== -1) { itemHref = itemHref.substring(lastSlashIndex + 1); }
+                         if (itemHref === '' && (item.getAttribute('href') || '').endsWith('/')) {
+                             let fullHref = (item.getAttribute('href') || '').replace('./', '');
+                             if (fullHref.endsWith('/')) { fullHref = fullHref.slice(0, -1); }
+                             itemHref = fullHref.substring(fullHref.lastIndexOf('/') + 1);
+                         }
+                     }
+                     if (itemHref && currentPath && itemHref.toLowerCase() === currentPath.toLowerCase()) {
+                         item.classList.add('np-active');
+                     }
+                 });
+
+                  if (currentPath === 'index.html') {
+                      const homeLinks = document.querySelectorAll('.np-header-wrapper a[href="index.html"], .np-header-wrapper a[href="/"], .np-header-wrapper a[href="./"]');
+                      homeLinks.forEach(link => {
+                          if(link.matches('.np-nav-link') && !link.classList.contains('np-active')) {
+                              link.classList.add('np-active');
+                          }
+                      });
+                  }
+             }
+             setActiveMenuItem();
+             window.addEventListener('hashchange', setActiveMenuItem);
+             window.addEventListener('popstate', setActiveMenuItem);
+             console.log("Header script (integrated) execution finished.");
+        });
+    </script>
+    </body>
 </html>
