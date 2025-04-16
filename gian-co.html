@@ -639,11 +639,12 @@
            }
            return response.text(); // Chuyển đổi nội dung phản hồi thành văn bản (HTML)
          })
-         .then(data => {
+         .then(html => {
            // Lấy phần tử giữ chỗ bằng ID
            const placeholder = document.getElementById(elementId);
            if (placeholder) {
-             placeholder.innerHTML = data; // Chèn HTML đã tải vào phần tử giữ chỗ
+             placeholder.innerHTML = html; // Chèn HTML đã tải vào phần tử giữ chỗ
+             if (url === 'header.html' && window.npInitHeaderMenu) window.npInitHeaderMenu();
            } else {
              console.error(`Lỗi: Không tìm thấy phần tử với ID "${elementId}".`); // Báo lỗi nếu không tìm thấy phần tử
            }
@@ -668,6 +669,7 @@
        loadHTML('footer.html', 'footer-placeholder');
      });
     </script>
+    <script src="js/script.js"></script>
 
 </body>
 </html>

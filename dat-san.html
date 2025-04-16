@@ -686,7 +686,9 @@
 
         // Load header and footer when the page loads
         document.addEventListener('DOMContentLoaded', () => {
-            loadHTML('header-placeholder', 'header.html');
+            loadHTML('header-placeholder', 'header.html').then(() => {
+                if (window.npInitHeaderMenu) window.npInitHeaderMenu();
+            });
             loadHTML('footer-placeholder', 'footer.html');
         });
 
@@ -720,6 +722,6 @@
         `;
         document.head.appendChild(style);
     </script>
-
+    <script src="js/script.js"></script>
 </body>
 </html>

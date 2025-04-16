@@ -121,6 +121,7 @@
                 }
                 const htmlContent = await response.text();
                 element.innerHTML = htmlContent;
+                if (url === 'header.html' && window.npInitHeaderMenu) window.npInitHeaderMenu();
                 console.log(`Đã tải thành công ${url} vào #${elementId}`);
             } catch (error) {
                 console.error(`Lỗi khi tải ${url}:`, error);
@@ -148,6 +149,7 @@
             loadHTML('footer.html', 'footer-placeholder');
         });
     </script>
+    <script src="js/script.js"></script>
 
 </body>
 </html>

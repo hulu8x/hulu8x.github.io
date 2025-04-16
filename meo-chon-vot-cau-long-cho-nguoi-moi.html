@@ -660,6 +660,8 @@
                     oldScript.parentNode.replaceChild(newScript, oldScript);
                 });
 
+                if (url === 'header.html' && window.npInitHeaderMenu) window.npInitHeaderMenu();
+
             } catch (error) {
                 console.error(`Could not load HTML from ${url}:`, error);
                 // Display an error message within the placeholder
@@ -682,6 +684,7 @@
             loadHTML('footer.html', 'footer-placeholder');
         });
     </script>
+    <script src="js/script.js"></script>
 
 </body>
 </html>
