@@ -87,7 +87,6 @@
         .np-header-wrapper.np-scrolled {
             box-shadow: var(--np-shadow-medium);
             background-color: rgba(255, 255, 255, 1); /* Rõ hơn khi cuộn */
-            /* Bỏ hiệu ứng transform translateY để tránh nhảy layout đột ngột */
         }
 
         .np-header {
@@ -108,14 +107,14 @@
         .np-logo-container {
             display: flex;
             align-items: center;
-            gap: 1rem; /* Khoảng cách giữa logo và text */
+            gap: 1rem; /* Khoảng cách giữa logo và text (Desktop) */
             flex-shrink: 0; /* Không co lại khi không đủ chỗ */
             text-decoration: none; /* Bỏ gạch chân cho thẻ a bao ngoài */
         }
 
         .np-logo {
             height: 55px; /* Kích thước logo */
-            transition: var(--np-transition-medium);
+            transition: height var(--np-transition-medium), transform var(--np-transition-fast); /* Thêm height vào transition */
             object-fit: contain;
             display: block;
             will-change: transform, height;
@@ -131,13 +130,13 @@
         }
 
         .np-logo-text {
-            font-size: 1.6rem; /* Kích thước chữ */
+            font-size: 1.6rem; /* Kích thước chữ (Desktop) */
             font-weight: 700;
             color: var(--np-primary-color);
             text-decoration: none;
             white-space: nowrap;
             letter-spacing: -0.5px;
-            transition: color var(--np-transition-fast);
+            transition: color var(--np-transition-fast), font-size var(--np-transition-medium); /* Thêm font-size vào transition */
         }
 
         .np-logo-container:hover .np-logo-text {
@@ -145,6 +144,13 @@
         }
 
         /* --- Menu Điều Hướng (Desktop) --- */
+        .np-nav-menu-desktop-container {
+             /* Container này chỉ để nhóm menu và nút CTA desktop */
+             display: flex;
+             align-items: center;
+             gap: 1.5rem; /* Khoảng cách giữa menu và nút CTA */
+        }
+
         .np-nav-menu {
             display: flex;
             gap: 1.5rem; /* Khoảng cách vừa phải */
@@ -219,6 +225,7 @@
             margin-left: 1rem; /* Khoảng cách với logo khi menu ẩn */
             border-radius: var(--np-border-radius-medium); /* Bo góc */
             line-height: 1; /* Đảm bảo icon căn giữa */
+            flex-shrink: 0; /* Ngăn nút hamburger bị co lại */
         }
 
         .np-hamburger:hover {
@@ -245,7 +252,7 @@
             display: inline-block;
             box-shadow: 0 4px 12px rgba(255, 90, 95, 0.3);
             white-space: nowrap;
-            margin-left: 2rem; /* Khoảng cách với menu */
+           /* margin-left: 2rem; /* Khoảng cách với menu - Đã chuyển vào container */
             will-change: transform, box-shadow;
             border: none; /* Bỏ border */
             outline-offset: 4px;
@@ -279,7 +286,7 @@
             z-index: 998;
             opacity: 0;
             visibility: hidden;
-            transition: opacity var(--np-transition-slow), visibility 0s linear var(--np-transition-slow);
+            transition: opacity var(--np-transition-slow), visibility 0s linear var(--np-transition-slow); /* Delay visibility */
             backdrop-filter: blur(5px); /* Tăng hiệu ứng mờ */
             -webkit-backdrop-filter: blur(5px);
         }
@@ -287,7 +294,7 @@
         .np-overlay.np-active {
             opacity: 1;
             visibility: visible;
-            transition: opacity var(--np-transition-slow), visibility 0s linear 0s;
+            transition: opacity var(--np-transition-slow), visibility 0s linear 0s; /* Remove delay */
         }
 
         /* --- Menu Mobile (Slide-in) --- */
@@ -299,7 +306,7 @@
             width: min(85%, 340px); /* Chiều rộng linh hoạt, tối đa 340px */
             height: 100vh; /* Chiều cao toàn màn hình */
             background-color: white;
-            padding: var(--np-header-height-mobile) 1.5rem 2rem 1.5rem; /* Padding top bằng chiều cao header mobile */
+            padding: calc(var(--np-header-height-mobile) + 1rem) 1.5rem 2rem 1.5rem; /* Padding top tăng nhẹ */
             transition: transform var(--np-transition-slow); /* Hiệu ứng slide mượt */
             box-shadow: var(--np-shadow-strong);
             z-index: 999;
@@ -414,6 +421,9 @@
              .np-header-wrapper.np-scrolled .np-logo[src*="placehold.co"] {
                  height: 48px; /* Thu nhỏ logo placeholder */
              }
+             .np-header-wrapper.np-scrolled .np-logo-text {
+                 font-size: 1.5rem; /* Thu nhỏ text logo khi cuộn */
+             }
         }
 
         /* Màn hình Tablet và Mobile (<= 991px) */
@@ -424,8 +434,7 @@
             }
 
             /* Ẩn menu desktop và nút CTA desktop */
-            .np-nav-menu,
-            .np-cta-button-desktop {
+            .np-nav-menu-desktop-container {
                 display: none;
             }
 
@@ -434,9 +443,12 @@
                 display: block;
             }
 
-            /* Điều chỉnh logo */
+            /* Điều chỉnh logo và text trên Tablet */
+            .np-logo-container {
+                 gap: 0.75rem; /* *** GIẢM KHOẢNG CÁCH logo và text trên tablet *** */
+            }
             .np-logo-text {
-                font-size: 1.3rem;
+                font-size: 1.25rem; /* *** GIẢM NHẸ FONT chữ logo trên tablet *** */
             }
             .np-logo {
                 height: 45px;
@@ -444,39 +456,6 @@
              .np-logo[src*="placehold.co"] {
                  height: 45px;
              }
-             
-            /* Nút đóng menu (X) trong menu mobile */
-            .np-close-menu {
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                background: none;
-                border: none;
-                font-size: 1.5rem;
-                color: var(--np-dark-color);
-                cursor: pointer;
-                padding: 0.5rem;
-                z-index: 1002;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: background-color var(--np-transition-fast), color var(--np-transition-fast);
-            }
-            
-            .np-close-menu:hover {
-                background-color: #f5f5f5;
-                color: var(--np-primary-color);
-            }
-            
-            .np-close-menu:focus {
-                outline: none;
-            }
-            
-            .np-close-menu:focus-visible {
-                outline: 2px solid var(--np-primary-color);
-                outline-offset: 2px;
-            }
         }
 
         /* Màn hình Mobile nhỏ (<= 767px) */
@@ -484,7 +463,9 @@
             .np-header {
                 padding: 0 1rem; /* Giảm padding */
             }
-
+            .np-logo-container {
+                 gap: 0.6rem; /* Giảm thêm khoảng cách */
+            }
             .np-logo-text {
                 font-size: 1.15rem; /* Giảm font chữ logo */
             }
@@ -550,27 +531,24 @@
             </a>
 
             <button class="np-hamburger" id="npHamburger" aria-label="Mở menu" aria-expanded="false" aria-controls="npNavMenuMobile">
-                <i class="fas fa-bars" aria-hidden="true"></i>
-            </button>
+                <i class="fas fa-bars" aria-hidden="true"></i> </button>
 
-            <nav aria-label="Menu chính" class="np-nav-menu-desktop-container">
-                <ul class="np-nav-menu" role="menubar">
-                    <li role="none"><a href="index.html" class="np-nav-link" role="menuitem">Trang chủ</a></li>
-                    <li role="none"><a href="gioi-thieu.html" class="np-nav-link" role="menuitem">Giới thiệu</a></li>
-                    <li role="none"><a href="lop-hoc.html" class="np-nav-link" role="menuitem">Lớp học</a></li>
-                    <li role="none"><a href="dat-san.html" class="np-nav-link" role="menuitem">Đặt sân</a></li>
-                    <li role="none"><a href="thu-vien.html" class="np-nav-link" role="menuitem">Thư viện</a></li>
-                    <li role="none"><a href="tin-tuc.html" class="np-nav-link" role="menuitem">Tin tức</a></li>
-                    <li role="none"><a href="lien-he.html" class="np-nav-link" role="menuitem">Liên hệ</a></li>
-                </ul>
-            </nav>
-
-            <a href="dat-san.html" class="np-cta-button-desktop">Đặt sân ngay</a>
+            <div class="np-nav-menu-desktop-container">
+                <nav aria-label="Menu chính">
+                    <ul class="np-nav-menu" role="menubar">
+                        <li role="none"><a href="index.html" class="np-nav-link" role="menuitem">Trang chủ</a></li>
+                        <li role="none"><a href="gioi-thieu.html" class="np-nav-link" role="menuitem">Giới thiệu</a></li>
+                        <li role="none"><a href="lop-hoc.html" class="np-nav-link" role="menuitem">Lớp học</a></li>
+                        <li role="none"><a href="dat-san.html" class="np-nav-link" role="menuitem">Đặt sân</a></li>
+                        <li role="none"><a href="thu-vien.html" class="np-nav-link" role="menuitem">Thư viện</a></li>
+                        <li role="none"><a href="tin-tuc.html" class="np-nav-link" role="menuitem">Tin tức</a></li>
+                        <li role="none"><a href="lien-he.html" class="np-nav-link" role="menuitem">Liên hệ</a></li>
+                    </ul>
+                </nav>
+                <a href="dat-san.html" class="np-cta-button-desktop">Đặt sân ngay</a>
+            </div>
 
             <ul class="np-nav-menu-mobile" id="npNavMenuMobile" role="menu" aria-labelledby="npHamburger" hidden>
-                <button class="np-close-menu" id="npCloseMenu" aria-label="Đóng menu">
-                    <i class="fas fa-times" aria-hidden="true"></i>
-                </button>
                 <li role="none"><a href="index.html" class="np-nav-link" role="menuitem">Trang chủ</a></li>
                 <li role="none"><a href="gioi-thieu.html" class="np-nav-link" role="menuitem">Giới thiệu</a></li>
                 <li role="none"><a href="lop-hoc.html" class="np-nav-link" role="menuitem">Lớp học</a></li>
@@ -582,225 +560,5 @@
             </ul>
         </header>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Lấy các phần tử DOM cần thiết
-            const hamburgerBtn = document.getElementById('npHamburger');
-            const closeMenuBtn = document.getElementById('npCloseMenu');
-            const mobileMenu = document.getElementById('npNavMenuMobile');
-            const overlay = document.getElementById('npOverlay');
-            const headerWrapper = document.getElementById('npHeaderWrapper');
-            const bodyEl = document.body;
-            const hamburgerIcon = hamburgerBtn?.querySelector('i'); // Sử dụng optional chaining
-
-            // Kiểm tra sự tồn tại của các phần tử chính
-            if (!hamburgerBtn || !mobileMenu || !overlay || !headerWrapper || !closeMenuBtn) {
-                console.error("Lỗi: Không tìm thấy một hoặc nhiều phần tử DOM cần thiết cho header.");
-                return; // Dừng nếu thiếu phần tử
-            }
-
-            let isMenuOpen = false; // Trạng thái menu
-
-            // Hàm đóng menu mobile
-            function closeMobileMenu() {
-                if (!isMenuOpen) return; // Thoát nếu menu đã đóng
-
-                // 1. Bắt đầu animation đóng
-                mobileMenu.classList.remove('np-active'); // Kích hoạt transition transform translateX(100%)
-                overlay.classList.remove('np-active'); // Kích hoạt transition opacity
-                hamburgerBtn.setAttribute('aria-expanded', 'false');
-                hamburgerBtn.setAttribute('aria-label', 'Mở menu');
-                bodyEl.classList.remove('np-menu-open'); // Cho phép cuộn lại body
-
-                // 2. Thêm thuộc tính 'hidden' sau khi animation hoàn thành (cải thiện accessibility)
-                // Thời gian phải khớp với transition duration của .np-nav-menu-mobile
-                mobileMenu.addEventListener('transitionend', () => {
-                    if (!isMenuOpen) { // Chỉ thêm hidden nếu menu thực sự đã đóng (tránh trường hợp mở lại nhanh)
-                        mobileMenu.setAttribute('hidden', '');
-                    }
-                }, { once: true }); // Chỉ chạy listener này một lần
-
-                isMenuOpen = false;
-            }
-
-            // Hàm mở menu mobile
-            function openMobileMenu() {
-                if (isMenuOpen) return; // Thoát nếu menu đã mở
-
-                // 1. Xóa 'hidden' để menu có thể hiển thị và animation
-                mobileMenu.removeAttribute('hidden');
-
-                // 2. Sử dụng requestAnimationFrame để đảm bảo trình duyệt đã xử lý việc xóa 'hidden'
-                // trước khi thêm class 'np-active' để animation chạy đúng
-                requestAnimationFrame(() => {
-                    mobileMenu.classList.add('np-active'); // Kích hoạt transition transform translateX(0)
-                    overlay.classList.add('np-active'); // Kích hoạt transition opacity
-                    hamburgerBtn.setAttribute('aria-expanded', 'true');
-                    hamburgerBtn.setAttribute('aria-label', 'Đóng menu');
-                    bodyEl.classList.add('np-menu-open'); // Ngăn cuộn body
-                    isMenuOpen = true;
-                    // Tùy chọn: focus vào mục đầu tiên trong menu
-                    mobileMenu.querySelector('a, button')?.focus();
-                });
-            }
-
-            // Xử lý sự kiện click nút hamburger
-            hamburgerBtn.addEventListener('click', (event) => {
-                event.stopPropagation(); // Ngăn sự kiện lan ra ngoài
-                if (isMenuOpen) {
-                    closeMobileMenu();
-                } else {
-                    openMobileMenu();
-                }
-            });
-
-            // Xử lý sự kiện click nút đóng menu (X)
-            closeMenuBtn.addEventListener('click', (event) => {
-                event.stopPropagation(); // Ngăn sự kiện lan ra ngoài
-                closeMobileMenu();
-                // Focus trở lại nút hamburger sau khi đóng menu
-                setTimeout(() => {
-                    hamburgerBtn.focus();
-                }, 100);
-            });
-
-            // Đóng menu khi click vào một link hoặc nút CTA trong menu mobile
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', (event) => {
-                    // Chỉ đóng menu nếu click vào link thực sự (không phải link #)
-                    // hoặc nếu là nút CTA
-                    if (link.getAttribute('href') && link.getAttribute('href') !== '#') {
-                         // Đợi một chút để người dùng thấy link được click trước khi menu đóng
-                         setTimeout(closeMobileMenu, 150);
-                    } else if (link.classList.contains('np-cta-button-mobile')) {
-                         setTimeout(closeMobileMenu, 150);
-                    }
-                    // Không cần event.stopPropagation() ở đây trừ khi có vấn đề
-                });
-            });
-
-            // Đóng menu khi click vào overlay
-            overlay.addEventListener('click', closeMobileMenu);
-
-            // Đóng menu khi nhấn phím Escape
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && isMenuOpen) {
-                    closeMobileMenu();
-                    hamburgerBtn.focus(); // Chuyển focus về nút hamburger
-                }
-            });
-
-            // Thêm/xóa class 'np-scrolled' vào header khi cuộn trang
-            let lastScrollY = window.scrollY;
-            const scrollThreshold = 50; // Ngưỡng cuộn để kích hoạt hiệu ứng
-
-            window.addEventListener('scroll', () => {
-                const currentScrollY = window.scrollY;
-                if (currentScrollY > scrollThreshold) {
-                    headerWrapper.classList.add('np-scrolled');
-                } else {
-                    headerWrapper.classList.remove('np-scrolled');
-                }
-                lastScrollY = currentScrollY; // Cập nhật vị trí cuộn cuối
-            }, { passive: true }); // Tối ưu hiệu suất cuộn
-
-
-            // --- Đánh dấu mục menu active ---
-             function setActiveMenuItem() {
-                // Lấy phần cuối của URL path (tên file hoặc thư mục)
-                let currentPath = window.location.pathname;
-                // Xử lý trường hợp trang chủ (/, /index.html, /index.php, etc.)
-                if (currentPath === '/' || currentPath.endsWith('/index.html') || currentPath.endsWith('/index.php')) {
-                    currentPath = 'index.html'; // Quy chuẩn về 'index.html' để so sánh
-                } else {
-                    // Lấy phần cuối cùng sau dấu /
-                    currentPath = currentPath.substring(currentPath.lastIndexOf('/') + 1);
-                    // Nếu không có phần cuối (vd: /gioi-thieu/), dùng cả path nhưng bỏ dấu / đầu
-                    if (!currentPath && window.location.pathname !== '/') {
-                         currentPath = window.location.pathname.substring(1);
-                         // Bỏ dấu / cuối nếu có (vd: /gioi-thieu/)
-                         if (currentPath.endsWith('/')) {
-                             currentPath = currentPath.slice(0, -1);
-                         }
-                    }
-                }
-
-
-                const menuItems = document.querySelectorAll('.np-nav-menu .np-nav-link, .np-nav-menu-mobile .np-nav-link');
-
-                menuItems.forEach(item => {
-                    item.classList.remove('np-active'); // Xóa active cũ
-                    let itemHref = item.getAttribute('href') || '';
-
-                    // Xử lý href tương tự như currentPath
-                    if (itemHref === '/' || itemHref === './' || itemHref.endsWith('index.html') || itemHref.endsWith('index.php')) {
-                        itemHref = 'index.html';
-                    } else {
-                        // Bỏ phần query string và hash nếu có
-                        itemHref = itemHref.split('?')[0].split('#')[0];
-                        // Lấy phần cuối cùng sau dấu /
-                        itemHref = itemHref.substring(itemHref.lastIndexOf('/') + 1);
-                         // Nếu không có phần cuối (vd: gioi-thieu/), dùng cả href nhưng bỏ ./ nếu có
-                        if (!itemHref && (item.getAttribute('href') || '') !== '/') {
-                             itemHref = (item.getAttribute('href') || '').replace('./', '');
-                             // Bỏ dấu / cuối nếu có
-                             if (itemHref.endsWith('/')) {
-                                 itemHref = itemHref.slice(0, -1);
-                             }
-                        }
-                    }
-
-                    // So sánh không phân biệt chữ hoa/thường và bỏ qua phần mở rộng file nếu cần
-                    // Ví dụ đơn giản: so sánh trực tiếp
-                    if (itemHref && itemHref === currentPath) {
-                        item.classList.add('np-active');
-                    }
-                });
-
-                 // Trường hợp đặc biệt cho trang chủ nếu so sánh trên không khớp
-                 if (currentPath === 'index.html') {
-                     const homeLinks = document.querySelectorAll('a[href="index.html"], a[href="/"], a[href="./"]');
-                     homeLinks.forEach(link => {
-                         // Chỉ thêm active nếu nó nằm trong menu
-                         if(link.matches('.np-nav-menu .np-nav-link, .np-nav-menu-mobile .np-nav-link')) {
-                             link.classList.add('np-active');
-                         }
-                     });
-                 }
-            }
-
-            setActiveMenuItem(); // Gọi hàm khi tải trang
-
-            // Lắng nghe sự kiện thay đổi hash (nếu dùng anchor link trong trang)
-            window.addEventListener('hashchange', setActiveMenuItem);
-
-            // Lắng nghe popstate (nếu dùng History API để điều hướng SPA)
-            window.addEventListener('popstate', setActiveMenuItem);
-
-            // Xử lý sự kiện vuốt (swipe) để đóng menu trên thiết bị cảm ứng
-            let touchStartX = 0;
-            let touchEndX = 0;
-            
-            // Hàm xử lý vuốt để đóng menu
-            function handleSwipe() {
-                // Nếu vuốt từ phải sang trái (đóng menu)
-                if (touchStartX - touchEndX > 70 && isMenuOpen) { // Ngưỡng 70px để xác định vuốt
-                    closeMobileMenu();
-                }
-            }
-            
-            // Thêm sự kiện touch cho menu mobile
-            mobileMenu.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-            
-            mobileMenu.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            }, { passive: true });
-        });
-    </script>
-
 </body>
 </html>
