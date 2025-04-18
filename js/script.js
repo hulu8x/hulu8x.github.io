@@ -170,9 +170,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const widgetDiv = document.getElementById('mini-booking-widget');
         if (!widgetDiv) return; // Exit if widget div not found
 
-        widgetDiv.innerHTML = '<p class="text-gray-500">Đang tải lịch sân hôm nay...</p>';
-
+        const loadingRow = document.getElementById('booking-loading');
+        const currentDateElement = document.getElementById('current-date');
+        
+        // Format and display current date
         const today = new Date();
+        const options = { weekday: 'long', day: 'numeric', month: 'numeric', year: 'numeric' };
+        currentDateElement.textContent = `Hôm nay, ${today.toLocaleDateString('vi-VN', options)}`;
+        
         const year = today.getFullYear();
         const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
         const day = String(today.getDate()).padStart(2, '0');
@@ -185,44 +190,137 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) {
                 throw new Error(`Lỗi mạng: ${response.status}`);
             }
+            
             const availabilityData = await response.json();
-
-            let widgetContent = '<ul class="space-y-3 text-left">';
-            const courts = ['1', '2', '3'];
-
-            courts.forEach(courtNum => {
-                widgetContent += `<li class="flex items-center justify-between pb-2 border-b border-gray-200 last:border-b-0">`;
-                widgetContent += `<span class="font-medium text-gray-700">Sân ${courtNum}:</span>`;
-
-                if (availabilityData[courtNum] && availabilityData[courtNum].length > 0) {
-                    const now = new Date();
-                    const availableSlots = availabilityData[courtNum].filter(slot => {
-                        const [startTime] = slot.time.split('-');
-                        if (!startTime) return false;
-                        const [hours, minutes] = startTime.split(':');
-                        const slotDateTime = new Date(todayStr);
-                        slotDateTime.setHours(parseInt(hours, 10), parseInt(minutes, 10), 0, 0);
-                        // Consider a slot available if its start time is in the future
-                        return slot.status === 'available' && slotDateTime >= now;
+            if (!availabilityData || Object.keys(availabilityData).length === 0) {
+                throw new Error('Không có dữ liệu sân');
+            }
+            
+            // Hide loading indicator
+            if (loadingRow) {
+                loadingRow.style.display = 'none';
+            }
+            
+            // Process all time slots from all courts to get a unique sorted list
+            const allTimeSlots = new Set();
+            for (const courtNum in availabilityData) {
+                if (availabilityData[courtNum] && Array.isArray(availabilityData[courtNum])) {
+                    availabilityData[courtNum].forEach(slot => {
+                        allTimeSlots.add(slot.time);
                     });
-
-                    if (availableSlots.length > 0) {
-                        widgetContent += `<span class="text-sm px-2 py-1 bg-green-100 text-green-700 rounded-full">${availableSlots.length} khung giờ trống</span>`;
-                    } else {
-                        widgetContent += `<span class="text-sm px-2 py-1 bg-orange-100 text-orange-700 rounded-full">Hết chỗ / Đã qua giờ</span>`;
-                    }
-                } else {
-                    widgetContent += `<span class="text-sm px-2 py-1 bg-gray-100 text-gray-500 rounded-full">Không có dữ liệu</span>`;
                 }
-                widgetContent += `</li>`;
+            }
+            
+            // Convert to array, sort by time
+            const sortedTimeSlots = Array.from(allTimeSlots).sort();
+            
+            // Get the table body to append rows to
+            const tableBody = document.querySelector('#mini-booking-widget tbody');
+            if (!tableBody) return;
+            
+            // Create a row for each time slot
+            sortedTimeSlots.forEach(timeSlot => {
+                const row = document.createElement('tr');
+                row.className = 'border-b border-gray-200 hover:bg-gray-50';
+                
+                // Add time cell
+                const timeCell = document.createElement('td');
+                timeCell.className = 'py-2 px-3 font-medium text-gray-900';
+                timeCell.textContent = timeSlot;
+                row.appendChild(timeCell);
+                
+                // Add cells for each court
+                for (let courtNum = 1; courtNum <= 3; courtNum++) {
+                    const courtCell = document.createElement('td');
+                    courtCell.className = 'py-2 px-3';
+                    
+                    // Find this time slot for this court
+                    const courtData = availabilityData[courtNum.toString()];
+                    let slotStatus = 'unavailable'; // Default status
+                    
+                    if (courtData && Array.isArray(courtData)) {
+                        const slotInfo = courtData.find(s => s.time === timeSlot);
+                        if (slotInfo) {
+                            const now = new Date();
+                            // For slots that are in the past
+                            const [startTime] = timeSlot.split('-');
+                            if (startTime) {
+                                const [hours, minutes] = startTime.split(':');
+                                const slotDateTime = new Date(today);
+                                slotDateTime.setHours(parseInt(hours, 10), parseInt(minutes, 10), 0, 0);
+                                
+                                if (slotDateTime < now) {
+                                    slotStatus = 'past';
+                                } else {
+                                    slotStatus = slotInfo.status; // 'available' or 'booked'
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Create status indicator
+                    const statusIndicator = document.createElement('div');
+                    statusIndicator.className = 'flex items-center';
+                    
+                    // Different styling based on status
+                    let statusColor = '';
+                    let statusText = '';
+                    
+                    if (slotStatus === 'available') {
+                        statusColor = 'bg-green-400';
+                        statusText = 'Trống';
+                    } else if (slotStatus === 'booked') {
+                        statusColor = 'bg-orange-300';
+                        statusText = 'Đã đặt';
+                    } else if (slotStatus === 'past') {
+                        statusColor = 'bg-gray-300';
+                        statusText = 'Đã qua';
+                    } else {
+                        statusColor = 'bg-gray-300';
+                        statusText = 'Không mở';
+                    }
+                    
+                    statusIndicator.innerHTML = `
+                        <div class="w-3 h-3 ${statusColor} rounded-full mr-2"></div>
+                        <span class="text-sm text-gray-700">${statusText}</span>
+                    `;
+                    
+                    courtCell.appendChild(statusIndicator);
+                    row.appendChild(courtCell);
+                }
+                
+                tableBody.appendChild(row);
             });
 
-            widgetContent += '</ul>';
-            widgetDiv.innerHTML = widgetContent;
+            // If no time slots were found, show a message
+            if (sortedTimeSlots.length === 0) {
+                const messageRow = document.createElement('tr');
+                messageRow.innerHTML = `
+                    <td colspan="4" class="text-center py-4 text-gray-500">
+                        Không có dữ liệu khung giờ cho ngày hôm nay.
+                    </td>
+                `;
+                tableBody.appendChild(messageRow);
+            }
 
         } catch (error) {
             console.error('Error loading mini booking widget:', error);
-            widgetDiv.innerHTML = `<p class="text-red-500 text-sm">Lỗi khi tải lịch sân. Vui lòng thử lại sau hoặc xem trang đặt sân.</p>`;
+            const tableBody = document.querySelector('#mini-booking-widget tbody');
+            if (loadingRow) {
+                loadingRow.style.display = 'none';
+            }
+            if (tableBody) {
+                const errorRow = document.createElement('tr');
+                errorRow.innerHTML = `
+                    <td colspan="4" class="text-center py-4 text-red-500">
+                        <div class="flex flex-col items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            Lỗi khi tải lịch sân. Vui lòng thử lại sau hoặc <a href="dat-san.html" class="underline">xem trang đặt sân</a>.
+                        </div>
+                    </td>
+                `;
+                tableBody.appendChild(errorRow);
+            }
         }
     }
 

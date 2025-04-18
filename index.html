@@ -383,16 +383,64 @@
                         <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/calendar-search.svg" alt="Lịch sân" class="icon-inline text-blue-600"/>
                         Xem nhanh tình trạng các sân tại CLB Nhơn Phú trong ngày hôm nay.
                     </p>
-                     <!-- START: Mini Booking Widget Placeholder -->
-                     <div id="mini-booking-widget" class="mt-4 p-4 border border-dashed border-gray-300 rounded-md text-gray-500 min-h-[100px] flex items-center justify-center">
-                         <!-- Nội dung widget sẽ được tải vào đây -->
-                         <p>Đang tải lịch sân...</p>
+                     <!-- START: Mini Booking Widget -->
+                     <div id="mini-booking-widget" class="mt-4 p-4 border border-gray-200 rounded-md bg-gray-50">
+                        <div class="mb-4 flex items-center justify-between">
+                            <div class="flex items-center">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-1 rounded-full">
+                                    <span id="current-date">Hôm nay, --/--/----</span>
+                                </span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-500 space-x-3">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-green-400 rounded-full mr-1"></div>
+                                    <span>Còn trống</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-orange-300 rounded-full mr-1"></div>
+                                    <span>Đã đặt</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-gray-300 rounded-full mr-1"></div>
+                                    <span>Không mở</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full rounded-md overflow-hidden">
+                                <thead>
+                                    <tr class="bg-blue-600 text-white text-left">
+                                        <th class="py-2 px-3 text-sm font-semibold w-20">Giờ</th>
+                                        <th class="py-2 px-3 text-sm font-semibold">Sân 1</th>
+                                        <th class="py-2 px-3 text-sm font-semibold">Sân 2</th>
+                                        <th class="py-2 px-3 text-sm font-semibold">Sân 3</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white">
+                                    <!-- Loading indicator -->
+                                    <tr id="booking-loading" class="border-b border-gray-200">
+                                        <td colspan="4" class="py-8 text-center text-gray-500">
+                                            <div class="flex flex-col items-center">
+                                                <div class="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                                                <p class="mt-2 text-sm">Đang tải dữ liệu sân...</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- Time slots will be inserted here by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="mt-4 text-center">
+                            <a href="dat-san.html" class="cta-button bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg text-sm shadow-sm inline-flex items-center">
+                                <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/calendar-plus.svg" alt="Đặt sân" class="icon-inline mr-1 text-white"/>
+                                Xem lịch đầy đủ & Đặt sân
+                            </a>
+                        </div>
                      </div>
-                     <!-- END: Mini Booking Widget Placeholder -->
+                     <!-- END: Mini Booking Widget -->
                 </div>
-                <a href="dat-san.html" class="cta-button bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg text-lg shadow-md">
-                    Xem lịch đầy đủ & Đặt sân
-                </a>
             </div>
         </section>
 
