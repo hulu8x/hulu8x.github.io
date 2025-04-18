@@ -165,19 +165,81 @@ document.addEventListener('DOMContentLoaded', function() {
         //    - Keep the confirmation form visible for retry or contact.
     }
 
+    // --- Mini Booking Widget Logic ---
+    async function loadMiniBookingWidget() {
+        const widgetDiv = document.getElementById('mini-booking-widget');
+        if (!widgetDiv) return; // Exit if widget div not found
+
+        widgetDiv.innerHTML = '<p class="text-gray-500">Đang tải lịch sân hôm nay...</p>';
+
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const day = String(today.getDate()).padStart(2, '0');
+        const todayStr = `${year}-${month}-${day}`;
+
+        const apiUrl = `https://asia-southeast1-nhonphu-booking.cloudfunctions.net/getAvailability?date=${todayStr}`;
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error(`Lỗi mạng: ${response.status}`);
+            }
+            const availabilityData = await response.json();
+
+            let widgetContent = '<ul class="space-y-3 text-left">';
+            const courts = ['1', '2', '3'];
+
+            courts.forEach(courtNum => {
+                widgetContent += `<li class="flex items-center justify-between pb-2 border-b border-gray-200 last:border-b-0">`;
+                widgetContent += `<span class="font-medium text-gray-700">Sân ${courtNum}:</span>`;
+
+                if (availabilityData[courtNum] && availabilityData[courtNum].length > 0) {
+                    const now = new Date();
+                    const availableSlots = availabilityData[courtNum].filter(slot => {
+                        const [startTime] = slot.time.split('-');
+                        if (!startTime) return false;
+                        const [hours, minutes] = startTime.split(':');
+                        const slotDateTime = new Date(todayStr);
+                        slotDateTime.setHours(parseInt(hours, 10), parseInt(minutes, 10), 0, 0);
+                        // Consider a slot available if its start time is in the future
+                        return slot.status === 'available' && slotDateTime >= now;
+                    });
+
+                    if (availableSlots.length > 0) {
+                        widgetContent += `<span class="text-sm px-2 py-1 bg-green-100 text-green-700 rounded-full">${availableSlots.length} khung giờ trống</span>`;
+                    } else {
+                        widgetContent += `<span class="text-sm px-2 py-1 bg-orange-100 text-orange-700 rounded-full">Hết chỗ / Đã qua giờ</span>`;
+                    }
+                } else {
+                    widgetContent += `<span class="text-sm px-2 py-1 bg-gray-100 text-gray-500 rounded-full">Không có dữ liệu</span>`;
+                }
+                widgetContent += `</li>`;
+            });
+
+            widgetContent += '</ul>';
+            widgetDiv.innerHTML = widgetContent;
+
+        } catch (error) {
+            console.error('Error loading mini booking widget:', error);
+            widgetDiv.innerHTML = `<p class="text-red-500 text-sm">Lỗi khi tải lịch sân. Vui lòng thử lại sau hoặc xem trang đặt sân.</p>`;
+        }
+    }
+
+    // Call the function to load the widget data
+    if (document.getElementById('mini-booking-widget')) {
+        loadMiniBookingWidget();
+    }
+
 });
 
 window.npInitHeaderMenu = function() {
-    // Lấy các phần tử DOM cần thiết từ header-placeholder
-    const headerPlaceholder = document.getElementById('header-placeholder');
-    if (!headerPlaceholder) {
-        console.error("Header placeholder not found!");
-        return;
-    }
-    const hamburgerBtn = headerPlaceholder.querySelector('#npHamburger');
-    const mobileMenu = headerPlaceholder.querySelector('#npNavMenuMobile');
-    const overlay = headerPlaceholder.querySelector('#npOverlay');
-    const headerWrapper = headerPlaceholder.querySelector('#npHeaderWrapper');
+    // Use header-placeholder if exists, otherwise use document as container
+    const container = document.getElementById('header-placeholder') || document;
+    const hamburgerBtn = container.querySelector('#npHamburger');
+    const mobileMenu = container.querySelector('#npNavMenuMobile');
+    const overlay = container.querySelector('#npOverlay');
+    const headerWrapper = container.querySelector('#npHeaderWrapper');
     const bodyEl = document.body;
     const hamburgerIcon = hamburgerBtn?.querySelector('i');
 
@@ -271,8 +333,8 @@ window.npInitHeaderMenu = function() {
             }
         }
         currentPath = currentPath.split('?')[0].split('#')[0];
-        const menuItemsDesktop = headerPlaceholder.querySelectorAll('.np-nav-menu .np-nav-link');
-        const menuItemsMobile = headerPlaceholder.querySelectorAll('.np-nav-menu-mobile .np-nav-link:not(.np-cta-button-mobile)');
+        const menuItemsDesktop = container.querySelectorAll('.np-nav-menu .np-nav-link');
+        const menuItemsMobile = container.querySelectorAll('.np-nav-menu-mobile .np-nav-link:not(.np-cta-button-mobile)');
         const menuItems = [...menuItemsDesktop, ...menuItemsMobile];
         if (menuItems.length === 0) return;
         menuItems.forEach(item => {
@@ -304,7 +366,7 @@ window.npInitHeaderMenu = function() {
             }
         });
         if (currentPath === 'index.html') {
-            const homeLinks = headerPlaceholder.querySelectorAll('a[href="index.html"], a[href="/"], a[href="./"]');
+            const homeLinks = container.querySelectorAll('a[href="index.html"], a[href="/"], a[href="./"]');
             homeLinks.forEach(link => {
                 if(link.matches('.np-nav-menu .np-nav-link, .np-nav-menu-mobile .np-nav-link') && !link.classList.contains('np-active')) {
                     link.classList.add('np-active');
