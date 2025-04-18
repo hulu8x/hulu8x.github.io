@@ -24,88 +24,89 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        /* Consistent section title styling */
-        .section-title {
-            @apply text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8 md:mb-12;
-        }
-        /* Styles for booking status spans */
-        .slot-available { @apply bg-green-100 text-green-800 px-2 py-0.5 rounded font-medium; }
-        .slot-booked { @apply bg-orange-100 text-orange-800 px-2 py-0.5 rounded font-medium; }
-        .slot-unavailable { @apply bg-gray-200 text-gray-600 px-2 py-0.5 rounded font-medium; }
-
         /* Styles for the simulated calendar */
         .calendar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.5rem; }
         .calendar-day { border: 1px solid #e5e7eb; border-radius: 0.375rem; padding: 0.75rem; }
         .calendar-day h4 { font-weight: 600; margin-bottom: 0.5rem; text-align: center; font-size: 0.875rem; }
         .time-slot {
-            display: block; /* Changed from inline-block */
-            width: 100%; /* Make slots take full width */
+            display: block;
+            width: 100%;
             padding: 0.5rem;
-            margin-bottom: 0.25rem; /* Add space between slots */
+            margin-bottom: 0.25rem;
             border-radius: 0.25rem;
             text-align: center;
-            font-size: 0.75rem; /* Smaller font size */
+            font-size: 0.75rem;
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             border: 1px solid transparent;
         }
-        .time-slot.booked { 
-            background-color: #fed7aa !important;
-            color: #9a3412 !important;
-            cursor: not-allowed !important;
-            opacity: 0.8 !important;
-            pointer-events: none !important;
-            border-color: #fdba74 !important;
-        }
-
-        .time-slot.available { 
-            background-color: #dcfce7; 
-            color: #166534; 
-            border-color: #bbf7d0; 
-        }
-
-        .time-slot.available:hover { 
-            background-color: #bbf7d0; 
-            border-color: #86efac; 
-        }
-
-        .time-slot.unavailable { 
-            background-color: #f3f4f6; 
-            color: #6b7280; 
-            cursor: not-allowed; 
-            opacity: 0.7; 
-            pointer-events: none;
-        }
+        .time-slot.available { background-color: #dcfce7; color: #166534; border-color: #bbf7d0; }
+        .time-slot.available:hover { background-color: #bbf7d0; border-color: #86efac; }
+        .time-slot.booked { background-color: #ffedd5; color: #9a3412; cursor: not-allowed; opacity: 0.8; }
+        .time-slot.unavailable { background-color: #f3f4f6; color: #6b7280; cursor: not-allowed; opacity: 0.7; }
 
         /* Styles for pricing table */
-        .pricing-table { @apply w-full max-w-2xl mx-auto border-collapse border border-gray-300 shadow-sm rounded-lg overflow-hidden; }
-        .pricing-table th, .pricing-table td { @apply border border-gray-200 px-4 py-3 text-sm text-left; }
-        .pricing-table th { @apply bg-gray-100 font-semibold text-gray-700; }
-        .pricing-table tbody tr:nth-child(even) { @apply bg-gray-50; }
-        .pricing-table td:last-child { @apply text-center font-semibold text-gray-800; }
-
-        /* Styles for booking rules list */
-        .rules-list { @apply list-none space-y-4; }
-        .rules-list > li { @apply pl-6 relative; }
-        .rules-list > li::before {
-            content: ''; @apply absolute left-0 top-1.5 w-2 h-2 bg-blue-500 rounded-full; /* Custom bullet */
-        }
-        .rules-list ul { @apply list-none mt-2 pl-4 space-y-1; }
-        .rules-list ul li { @apply pl-5 relative text-sm text-gray-600; }
-         .rules-list ul li::before {
-            content: '-'; @apply absolute left-0 top-0 text-blue-600 font-bold; /* Dash bullet */
-        }
+        .pricing-table { width: 100%; min-width: 400px; margin-left: auto; margin-right: auto; border-collapse: collapse; border: 1px solid #d1d5db; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); border-radius: 0.5rem; overflow: hidden; }
+        .pricing-table th, .pricing-table td { border: 1px solid #e5e7eb; padding: 0.75rem 1rem; font-size: 0.875rem; text-align: left; }
+        .pricing-table th { background-color: #f9fafb; font-weight: 600; color: #374151; }
+        .pricing-table tbody tr:nth-child(even) { background-color: #f9fafb; }
+        .pricing-table td:last-child { text-align: center; font-weight: 600; color: #1f2937; }
 
         /* Ensure icons are sized correctly */
         .icon {
             width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; margin-right: 0.25rem; flex-shrink: 0;
         }
-        /* Form styling (reusing from previous example) */
-         .form-group label:not([type="radio"]):not([type="checkbox"]) { @apply block text-sm font-medium text-gray-700 mb-1; }
-         .form-group input[type="text"], .form-group input[type="tel"], .form-group textarea { @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-150 ease-in-out; }
-         .form-group input[type="checkbox"] { @apply focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mr-2; }
-         .form-group label[type="checkbox"] { @apply inline-flex items-center text-sm text-gray-700; }
-         .form-group a { @apply text-blue-600 hover:underline; }
+
+        /* Styles for selected time slots */
+        .time-slot.selected {
+            background-color: #bfdbfe;
+            color: #1e40af;
+            border-color: #60a5fa;
+            font-weight: 600;
+        }
+        .time-slot.selected:hover {
+            background-color: #93c5fd;
+        }
+
+        /* Styles for the calendar grid */
+        .calendar-grid {
+            display: grid;
+            gap: 0.5rem;
+            min-height: 100px;
+            border: 1px dashed #d1d5db;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            background-color: #f9fafb;
+        }
+        .calendar-grid:empty::before {
+            content: "Vui lòng chọn ngày và sân để xem giờ trống.";
+            text-align: center; color: #6b7280; font-size: 0.875rem; grid-column: 1 / -1; align-self: center;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 640px) {
+            .calendar-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                gap: 0.25rem;
+            }
+            .time-slot {
+                padding: 0.4rem;
+                font-size: 0.7rem;
+            }
+            .pricing-table th, .pricing-table td {
+                padding: 0.5rem; font-size: 0.75rem;
+            }
+        }
+
+        /* Styles for selected court button */
+        #court-selector label.selected-court {
+            background-color: #2563eb; /* blue-600 */
+            border-color: #1d4ed8; /* blue-700 */
+            color: white;
+        }
+        #court-selector label.selected-court span {
+            color: white;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -136,96 +137,186 @@
 
     <section class="online-booking-system py-12 md:py-16 bg-gray-100">
         <div class="container mx-auto px-4">
-            <h2 class="section-title">Lịch Đặt Sân Cầu Lông Trực Tuyến</h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8 md:mb-12">Lịch Đặt Sân Cầu Lông Trực Tuyến</h2>
 
             <div class="booking-instructions bg-blue-50 border border-blue-200 text-blue-800 p-6 rounded-lg mb-8 md:mb-12 max-w-4xl mx-auto shadow-sm">
                 <h3 class="text-lg font-semibold mb-3">Hướng dẫn đặt sân:</h3>
                 <ol class="list-decimal list-inside space-y-1 text-sm mb-4">
-                    <li>Chọn ngày bạn muốn thuê sân trên lịch bên dưới.</li>
-                    <li>Các khung giờ còn trống sẽ hiển thị màu <span class="slot-available">Xanh</span>. Khung giờ đã được đặt sẽ hiển thị màu <span class="slot-booked">Cam</span>. Khung giờ ngoài giờ hoạt động sẽ hiển thị màu <span class="slot-unavailable">Xám</span>.</li>
-                    <li>Nhấp vào khung giờ <span class="slot-available">Xanh</span> bạn muốn đặt (ví dụ bên dưới).</li>
+                    <li>Chọn ngày bạn muốn thuê sân (tối đa 2 tuần tới).</li>
+                    <li>Chọn sân bạn muốn đặt (Sân 1, 2 hoặc 3).</li>
+                    <li>Các khung giờ còn trống của sân đó sẽ hiển thị màu <span class="bg-green-100 text-green-800 px-2 py-0.5 rounded font-medium">Xanh</span>. Khung giờ đã được đặt sẽ hiển thị màu <span class="bg-orange-100 text-orange-800 px-2 py-0.5 rounded font-medium">Cam</span>. Khung giờ ngoài giờ hoạt động sẽ hiển thị màu <span class="bg-gray-200 text-gray-600 px-2 py-0.5 rounded font-medium">Xám</span>.</li>
+                    <li>Nhấp vào các khung giờ <span class="bg-green-100 text-green-800 px-2 py-0.5 rounded font-medium">Xanh</span> bạn muốn đặt (tối đa 3 khung giờ). Các khung giờ đã chọn sẽ có viền <span class="font-semibold text-blue-600">Xanh dương</span>.</li>
                     <li>Điền thông tin vào form xác nhận hiện ra bên dưới lịch.</li>
                 </ol>
-                <p class="text-sm font-semibold mb-1"><strong>Khung giờ hoạt động cho thuê sân:</strong></p>
-                <ul class="list-disc list-inside text-sm space-y-1">
-                    <li><strong>Thứ 2 - Thứ 6:</strong>
-                        <ul class="list-none pl-4">
-                            <li>Buổi Sáng: 5h00 - 6h00 | 6h00 - 7h00</li>
-                            <li>Buổi Chiều: 17h00 - 18h00 | 18h00 - 19h00 | 19h00 - 20h00 | 20h00 - 21h00</li>
-                        </ul>
-                    </li>
-                    <li><strong>Thứ 7 & Chủ Nhật:</strong> Từ 5h00 đến 21h00 (tất cả các khung giờ)</li>
-                </ul>
-                <p class="text-sm font-medium text-blue-600 mt-2">* Bạn chỉ có thể đặt tối đa 3 khung giờ</p>
+                 <p class="text-sm font-semibold mb-1"><strong>Khung giờ hoạt động cho thuê sân:</strong></p>
+                 <ul class="list-disc list-inside text-sm space-y-1">
+                     <li>Thứ 2 - Thứ 6: 5h-7h & 17h-21h</li>
+                     <li>Thứ 7 & Chủ Nhật: 5h-21h (liên tục)</li>
+                 </ul>
             </div>
 
+            <!-- Date and Court Selection Area -->
+            <div class="selection-area max-w-4xl mx-auto mb-8 md:mb-12 bg-white p-6 rounded-lg shadow grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Date Picker -->
+                <div class="form-group md:col-span-1">
+                    <label for="calendar-date-picker" class="block text-sm font-medium text-gray-700 mb-1">1. Chọn Ngày:</label>
+                    <input type="text" id="calendar-date-picker" placeholder="Chọn ngày..." class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-150 ease-in-out cursor-pointer">
+                </div>
+
+                <!-- Court Selection -->
+                <div class="form-group md:col-span-2">
+                     <label class="block text-sm font-medium text-gray-700 mb-2">2. Chọn Sân:</label>
+                     <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-3" id="court-selector">
+                         <label class="flex-1 text-center block border border-gray-300 rounded-md px-4 py-3 cursor-pointer hover:bg-gray-50 transition duration-150 ease-in-out">
+                             <input type="radio" name="courtSelection" value="1" class="hidden">
+                             <span class="text-sm font-medium text-gray-700">Sân 1</span>
+                         </label>
+                         <label class="flex-1 text-center block border border-gray-300 rounded-md px-4 py-3 cursor-pointer hover:bg-gray-50 transition duration-150 ease-in-out">
+                             <input type="radio" name="courtSelection" value="2" class="hidden">
+                             <span class="text-sm font-medium text-gray-700">Sân 2</span>
+                         </label>
+                         <label class="flex-1 text-center block border border-gray-300 rounded-md px-4 py-3 cursor-pointer hover:bg-gray-50 transition duration-150 ease-in-out">
+                             <input type="radio" name="courtSelection" value="3" class="hidden">
+                             <span class="text-sm font-medium text-gray-700">Sân 3</span>
+                         </label>
+                     </div>
+                </div>
+            </div>
+
+            <!-- Calendar Display Area -->
             <div id="booking-calendar-placeholder" class="mb-8 md:mb-12 bg-white p-6 rounded-lg shadow">
-                 <h3 class="text-xl font-semibold text-center text-gray-800 mb-6 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-calendar-days mr-2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
-                    Chọn Ngày Đặt Sân
+                 <h3 class="text-xl font-semibold text-center text-gray-800 mb-6 flex flex-col md:flex-row items-center justify-center">
+                    <span class="flex items-center mb-1 md:mb-0 md:mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-clock mr-2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        Khung Giờ Trống
+                    </span>
+                    <span class="text-base md:text-xl font-normal md:font-semibold text-center">
+                        (Ngày: <span id="display-selected-date" class="font-bold">Chưa chọn</span>, Sân: <span id="display-selected-court" class="font-bold">Chưa chọn</span>)
+                    </span>
                  </h3>
-                 <div class="text-center mb-6">
-                    <input type="text" id="calendar-date-picker" class="px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Chọn ngày...">
+                 <div class="calendar-grid">
+                     <!-- Time slots will be loaded here by JavaScript -->
                  </div>
-                 <div class="calendar-grid"></div>
+                 <div id="calendar-loading-spinner" class="hidden text-center py-4">
+                     <div class="sk-chase mx-auto">
+                         <div class="sk-chase-dot"></div>
+                         <div class="sk-chase-dot"></div>
+                         <div class="sk-chase-dot"></div>
+                         <div class="sk-chase-dot"></div>
+                         <div class="sk-chase-dot"></div>
+                         <div class="sk-chase-dot"></div>
+                     </div>
+                     <p class="text-sm text-gray-500 mt-2">Đang tải lịch...</p>
+                 </div>
+                 <p id="calendar-message" class="text-center text-sm text-gray-500 mt-4 hidden"></p>
             </div>
 
-            <div id="booking-confirmation-form" class="hidden mt-8 md:mt-12 max-w-lg mx-auto bg-white p-6 md:p-8 rounded-lg shadow-md border border-gray-200">
-                <h3 class="text-xl font-semibold text-center text-gray-800 mb-6">Xác Nhận Thông Tin Đặt Sân</h3>
-                <form id="confirm-booking-form" class="space-y-4">
-                    <div class="bg-gray-50 p-3 rounded-md border border-gray-200 text-sm space-y-1">
-                        <p><strong>Ngày đặt:</strong> <span id="selected-date" class="font-medium text-blue-700">[Ngày]</span></p>
-                        <div id="selected-slots" class="space-y-1">
-                            <!-- Selected time slots will be inserted here dynamically -->
+            <!-- Confirmation Form -->
+            <div id="booking-confirmation-form" class="hidden mt-8 md:mt-12 max-w-xl mx-auto bg-gradient-to-br from-white to-blue-50 p-6 md:p-8 rounded-xl shadow-lg border border-blue-100">
+                <div class="flex items-center justify-center mb-6">
+                    <div class="bg-blue-100 p-2 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-700"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 ml-3">Xác Nhận Đặt Sân</h3>
+                </div>
+                
+                <form id="confirm-booking-form" class="space-y-5">
+                    <div class="bg-white p-4 rounded-lg border border-blue-200 shadow-sm">
+                        <div class="mb-3 pb-3 border-b border-gray-100">
+                            <h4 class="text-lg font-semibold text-gray-700 mb-3">Thông tin đặt sân</h4>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-blue-50 p-3 rounded-md">
+                                    <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold">Ngày đặt</div>
+                                    <div id="selected-date" class="font-medium text-blue-700 text-lg">[Chưa chọn]</div>
+                                </div>
+                                <div class="bg-blue-50 p-3 rounded-md">
+                                    <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold">Sân số</div>
+                                    <div id="selected-court" class="font-medium text-blue-700 text-lg">[Chưa chọn]</div>
+                                </div>
+                            </div>
                         </div>
-                        <p><strong>Sân số:</strong> <span id="selected-court" class="font-medium text-blue-700">[Sân]</span></p>
-                        <p class="mt-2 text-sm text-gray-600">Tổng tiền: <span id="total-price" class="font-medium text-green-600">0đ</span></p>
+                        <div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2">Khung giờ đã chọn</div>
+                            <ul id="selected-time-list" class="flex flex-wrap gap-2">
+                                <!-- Selected times will be listed here -->
+                                <li id="no-time-selected" class="text-gray-500 italic">Chưa chọn khung giờ nào</li>
+                            </ul>
+                        </div>
                     </div>
 
                     <input type="hidden" id="bookingDate" name="bookingDate">
-                    <input type="hidden" id="bookingTime" name="bookingTime">
                     <input type="hidden" id="bookingCourt" name="bookingCourt">
+                    <input type="hidden" id="bookingTimes" name="bookingTimes">
 
-                    <div class="form-group">
-                        <label for="bookerName">Họ và Tên Người Đặt:*</label>
-                        <input type="text" id="bookerName" name="bookerName" required 
-                            placeholder="Nguyễn Văn A"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-150">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="form-group">
+                            <label for="bookerName" class="block text-sm font-medium text-gray-700 mb-1">Họ và Tên: <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                </div>
+                                <input type="text" id="bookerName" name="bookerName" required placeholder="Nguyễn Văn A" class="pl-10 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookerPhone" class="block text-sm font-medium text-gray-700 mb-1">Số Điện Thoại: <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                </div>
+                                <input type="tel" id="bookerPhone" name="bookerPhone" required pattern="[0-9]{10,11}" title="Số điện thoại gồm 10-11 chữ số" placeholder="09xxxxxxxx" class="pl-10 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            </div>
+                        </div>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="bookerPhone">Số Điện Thoại Liên Hệ:*</label>
-                        <input type="tel" id="bookerPhone" name="bookerPhone" required 
-                            pattern="[0-9]{10,11}" 
-                            title="Số điện thoại gồm 10-11 chữ số" 
-                            placeholder="09xxxxxxxx"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-150">
+                        <label for="bookingNotes" class="block text-sm font-medium text-gray-700 mb-1">Ghi chú (nếu có):</label>
+                        <div class="relative">
+                            <div class="absolute top-3 left-3 flex items-start pointer-events-none">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" y1="6" x2="3" y2="6"></line><line x1="15" y1="12" x2="3" y2="12"></line><line x1="17" y1="18" x2="3" y2="18"></line></svg>
+                            </div>
+                            <textarea id="bookingNotes" name="bookingNotes" rows="3" placeholder="Ví dụ: Cần thuê vợt..." class="pl-10 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="bookingNotes">Ghi chú (nếu có):</label>
-                        <textarea id="bookingNotes" name="bookingNotes" rows="3" 
-                            placeholder="Ví dụ: Cần thuê vợt..."
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-150"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label type="checkbox">
-                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
-                            Tôi đã đọc và đồng ý với <a href="#booking-rules" class="scroll-link">Quy định đặt sân</a> của CLB.
+                    
+                    <div class="form-group bg-yellow-50 p-3 rounded-md border border-yellow-100">
+                        <label class="flex items-start">
+                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required class="mt-0.5 focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mr-2">
+                            <span class="text-sm text-gray-700">Tôi đã đọc và đồng ý với <a href="#booking-rules" class="scroll-link text-blue-600 hover:underline font-medium">Quy định đặt sân</a> của CLB.</span>
                         </label>
                     </div>
+                    
                     <div class="text-center pt-2">
-                        <button type="submit" class="inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
-                            Xác Nhận Đặt Sân
+                        <button type="submit" id="submit-booking-button" class="relative inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-base font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            <span class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                                Xác Nhận Đặt Sân
+                            </span>
                         </button>
                     </div>
                 </form>
 
-                 <div id="booking-success-message" class="hidden mt-5 p-4 bg-green-100 border border-green-300 text-green-800 rounded-md text-sm text-center flex items-center justify-center gap-2">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-check-circle-2 w-5 h-5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
-                    <span>Đặt sân thành công! Ngày <strong class="confirm-date"></strong>, Giờ <strong class="confirm-time"></strong>, Sân <strong class="confirm-court"></strong>. Hẹn gặp bạn!</span>
+                <div id="booking-success-message" class="hidden mt-5 p-5 bg-gradient-to-r from-green-50 to-green-100 border border-green-200 text-green-800 rounded-lg shadow-sm">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-green-100 p-1 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-check-circle-2 w-6 h-6 text-green-600"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <div class="ml-3 text-left">
+                            <div><strong class="text-lg font-semibold text-green-800">Bạn đã đặt sân thành công:</strong></div>
+                            <div class="mt-2 text-green-700">
+                                <p>Ngày: <strong></strong></p>
+                                <p>Sân : <strong></strong></p>
+                                <p>Khung giờ: <strong></strong></p>
+                                <p class="mt-2 font-medium">Hẹn gặp bạn trên sân cầu lông nhé!</p>
+                                <p class="text-sm text-green-600">&lt;Thank you!&gt;</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="booking-error-message" class="hidden mt-5 p-4 bg-red-100 border border-red-300 text-red-800 rounded-md text-sm text-center flex items-center justify-center gap-2">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-x-circle w-5 h-5"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
-                    <span>Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ HLV Hoàng.</span>
+                
+                <div id="booking-error-message" class="hidden mt-5 p-4 bg-red-50 border border-red-200 text-red-800 rounded-lg shadow-sm flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon lucide lucide-x-circle w-5 h-5 text-red-500 mr-2"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                    <span class="text-red-700"></span>
                 </div>
             </div>
         </div>
@@ -233,46 +324,48 @@
 
     <section class="pricing py-12 md:py-16 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="section-title">Bảng Giá Thuê Sân Cầu Lông</h2>
-            <table class="pricing-table">
-                <thead>
-                    <tr>
-                        <th>Khung Giờ</th>
-                        <th>Giá (VNĐ / giờ / sân)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Giờ vàng (18h00 - 21h00)</td>
-                        <td><strong>60.000</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Các khung giờ khác</td>
-                        <td><strong>50.000</strong></td>
-                    </tr>
-                </tbody>
-            </table>
+            <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8 md:mb-12">Bảng Giá Thuê Sân Cầu Lông</h2>
+            <div class="overflow-x-auto">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Khung Giờ</th>
+                            <th>Giá (VNĐ / giờ / sân)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>18h00 - 21h00</td>
+                            <td><strong>60.000</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Các khung giờ khác</td>
+                            <td><strong>50.000</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <p class="text-center text-sm text-gray-500 mt-4 italic">
-                * Giá áp dụng cho tất cả các ngày trong tuần
+                Giá có thể thay đổi, vui lòng kiểm tra lại khi đặt sân hoặc liên hệ HLV Hoàng.
             </p>
         </div>
     </section>
 
     <section class="booking-rules py-12 md:py-16 bg-gray-100" id="booking-rules">
         <div class="container mx-auto px-4 max-w-3xl">
-            <h2 class="section-title">Quy Định Đặt Sân & Sử Dụng Sân</h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8 md:mb-12">Quy Định Đặt Sân & Sử Dụng Sân</h2>
             <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                <ul class="rules-list text-sm md:text-base text-gray-700">
-                    <li>
+                <ul class="list-none space-y-4 text-sm md:text-base text-gray-700">
+                    <li class="pl-6 relative">
                         <strong>Đặt sân:</strong> Vui lòng đặt sân trước giờ chơi ít nhất 1 tiếng. Ưu tiên đặt qua hệ thống online hoặc hotline HLV Hoàng: <a href="tel:0935185558" class="text-blue-600 hover:underline font-medium">0935.185.558</a>.
                     </li>
-                    <li>
+                    <li class="pl-6 relative">
                         <strong>Hủy sân:</strong> Báo trước ít nhất <strong>4 tiếng</strong> qua Hotline HLV Hoàng. Hủy muộn hoặc không đến có thể bị tính phí/hạn chế đặt lần sau.
                     </li>
-                    <li>
+                    <li class="pl-6 relative">
                         <strong>Thanh toán:</strong> Thanh toán trực tiếp tại sân trước hoặc sau giờ chơi (Chưa hỗ trợ chuyển khoản online).
                     </li>
-                    <li>
+                    <li class="pl-6 relative">
                         <strong>Nội quy sử dụng sân:</strong>
                         <div class="bg-white p-4 rounded-lg shadow-md border border-gray-300">
                             <div class="text-center mb-4">
@@ -285,17 +378,17 @@
                             </div>
                             <div class="mb-4 p-4 border border-blue-500 rounded-lg bg-gray-50">
                                 <h2 class="text-xl font-bold text-blue-500 mb-2">💰 BẢNG GIÁ</h2>
-                                <div class="flex justify-between">
-                                    <div class="w-1/2 pr-2">
-                                        <p class="font-bold">TIỀN SÂN:</p>
-                                        <ul class="list-disc pl-5">
+                                <div class="flex flex-col sm:flex-row justify-between">
+                                    <div class="w-full sm:w-1/2 sm:pr-2">
+                                        <p class="font-bold text-sm md:text-base">TIỀN SÂN:</p>
+                                        <ul class="list-disc pl-5 text-xs md:text-sm space-y-0.5">
                                             <li>Người lớn (≥18 tuổi): 10.000₫/người</li>
                                             <li>Học sinh (<18 tuổi): 7.000₫/người</li>
                                         </ul>
                                     </div>
-                                    <div class="w-1/2 pl-2">
-                                        <p class="font-bold">THUÊ GIỜ:</p>
-                                        <ul class="list-disc pl-5">
+                                    <div class="w-full sm:w-1/2 sm:pl-2 mt-2 sm:mt-0">
+                                        <p class="font-bold text-sm md:text-base">THUÊ GIỜ:</p>
+                                        <ul class="list-disc pl-5 text-xs md:text-sm space-y-0.5">
                                             <li>18:00 - 20:00: 60.000₫/giờ</li>
                                             <li>Các khung giờ khác: 50.000₫/giờ</li>
                                         </ul>
@@ -305,7 +398,7 @@
                             <div class="mb-4 p-4 border border-blue-500 rounded-lg bg-gray-50">
                                 <h2 class="text-xl font-bold text-blue-500 mb-2">🚫 TRANG PHỤC</h2>
                                 <p class="text-base font-semibold">KHÔNG ĐƯỢC MANG VÀO SÂN THẢM:</p>
-                                <ul class="list-disc pl-5">
+                                <ul class="list-disc pl-5 text-xs md:text-sm space-y-0.5">
                                     <li>Dép</li>
                                     <li>Giày đinh</li>
                                     <li>Giày sneaker đế đen</li>
@@ -332,136 +425,37 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        const API_BASE_URL = 'https://np-backend-3rgn.onrender.com';
-        let selectedTimeSlots = []; // Array to store selected time slots
+        // --- Constants and State Variables ---
+        const MAX_SELECTED_SLOTS = 3;
+        let selectedDate = new Date().toISOString().split('T')[0]; // Chọn ngày hiện tại mặc định
+        let selectedCourt = "1"; // Mặc định chọn sân 1
+        let selectedSlots = []; // Array to store { time: "HH:MM-HH:MM", element: <button> }
+        let allAvailabilityData = null; // Lưu dữ liệu tình trạng cả 3 sân
 
-        // Hàm kiểm tra trạng thái server
-        async function checkHealth() {
-            try {
-                const response = await fetch(`${API_BASE_URL}/health`);
-                const data = await response.json();
-                return response.ok;
-            } catch (error) {
-                console.error('Server health check failed:', error);
-                return false;
-            }
-        }
+        // --- DOM Element References ---
+        const datePickerInput = document.getElementById('calendar-date-picker');
+        const courtSelectorDiv = document.getElementById('court-selector');
+        const calendarGrid = document.querySelector('.calendar-grid');
+        const calendarPlaceholder = document.getElementById('booking-calendar-placeholder');
+        const calendarLoadingSpinner = document.getElementById('calendar-loading-spinner');
+        const calendarMessage = document.getElementById('calendar-message');
+        const displaySelectedDate = document.getElementById('display-selected-date');
+        const displaySelectedCourt = document.getElementById('display-selected-court');
 
-        // Hàm lấy danh sách sân trống theo ngày
-        async function loadAvailability(date) {
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/availability?date=${date}`);
-                if (!response.ok) throw new Error('Network response was not ok');
-                const data = await response.json();
-                
-                // Clear existing calendar grid
-                const calendarGrid = document.querySelector('.calendar-grid');
-                calendarGrid.innerHTML = '';
+        const confirmationFormDiv = document.getElementById('booking-confirmation-form');
+        const bookingForm = document.getElementById('confirm-booking-form');
+        const selectedDateSpan = document.getElementById('selected-date');
+        const selectedCourtSpan = document.getElementById('selected-court');
+        const selectedTimeList = document.getElementById('selected-time-list');
+        const noTimeSelectedLi = document.getElementById('no-time-selected');
+        const bookingDateInput = document.getElementById('bookingDate');
+        const bookingCourtInput = document.getElementById('bookingCourt');
+        const bookingTimesInput = document.getElementById('bookingTimes'); // Updated ID
+        const submitBookingButton = document.getElementById('submit-booking-button');
+        const successMessageDiv = document.getElementById('booking-success-message');
+        const errorMessageDiv = document.getElementById('booking-error-message');
 
-                // Create and append new calendar day
-                const dayElement = document.createElement('div');
-                dayElement.className = 'calendar-day';
-                
-                // Add header with formatted date
-                const formattedDate = new Date(date).toLocaleDateString('vi-VN', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'numeric',
-                    day: 'numeric'
-                });
-                dayElement.innerHTML = `<h4>${formattedDate}</h4>`;
-
-                // Create a container for courts
-                const courtsContainer = document.createElement('div');
-                courtsContainer.className = 'courts-container grid grid-cols-1 md:grid-cols-3 gap-4 mt-4';
-
-                // Process courts and their time slots
-                data.courts.forEach(court => {
-                    const courtElement = document.createElement('div');
-                    courtElement.className = 'court-column';
-                    courtElement.innerHTML = `<h5 class="font-semibold text-center mb-2">${court.courtName}</h5>`;
-
-                    court.slots.forEach(slot => {
-                        const timeSlotElement = document.createElement(slot.status === 'available' ? 'button' : 'span');
-                        timeSlotElement.className = `time-slot ${slot.status}`; // available, booked, or unavailable
-                        
-                        if (slot.status === 'available') {
-                            timeSlotElement.dataset.date = date;
-                            timeSlotElement.dataset.time = `${slot.startTime} - ${slot.endTime}`;
-                            timeSlotElement.dataset.court = court.courtName;
-                            timeSlotElement.dataset.courtId = court.courtId;
-                            timeSlotElement.dataset.timeslotId = slot.timeslotId;
-                            timeSlotElement.dataset.price = slot.price;
-                        }
-                        
-                        timeSlotElement.innerHTML = `${slot.startTime} - ${slot.endTime}<br><small>${slot.price.toLocaleString()}đ</small>`;
-                        courtElement.appendChild(timeSlotElement);
-                    });
-
-                    courtsContainer.appendChild(courtElement);
-                });
-
-                dayElement.appendChild(courtsContainer);
-                calendarGrid.appendChild(dayElement);
-
-                // Add weekend/weekday indicator
-                const operatingHoursNote = document.createElement('p');
-                operatingHoursNote.className = 'text-sm text-gray-600 mt-4 text-center';
-                operatingHoursNote.textContent = data.isWeekend ? 
-                    'Thứ 7 & Chủ Nhật: Mở cửa từ 5h00 đến 21h00' : 
-                    'Ngày thường: Mở cửa 5h00-7h00 và 17h00-21h00';
-                calendarGrid.appendChild(operatingHoursNote);
-
-            } catch (error) {
-                console.error('Error loading availability:', error);
-                showErrorMessage('Không thể tải thông tin sân. Vui lòng thử lại sau.');
-            }
-        }
-
-        // Hàm đặt sân
-        async function submitBooking(formData) {
-            try {
-                const selectedSlots = JSON.parse(formData.selectedSlots || '[]');
-                if (!selectedSlots.length) {
-                    throw new Error('No time slots selected');
-                }
-
-                // Create booking requests for each selected slot
-                const bookingPromises = selectedSlots.map(slot => {
-                    const bookingData = {
-                        courtId: parseInt(formData.court),
-                        timeslotId: parseInt(slot.timeslotId),
-                        date: slot.date,
-                        userName: formData.name,
-                        userPhone: formData.phone,
-                        notes: formData.notes || ''
-                    };
-
-                    return fetch(`${API_BASE_URL}/api/bookings`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(bookingData)
-                    });
-                });
-
-                const responses = await Promise.all(bookingPromises);
-                const results = await Promise.all(responses.map(r => r.json()));
-
-                // Check if all bookings were successful
-                const allSuccessful = results.every(r => r.id);
-                if (!allSuccessful) {
-                    throw new Error('Some bookings failed');
-                }
-
-                return { success: true, data: results };
-            } catch (error) {
-                return { success: false, error: error.message };
-            }
-        }
-
-        // Function to load HTML content from a file into an element
+        // --- Helper Functions ---
         async function loadHTML(elementId, filePath) {
             const element = document.getElementById(elementId);
             if (!element) {
@@ -482,246 +476,420 @@
             }
         }
 
-        // --- Booking Simulation Logic ---
-        const calendarPlaceholder = document.getElementById('booking-calendar-placeholder');
-        const confirmationFormDiv = document.getElementById('booking-confirmation-form');
-        const bookingForm = document.getElementById('confirm-booking-form');
-        const successMessageDiv = document.getElementById('booking-success-message');
-        const errorMessageDiv = document.getElementById('booking-error-message');
-
-        // Add event listener to the calendar placeholder (delegation)
-        if (calendarPlaceholder) {
-            calendarPlaceholder.addEventListener('click', function(event) {
-                if (event.target.matches('.time-slot.available')) {
-                    const button = event.target;
-                    const date = button.dataset.date;
-                    const time = button.dataset.time;
-                    const court = button.dataset.court;
-                    const price = parseInt(button.dataset.price || '0');
-                    const courtId = parseInt(button.dataset.courtId);
-                    const timeslotId = parseInt(button.dataset.timeslotId);
-
-                    // Check if the slot is already selected
-                    const slotIndex = selectedTimeSlots.findIndex(slot => 
-                        slot.time === time && slot.court === court
-                    );
-
-                    if (slotIndex !== -1) {
-                        // Deselect the slot
-                        selectedTimeSlots.splice(slotIndex, 1);
-                        button.classList.remove('selected');
-                        button.style.backgroundColor = ''; // Reset to default color
-                    } else if (selectedTimeSlots.length < 3) {
-                        // Select the slot if under limit
-                        selectedTimeSlots.push({ 
-                            date, 
-                            time, 
-                            court, 
-                            courtId,
-                            timeslotId,
-                            price 
-                        });
-                        button.classList.add('selected');
-                        button.style.backgroundColor = '#93c5fd'; // Light blue background
-                    } else {
-                        alert('Bạn chỉ có thể chọn tối đa 3 khung giờ!');
-                        return;
-                    }
-
-                    // Update the confirmation form
-                    updateConfirmationForm();
-                }
-            });
+        function formatTimeForDisplay(timeString) {
+            return timeString; // Can add more formatting if needed
         }
 
-        function updateConfirmationForm() {
-            if (selectedTimeSlots.length > 0) {
-                // Show the confirmation form
-                confirmationFormDiv.classList.remove('hidden');
-                
-                // Update form fields
-                document.getElementById('selected-date').textContent = selectedTimeSlots[0].date;
-                document.getElementById('selected-court').textContent = selectedTimeSlots[0].court;
+        function isPastTime(dateStr, timeStr) {
+            if (!dateStr || !timeStr) return false;
+            const now = new Date();
+            const [startTime] = timeStr.split('-'); // Get "HH:MM"
+            if (!startTime) return false;
+            const [hours, minutes] = startTime.split(':');
+            const slotDateTime = new Date(dateStr);
+            slotDateTime.setHours(parseInt(hours, 10), parseInt(minutes, 10), 0, 0);
 
-                // Update selected slots display
-                const slotsContainer = document.getElementById('selected-slots');
-                slotsContainer.innerHTML = '<strong>Khung giờ:</strong>';
-                
-                // Calculate total price
-                let totalPrice = 0;
-                selectedTimeSlots.forEach((slot, index) => {
-                    slotsContainer.innerHTML += `
-                        <div class="flex justify-between items-center">
-                            <span class="text-blue-700">${slot.time}</span>
-                            <span class="text-gray-600">${slot.price.toLocaleString()}đ</span>
-                        </div>
-                    `;
-                    totalPrice += slot.price;
+            return slotDateTime < now;
+        }
+
+        // Helper for display format dd-mm-yyyy
+        function formatDateDisplay(dateString) {
+            if (!dateString) return dateString;
+            const [year, month, day] = dateString.split('-');
+            return `${day}-${month}-${year}`;
+        }
+
+        function updateCalendarDisplay() {
+            displaySelectedDate.textContent = selectedDate ? formatDateDisplay(selectedDate) : 'Chưa chọn';
+            displaySelectedCourt.textContent = selectedCourt ? `Sân ${selectedCourt}` : 'Chưa chọn';
+        }
+
+        function updateConfirmationFormDisplay() {
+            if (selectedSlots.length > 0) {
+                selectedDateSpan.textContent = selectedDate ? formatDateDisplay(selectedDate) : '[Lỗi]';
+                selectedCourtSpan.textContent = selectedCourt ? `Sân ${selectedCourt}` : '[Lỗi]';
+                bookingDateInput.value = selectedDate || '';
+                bookingCourtInput.value = selectedCourt || '';
+
+                selectedTimeList.innerHTML = ''; // Clear previous entries
+                const timeValues = [];
+                selectedSlots.forEach(slot => {
+                    const li = document.createElement('li');
+                    li.textContent = formatTimeForDisplay(slot.time);
+                    selectedTimeList.appendChild(li);
+                    timeValues.push(slot.time);
                 });
+                bookingTimesInput.value = JSON.stringify(timeValues); // Store as JSON array string
 
-                // Update total price
-                document.getElementById('total-price').textContent = `${totalPrice.toLocaleString()}đ`;
-
-                // Update hidden fields for form submission
-                document.getElementById('bookingDate').value = selectedTimeSlots[0].date;
-                // Store selected slots as JSON in a hidden field
-                const hiddenSlotsInput = document.getElementById('selectedSlots') || 
-                    createHiddenInput('selectedSlots');
-                hiddenSlotsInput.value = JSON.stringify(selectedTimeSlots);
-
-                confirmationFormDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                confirmationFormDiv.classList.remove('hidden');
+                submitBookingButton.disabled = false; // Enable submit button
             } else {
+                selectedDateSpan.textContent = '[Chưa chọn]';
+                selectedCourtSpan.textContent = '[Chưa chọn]';
+                selectedTimeList.innerHTML = '';
+                selectedTimeList.appendChild(noTimeSelectedLi); // Show the placeholder
+                bookingDateInput.value = '';
+                bookingCourtInput.value = '';
+                bookingTimesInput.value = '';
                 confirmationFormDiv.classList.add('hidden');
+                submitBookingButton.disabled = true; // Disable submit button
+            }
+            successMessageDiv.classList.add('hidden');
+            errorMessageDiv.classList.add('hidden');
+            bookingForm.querySelectorAll('.border-red-500').forEach(el => el.classList.remove('border-red-500'));
+            bookingForm.querySelectorAll('.text-red-600').forEach(el => el.classList.remove('text-red-600'));
+            document.getElementById('agreeTerms').checked = false; // Reset checkbox
+        }
+
+        function showLoading(isLoading) {
+            if (isLoading) {
+                calendarGrid.innerHTML = ''; // Clear grid
+                calendarLoadingSpinner.classList.remove('hidden');
+                calendarMessage.classList.add('hidden');
+            } else {
+                calendarLoadingSpinner.classList.add('hidden');
             }
         }
 
-        function createHiddenInput(id) {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.id = id;
-            input.name = id;
-            document.getElementById('confirm-booking-form').appendChild(input);
-            return input;
+        function showCalendarMessage(message, isError = false) {
+            calendarMessage.textContent = message;
+            calendarMessage.className = `text-center text-sm mt-4 ${isError ? 'text-red-600' : 'text-gray-500'}`;
+            calendarMessage.classList.remove('hidden');
+            calendarGrid.innerHTML = ''; // Clear grid when showing a message
         }
 
-        // Handle Confirmation Form Submission
-        if (bookingForm) {
-            bookingForm.addEventListener('submit', async function(event) {
-                event.preventDefault();
+        async function loadAllAvailability(date) {
+            if (!date) return;
+            
+            console.log(`Loading availability for all courts on date: ${date}`);
+            showLoading(true);
+            
+            try {
+                // Gọi API để lấy dữ liệu của tất cả các sân
+                const url = `https://asia-southeast1-nhonphu-booking.cloudfunctions.net/getAvailability?date=${date}`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Lỗi khi lấy dữ liệu từ server');
+                allAvailabilityData = await response.json();
+                showLoading(false);
+                
+                // Hiển thị dữ liệu cho sân đã chọn
+                displayCourtAvailability(selectedCourt);
+                
+                // Chọn radio button tương ứng
+                const radioButton = document.querySelector(`input[name="courtSelection"][value="${selectedCourt}"]`);
+                if (radioButton) {
+                    radioButton.checked = true;
+                }
+                
+                updateCalendarDisplay();
+                
+                return true;
+            } catch (error) {
+                console.error('Error loading availability:', error);
+                showLoading(false);
+                showCalendarMessage('Lỗi khi tải lịch sân. Vui lòng thử lại.', true);
+                return false;
+            }
+        }
+        
+        function displayCourtAvailability(court) {
+            if (!allAvailabilityData || !court) return;
+            
+            calendarGrid.innerHTML = '';
+            selectedSlots = []; // Reset selection when switching courts
+            updateConfirmationFormDisplay();
+            
+            if (!allAvailabilityData[court] || allAvailabilityData[court].length === 0) {
+                showCalendarMessage("Không có khung giờ nào cho ngày và sân đã chọn.");
+                return;
+            }
+            
+            const todayStr = new Date().toISOString().split('T')[0];
+            const isToday = (selectedDate === todayStr);
+            
+            allAvailabilityData[court].forEach(slot => {
+                const isPast = isToday && isPastTime(selectedDate, slot.time);
+                const effectiveStatus = isPast ? 'unavailable' : slot.status;
+                const slotElement = document.createElement(effectiveStatus === 'available' ? 'button' : 'span');
+                slotElement.className = `time-slot ${effectiveStatus}`;
+                slotElement.textContent = formatTimeForDisplay(slot.time);
+                if (effectiveStatus === 'available') {
+                    slotElement.dataset.time = slot.time;
+                } else {
+                    slotElement.disabled = true;
+                    if (isPast) {
+                        slotElement.title = "Đã qua giờ";
+                    } else if (effectiveStatus === 'booked') {
+                        slotElement.title = "Đã có người đặt";
+                    } else {
+                        slotElement.title = "Ngoài giờ hoạt động";
+                    }
+                }
+                calendarGrid.appendChild(slotElement);
+            });
+            
+            updateCalendarDisplay();
+        }
 
-                // Add loading state
-                const submitButton = this.querySelector('button[type="submit"]');
-                submitButton.disabled = true;
-                submitButton.innerHTML = 'Đang xử lý...';
+        function handleTimeSlotClick(event) {
+            if (!event.target.matches('.time-slot.available')) {
+                return;
+            }
 
-                try {
-                    const formData = {
-                        selectedSlots: selectedTimeSlots,
-                        userName: document.getElementById('bookerName').value,
-                        userPhone: document.getElementById('bookerPhone').value,
-                        notes: document.getElementById('bookingNotes').value || ''
-                    };
+            const clickedButton = event.target;
+            const time = clickedButton.dataset.time;
 
-                    console.log('Sending booking request:', formData);
+            const existingIndex = selectedSlots.findIndex(slot => slot.time === time);
 
-                    const response = await fetch(`${API_BASE_URL}/api/bookings`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(formData)
+            if (existingIndex > -1) {
+                selectedSlots.splice(existingIndex, 1);
+                clickedButton.classList.remove('selected');
+            } else {
+                if (selectedSlots.length >= MAX_SELECTED_SLOTS) {
+                    alert(`Bạn chỉ có thể chọn tối đa ${MAX_SELECTED_SLOTS} khung giờ.`);
+                    return;
+                }
+                selectedSlots.push({ time: time, element: clickedButton });
+                clickedButton.classList.add('selected');
+            }
+
+            selectedSlots.sort((a, b) => a.time.localeCompare(b.time));
+
+            updateConfirmationFormDisplay();
+        }
+
+        async function submitBooking(formData) {
+             console.log("Submitting booking data:", formData); // Log data being sent
+             showLoading(true); // Indicate loading on the form button or globally
+             submitBookingButton.disabled = true;
+             submitBookingButton.innerHTML = `<svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+             </svg>Đang xử lý...`;
+
+            try {
+                // Gọi API thật
+                const response = await fetch('https://asia-southeast1-nhonphu-booking.cloudfunctions.net/createBooking', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Lỗi đặt sân từ server.');
+                }
+                return { success: true, data };
+            } catch (error) {
+                console.error("Booking submission error:", error);
+                return { success: false, error: error.message || "Lỗi không xác định khi gửi yêu cầu." };
+            } finally {
+                 showLoading(false); // Hide loading indicator
+                 submitBookingButton.disabled = false; // Re-enable button
+                 submitBookingButton.innerHTML = 'Xác Nhận Đặt Sân'; // Restore button text
+            }
+        }
+
+        function validateForm() {
+            let isValid = true;
+            const requiredInputs = bookingForm.querySelectorAll('[required]');
+            errorMessageDiv.classList.add('hidden');
+
+            requiredInputs.forEach(input => {
+                 const formGroup = input.closest('.form-group') || input.closest('label');
+                 input.classList.remove('border-red-500');
+                 if (formGroup) formGroup.classList.remove('text-red-600');
+
+                if (input.type === 'checkbox') {
+                    if (!input.checked) {
+                        isValid = false;
+                        if (formGroup) formGroup.classList.add('text-red-600');
+                    }
+                } else {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.classList.add('border-red-500');
+                    }
+                }
+            });
+
+            const phoneInput = bookingForm.querySelector('#bookerPhone');
+            if (phoneInput && !phoneInput.value.match(/^[0-9]{10,11}$/)) {
+                isValid = false;
+                phoneInput.classList.add('border-red-500');
+            }
+
+            if (!isValid) {
+                showErrorMessage('Vui lòng điền đầy đủ thông tin bắt buộc (*) và đồng ý với quy định.');
+            }
+
+            return isValid;
+        }
+
+        function showErrorMessage(message) {
+            errorMessageDiv.querySelector('span').textContent = message;
+            errorMessageDiv.classList.remove('hidden');
+            successMessageDiv.classList.add('hidden');
+        }
+
+        // Cập nhật tình trạng sân sau khi đặt thành công
+        function updateAvailabilityAfterBooking(date, court, times) {
+            if (!allAvailabilityData || !allAvailabilityData[court]) return;
+            
+            // Cập nhật dữ liệu tình trạng sân
+            times.forEach(time => {
+                const slotIndex = allAvailabilityData[court].findIndex(slot => slot.time === time);
+                if (slotIndex !== -1) {
+                    allAvailabilityData[court][slotIndex].status = 'booked';
+                }
+                
+                // Cập nhật giao diện
+                const slotElement = calendarGrid.querySelector(`.time-slot[data-time="${time}"]`);
+                if (slotElement) {
+                    slotElement.classList.remove('available', 'selected');
+                    slotElement.classList.add('booked');
+                    slotElement.disabled = true;
+                    slotElement.title = "Vừa được đặt";
+                    // Thay đổi thành một span để không thể chọn nữa
+                    const newSlotElement = document.createElement('span');
+                    newSlotElement.className = slotElement.className;
+                    newSlotElement.textContent = slotElement.textContent;
+                    newSlotElement.title = slotElement.title;
+                    slotElement.parentNode.replaceChild(newSlotElement, slotElement);
+                }
+            });
+            
+            // Cập nhật hiển thị ngày và sân
+            displaySelectedDate.textContent = formatDateDisplay(date);
+            displaySelectedCourt.textContent = `Sân ${court}`;
+            
+            // Đảm bảo radio button của sân được chọn
+            const radioButton = document.querySelector(`input[name="courtSelection"][value="${court}"]`);
+            if (radioButton) {
+                radioButton.checked = true;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHTML('header-placeholder', 'header.html');
+            loadHTML('footer-placeholder', 'footer.html');
+
+            // Khởi tạo date picker với ngày hiện tại được chọn sẵn
+            flatpickr(datePickerInput, {
+                locale: "vn",
+                dateFormat: "Y-m-d",      // underlying value
+                altInput: true,            // show alternate input
+                altFormat: "d-m-Y",       // display format
+                minDate: "today",
+                maxDate: new Date().fp_incr(14),
+                defaultDate: selectedDate,
+                onChange: function(selectedDates, dateStr) {
+                    selectedDate = dateStr;
+                    loadAllAvailability(selectedDate);
+                }
+            });
+
+            // Xử lý sự kiện khi chọn sân
+            courtSelectorDiv.addEventListener('change', (event) => {
+                if (event.target.type === 'radio' && event.target.name === 'courtSelection') {
+                    selectedCourt = event.target.value;
+
+                    // Remove highlight from all labels
+                    courtSelectorDiv.querySelectorAll('label').forEach(label => {
+                        label.classList.remove('selected-court');
                     });
 
-                    const data = await response.json();
-                    console.log('Server response:', data);
-
-                    if (!response.ok) {
-                        throw new Error(data.message || 'Đã có lỗi xảy ra khi đặt sân');
+                    // Add highlight to the selected label
+                    const selectedLabel = event.target.closest('label');
+                    if (selectedLabel) {
+                        selectedLabel.classList.add('selected-court');
                     }
 
-                    // Show success message but keep the form visible
+                    displayCourtAvailability(selectedCourt);
+                }
+            });
+
+            calendarGrid.addEventListener('click', handleTimeSlotClick);
+
+            bookingForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                if (!validateForm()) {
+                    return;
+                }
+
+                const formData = {
+                    date: bookingDateInput.value,
+                    court: bookingCourtInput.value,
+                    times: JSON.parse(bookingTimesInput.value || '[]'),
+                    name: document.getElementById('bookerName').value,
+                    phone: document.getElementById('bookerPhone').value,
+                    notes: document.getElementById('bookingNotes').value
+                };
+
+                const result = await submitBooking(formData);
+
+                if (result.success) {
+                    // Cập nhật nội dung thông báo thành công
+                    successMessageDiv.querySelector('.text-green-700 p:nth-child(1) strong').textContent = formatDateDisplay(formData.date);
+                    successMessageDiv.querySelector('.text-green-700 p:nth-child(2) strong').textContent = `Sân ${formData.court}`;
+                    successMessageDiv.querySelector('.text-green-700 p:nth-child(3) strong').textContent = formData.times.join(', ');
+                    
+                    // Hiển thị thông báo
                     successMessageDiv.classList.remove('hidden');
                     errorMessageDiv.classList.add('hidden');
 
-                    // Update success message details
-                    successMessageDiv.querySelector('.confirm-date').textContent = selectedTimeSlots[0].date;
-                    successMessageDiv.querySelector('.confirm-time').textContent = selectedTimeSlots.map(slot => slot.time).join(', ');
-                    successMessageDiv.querySelector('.confirm-court').textContent = selectedTimeSlots[0].court;
+                    // Cập nhật trạng thái sân ngay lập tức
+                    updateAvailabilityAfterBooking(formData.date, formData.court, formData.times);
 
-                    // Reset form but don't hide it
-                    bookingForm.reset();
-                    selectedTimeSlots = [];
-                    
-                    // Remove selected styling from all time slots
-                    document.querySelectorAll('.time-slot.selected').forEach(slot => {
-                        slot.classList.remove('selected');
-                        slot.style.backgroundColor = '';
-                    });
-
-                    // Reload availability after success
-                    // Sửa: luôn reload đúng ngày vừa đặt
-                    if (formData.selectedSlots && formData.selectedSlots.length > 0) {
-                        // Nếu có slot vừa đặt, reload đúng ngày đó và cập nhật date picker
-                        const bookedDate = formData.selectedSlots[0].date;
-                        if (bookedDate) {
-                            document.getElementById('calendar-date-picker')._flatpickr.setDate(bookedDate, true);
-                            await loadAvailability(bookedDate);
-                        }
-                    } else {
-                        // fallback: reload ngày đang hiển thị
-                        const currentDate = document.getElementById('calendar-date-picker')._flatpickr.selectedDates[0];
-                        if (currentDate) {
-                            await loadAvailability(currentDate.toISOString().split('T')[0]);
-                        }
-                    }
-
-                    // Scroll to success message
+                    // Cuộn đến thông báo thành công
                     successMessageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-                } catch (error) {
-                    console.error('Booking error:', error);
-                    errorMessageDiv.querySelector('span').textContent = error.message || 'Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ HLV Hoàng.';
-                    errorMessageDiv.classList.remove('hidden');
-                    successMessageDiv.classList.add('hidden');
-                    errorMessageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                } finally {
-                    // Reset button state
-                    submitButton.disabled = false;
-                    submitButton.innerHTML = 'Xác Nhận Đặt Sân';
-                }
-            });
-        }
-
-        // Smooth scroll for rules link
-        document.querySelectorAll('.scroll-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href'); // #booking-rules
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Load header and footer when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            loadHTML('header-placeholder', 'header.html').then(() => {
-                if (window.npInitHeaderMenu) window.npInitHeaderMenu();
-            });
-            loadHTML('footer-placeholder', 'footer.html');
-        });
-
-        // Calendar functionality
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize Flatpickr date picker
-            const datePicker = flatpickr("#calendar-date-picker", {
-                locale: "vn",
-                dateFormat: "Y-m-d",
-                minDate: "today",
-                maxDate: new Date().fp_incr(14), // Allow booking up to 14 days in advance
-                defaultDate: "today",
-                onChange: function(selectedDates, dateStr) {
-                    loadAvailability(dateStr);
+                    // Giữ form và thông báo 5 giây, sau đó reset
+                    setTimeout(() => {
+                        // Ẩn thông báo và form xác nhận
+                        successMessageDiv.classList.add('hidden');
+                        // Reset form và trạng thái lựa chọn
+                        bookingForm.reset();
+                        selectedSlots = [];
+                        updateConfirmationFormDisplay();
+                        
+                        // Chọn lại ngày hiện tại và tải lại lịch trống
+                        const today = new Date().toISOString().split('T')[0];
+                        selectedDate = today;
+                        datePickerInput._flatpickr.setDate(today);
+                        loadAllAvailability(selectedDate);
+                    }, 5000);
+                } else {
+                    showErrorMessage(result.error || 'Đã có lỗi xảy ra khi đặt sân.');
                 }
             });
 
-            // Load today's availability when page loads
-            const today = new Date().toISOString().split('T')[0];
-            loadAvailability(today);
-        });
+            document.querySelectorAll('.scroll-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
 
-        // Add styles for selected time slots
-        const style = document.createElement('style');
-        style.textContent = `
-            .time-slot.selected {
-                background-color: #93c5fd !important;
-                border-color: #3b82f6 !important;
-                color: #1e40af !important;
+            // Tải thông tin sân khi trang được tải
+            const defaultCourtLabel = courtSelectorDiv.querySelector(`input[name="courtSelection"][value="${selectedCourt}"]`).closest('label');
+            if (defaultCourtLabel) {
+                defaultCourtLabel.classList.add('selected-court');
             }
-        `;
-        document.head.appendChild(style);
+
+            loadAllAvailability(selectedDate);
+            updateCalendarDisplay();
+            updateConfirmationFormDisplay();
+        });
+
     </script>
-    <script src="js/script.js"></script>
+  </script>
+  <script src="js/script.js"></script>
 </body>
 </html>
+
+
+
