@@ -470,6 +470,10 @@
                 const html = await response.text();
                 element.innerHTML = html;
                 console.log(`Successfully loaded ${filePath} into #${elementId}`);
+                // Initialize header menu if header content is loaded
+                if (elementId === 'header-placeholder' && typeof window.npInitHeaderMenu === 'function') {
+                    window.npInitHeaderMenu();
+                }
             } catch (error) {
                 console.error(`Could not load HTML from ${filePath}:`, error);
                 element.innerHTML = `<p class="text-red-500 text-center p-4">Lỗi khi tải ${elementId}. Vui lòng thử lại sau.</p>`;
