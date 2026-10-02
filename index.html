@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .circle-bg {
+            fill: none;
+            stroke: #e5e7eb;
+            stroke-width: 4;
+        }
+        .circle-progress {
+            fill: none;
+            stroke: #3b82f6;
+            stroke-width: 4;
+            transition: stroke-dashoffset 1s linear, stroke 0.5s;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 flex items-center justify-center font-sans">
+
+    <div class="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden min-h-[600px] h-auto flex flex-col" id="slide-container">
+        
+        <!-- Pagination Container -->
+        <div class="flex justify-center gap-2 pt-6 px-6 z-10" id="pagination-container">
+            <!-- Pagination buttons will be generated here -->
+        </div>
+
+        <!-- Quiz Content -->
+        <div class="flex-1 flex flex-col md:flex-row p-6 md:p-10 gap-8" id="quiz-content">
+            <!-- Left Side: Question -->
+            <div class="flex-1 flex flex-col justify-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" id="question-text">
+                    <!-- Question dynamically loaded -->
+                </h2>
+                <p class="text-gray-500 text-lg mb-8" id="question-subtitle">
+                    <!-- Subtitle dynamically loaded -->
+                </p>
+            </div>
+
+            <!-- Right Side: Options and Timer -->
+            <div class="flex-1 flex flex-col items-center justify-center w-full">
+                <!-- Timer -->
+                <div class="relative w-24 h-24 mb-6 shrink-0">
+                    <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                        <circle class="circle-bg" cx="18" cy="18" r="16"></circle>
+                        <circle class="circle-progress" cx="18" cy="18" r="16" stroke-dasharray="100" stroke-dashoffset="0" id="timer-circle"></circle>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-gray-700" id="timer-text">
+                        20
+                    </div>
+                </div>
+
+                <!-- Options -->
+                <div class="w-full flex flex-col gap-3" id="options-container">
+                    <!-- Options dynamically loaded -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Overlay (High z-index to cover pagination and everything else) -->
+        <div id="result-overlay" class="absolute inset-0 bg-white/95 backdrop-blur-sm z-30 hidden flex-col items-center justify-center p-6 text-center overflow-y-auto">
+            <div class="max-w-4xl w-full flex flex-col items-center py-10">
+                <h2 id="result-title" class="text-4xl md:text-5xl font-bold mb-4"></h2>
+                <p id="result-message" class="text-lg md:text-xl text-gray-700 max-w-2xl mb-8"></p>
+
+                <!-- Custom Content Box for charts and stats -->
+                <div id="custom-content-box" class="w-full max-w-3xl hidden mb-8"></div>
+
+                <div class="flex flex-wrap justify-center gap-4 mt-2">
+                    <button id="retry-btn" class="px-8 py-3 bg-gray-200 text-gray-800 rounded-lg font-bold hover:bg-gray-300 transition duration-200 focus:outline-none">
+                        Retry Question
+                    </button>
+                    <button id="next-btn" class="px-8 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition duration-200 focus:outline-none shadow-lg shadow-blue-200">
+                        Next Question
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. ALL QUIZ DATA
+        const quizData = [
+            {
+                question: "What are the world's deadliest animals?",
+                subtitle: "Estimates for the number of humans killed by different animals per year.",
+                options: [
+                    { icon: "🧍", text: "A. Humans", correct: false },
+                    { icon: "🐍", text: "B. Snakes", correct: false },
+                    { icon: "🐕", text: "C. Dogs", correct: false },
+                    { icon: "🦟", text: "D. Mosquitoes", correct: true }
+                ],
+                correctMsg: "Correct! Mosquitoes are by far the deadliest, primarily due to transmitting diseases like malaria.",
+                incorrectMsg: "Actually, Mosquitoes are the deadliest. They transmit diseases that cause hundreds of thousands of deaths annually.",
+                customContent: `
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-inner w-full text-left mt-2">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4 border-b border-gray-200 pb-2">Full Reference Data (Deaths/Year)</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 h-64 overflow-y-auto pr-2">
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🦟</span> Mosquitoes</span><span class="font-bold text-red-600">760,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🧍</span> Humans</span><span class="font-bold text-gray-700">600,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🐍</span> Snakes</span><span class="font-bold">100,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🐕</span> Dogs</span><span class="font-bold">40,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🐌</span> Freshwater snails</span><span class="font-bold">14,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🪲</span> Kissing bugs</span><span class="font-bold">8,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🪰</span> Sandflies</span><span class="font-bold">5,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🪱</span> Roundworms</span><span class="font-bold">4,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🦂</span> Scorpions</span><span class="font-bold">3,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🪱</span> Tapeworms</span><span class="font-bold">2,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🪰</span> Tsetse flies</span><span class="font-bold">1,500</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🐘</span> Elephants</span><span class="font-bold">1,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🐝</span> Bees, wasps, hornets</span><span class="font-bold">500</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🐅</span> Big cats</span><span class="font-bold">300</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🐊</span> Crocodiles</span><span class="font-bold">>150</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🪼</span> Jellyfish</span><span class="font-bold">100</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🦛</span> Hippopotamuses</span><span class="font-bold">>50</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🕷️</span> Spiders</span><span class="font-bold">50</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🐻</span> Bears</span><span class="font-bold">20</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🦈</span> Sharks</span><span class="font-bold">6</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="text-2xl mr-2">🐺</span> Gray wolves</span><span class="font-bold">5</span></div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                question: "Which movie won the Oscar for Best Picture at the 92nd Academy Awards in 2020?",
+                subtitle: "This film made history by being the first non-English language film to win Best Picture.",
+                options: [
+                    { icon: "🤡", text: "A. Joker", correct: false },
+                    { icon: "🪖", text: "B. 1917", correct: false },
+                    { icon: "🍑", text: "C. Parasite", correct: true },
+                    { icon: "🎬", text: "D. Once Upon a Time in Hollywood", correct: false }
+                ],
+                correctMsg: "Excellent! 'Parasite', directed by Bong Joon-ho, took home the prestigious Best Picture award.",
+                incorrectMsg: "The correct answer is 'Parasite'. It made history at the 92nd Academy Awards!",
+                customContent: '' // No custom content for this question
+            },
+            {
+                question: "What is the fastest sport in the world?",
+                subtitle: "Based on the highest recorded speed of the projectile or participant.",
+                options: [
+                    { icon: "🏸", text: "A. Badminton", correct: true },
+                    { icon: "🥍", text: "B. Jai Alai", correct: false },
+                    { icon: "⛷️", text: "C. Speed skiing", correct: false },
+                    { icon: "🏎️", text: "D. Formula 1 car racing", correct: false }
+                ],
+                correctMsg: "That's right! Badminton is considered the fastest sport, with shuttlecock smash speeds recorded over 500 km/h (310 mph) - faster than an F1 car's top speed!",
+                incorrectMsg: "The correct answer is Badminton. The shuttlecock can reach speeds over 500 km/h (310 mph) immediately after a smash, making it the fastest.",
+                customContent: `
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-inner w-full text-left mt-2">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6 border-b border-gray-200 pb-2">Top Recorded Speeds Comparison</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-bold text-gray-700 flex items-center"><span class="mr-2 text-2xl">🏸</span> Badminton (Smash)</span>
+                                    <span class="font-bold text-blue-600">565 km/h</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-5 overflow-hidden">
+                                    <div class="bg-blue-600 h-5 rounded-full transition-all duration-1000 ease-out" style="width: 0%" data-width="94%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-bold text-gray-700 flex items-center"><span class="mr-2 text-2xl">🏎️</span> Formula 1 (Top Speed)</span>
+                                    <span class="font-bold text-red-500">~397 km/h</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-5 overflow-hidden">
+                                    <div class="bg-red-500 h-5 rounded-full transition-all duration-1000 ease-out delay-100" style="width: 0%" data-width="66%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-bold text-gray-700 flex items-center"><span class="mr-2 text-2xl">🥍</span> Jai Alai (Pelota)</span>
+                                    <span class="font-bold text-green-500">~302 km/h</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-5 overflow-hidden">
+                                    <div class="bg-green-500 h-5 rounded-full transition-all duration-1000 ease-out delay-200" style="width: 0%" data-width="50%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-bold text-gray-700 flex items-center"><span class="mr-2 text-2xl">⛷️</span> Speed Skiing</span>
+                                    <span class="font-bold text-purple-500">~255 km/h</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-5 overflow-hidden">
+                                    <div class="bg-purple-500 h-5 rounded-full transition-all duration-1000 ease-out delay-300" style="width: 0%" data-width="42%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        let currentSlide = 0;
+        let timeLeft = 20;
+        let timerInterval = null;
+        let hasAnswered = false;
+
+        const questionText = document.getElementById('question-text');
+        const questionSubtitle = document.getElementById('question-subtitle');
+        const optionsContainer = document.getElementById('options-container');
+        const timerCircle = document.getElementById('timer-circle');
+        const timerText = document.getElementById('timer-text');
+        
+        const resultOverlay = document.getElementById('result-overlay');
+        const resultTitle = document.getElementById('result-title');
+        const resultMessage = document.getElementById('result-message');
+        const customContentBox = document.getElementById('custom-content-box');
+        
+        const retryBtn = document.getElementById('retry-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const paginationContainer = document.getElementById('pagination-container');
+
+        function initQuiz() {
+            // Build pagination buttons
+            paginationContainer.innerHTML = '';
+            quizData.forEach((_, index) => {
+                const btn = document.createElement('button');
+                btn.className = `w-10 h-10 rounded-full font-bold transition-all flex items-center justify-center border-2 
+                    ${index === 0 ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-500 border-gray-300 hover:border-blue-400'}`;
+                btn.textContent = index + 1;
+                btn.onclick = () => {
+                    if (currentSlide !== index) {
+                        currentSlide = index;
+                        loadSlide(currentSlide);
+                    }
+                };
+                paginationContainer.appendChild(btn);
+            });
+
+            loadSlide(0);
+        }
+
+        function loadSlide(index) {
+            clearInterval(timerInterval);
+            hasAnswered = false;
+            timeLeft = 20;
+            resultOverlay.classList.add('hidden');
+            resultOverlay.classList.remove('flex');
+            
+            const data = quizData[index];
+            questionText.textContent = data.question;
+            questionSubtitle.textContent = data.subtitle;
+
+            // Update Pagination styling
+            const dots = paginationContainer.children;
+            for(let i=0; i < dots.length; i++) {
+                if(i === index) {
+                    dots[i].className = 'w-10 h-10 rounded-full font-bold transition-all flex items-center justify-center border-2 bg-blue-600 text-white border-blue-600 shadow-md transform scale-110';
+                } else {
+                    dots[i].className = 'w-10 h-10 rounded-full font-bold transition-all flex items-center justify-center border-2 bg-white text-gray-500 border-gray-300 hover:border-blue-400';
+                }
+            }
+
+            // Render options
+            optionsContainer.innerHTML = '';
+            data.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left p-3 md:p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-blue-500 hover:bg-blue-50 transition duration-200 font-semibold text-gray-700 text-base md:text-lg focus:outline-none shadow-sm flex items-center';
+                
+                const iconSpan = document.createElement('span');
+                iconSpan.className = 'text-2xl mr-3';
+                iconSpan.textContent = opt.icon;
+                
+                const textSpan = document.createElement('span');
+                textSpan.textContent = opt.text;
+
+                btn.appendChild(iconSpan);
+                btn.appendChild(textSpan);
+
+                btn.onclick = () => handleAnswer(idx);
+                optionsContainer.appendChild(btn);
+            });
+
+            startTimer();
+        }
+
+        function startTimer() {
+            updateTimerDisplay();
+            timerCircle.style.stroke = '#3b82f6'; // Reset color to blue
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+
+                if (timeLeft <= 5) {
+                    timerCircle.style.stroke = '#ef4444'; // Red when <= 5s
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    handleAnswer(null); // Time out
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            timerText.textContent = timeLeft;
+            // Calculate stroke-dashoffset (100 is max)
+            const offset = 100 - (timeLeft / 20) * 100;
+            timerCircle.style.strokeDashoffset = offset;
+        }
+
+        function handleAnswer(selectedIndex) {
+            if (hasAnswered) return;
+            hasAnswered = true;
+            clearInterval(timerInterval);
+
+            const data = quizData[currentSlide];
+            const isTimeout = selectedIndex === null;
+            let isCorrect = false;
+
+            if (!isTimeout) {
+                isCorrect = data.options[selectedIndex].correct;
+            }
+
+            showResult(isCorrect, isTimeout, data);
+        }
+
+        function showResult(isCorrect, isTimeout, data) {
+            resultOverlay.classList.remove('hidden');
+            resultOverlay.classList.add('flex');
+
+            // Handle custom content (charts, stats)
+            if (data.customContent && data.customContent.trim() !== '') {
+                customContentBox.innerHTML = data.customContent;
+                customContentBox.classList.remove('hidden');
+                
+                // Animate chart bars after a tiny delay to ensure DOM is ready
+                setTimeout(() => {
+                    const bars = customContentBox.querySelectorAll('[data-width]');
+                    bars.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                }, 100);
+            } else {
+                customContentBox.classList.add('hidden');
+                customContentBox.innerHTML = '';
+            }
+
+            // Set titles and colors based on correctness
+            if (isCorrect) {
+                resultTitle.textContent = 'Correct!';
+                resultTitle.className = 'text-4xl md:text-5xl font-bold mb-4 text-green-500';
+                resultMessage.textContent = data.correctMsg;
+            } else {
+                resultTitle.textContent = isTimeout ? 'Time Out!' : 'Incorrect!';
+                resultTitle.className = 'text-4xl md:text-5xl font-bold mb-4 text-red-500';
+                resultMessage.textContent = data.incorrectMsg;
+            }
+
+            // Setup buttons
+            if (currentSlide < quizData.length - 1) {
+                nextBtn.textContent = "Next Question";
+                nextBtn.onclick = () => {
+                    currentSlide++;
+                    loadSlide(currentSlide);
+                };
+            } else {
+                nextBtn.textContent = "Restart Quiz";
+                nextBtn.onclick = () => {
+                    currentSlide = 0;
+                    loadSlide(currentSlide);
+                };
+            }
+
+            retryBtn.onclick = () => {
+                loadSlide(currentSlide);
+            };
+        }
+
+        // Start everything when page loads
+        initQuiz();
+    </script>
+</body>
+</html>
