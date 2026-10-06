@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .circle-bg {
+            fill: none;
+            stroke: #e5e7eb;
+            stroke-width: 4;
+        }
+        .circle-progress {
+            fill: none;
+            stroke: #3b82f6;
+            stroke-width: 4;
+            transition: stroke-dashoffset 1s linear, stroke 0.5s;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 flex items-center justify-center font-sans">
+
+    <div class="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden min-h-[600px] h-auto flex flex-col" id="slide-container">
+        
+        <!-- Quiz Content -->
+        <div class="flex-1 flex flex-col md:flex-row p-6 md:p-10 gap-8" id="quiz-content">
+            <!-- Left Side: Question -->
+            <div class="flex-1 flex flex-col justify-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" id="question-text">
+                    <!-- Question dynamically loaded -->
+                </h2>
+                <p class="text-gray-500 text-lg mb-8" id="question-subtitle">
+                    <!-- Subtitle dynamically loaded -->
+                </p>
+            </div>
+
+            <!-- Right Side: Options and Timer -->
+            <div class="flex-1 flex flex-col items-center justify-center w-full">
+                <!-- Timer -->
+                <div class="relative w-24 h-24 mb-6 shrink-0">
+                    <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                        <circle class="circle-bg" cx="18" cy="18" r="16"></circle>
+                        <circle class="circle-progress" cx="18" cy="18" r="16" stroke-dasharray="100" stroke-dashoffset="0" id="timer-circle"></circle>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-gray-700" id="timer-text">
+                        20
+                    </div>
+                </div>
+
+                <!-- Options -->
+                <div class="w-full flex flex-col gap-3" id="options-container">
+                    <!-- Options dynamically loaded -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination Container (Moved to bottom) -->
+        <div class="flex justify-center gap-2 pb-6 px-6 z-10 mt-auto" id="pagination-container">
+            <!-- Pagination buttons will be generated here -->
+        </div>
+
+        <!-- Result Overlay (High z-index to cover pagination and everything else) -->
+        <div id="result-overlay" class="absolute inset-0 bg-white/95 backdrop-blur-sm z-30 hidden flex-col items-center justify-center p-4 md:p-6 text-center overflow-y-auto">
+            <div class="max-w-4xl w-full flex flex-col items-center py-2 md:py-4">
+                <h2 id="result-title" class="text-3xl md:text-4xl font-bold mb-2"></h2>
+                <p id="result-message" class="text-base md:text-lg text-gray-700 max-w-2xl mb-4 md:mb-6"></p>
+
+                <!-- Custom Content Box for charts and stats -->
+                <div id="custom-content-box" class="w-full max-w-3xl hidden mb-4 md:mb-6"></div>
+
+                <div class="flex flex-wrap justify-center gap-4 mt-2">
+                    <button id="retry-btn" class="px-8 py-3 bg-gray-200 text-gray-800 rounded-lg font-bold hover:bg-gray-300 transition duration-200 focus:outline-none">
+                        Retry Question
+                    </button>
+                    <button id="next-btn" class="px-8 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition duration-200 focus:outline-none shadow-lg shadow-blue-200">
+                        Next Question
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. ALL QUIZ DATA
+        const quizData = [
+            {
+                question: "What are the world's deadliest animals?",
+                subtitle: "Estimates for the number of humans killed by different animals per year.",
+                options: [
+                    { icon: "🧍", text: "A. Humans", correct: false },
+                    { icon: "🐍", text: "B. Snakes", correct: false },
+                    { icon: "🐕", text: "C. Dogs", correct: false },
+                    { icon: "🦟", text: "D. Mosquitoes", correct: true }
+                ],
+                correctMsg: "Correct! Mosquitoes are by far the deadliest, primarily due to transmitting diseases like malaria.",
+                incorrectMsg: "Actually, Mosquitoes are the deadliest. They transmit diseases that cause hundreds of thousands of deaths annually.",
+                customContent: `
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 shadow-inner w-full text-left mt-0">
+                        <h3 class="text-base md:text-lg font-bold text-gray-800 mb-3 border-b border-gray-200 pb-2">Full Reference Data (Deaths/Year)</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-1 text-xs md:text-sm">
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🦟</span> Mosquitoes</span><span class="font-bold text-red-600">760,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🧍</span> Humans</span><span class="font-bold text-gray-700">600,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🐍</span> Snakes</span><span class="font-bold">100,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🐕</span> Dogs</span><span class="font-bold">40,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🐌</span> Snails</span><span class="font-bold">14,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🪲</span> Kissing bugs</span><span class="font-bold">8,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🪰</span> Sandflies</span><span class="font-bold">5,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🪱</span> Roundworms</span><span class="font-bold">4,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🦂</span> Scorpions</span><span class="font-bold">3,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🪱</span> Tapeworms</span><span class="font-bold">2,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🪰</span> Tsetse flies</span><span class="font-bold">1,500</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🐘</span> Elephants</span><span class="font-bold">1,000</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🐝</span> Bees/Wasps</span><span class="font-bold">500</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🐅</span> Big cats</span><span class="font-bold">300</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🐊</span> Crocodiles</span><span class="font-bold">>150</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🪼</span> Jellyfish</span><span class="font-bold">100</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🦛</span> Hippos</span><span class="font-bold">>50</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🕷️</span> Spiders</span><span class="font-bold">50</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🐻</span> Bears</span><span class="font-bold">20</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🦈</span> Sharks</span><span class="font-bold">6</span></div>
+                            <div class="flex justify-between items-center py-1 border-b border-gray-100"><span class="flex items-center"><span class="mr-1 text-base md:text-lg">🐺</span> Wolves</span><span class="font-bold">5</span></div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                question: "Which movie won the Oscar for Best Picture at the 92nd Academy Awards in 2020?",
+                subtitle: "This film made history by being the first non-English language film to win Best Picture.",
+                options: [
+                    { icon: "🤡", text: "A. Joker", correct: false },
+                    { icon: "🪖", text: "B. 1917", correct: false },
+                    { icon: "🍑", text: "C. Parasite", correct: true },
+                    { icon: "🎬", text: "D. Once Upon a Time in Hollywood", correct: false }
+                ],
+                correctMsg: "Excellent! 'Parasite', directed by Bong Joon-ho, took home the prestigious Best Picture award.",
+                incorrectMsg: "The correct answer is 'Parasite'. It made history at the 92nd Academy Awards!",
+                customContent: '' // No custom content for this question
+            },
+            {
+                question: "What is the fastest sport in the world?",
+                subtitle: "Based on the highest recorded speed of the projectile or participant.",
+                options: [
+                    { icon: "🏸", text: "A. Badminton", correct: true },
+                    { icon: "🥍", text: "B. Jai Alai", correct: false },
+                    { icon: "⛷️", text: "C. Speed skiing", correct: false },
+                    { icon: "🏎️", text: "D. Formula 1 car racing", correct: false }
+                ],
+                correctMsg: "That's right! Badminton is considered the fastest sport, with shuttlecock smash speeds recorded over 500 km/h (310 mph) - faster than an F1 car's top speed!",
+                incorrectMsg: "The correct answer is Badminton. The shuttlecock can reach speeds over 500 km/h (310 mph) immediately after a smash, making it the fastest.",
+                customContent: `
+                    <div class="bg-gray-50 p-4 md:p-6 rounded-xl border border-gray-200 shadow-inner w-full text-left mt-0">
+                        <h3 class="text-base md:text-lg font-bold text-gray-800 mb-3 border-b border-gray-200 pb-2">Top Recorded Speeds Comparison</h3>
+                        <div class="space-y-4 text-sm md:text-base">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-bold text-gray-700 flex items-center"><span class="mr-2 text-xl md:text-2xl">🏸</span> Badminton (Smash)</span>
+                                    <span class="font-bold text-blue-600">565 km/h</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-4 md:h-5 overflow-hidden">
+                                    <div class="bg-blue-600 h-4 md:h-5 rounded-full transition-all duration-1000 ease-out" style="width: 0%" data-width="94%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-bold text-gray-700 flex items-center"><span class="mr-2 text-xl md:text-2xl">🏎️</span> Formula 1 (Top Speed)</span>
+                                    <span class="font-bold text-red-500">~397 km/h</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-4 md:h-5 overflow-hidden">
+                                    <div class="bg-red-500 h-4 md:h-5 rounded-full transition-all duration-1000 ease-out delay-100" style="width: 0%" data-width="66%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-bold text-gray-700 flex items-center"><span class="mr-2 text-xl md:text-2xl">🥍</span> Jai Alai (Pelota)</span>
+                                    <span class="font-bold text-green-500">~302 km/h</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-4 md:h-5 overflow-hidden">
+                                    <div class="bg-green-500 h-4 md:h-5 rounded-full transition-all duration-1000 ease-out delay-200" style="width: 0%" data-width="50%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-bold text-gray-700 flex items-center"><span class="mr-2 text-xl md:text-2xl">⛷️</span> Speed Skiing</span>
+                                    <span class="font-bold text-purple-500">~255 km/h</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-4 md:h-5 overflow-hidden">
+                                    <div class="bg-purple-500 h-4 md:h-5 rounded-full transition-all duration-1000 ease-out delay-300" style="width: 0%" data-width="42%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                question: "Who holds the Guinness World Record for 'Most Stunts by a Living Actor'?",
+                subtitle: "This legendary martial artist has broken almost every bone in his body performing his own movie stunts.",
+                options: [
+                    { icon: "🕴️", text: "A. Tom Cruise", correct: false },
+                    { icon: "🥋", text: "B. Jackie Chan", correct: true },
+                    { icon: "🕶️", text: "C. Keanu Reeves", correct: false },
+                    { icon: "🥊", text: "D. Sylvester Stallone", correct: false }
+                ],
+                correctMsg: "Correct! Jackie Chan has held this Guinness World Record since 2012, having performed unassisted stunts in over 100 films.",
+                incorrectMsg: "Actually, it's Jackie Chan! While other actors do their own stunts, Jackie Chan officially holds the Guinness World Record.",
+                customContent: `
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 shadow-inner w-full text-left mt-0">
+                        <h3 class="text-base font-bold text-gray-800 mb-2 border-b border-gray-200 pb-2">Famous Jackie Chan Stunts</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center py-1 border-b border-gray-100"><span class="font-bold">🕰️ Project A (1983)</span> <span class="text-gray-600">Fell 60ft from a clock tower, tearing ligaments</span></div>
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center py-1 border-b border-gray-100"><span class="font-bold">🏢 Police Story (1985)</span> <span class="text-gray-600">Slid down a pole with exploding lights, burning his hands</span></div>
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center py-1 border-b border-gray-100"><span class="font-bold">🚁 Supercop (1992)</span> <span class="text-gray-600">Hung from a flying helicopter over Kuala Lumpur</span></div>
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center py-1 border-b border-gray-100"><span class="font-bold text-red-600">🧗 Armour of God (1986)</span> <span class="text-gray-600">Fell from a tree, fracturing his skull (most serious injury)</span></div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                question: "Which comic book character is famously known as the 'Merc with a Mouth' and constantly breaks the fourth wall?",
+                subtitle: "This character is fully aware he is fictional and often talks directly to the reader or audience.",
+                options: [
+                    { icon: "🐺", text: "A. Wolverine", correct: false },
+                    { icon: "🕷️", text: "B. Spider-Man", correct: false },
+                    { icon: "⚔️", text: "C. Deadpool", correct: true },
+                    { icon: "🃏", text: "D. The Joker", correct: false }
+                ],
+                correctMsg: "Spot on! Deadpool (Wade Wilson) is notorious for his meta-humor and directly addressing the audience.",
+                incorrectMsg: "The correct answer is Deadpool. He is unique in the Marvel universe for knowing he's just a character in a comic/movie.",
+                customContent: `
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 shadow-inner w-full flex flex-wrap justify-around gap-4 mt-0 text-sm">
+                        <div class="text-center px-2"><div class="text-3xl mb-1">💬</div><div class="font-bold text-red-600">4th Wall Break</div><div class="text-gray-500">Talks to the audience</div></div>
+                        <div class="text-center px-2"><div class="text-3xl mb-1">❤️‍🩹</div><div class="font-bold text-red-600">Healing Factor</div><div class="text-gray-500">Regenerates limbs</div></div>
+                        <div class="text-center px-2"><div class="text-3xl mb-1">🦄</div><div class="font-bold text-red-600">Pop Culture</div><div class="text-gray-500">Loves Chimichangas</div></div>
+                    </div>
+                `
+            },
+            {
+                question: "Smartphones, computers, and the Internet are all examples of modern ______.",
+                subtitle: "These are tools and systems created by humans to make everyday life easier.",
+                options: [
+                    { icon: "🪄", text: "A. Magic", correct: false },
+                    { icon: "💻", text: "B. Technology", correct: true },
+                    { icon: "🌿", text: "C. Nature", correct: false },
+                    { icon: "📚", text: "D. History", correct: false }
+                ],
+                correctMsg: "Correct! Technology includes all the tools, machines, and devices we use everyday.",
+                incorrectMsg: "The correct answer is Technology. Computers and smartphones are modern technological tools.",
+                customContent: `
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 shadow-inner w-full text-center mt-0">
+                        <h3 class="text-base font-bold text-gray-800 mb-4 border-b border-gray-200 pb-2">How Technology Changes Life</h3>
+                        <div class="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-6 text-sm">
+                            <div class="flex-1 bg-white p-3 rounded-lg shadow-sm border border-gray-100 w-full">
+                                <span class="text-2xl md:text-3xl">📱</span><br/>
+                                <b class="text-gray-800">Smartphones</b><br/>
+                                <span class="text-xs text-gray-500">Information in your hand.</span>
+                            </div>
+                            <div class="flex-1 bg-white p-3 rounded-lg shadow-sm border border-gray-100 w-full">
+                                <span class="text-2xl md:text-3xl">✈️</span><br/>
+                                <b class="text-gray-800">Airplanes</b><br/>
+                                <span class="text-xs text-gray-500">Flying safely in the sky.</span>
+                            </div>
+                            <div class="flex-1 bg-white p-3 rounded-lg shadow-sm border border-gray-100 w-full">
+                                <span class="text-2xl md:text-3xl">🌐</span><br/>
+                                <b class="text-gray-800">The Internet</b><br/>
+                                <span class="text-xs text-gray-500">Connecting the world fast.</span>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                question: "What is the physical area called where the land meets the ocean or sea?",
+                subtitle: "This area is famous for beaches, waves, and seashells.",
+                options: [
+                    { icon: "🏔️", text: "A. Mountain range", correct: false },
+                    { icon: "🏞️", text: "B. River", correct: false },
+                    { icon: "🏖️", text: "C. Coast", correct: true },
+                    { icon: "🏜️", text: "D. Desert", correct: false }
+                ],
+                correctMsg: "Correct! The coast is where the land meets the sea. Interestingly, due to its jagged shape, its exact length is mathematically impossible to measure perfectly!",
+                incorrectMsg: "The correct answer is the Coast. It is the boundary between the land and the ocean.",
+                customContent: `
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 shadow-inner w-full text-center mt-0">
+                        <h3 class="text-base font-bold text-gray-800 mb-3 border-b border-gray-200 pb-2">Fun Fact: The Coastline Paradox</h3>
+                        <div class="flex justify-center items-center space-x-4 md:space-x-8 text-sm">
+                            <div class="flex-1 bg-white p-3 rounded-lg shadow-sm border border-gray-100">
+                                <div class="text-2xl mb-1">📏</div>
+                                <div class="font-bold text-blue-600">Big Ruler</div>
+                                <div class="text-gray-500 text-xs mt-1">Measures a shorter total length because it skips small curves.</div>
+                            </div>
+                            <div class="flex-1 bg-white p-3 rounded-lg shadow-sm border border-gray-100">
+                                <div class="text-2xl mb-1">🔍</div>
+                                <div class="font-bold text-red-600">Small Ruler</div>
+                                <div class="text-gray-500 text-xs mt-1">Measures every rock and curve, making it endlessly longer!</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                question: "Which urban physical discipline focuses primarily on self-expression and aesthetics through acrobatics and flips?",
+                subtitle: "While often confused with a similar discipline focused only on efficiency, this practice encourages creative movements and showing off.",
+                options: [
+                    { icon: "🤸", text: "A. Free Running", correct: true },
+                    { icon: "🏃‍♂️", text: "B. Parkour", correct: false },
+                    { icon: "🥋", text: "C. Tricking", correct: false },
+                    { icon: "💪", text: "D. Calisthenics", correct: false }
+                ],
+                correctMsg: "Spot on! Free Running focuses on freedom of movement and acrobatics.",
+                incorrectMsg: "The correct answer is Free Running. Unlike Parkour's focus on efficiency, Free Running is all about creative expression.",
+                customContent: `
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 shadow-inner w-full text-center mt-0">
+                        <h3 class="text-base font-bold text-gray-800 mb-3 border-b border-gray-200 pb-2">Parkour vs. Free Running</h3>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="bg-white p-3 rounded-lg shadow-sm border border-gray-100">
+                                <div class="text-xl mb-1">🏃‍♂️</div>
+                                <div class="font-bold text-gray-800">Parkour</div>
+                                <ul class="text-gray-500 text-xs mt-2 text-left list-disc list-inside">
+                                    <li>Point A to B</li>
+                                    <li>Maximum efficiency</li>
+                                    <li>Speed & safety</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg shadow-sm border border-gray-100">
+                                <div class="text-xl mb-1">🤸‍♂️</div>
+                                <div class="font-bold text-blue-600">Free Running</div>
+                                <ul class="text-gray-500 text-xs mt-2 text-left list-disc list-inside">
+                                    <li>Self-expression</li>
+                                    <li>Aesthetics & style</li>
+                                    <li>Flips, spins & tricks</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                question: "Which language has the highest number of native speakers in the world?",
+                subtitle: "More than 900 million people speak this as their first language.",
+                options: [
+                    { icon: '<img src="https://flagcdn.com/w40/gb.png" class="w-6 md:w-8 rounded border border-gray-200 shadow-sm" alt="UK">', text: "A. English", correct: false },
+                    { icon: '<img src="https://flagcdn.com/w40/in.png" class="w-6 md:w-8 rounded border border-gray-200 shadow-sm" alt="India">', text: "B. Hindi", correct: false },
+                    { icon: '<img src="https://flagcdn.com/w40/cn.png" class="w-6 md:w-8 rounded border border-gray-200 shadow-sm" alt="China">', text: "C. Mandarin", correct: true },
+                    { icon: '<img src="https://flagcdn.com/w40/es.png" class="w-6 md:w-8 rounded border border-gray-200 shadow-sm" alt="Spain">', text: "D. Spanish", correct: false }
+                ],
+                correctMsg: "Correct! Mandarin Chinese has the most native speakers globally, far ahead of any other language.",
+                incorrectMsg: "The correct answer is Mandarin. While English is widely spoken as a second language, Mandarin has the most native (first language) speakers.",
+                customContent: `
+                    <div class="bg-gray-50 p-4 md:p-6 rounded-xl border border-gray-200 shadow-inner w-full text-left mt-0">
+                        <h3 class="text-base md:text-lg font-bold text-gray-800 mb-3 border-b border-gray-200 pb-2">Top 3 Native Languages in the World</h3>
+                        <div class="space-y-4 text-sm md:text-base">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-bold text-gray-700 flex items-center"><img src="https://flagcdn.com/w40/cn.png" class="w-5 md:w-6 rounded border border-gray-200 shadow-sm mr-2" alt="China"> Mandarin (China)</span>
+                                    <span class="font-bold text-red-600">~930 Million</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-4 md:h-5 overflow-hidden">
+                                    <div class="bg-red-600 h-4 md:h-5 rounded-full transition-all duration-1000 ease-out" style="width: 0%" data-width="95%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-bold text-gray-700 flex items-center"><img src="https://flagcdn.com/w40/es.png" class="w-5 md:w-6 rounded border border-gray-200 shadow-sm mr-2" alt="Spain"> Spanish</span>
+                                    <span class="font-bold text-yellow-500">~480 Million</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-4 md:h-5 overflow-hidden">
+                                    <div class="bg-yellow-500 h-4 md:h-5 rounded-full transition-all duration-1000 ease-out delay-100" style="width: 0%" data-width="50%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-bold text-gray-700 flex items-center"><img src="https://flagcdn.com/w40/gb.png" class="w-5 md:w-6 rounded border border-gray-200 shadow-sm mr-2" alt="UK"> English</span>
+                                    <span class="font-bold text-blue-500">~380 Million</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-4 md:h-5 overflow-hidden">
+                                    <div class="bg-blue-500 h-4 md:h-5 rounded-full transition-all duration-1000 ease-out delay-200" style="width: 0%" data-width="40%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                question: "What is the popular style of Japanese animation called, which includes famous shows like Pokémon and Naruto?",
+                subtitle: "It is known for colorful art, exciting stories, and is loved by millions of people worldwide.",
+                options: [
+                    { icon: "📖", text: "A. Manga", correct: false },
+                    { icon: "📺", text: "B. Anime", correct: true },
+                    { icon: "🤡", text: "C. Cartoon", correct: false },
+                    { icon: "🦸‍♂️", text: "D. Comic", correct: false }
+                ],
+                correctMsg: "Spot on! Anime is the globally recognized term for animation produced in Japan.",
+                incorrectMsg: "The correct answer is Anime. While Manga refers to Japanese comic books, Anime refers to the animated shows and movies.",
+                customContent: `
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 shadow-inner w-full text-center mt-0">
+                        <h3 class="text-base font-bold text-gray-800 mb-3 border-b border-gray-200 pb-2">Anime vs. Manga</h3>
+                        <div class="flex justify-center items-center space-x-4 md:space-x-8 text-sm">
+                            <div class="flex-1 bg-white p-3 rounded-lg shadow-sm border border-gray-100">
+                                <div class="text-3xl mb-2">📺</div>
+                                <div class="font-bold text-blue-600 text-lg">Anime</div>
+                                <div class="text-gray-500 text-xs mt-1">TV shows and movies. Usually has color, sound, and music.</div>
+                            </div>
+                            <div class="flex-1 bg-white p-3 rounded-lg shadow-sm border border-gray-100">
+                                <div class="text-3xl mb-2">📖</div>
+                                <div class="font-bold text-purple-600 text-lg">Manga</div>
+                                <div class="text-gray-500 text-xs mt-1">Comic books and graphic novels. Usually printed in black and white.</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        let currentSlide = 0;
+        let timeLeft = 20;
+        let timerInterval = null;
+        let hasAnswered = false;
+
+        const questionText = document.getElementById('question-text');
+        const questionSubtitle = document.getElementById('question-subtitle');
+        const optionsContainer = document.getElementById('options-container');
+        const timerCircle = document.getElementById('timer-circle');
+        const timerText = document.getElementById('timer-text');
+        
+        const resultOverlay = document.getElementById('result-overlay');
+        const resultTitle = document.getElementById('result-title');
+        const resultMessage = document.getElementById('result-message');
+        const customContentBox = document.getElementById('custom-content-box');
+        
+        const retryBtn = document.getElementById('retry-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const paginationContainer = document.getElementById('pagination-container');
+
+        function initQuiz() {
+            // Build pagination buttons
+            paginationContainer.innerHTML = '';
+            quizData.forEach((_, index) => {
+                const btn = document.createElement('button');
+                btn.className = `w-10 h-10 rounded-full font-bold transition-all flex items-center justify-center border-2 
+                    ${index === 0 ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-500 border-gray-300 hover:border-blue-400'}`;
+                btn.textContent = index + 1;
+                btn.onclick = () => {
+                    if (currentSlide !== index) {
+                        currentSlide = index;
+                        loadSlide(currentSlide);
+                    }
+                };
+                paginationContainer.appendChild(btn);
+            });
+
+            loadSlide(0);
+        }
+
+        function loadSlide(index) {
+            clearInterval(timerInterval);
+            hasAnswered = false;
+            timeLeft = 20;
+            resultOverlay.classList.add('hidden');
+            resultOverlay.classList.remove('flex');
+            
+            const data = quizData[index];
+            questionText.textContent = data.question;
+            questionSubtitle.textContent = data.subtitle;
+
+            // Update Pagination styling
+            const dots = paginationContainer.children;
+            for(let i=0; i < dots.length; i++) {
+                if(i === index) {
+                    dots[i].className = 'w-10 h-10 rounded-full font-bold transition-all flex items-center justify-center border-2 bg-blue-600 text-white border-blue-600 shadow-md transform scale-110 shrink-0';
+                } else {
+                    dots[i].className = 'w-10 h-10 rounded-full font-bold transition-all flex items-center justify-center border-2 bg-white text-gray-500 border-gray-300 hover:border-blue-400 shrink-0';
+                }
+            }
+
+            // Render options
+            optionsContainer.innerHTML = '';
+            data.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left p-3 md:p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-blue-500 hover:bg-blue-50 transition duration-200 font-semibold text-gray-700 text-base md:text-lg focus:outline-none shadow-sm flex items-center';
+                
+                const iconSpan = document.createElement('span');
+                iconSpan.className = 'text-2xl mr-3 flex shrink-0 items-center justify-center';
+                iconSpan.innerHTML = opt.icon; 
+                
+                const textSpan = document.createElement('span');
+                textSpan.textContent = opt.text;
+
+                btn.appendChild(iconSpan);
+                btn.appendChild(textSpan);
+
+                btn.onclick = () => handleAnswer(idx);
+                optionsContainer.appendChild(btn);
+            });
+
+            startTimer();
+        }
+
+        function startTimer() {
+            updateTimerDisplay();
+            timerCircle.style.stroke = '#3b82f6'; // Reset color to blue
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+
+                if (timeLeft <= 5) {
+                    timerCircle.style.stroke = '#ef4444'; // Red when <= 5s
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    handleAnswer(null); // Time out
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            timerText.textContent = timeLeft;
+            // Calculate stroke-dashoffset (100 is max)
+            const offset = 100 - (timeLeft / 20) * 100;
+            timerCircle.style.strokeDashoffset = offset;
+        }
+
+        function handleAnswer(selectedIndex) {
+            if (hasAnswered) return;
+            hasAnswered = true;
+            clearInterval(timerInterval);
+
+            const data = quizData[currentSlide];
+            const isTimeout = selectedIndex === null;
+            let isCorrect = false;
+
+            if (!isTimeout) {
+                isCorrect = data.options[selectedIndex].correct;
+            }
+
+            showResult(isCorrect, isTimeout, data);
+        }
+
+        function showResult(isCorrect, isTimeout, data) {
+            resultOverlay.classList.remove('hidden');
+            resultOverlay.classList.add('flex');
+
+            // Handle custom content (charts, stats)
+            if (data.customContent && data.customContent.trim() !== '') {
+                customContentBox.innerHTML = data.customContent;
+                customContentBox.classList.remove('hidden');
+                
+                // Animate chart bars after a tiny delay to ensure DOM is ready
+                setTimeout(() => {
+                    const bars = customContentBox.querySelectorAll('[data-width]');
+                    bars.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                }, 100);
+            } else {
+                customContentBox.classList.add('hidden');
+                customContentBox.innerHTML = '';
+            }
+
+            // Set titles and colors based on correctness
+            if (isCorrect) {
+                resultTitle.textContent = 'Correct!';
+                resultTitle.className = 'text-4xl md:text-5xl font-bold mb-4 text-green-500';
+                resultMessage.textContent = data.correctMsg;
+            } else {
+                resultTitle.textContent = isTimeout ? 'Time Out!' : 'Incorrect!';
+                resultTitle.className = 'text-4xl md:text-5xl font-bold mb-4 text-red-500';
+                resultMessage.textContent = data.incorrectMsg;
+            }
+
+            // Setup buttons
+            if (currentSlide < quizData.length - 1) {
+                nextBtn.textContent = "Next Question";
+                nextBtn.onclick = () => {
+                    currentSlide++;
+                    loadSlide(currentSlide);
+                };
+            } else {
+                nextBtn.textContent = "Restart Quiz";
+                nextBtn.onclick = () => {
+                    currentSlide = 0;
+                    loadSlide(currentSlide);
+                };
+            }
+
+            retryBtn.onclick = () => {
+                loadSlide(currentSlide);
+            };
+        }
+
+        // Start everything when page loads
+        initQuiz();
+    </script>
+</body>
+</html>
